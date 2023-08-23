@@ -37,12 +37,12 @@ $routes->setAutoRoute(true);
 
 // $routes->get('/', 'Home::index');
 
-$routes->get('/', 'RegisterController::index');
-$routes->get('/register', 'RegisterController::index');
+$routes->get('/', 'Pages::index', ['filter' => 'authGuard']);
+$routes->get('/register', 'RegisterController::index', ['filter' => 'noauth']);
 $routes->match(['get', 'post'], 'RegisterController/store', 'RegisterController::store');
 $routes->match(['get', 'post'], 'LoginController/loginAuth', 'LoginController::loginAuth');
-$routes->get('/login', 'LoginController::index');
-$routes->get('/profile', 'ProfileController::index',['filter' => 'authGuard']);
+$routes->get('/login', 'LoginController::index', ['filter' => 'noauth']);
+$routes->get('/profile', 'ProfileController::index', ['filter' => 'authGuard']);
 
 /*
  * --------------------------------------------------------------------

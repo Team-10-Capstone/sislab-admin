@@ -9,7 +9,8 @@ class LoginController extends Controller
     public function index()
     {
         helper(['form']);
-        echo view('pages/login');
+        $data['title'] = "Login";
+        echo view('pages/login', $data);
     }
 
     public function loginAuth()
@@ -32,7 +33,7 @@ class LoginController extends Controller
                     'isLoggedIn' => TRUE
                 ];
                 $session->set($ses_data);
-                return redirect()->to('/profile');
+                return redirect()->to('/');
 
             } else {
                 $session->setFlashdata('msg', 'Password is incorrect.');

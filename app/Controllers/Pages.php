@@ -9,7 +9,10 @@ class Pages extends BaseController
 
     public function index()
     {
-        return view('pages/index');
+        $data = [
+            'title' => 'Dashboard'
+        ];
+        return view('pages/index', $data);
     }
     public function about()
     {
@@ -91,7 +94,7 @@ class Pages extends BaseController
     {
         return view('pages/chat');
     }
-    
+
     public function checkout()
     {
         return view('pages/checkout');
@@ -540,5 +543,5 @@ class Pages extends BaseController
     {
         return view('pages/wishlist');
     }
-   
+
 }

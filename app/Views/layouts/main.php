@@ -1,54 +1,58 @@
 <!doctype html>
-<html lang="en" dir="ltr" data-nav-layout="vertical" class="light" data-header-styles="light" data-menu-styles="dark">
+<html lang="en" dir="ltr" data-nav-layout="vertical" class="light" data-header-styles="light" data-menu-styles="light">
 
-    <head>
+<head>
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="CodeIgniter with Tailwind CSS is a lightweight and efficient way to create stylish and responsive admin panels or dashboards, with many pre-built templates available for fast development.">
-        <meta name="keywords" content="admin & dashboard template, codeigniter admin panel, admin template, dashboard admin, admin panel, admin dashboard, tailwind admin panel, admin panel template, dashboard template, dashboard tailwind, tailwind admin template, tailwind dashboard, tailwind, codeigniter admin, codeigniter tailwind">
-        
-        <title>Synto – Codeigniter Tailwind Admin Template</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="CodeIgniter with Tailwind CSS is a lightweight and efficient way to create stylish and responsive admin panels or dashboards, with many pre-built templates available for fast development.">
+    <meta name="keywords"
+        content="admin & dashboard template, codeigniter admin panel, admin template, dashboard admin, admin panel, admin dashboard, tailwind admin panel, admin panel template, dashboard template, dashboard tailwind, tailwind admin template, tailwind dashboard, tailwind, codeigniter admin, codeigniter tailwind">
 
-		<!-- Favicon -->
-		<link rel="shortcut icon" href="<?php echo base_url('assets/img/brand-logos/favicon.ico'); ?>">
-       
-        <!-- styles code -->
-        <?= $this->include('layouts/components/styles'); ?>
-        <!-- End styles -->
+    <title>SISLAB |
+        <?= $title; ?>
+    </title>
 
-    </head>    
-    
-    <body class="">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="<?php echo base_url('assets/img/brand-logos/favicon.ico'); ?>">
 
-        <!-- Start::main-_switcher -->
-        <?= $this->include('layouts/components/switcher'); ?>
-        <!-- End::main-_switcher -->
+    <!-- styles code -->
+    <?= $this->include('layouts/components/styles'); ?>
+    <!-- End styles -->
 
-		<!-- page -->
-        <div class="page">
+</head>
 
-			<!-- Start::app-sidebar -->
-            <?= $this->include('layouts/components/app-sidebar'); ?>
-			<!-- End::app-sidebar -->
+<body class="">
 
-			<!-- Start::app-header -->
-            <?= $this->include('layouts/components/app-header'); ?>
-			<!-- End::app-header -->
+    <!-- Start::main-_switcher -->
+    <?= $this->include('layouts/components/switcher'); ?>
+    <!-- End::main-_switcher -->
 
-                <?= $this->renderSection('content'); ?>
+    <!-- page -->
+    <div class="page">
 
-        </div> 
-        <!-- End Page -->   
+        <!-- Start::app-sidebar -->
+        <?= $this->include('layouts/components/app-sidebar'); ?>
+        <!-- End::app-sidebar -->
 
-        <!-- Start::main-footer -->
-        <?= $this->include('layouts/components/footer'); ?>
-        <!-- End::main-footer -->
+        <!-- Start::app-header -->
+        <?= $this->include('layouts/components/app-header'); ?>
+        <!-- End::app-header -->
 
-        <!-- Start::main-scripts -->
-        <?= $this->include('layouts/components/scripts'); ?>
-        <!-- End::main-scripts -->
+        <?= $this->renderSection('content'); ?>
 
-    </body>
+    </div>
+    <!-- End Page -->
+
+    <!-- Start::main-footer -->
+    <?= $this->include('layouts/components/footer'); ?>
+    <!-- End::main-footer -->
+
+    <!-- Start::main-scripts -->
+    <?= $this->include('layouts/components/scripts'); ?>
+    <!-- End::main-scripts -->
+
+</body>
 
 </html>
