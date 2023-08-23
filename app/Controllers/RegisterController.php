@@ -25,7 +25,7 @@ class RegisterController extends Controller
                 ]
             ],
             'email'         => [
-                'rules'  => 'required|valid_email|is_unique[tbl_users.email]',
+                'rules'  => 'required|valid_email|is_unique[users.email]',
                 'errors' => [
                     'required' => 'Email is required',
                     'valid_email' => 'Email must be valid',
@@ -61,9 +61,21 @@ class RegisterController extends Controller
             $data = [
                 'name'     => $this->request->getVar('name'),
                 'email'    => $this->request->getVar('email'),
-                'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
+                'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+                'mobile'    => '0232323',
+                'isDeleted' => 0,
+                'createdBy' => 0,
+                'roleId' => 0,
+                'updatedBy' => 0,
             ];
-            $userModel->save($data);
+
+            $userModel->insert($data);
+
+            $session = session();
+
+            $session->setFlashdata('regist-success', 'Berhasil melakukan registrasi');
+
+            return redirect()->to('/login');
         }else{
             $data['validation'] = $this->validator;
             echo view('pages/register', $data);

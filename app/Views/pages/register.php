@@ -59,7 +59,7 @@
                                 <div>
                                     <label class="block text-sm mb-2 dark:text-white">Full Name</label>
                                     <div class="relative">
-                                        <input type="text" name="text"
+                                        <input type="text" name="name"
                                             value="<?= set_value('name') ?>"
                                             class="py-2 px-3 block w-full border-gray-200 rounded-sm text-sm focus:border-primary focus:ring-primary dark:bg-bgdark dark:border-white/10 dark:text-white/70"
                                             required>
