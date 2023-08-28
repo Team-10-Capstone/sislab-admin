@@ -27,55 +27,72 @@
 				</svg></div>
 			<ul class="main-menu">
 				<!-- Start::slide__category -->
-				<li class="slide__category"><span class="category-name">Main</span></li>
+				<li class="slide__category"><span class="category-name">Main Navigations</span></li>
 				<!-- End::slide__category -->
+
+				<!-- Start::slide -->
+				<li class="slide">
+					<a href="/" class="side-menu__item">
+						<i class="ri-home-8-line side-menu__icon"></i>
+						<span class="side-menu__label">Dashboards</span>
+					</a>
+				</li>
+				<!-- End::slide -->
+
+				<!-- Start::slide -->
+				<li class="slide">
+					<a href="/daftar-lhu" class="side-menu__item">
+						<i class="ti ti-file-description side-menu__icon"></i>
+						<span class="side-menu__label">Daftar LHU</span>
+					</a>
+				</li>
+				<!-- End::slide -->
 
 				<!-- Start::slide -->
 				<li class="slide  has-sub">
 					<a href="javascript:void(0);" class="side-menu__item">
-						<i class="ri-home-8-line side-menu__icon"></i>
-						<span class="side-menu__label">Dashboards</span>
+						<i class="ti ti-zoom-check side-menu__icon"></i>
+						<span class="side-menu__label">Verifikasi</span>
 						<i class="ri ri-arrow-right-s-line side-menu__angle"></i>
 					</a>
 					<ul class="slide-menu child1">
-						<li class="slide side-menu__label1"><a href="javascript:void(0)">Dashboards</a></li>
-						<li class="slide"><a href="<?php echo base_url('index'); ?>" class="side-menu__item">Sales</a>
-						</li>
+						<li class="slide side-menu__label1"><a href="javascript:void(0)">Verifikasi</a></li>
+						<li class="slide"><a href="<?php echo base_url('index'); ?>" class="side-menu__item">Verifikasi
+								FPPC</a></li>
+						<li class="slide"><a href="<?php echo base_url('index'); ?>" class="side-menu__item">Verifikasi
+								LHUS</a></li>
 					</ul>
 				</li>
 				<!-- End::slide -->
 
-				<!-- Start::slide__category -->
-				<li class="slide__category"><span class="category-name">Levels</span></li>
-				<!-- End::slide__category -->
+				<!-- Start::slide -->
+				<li class="slide">
+					<a href="javascript:void(0);" class="side-menu__item">
+						<i class="ti ti-mail-exclamation side-menu__icon"></i>
+						<span class="side-menu__label">Disposisi Ke Penyelia</span>
+					</a>
+				</li>
+				<!-- End::slide -->
 
 				<!-- Start::slide -->
-				<li class="slide has-sub">
+				<li class="slide  has-sub">
 					<a href="javascript:void(0);" class="side-menu__item">
-						<i class="ri-node-tree side-menu__icon"></i>
-						<span class="side-menu__label">NestedMenu</span>
+						<i class="ti ti-eye side-menu__icon"></i>
+						<span class="side-menu__label">Referensi Penyelia</span>
 						<i class="ri ri-arrow-right-s-line side-menu__angle"></i>
 					</a>
 					<ul class="slide-menu child1">
-						<li class="slide side-menu__label1"><a href="javascript:void(0)">Nested Menu</a></li>
-						<li class="slide"><a href="javascript:void(0);" class="side-menu__item">Nested-1</a></li>
-						<li class="slide has-sub"><a href="javascript:void(0);" class="side-menu__item">Nested-2<i
-									class="ri ri-arrow-right-s-line side-menu__angle"></i></a>
-							<ul class="slide-menu child2">
-								<li class="slide"><a href="javascript:void(0);" class="side-menu__item">Nested-2-1</a>
-								</li>
-								<li class="slide has-sub"><a href="javascript:void(0);"
-										class="side-menu__item">Nested-2-2<i
-											class="ri ri-arrow-right-s-line side-menu__angle"></i></a>
-									<ul class="slide-menu child3">
-										<li class="slide"><a href="javascript:void(0);"
-												class="side-menu__item">Nested-2-2-1</a></li>
-										<li class="slide"><a href="javascript:void(0);"
-												class="side-menu__item">Nested-2-2-2</a></li>
-									</ul>
-								</li>
-							</ul>
+						<li class="slide side-menu__label1"><a href="javascript:void(0)">Referensi Penyelia</a></li>
+						<li class="slide"><a href="<?php echo base_url('index'); ?>" class="side-menu__item">Wadah</a>
 						</li>
+						<li class="slide"><a href="<?php echo base_url('index'); ?>" class="side-menu__item">Bentuk</a>
+						</li>
+						<li class="slide"><a href="<?php echo base_url('index'); ?>"
+								class="side-menu__item">Organoleptik</a></li>
+						<li class="slide"><a href="<?php echo base_url('index'); ?>" class="side-menu__item">Kode Asal
+								Sampel</a></li>
+						<li class="slide"><a href="<?php echo base_url('index'); ?>" class="side-menu__item">Permintaan
+								Uji</a></li>
 					</ul>
 				</li>
 				<!-- End::slide -->

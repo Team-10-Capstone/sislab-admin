@@ -44,4 +44,10 @@ class LoginController extends Controller
             return redirect()->to('/login');
         }
     }
+    public function logout()
+    {
+        $session = session();
+        $session->destroy();
+        return redirect()->to('/login');
+    }
 }

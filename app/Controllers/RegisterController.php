@@ -81,6 +81,7 @@ class RegisterController extends Controller
             return redirect()->to('/login');
         } else {
             $data['validation'] = $this->validator;
+            $data['title'] = 'Register';
             echo view('pages/register', $data);
         }
 

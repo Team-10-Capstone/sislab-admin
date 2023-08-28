@@ -195,7 +195,7 @@
 										<i class="ti ti-wallet text-lg"></i>
 										Bal: $7,12,950
 									</a>
-									<a href="javascript:void(0);" class="ti-dropdown-item">
+									<a href="<?php echo base_url(); ?>/LoginController/logout" class="ti-dropdown-item">
 										<i class="ti ti-logout  text-lg"></i>
 										Log Out
 									</a>
