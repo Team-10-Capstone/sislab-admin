@@ -23,6 +23,7 @@ class Filters extends BaseConfig
         'secureheaders' => SecureHeaders::class,
         'authGuard' => \App\Filters\AuthGuard::class,
         'noauth' => \App\Filters\Noauth::class,
+        'roleguard' => \App\Filters\RoleGuard::class,
     ];
 
     /**
@@ -62,5 +63,28 @@ class Filters extends BaseConfig
      * Example:
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
      */
-    public array $filters = [];
+    public array $filters = [
+        'authGuard' => [
+            'before' => [
+                'admin/*',
+                'admin',
+                'admin/users',
+                'admin/users/*',
+                'admin/roles',
+                'admin/roles/*',
+                'admin/permissions'
+            ]
+        ],
+        'noauth' => [
+            'before' => [
+                'login',
+                'register',
+                'forgot-password',
+                'reset-password',
+                'activate-account',
+                'resend-activation',
+                'logout'
+            ]
+        ],
+    ];
 }
