@@ -11,20 +11,24 @@ class RoleGuard implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         // Get the user's role from your authentication system.
-        $userRole = // Retrieve the user's role (e.g., from session or database).
+        $userRole = session()->get('role');
 
-            // Define the roles and their corresponding access levels.
-            $roles = [
-                0 => 'Guest',
-                1 => 'User',
-                2 => 'Moderator',
-                3 => 'Admin',
-            ];
+        // Define the roles and their corresponding access levels.
+        $roles = [
+            0 => 'Guest',
+            1 => 'User',
+            2 => 'Moderator',
+            3 => 'Admin',
+        ];
 
         // Specify the minimum role required to access the route.
         $requiredRole = $arguments[0] ?? null;
 
-        if ($userRole >= $requiredRole) {
+        if (!array_key_exists($requiredRole, $roles)) {
+            throw new \InvalidArgumentException('Invalid role: ' . $requiredRole);
+        }
+
+        if ($userRole == $requiredRole) {
             // User has the required role or higher; allow access.
             return;
         } else {
