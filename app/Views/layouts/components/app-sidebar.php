@@ -97,6 +97,15 @@
 				</li>
 				<!-- End::slide -->
 
+				<!-- Start::slide -->
+				<li class="slide">
+					<a href="/user" class="side-menu__item">
+						<i class="ti ti-user-plus side-menu__icon"></i>
+						<span class="side-menu__label">Daftar User</span>
+					</a>
+				</li>
+				<!-- End::slide -->
+
 			</ul>
 			<div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24"
 					height="24" viewBox="0 0 24 24">
