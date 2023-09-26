@@ -188,6 +188,7 @@
         });
     }
 
+    
     function editRow(userId) {
         $.ajax({
             url: '<?php echo base_url("UserController/edit/"); ?>' + userId,
