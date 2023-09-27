@@ -178,8 +178,8 @@
             type: 'DELETE', // Assuming you want to use the DELETE HTTP method
             success: function (response) {
                 // Handle success (e.g., remove the row from the table)
-                console.log(response); // Log the response from the server
                 table.deleteRow(userId); // Remove the row from the table
+                window.location.reload()
             },
             error: function (xhr, status, error) {
                 // Handle error
@@ -188,7 +188,7 @@
         });
     }
 
-    
+
     function editRow(userId) {
         $.ajax({
             url: '<?php echo base_url("UserController/edit/"); ?>' + userId,

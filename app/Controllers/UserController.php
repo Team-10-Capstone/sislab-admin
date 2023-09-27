@@ -19,7 +19,7 @@ class UserController extends BaseController
     {
         $userModel = new UserModel();
         $userModel->delete($id);
-        return redirect()->to('/user');
+        return redirect()->to('/');
     }
 
     public function edit($id)
