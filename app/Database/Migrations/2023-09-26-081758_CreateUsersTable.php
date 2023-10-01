@@ -41,19 +41,11 @@ class CreateUsersTable extends Migration
                 'constraint' => 1,
                 'default' => 0,
             ],
-            'createdBy' => [
-                'type' => 'INT',
-                'constraint' => 11,
-            ],
-            'createdDtm' => [
+            'created_at' => [
                 'type' => 'DATETIME',
-            ],
-            'updatedBy' => [
-                'type' => 'INT',
-                'constraint' => 11,
                 'null' => true,
             ],
-            'updatedDtm' => [
+            'updated_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
             ],

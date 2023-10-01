@@ -63,6 +63,7 @@ class UserController extends BaseController
             'isDeleted' => 0,
             'updatedBy' => session()->get('userId')
         ]);
+
         return redirect()->to('/user');
     }
 }
