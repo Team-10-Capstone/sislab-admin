@@ -75,7 +75,7 @@
 
 
     //define data
-    var tabledata = <?= json_encode($users); ?>;
+    var tabledata = <?= json_encode($admin); ?>;
     var table = new Tabulator("#basic-table", {
         width: 100,
         minWidth: 100,
@@ -89,7 +89,7 @@
         data: tabledata, //load data into table
         columns: [{
             title: "ID",
-            field: "userId",
+            field: "adminId",
             sorter: "string"
         },
         {
@@ -127,11 +127,11 @@
                     // Handle edit action
                     alert("Editing " + rowData.name);
                     window.location.href = '<?php echo base_url("user/edit/"); ?>' + rowData
-                        .userId;
+                        .adminId;
                 } else if (action === "delete") {
                     if (confirm("Are you sure you want to delete this row?")) {
                         // Send an AJAX request to delete the row
-                        deleteRow(rowData.userId);
+                        deleteRow(rowData.adminId);
                     }
                 }
             },
@@ -172,13 +172,13 @@
         return actionsContainer;
     }
 
-    function deleteRow(userId) {
+    function deleteRow(adminId) {
         $.ajax({
-            url: '<?php echo base_url("UserController/delete/"); ?>' + userId,
+            url: '<?php echo base_url("UserController/delete/"); ?>' + adminId,
             type: 'DELETE', // Assuming you want to use the DELETE HTTP method
             success: function (response) {
                 // Handle success (e.g., remove the row from the table)
-                table.deleteRow(userId); // Remove the row from the table
+                table.deleteRow(adminId); // Remove the row from the table
                 window.location.reload()
             },
             error: function (xhr, status, error) {
@@ -189,9 +189,9 @@
     }
 
 
-    function editRow(userId) {
+    function editRow(adminId) {
         $.ajax({
-            url: '<?php echo base_url("UserController/edit/"); ?>' + userId,
+            url: '<?php echo base_url("UserController/edit/"); ?>' + adminId,
             type: 'GET', // Assuming you want to use the DELETE HTTP method
             success: function (response) {
                 // Handle success (e.g., remove the row from the table)

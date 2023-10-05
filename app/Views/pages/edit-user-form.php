@@ -23,7 +23,7 @@
         <!-- Page Header Close -->
 
         <!-- Start::row-3 -->
-        <form action="<?php echo base_url('UserController/update/' . $user['userId']); ?>" method="post">
+        <form action="<?php echo base_url('UserController/update/' . $admin['adminId']); ?>" method="post">
             <div class="col-span-12">
                 <div class="box">
                     <div class="box-body">
@@ -32,12 +32,12 @@
                                 <div class="space-y-2">
                                     <label class="ti-form-label mb-0">Nama</label>
                                     <input type="text" class="my-auto ti-form-input" placeholder="Firstname" name="name"
-                                        value="<?php echo $user['name']; ?>">
+                                        value="<?php echo $admin['name']; ?>">
                                 </div>
                                 <div class=" space-y-2">
                                     <label class="ti-form-label mb-0">Role</label>
                                     <select class="ti-form-select" id="select-beast" autocomplete="off" name="roleId"
-                                        value="<?php echo $user['roleId']; ?>">
+                                        value="<?php echo $admin['roleId']; ?>">
                                         <option value="1">Petugas LAB</option>
                                         <option value="2">Penyelia</option>
                                         <option value="3">Analis</option>
@@ -47,12 +47,12 @@
                                 <div class="space-y-2">
                                     <label class="ti-form-label mb-0">No Handphone</label>
                                     <input type="number" class="my-auto ti-form-input" placeholder="+91 123-456-789"
-                                        name="mobile" value="<?php echo $user['mobile']; ?>">
+                                        name="mobile" value="<?php echo $admin['mobile']; ?>">
                                 </div>
                                 <div class=" space-y-2">
                                     <label class="ti-form-label mb-0">Email Address</label>
                                     <input type="email" class="my-auto ti-form-input" placeholder="your@site.com"
-                                        name="email" value="<?php echo $user['email']; ?>">
+                                        name="email" value="<?php echo $admin['email']; ?>">
                                 </div>
                                 <div class=" space-y-2">
                                     <label class="ti-form-label mb-0">Password</label>

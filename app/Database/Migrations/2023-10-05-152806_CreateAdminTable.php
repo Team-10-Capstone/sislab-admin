@@ -4,12 +4,12 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateUsersTable extends Migration
+class CreateAdminTable extends Migration
 {
     public function up()
     {
         $this->forge->addField([
-            'userId' => [
+            'adminId' => [
                 'type' => 'INT',
                 'constraint' => 11,
                 'auto_increment' => true,
@@ -51,12 +51,12 @@ class CreateUsersTable extends Migration
             ],
         ]);
 
-        $this->forge->addKey('userId', true);
-        $this->forge->createTable('users');
+        $this->forge->addKey('adminId', true);
+        $this->forge->createTable('admin');
     }
 
     public function down()
     {
-        $this->forge->dropTable('users');
+        $this->forge->dropTable('admin');
     }
 }

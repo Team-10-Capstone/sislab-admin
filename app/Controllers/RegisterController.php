@@ -2,7 +2,7 @@
 namespace App\Controllers;
 
 use CodeIgniter\Controller;
-use App\Models\UserModel;
+use App\Models\AdminModel;
 
 class RegisterController extends Controller
 {
@@ -60,7 +60,7 @@ class RegisterController extends Controller
 
         if ($this->validate($rules)) {
 
-            $userModel = new UserModel();
+            $adminModel = new AdminModel();
             $data = [
                 'name' => $this->request->getVar('name'),
                 'email' => $this->request->getVar('email'),
@@ -72,7 +72,7 @@ class RegisterController extends Controller
                 'updatedBy' => 0,
             ];
 
-            $userModel->insert($data);
+            $adminModel->insert($data);
 
             $session = session();
 

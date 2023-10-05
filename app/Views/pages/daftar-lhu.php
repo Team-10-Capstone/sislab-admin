@@ -69,7 +69,7 @@
 
 
     //define data
-    var tabledata = <?= json_encode($users); ?>;
+    var tabledata = <?= json_encode($admin); ?>;
     var table = new Tabulator("#basic-table", {
         width: 100,
         minWidth: 100,

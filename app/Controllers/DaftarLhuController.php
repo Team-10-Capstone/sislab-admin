@@ -3,14 +3,14 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\UserModel;
+use App\Models\AdminModel;
 
 class DaftarLhuController extends BaseController
 {
     public function index()
     {
-        $userModel = new UserModel();
-        $data['users'] = $userModel->findAll();
+        $adminModel = new AdminModel();
+        $data['admin'] = $adminModel->findAll();
         $data['title'] = 'Daftar LHU';
         return view('pages/daftar-lhu', $data);
 

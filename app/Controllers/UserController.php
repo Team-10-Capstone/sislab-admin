@@ -3,43 +3,43 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\UserModel;
+use App\Models\AdminModel;
 
 class UserController extends BaseController
 {
     public function index()
     {
-        $userModel = new UserModel();
-        $data['users'] = $userModel->findAll();
+        $adminModel = new AdminModel();
+        $data['admin'] = $adminModel->findAll();
         $data['title'] = 'Daftar Admin';
         return view('pages/user', $data);
     }
 
     public function delete($id)
     {
-        $userModel = new UserModel();
-        $userModel->delete($id);
+        $adminModel = new AdminModel();
+        $adminModel->delete($id);
         return redirect()->to('/');
     }
 
     public function edit($id)
     {
-        $userModel = new UserModel();
-        $data['user'] = $userModel->find($id);
+        $adminModel = new AdminModel();
+        $data['admin'] = $adminModel->find($id);
         $data['title'] = 'Edit User';
         return view('pages/edit-user-form', $data);
     }
 
     public function update($id)
     {
-        $userModel = new UserModel();
-        $userModel->update($id, [
+        $adminModel = new AdminModel();
+        $adminModel->update($id, [
             'name' => $this->request->getVar('name'),
             'roleId' => $this->request->getVar('roleId'),
             'email' => $this->request->getVar('email'),
             'password' => $this->request->getVar('password'),
             'mobile' => $this->request->getVar('mobile'),
-            'updatedBy' => session()->get('userId')
+            'updatedBy' => session()->get('adminId')
         ]);
         return redirect()->to('/user');
     }
@@ -52,16 +52,14 @@ class UserController extends BaseController
 
     public function store()
     {
-        $userModel = new UserModel();
-        $userModel->save([
+        $adminModel = new AdminModel();
+        $adminModel->save([
             'name' => $this->request->getVar('name'),
             'roleId' => $this->request->getVar('roleId'),
             'email' => $this->request->getVar('email'),
             'password' => $this->request->getVar('password'),
             'mobile' => $this->request->getVar('mobile'),
-            'createdBy' => session()->get('userId'),
             'isDeleted' => 0,
-            'updatedBy' => session()->get('userId')
         ]);
 
         return redirect()->to('/user');
