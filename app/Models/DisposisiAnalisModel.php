@@ -8,7 +8,7 @@ use CodeIgniter\Model\Concerns\SoftDeletes;
 class DisposisiAnalis extends Model
 {
     use SoftDeletes;
-    protected $table = 'disposisi_penyelia';
+    protected $table = 'disposisi_analis';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $allowedFields = [
@@ -21,7 +21,6 @@ class DisposisiAnalis extends Model
 
     protected $useTimestamps = true;
     protected $dateFormat = 'datetime';
-
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
     protected $deletedField = 'deleted_at';
