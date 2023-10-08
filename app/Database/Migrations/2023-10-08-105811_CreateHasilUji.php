@@ -53,6 +53,7 @@ class CreatePermohonanUjiTable extends Migration
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('fppc_id', 'fppc', 'id');
         $this->forge->addForeignKey('dtl_fppc_id', 'dtl_fppc', 'id');
+        $this->forge->addForeignKey('analis_id', 'admin', 'adminId');
         $this->forge->createTable('hasil_uji');
     }
 

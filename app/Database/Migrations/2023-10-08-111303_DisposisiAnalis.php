@@ -17,6 +17,10 @@ class DisposisiAnalis extends Migration
                 'type' => 'INT',
                 'null' => true,
             ],
+            'id_dtl_fppc' => [
+                'type' => 'INT',
+                'null' => true,
+            ],
             'analis_id' => [
                 'type' => 'INT',
                 'null' => true,
@@ -42,6 +46,7 @@ class DisposisiAnalis extends Migration
 
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('id_fppc', 'fppc', 'id');
+        $this->forge->addForeignKey('id_dtl_fppc', 'dtl_fppc', 'id');
         $this->forge->addForeignKey('analis_id', 'admin', 'adminId');
         $this->forge->addForeignKey('penyelia_id', 'admin', 'adminId');
         $this->forge->createTable('disposisi_analis');

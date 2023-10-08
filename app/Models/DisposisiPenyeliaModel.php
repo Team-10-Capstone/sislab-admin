@@ -3,35 +3,27 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use CodeIgniter\Model\Concerns\SoftDeletes;
 
-class DtlFppcModel extends Model
+class DisposisiPenyeliaModel extends Model
 {
-    protected $table = 'dtl_fppc';
+    use SoftDeletes;
+    protected $table = 'disposisi_penyelia';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $allowedFields = [
         'id_fppc',
-        'id_ikan',
-        'nama_lokal',
-        'nama_latin',
-        'nama_umum',
-        'jenis_ikan',
-        'asal_sampel',
-        'jumlah_sampel',
-        'kode_pelanggan',
-        'deskripsi_sampel',
-        'kode_sampel',
-        'bentuk',
-        'wadah',
-        'kondisi_sampel',
+        'manajer_teknis_id',
+        'penyelia_id',
         'status',
     ];
 
     protected $useTimestamps = true;
     protected $dateFormat = 'datetime';
+
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
-
+    protected $deletedField = 'deleted_at';
 
     // Define any validation rules or custom behaviors here if needed.
 
@@ -39,5 +31,15 @@ class DtlFppcModel extends Model
     public function fppc()
     {
         return $this->belongsTo(FppcModel::class, 'id_fppc');
+    }
+
+    public function manajerTeknis()
+    {
+        return $this->belongsTo(AdminModel::class, 'manajer_teknis_id');
+    }
+
+    public function penyelia()
+    {
+        return $this->belongsTo(AdminModel::class, 'penyelia_id');
     }
 }
