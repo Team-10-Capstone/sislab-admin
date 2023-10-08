@@ -8,7 +8,7 @@ use CodeIgniter\Model\Concerns\SoftDeletes;
 class IkanLokalModel extends Model
 {
     use SoftDeletes;
-    protected $table = 'tb_r_ikan_lokal';
+    protected $table = 'ikan_lokal';
     protected $primaryKey = 'id_kd_lokal';
     protected $useAutoIncrement = true;
     protected $insertID = 0;

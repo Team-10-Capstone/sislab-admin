@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateParameterUji extends Migration
+class PembatalanFppc extends Migration
 {
     public function up()
     {
@@ -13,28 +13,21 @@ class CreateParameterUji extends Migration
                 'type' => 'INT',
                 'auto_increment' => true,
             ],
-            'kode_uji' => [
+            'id_fppc' => [
                 'type' => 'INT',
                 'null' => true,
             ],
-            'jenis_parameter' => [
-                'type' => 'VARCHAR',
-                'constraint' => 20,
+            'id_admin' => [
+                'type' => 'INT',
                 'null' => true,
             ],
-            'no_ikm' => [
-                'type' => 'VARCHAR',
-                'constraint' => 20,
-                'null' => true,
+            'dibatalkan_oleh' => [
+                'type' => 'INT',
+                'default' => 'admin',
             ],
-            'keterangan_uji' => [
+            'alasan' => [
                 'type' => 'VARCHAR',
-                'constraint' => 100,
-                'null' => true,
-            ],
-            'standar_uji' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
+                'constraint' => 255,
                 'null' => true,
             ],
             'created_at' => [
@@ -45,19 +38,16 @@ class CreateParameterUji extends Migration
                 'type' => 'DATETIME',
                 'null' => true,
             ],
-            'deleted_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
         ]);
 
         $this->forge->addPrimaryKey('id');
-
-        $this->forge->createTable('parameter_uji');
+        $this->forge->addForeignKey('id_fppc', 'fppc', 'id');
+        $this->forge->addForeignKey('id_admin', 'admin', 'adminId');
+        $this->forge->createTable('pembatalan_fppc');
     }
 
     public function down()
     {
-        $this->forge->dropTable('parameter_uji');
+        $this->forge->dropTable('pembatalan_fppc');
     }
 }

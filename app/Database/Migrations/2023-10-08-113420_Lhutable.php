@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateFppcTable extends Migration
+class Lhutable extends Migration
 {
     public function up()
     {
@@ -13,21 +13,15 @@ class CreateFppcTable extends Migration
                 'type' => 'INT',
                 'auto_increment' => true,
             ],
-            'no_fppc' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
+            'id_fppc' => [
+                'type' => 'INT',
                 'null' => true,
             ],
-            'no_ppk' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
+            'id_dtl_fppc' => [
+                'type' => 'INT',
                 'null' => true,
             ],
-            'tgl_ppk' => [
-                'type' => 'DATE',
-                'null' => true,
-            ],
-            'id_ppk' => [
+            'id_penyelia' => [
                 'type' => 'INT',
                 'null' => true,
             ],
@@ -35,22 +29,13 @@ class CreateFppcTable extends Migration
                 'type' => 'INT',
                 'null' => true,
             ],
-            'id_petugas' => [
-                'type' => 'INT',
-                'null' => true,
-            ],
-            'nip_baru' => [
-                'type' => 'VARCHAR',
-                'constraint' => 18,
-                'null' => true,
-            ],
-            'tgl_monsur' => [
+            'tgl_terbit' => [
                 'type' => 'DATE',
                 'null' => true,
             ],
-            'petugas_monsur' => [
+            'no_lhu' => [
                 'type' => 'VARCHAR',
-                'constraint' => 100,
+                'constraint' => 50,
                 'null' => true,
             ],
             'status' => [
@@ -66,22 +51,18 @@ class CreateFppcTable extends Migration
                 'type' => 'DATETIME',
                 'null' => true,
             ],
-            'deleted_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
         ]);
 
         $this->forge->addPrimaryKey('id');
-
-        $this->forge->createTable('fppc');
-        // relation with trader
+        $this->forge->addForeignKey('id_fppc', 'fppc', 'id');
+        $this->forge->addForeignKey('id_dtl_fppc', 'dtl_fppc', 'id');
+        $this->forge->addForeignKey('id_penyelia', 'admin', 'adminId');
         $this->forge->addForeignKey('id_trader', 'users', 'user_id');
-        $this->forge->addForeignKey('id_petugas', 'admin', 'adminId');
+        $this->forge->createTable('lhus');
     }
 
     public function down()
     {
-        $this->forge->dropTable('fppc');
+        $this->forge->dropTable('lhus');
     }
 }

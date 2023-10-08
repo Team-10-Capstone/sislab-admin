@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateParameterUji extends Migration
+class CreatePermohonanUjiTable extends Migration
 {
     public function up()
     {
@@ -13,28 +13,31 @@ class CreateParameterUji extends Migration
                 'type' => 'INT',
                 'auto_increment' => true,
             ],
-            'kode_uji' => [
+            'fppc_id' => [
                 'type' => 'INT',
                 'null' => true,
             ],
-            'jenis_parameter' => [
-                'type' => 'VARCHAR',
-                'constraint' => 20,
+            'dtl_fppc_id' => [
+                'type' => 'INT',
                 'null' => true,
             ],
-            'no_ikm' => [
-                'type' => 'VARCHAR',
-                'constraint' => 20,
+            'analis_id' => [
+                'type' => 'INT',
                 'null' => true,
             ],
-            'keterangan_uji' => [
-                'type' => 'VARCHAR',
-                'constraint' => 100,
-                'null' => true,
-            ],
-            'standar_uji' => [
+            'hasil_uji' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50,
+                'null' => true,
+            ],
+            'keterangan' => [
+                'type' => 'VARCHAR',
+                'constraint' => 128,
+                'null' => true,
+            ],
+            'nilai' => [
+                'type' => 'VARCHAR',
+                'constraint' => 128,
                 'null' => true,
             ],
             'created_at' => [
@@ -45,19 +48,16 @@ class CreateParameterUji extends Migration
                 'type' => 'DATETIME',
                 'null' => true,
             ],
-            'deleted_at' => [
-                'type' => 'DATETIME',
-                'null' => true,
-            ],
         ]);
 
         $this->forge->addPrimaryKey('id');
-
-        $this->forge->createTable('parameter_uji');
+        $this->forge->addForeignKey('fppc_id', 'fppc', 'id');
+        $this->forge->addForeignKey('dtl_fppc_id', 'dtl_fppc', 'id');
+        $this->forge->createTable('hasil_uji');
     }
 
     public function down()
     {
-        $this->forge->dropTable('parameter_uji');
+        $this->forge->dropTable('hasil_uji');
     }
 }

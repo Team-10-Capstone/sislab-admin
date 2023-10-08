@@ -4,15 +4,14 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Createtradertable extends Migration
+class CreateUserTable extends Migration
 {
     public function up()
     {
         $this->forge->addField([
-            'trader_id' => [
-                'type' => 'SMALLINT',
+            'user_id' => [
+                'type' => 'INT',
                 'auto_increment' => true,
-                'unsigned' => true,
             ],
             'username' => [
                 'type' => 'VARCHAR',
@@ -59,6 +58,11 @@ class Createtradertable extends Migration
                 "constraint" => 255,
                 "null" => true,
             ],
+            "pt" => [
+                "type" => "VARCHAR",
+                "constraint" => 255,
+                "null" => true,
+            ],
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
@@ -67,14 +71,18 @@ class Createtradertable extends Migration
                 'type' => 'DATETIME',
                 'null' => true,
             ],
+            'deleted_at' => [
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
         ]);
 
-        $this->forge->addKey('trader_id', true);
-        $this->forge->createTable('trader');
+        $this->forge->addKey('user_id', true);
+        $this->forge->createTable('users');
     }
 
     public function down()
     {
-        $this->forge->dropTable('trader');
+        $this->forge->dropTable('users');
     }
 }
