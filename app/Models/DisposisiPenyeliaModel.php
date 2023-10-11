@@ -26,19 +26,5 @@ class DisposisiPenyeliaModel extends Model
 
     // Define any validation rules or custom behaviors here if needed.
 
-    // Define relationships if needed.
-    public function fppc()
-    {
-        return $this->belongsTo(FppcModel::class, 'id_fppc');
-    }
 
-    public function manajerTeknis()
-    {
-        return $this->belongsTo(AdminModel::class, 'manajer_teknis_id');
-    }
-
-    public function penyelia()
-    {
-        return $this->belongsTo(AdminModel::class, 'penyelia_id');
-    }
 }

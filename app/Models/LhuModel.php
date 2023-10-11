@@ -29,24 +29,5 @@ class LhuModel extends Model
 
     // Define any validation rules or custom behaviors here if needed.
 
-    // Define relationships if needed.
-    public function fppc()
-    {
-        return $this->belongsTo(FppcModel::class, 'id_fppc');
-    }
 
-    public function dtlFppc()
-    {
-        return $this->belongsTo(DtlFppcModel::class, 'id_dtl_fppc');
-    }
-
-    public function penyelia()
-    {
-        return $this->belongsTo(AdminModel::class, 'id_penyelia');
-    }
-
-    public function trader()
-    {
-        return $this->belongsTo(UserModel::class, 'id_trader');
-    }
 }

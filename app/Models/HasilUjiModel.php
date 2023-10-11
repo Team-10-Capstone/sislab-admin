@@ -24,19 +24,5 @@ class HasilUjiModel extends Model
 
     // Define any validation rules or custom behaviors here if needed.
 
-    // Define relationships if needed.
-    public function fppc()
-    {
-        return $this->belongsTo(FppcModel::class, 'fppc_id');
-    }
 
-    public function dtlFppc()
-    {
-        return $this->belongsTo(DtlFppcModel::class, 'dtl_fppc_id');
-    }
-
-    public function analis()
-    {
-        return $this->belongsTo(AdminModel::class, 'analis_id');
-    }
 }

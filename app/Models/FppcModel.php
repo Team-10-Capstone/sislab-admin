@@ -31,13 +31,5 @@ class FppcModel extends Model
 
     protected $updatedField = 'updated_at'; // Change the updated field to 'updated_at'
 
-    protected $deletedField = 'deleted_at'; // Change the deleted field to 'deleted_at'
-
-    public function getAllFppcWithDtlFppc()
-    {
-        $builder = $this->db->table('fppc');
-        $builder->select('fppc.*, dtl_fppc.*');
-        $builder->join('dtl_fppc', 'dtl_fppc.id_fppc = fppc.id', 'left'); // Assuming it's a left join
-        return $builder->get()->getResultArray();
-    }
+    protected $deletedField = 'deleted_at'; // Change the deleted field to 'deleted_at's
 }

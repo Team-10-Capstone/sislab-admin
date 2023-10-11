@@ -26,19 +26,4 @@ class PermohonanUjiModel extends Model
 
     // Define any validation rules or custom behaviors here if needed.
 
-    // Define relationships if needed.
-    public function dtlFppc()
-    {
-        return $this->belongsTo(DtlFppcModel::class, 'dtl_fppc_id');
-    }
-
-    public function parameterUji()
-    {
-        return $this->belongsTo(ParameterUjiModel::class, 'parameter_uji_id');
-    }
-
-    public function hasilUji()
-    {
-        return $this->belongsTo(HasilUjiModel::class, 'hasil_uji_id');
-    }
 }
