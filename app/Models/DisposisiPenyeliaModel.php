@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use CodeIgniter\Model\Concerns\SoftDeletes;
 
 class DisposisiPenyeliaModel extends Model
 {
-    use SoftDeletes;
+    protected $useSoftDeletes = true;
     protected $table = 'disposisi_penyelia';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;

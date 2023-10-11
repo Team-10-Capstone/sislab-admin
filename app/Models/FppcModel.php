@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use CodeIgniter\Model\Concerns\SoftDeletes;
 
 class FppcModel extends Model
 {
-    use SoftDeletes;
+    protected $useSoftDeletes = true;
     protected $table = 'fppc';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
@@ -34,5 +33,11 @@ class FppcModel extends Model
 
     protected $deletedField = 'deleted_at'; // Change the deleted field to 'deleted_at'
 
-    // Define any validation rules or custom behaviors here if needed.
+    public function getAllFppcWithDtlFppc()
+    {
+        $builder = $this->db->table('fppc');
+        $builder->select('fppc.*, dtl_fppc.*');
+        $builder->join('dtl_fppc', 'dtl_fppc.id_fppc = fppc.id', 'left'); // Assuming it's a left join
+        return $builder->get()->getResultArray();
+    }
 }

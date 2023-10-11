@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use CodeIgniter\Model\Concerns\SoftDeletes;
 
 class HasilUjiModel extends Model
 {
-    use SoftDeletes;
+    protected $useSoftDeletes = true;
     protected $table = 'hasil_uji';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;

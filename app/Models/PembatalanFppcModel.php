@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use CodeIgniter\Model\Concerns\SoftDeletes;
 
 class PembatalanFppcModel extends Model
 {
-    use SoftDeletes;
+    protected $useSoftDeletes = true;
     protected $table = 'pembatalan_fppc';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;

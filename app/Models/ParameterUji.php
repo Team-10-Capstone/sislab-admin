@@ -3,11 +3,9 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use CodeIgniter\Model\Concerns\SoftDeletes;
 
 class ParameterUjiModel extends Model
 {
-    use SoftDeletes;
     protected $table = 'parameter_uji';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
@@ -18,6 +16,7 @@ class ParameterUjiModel extends Model
         'keterangan_uji',
         'standar_uji',
     ];
+    protected $useSoftDeletes = true;
 
     protected $useTimestamps = true;
     protected $createdField = 'created_at';

@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use CodeIgniter\Model\Concerns\SoftDeletes;
 
 class PermohonanUjiModel extends Model
 {
-    use SoftDeletes;
+    protected $useSoftDeletes = true;
     protected $table = 'permohonan_uji';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;

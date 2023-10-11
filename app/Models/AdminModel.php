@@ -2,11 +2,10 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use CodeIgniter\Model\Concerns\SoftDeletes;
 
 class AdminModel extends Model
 {
-    use SoftDeletes;
+    protected $useSoftDeletes = true;
     protected $table = 'admin';
     protected $primaryKey = 'adminId';
     protected $useAutoIncrement = true;
@@ -14,15 +13,12 @@ class AdminModel extends Model
     protected $dateFormat = 'datetime';
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
-
+    protected $deletedField = 'deleted_at';
     protected $allowedFields = [
         'name',
         'roleId',
         'email',
         'password',
         'mobile',
-        'isDeleted',
     ];
-
-    protected $deletedField = 'deleted_at';
 }

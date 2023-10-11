@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use CodeIgniter\Model\Concerns\SoftDeletes;
 
 class UserModel extends Model
 {
-    use SoftDeletes;
+    protected $useSoftDeletes = true;
     protected $table = 'users';
     protected $primaryKey = 'user_id';
     protected $useAutoIncrement = true;
@@ -30,7 +29,6 @@ class UserModel extends Model
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
     protected $deletedField = 'deleted_at';
-
     protected $dateFormat = 'datetime';
 
     // Validation rules go here if needed.

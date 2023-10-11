@@ -39,7 +39,6 @@ class UserController extends BaseController
             'email' => $this->request->getVar('email'),
             'password' => $this->request->getVar('password'),
             'mobile' => $this->request->getVar('mobile'),
-            'updatedBy' => session()->get('adminId')
         ]);
         return redirect()->to('/user');
     }
@@ -59,7 +58,6 @@ class UserController extends BaseController
             'email' => $this->request->getVar('email'),
             'password' => $this->request->getVar('password'),
             'mobile' => $this->request->getVar('mobile'),
-            'isDeleted' => 0,
         ]);
 
         return redirect()->to('/user');

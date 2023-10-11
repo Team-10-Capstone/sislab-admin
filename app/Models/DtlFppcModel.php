@@ -32,12 +32,4 @@ class DtlFppcModel extends Model
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
 
-
-    // Define any validation rules or custom behaviors here if needed.
-
-    // Define relationships if needed.
-    public function fppc()
-    {
-        return $this->belongsTo(FppcModel::class, 'id_fppc');
-    }
 }
