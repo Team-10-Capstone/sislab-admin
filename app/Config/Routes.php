@@ -49,6 +49,8 @@ $routes->get('/user/add', 'UserController::add', ['filter' => 'authGuard']);
 $routes->get('/user/edit/(:num)', 'UserController::edit/$1', ['filter' => 'authGuard']);
 $routes->get('/fppc', 'FppcController::index', ['filter' => 'authGuard']);
 
+$routes->get('/permohonan-ppk', 'PpkController::index', ['filter' => 'authGuard']);
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing

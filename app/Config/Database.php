@@ -44,6 +44,32 @@ class Database extends Config
         'port' => 1433,
     ];
 
+
+    /**
+     * Database karimutu
+     * used to query data from karimutu system
+     */
+    public array $karimutu = [
+        'DSN' => '',
+        'hostname' => 'localhost',
+        'username' => 'sa',
+        'password' => '123',
+        'database' => 'karimutu_2',
+        'DBDriver' => 'sqlsrv',
+        'DBPrefix' => '',
+        'pConnect' => false,
+        'DBDebug' => true,
+        'charset' => 'utf16',
+        'DBCollat' => 'utf8_general_ci',
+        'swapPre' => '',
+        'encrypt' => false,
+        'compress' => false,
+        'strictOn' => false,
+        'failover' => [],
+        'port' => 1433,
+        // Change this to the appropriate port
+    ];
+
     /**
      * This database connection is used when
      * running PHPUnit database tests.

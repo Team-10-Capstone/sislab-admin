@@ -49,6 +49,17 @@
 				<!-- End::slide -->
 
 				<!-- Start::slide -->
+				<li class="slide">
+					<a href="/permohonan-ppk" class="side-menu__item">
+						<i class="ti ti-file-description side-menu__icon"></i>
+						<span class="side-menu__label">
+							Permohonan masuk
+						</span>
+					</a>
+				</li>
+				<!-- End::slide -->
+
+				<!-- Start::slide -->
 				<li class="slide  has-sub">
 					<a href="javascript:void(0);" class="side-menu__item">
 						<i class="ti ti-zoom-check side-menu__icon"></i>
