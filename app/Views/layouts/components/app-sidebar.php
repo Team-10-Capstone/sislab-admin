@@ -50,7 +50,7 @@
 
 				<!-- Start::slide -->
 				<li class="slide">
-					<a href="/permohonan-ppk" class="side-menu__item">
+					<a href="/ppk" class="side-menu__item">
 						<i class="ti ti-file-description side-menu__icon"></i>
 						<span class="side-menu__label">
 							Permohonan masuk

@@ -17,7 +17,9 @@ $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Pages');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(true);
-$routes->set404Override();
+$routes->set404Override(function () {
+    return view('/pages/error404', ['title' => 'Page Not Found']);
+});
 $routes->setAutoRoute(true);
 
 // The Auto Routing (Legacy) is very dangerous. It is easy to create vulnerable apps
@@ -49,7 +51,8 @@ $routes->get('/user/add', 'UserController::add', ['filter' => 'authGuard']);
 $routes->get('/user/edit/(:num)', 'UserController::edit/$1', ['filter' => 'authGuard']);
 $routes->get('/fppc', 'FppcController::index', ['filter' => 'authGuard']);
 
-$routes->get('/permohonan-ppk', 'PpkController::index', ['filter' => 'authGuard']);
+$routes->get('/ppk', 'PpkController::index', ['filter' => 'authGuard']);
+$routes->get('/fppc/create', 'FppcController::create', ['filter' => 'authGuard']);
 
 /*
  * --------------------------------------------------------------------

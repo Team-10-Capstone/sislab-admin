@@ -243,39 +243,20 @@
                                                 <?php echo $row['nilai_komoditas_usd']; ?>
                                             </td>
                                             <td class="font-medium space-x-2 rtl:space-x-reverse">
-                                                <div class="hs-tooltip ti-main-tooltip">
-                                                    <a href="javascript:void(0);"
-                                                        class="m-0 hs-tooltip-toggle relative  w-8 h-8 ti-btn rounded-full p-0 transition-none focus:outline-none ti-btn-soft-primary">
-                                                        <i class="ti ti-send"></i>
-                                                        <span
-                                                            class="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
-                                                            role="tooltip">
-                                                            Send
-                                                        </span>
-                                                    </a>
-                                                </div>
-                                                <div class="hs-tooltip ti-main-tooltip">
-                                                    <a href="javascript:void(0);"
-                                                        onclick="changeTheInfo('Edit Invoice','Socrates Itumay','P.O. Box 283 8562 Fusce Rd., 20620','socratesitumany@abc.com','#IN5252155','25-10-2022','25-11-2022')"
-                                                        data-hs-overlay="#invoice-modal"
-                                                        class="invoice-edit m-0 hs-tooltip-toggle relative  w-8 h-8 ti-btn rounded-full p-0 transition-none focus:outline-none ti-btn-soft-secondary">
-                                                        <i class="ti ti-pencil"></i>
-                                                        <span
-                                                            class="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
-                                                            role="tooltip">
-                                                            Edit
-                                                        </span>
-                                                    </a>
-                                                </div>
+
+                                                <a href="javascript:void(0);"
+                                                    class="invoice-edit m-0 relative ti-btn rounded-full p-2 transition-none focus:outline-none ti-btn-soft-secondary">
+                                                    <i class="ti ti-pencil"></i>
+                                                    <p>
+                                                        Pengajuan Uji
+                                                    </p>
+                                                </a>
+
                                                 <div class="hs-tooltip ti-main-tooltip">
                                                     <a href="javascript:void(0);"
                                                         class="invoice-btn m-0 hs-tooltip-toggle relative  w-8 h-8 ti-btn rounded-full p-0 transition-none focus:outline-none ti-btn-soft-danger">
                                                         <i class="ti ti-trash"></i>
-                                                        <span
-                                                            class="hs-tooltip-content ti-main-tooltip-content py-1 px-2 bg-gray-900 text-xs font-medium text-white shadow-sm dark:bg-slate-700"
-                                                            role="tooltip">
-                                                            Delete
-                                                        </span>
+
                                                     </a>
                                                 </div>
                                             </td>
