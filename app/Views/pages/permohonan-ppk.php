@@ -87,7 +87,8 @@
 
                                     <input type="text"
                                         class="px-3 py-2 ti-form-input ltr:rounded-l-none rtl:rounded-r-none focus:z-10 flatpickr-input"
-                                        id="daterange" placeholder="Filter By Date" readonly />
+                                        id="daterange" placeholder="Filter By Date" readonly
+                                        value="<?php echo !empty($_GET['start_date']) ? $_GET['start_date'] : '' ?>  <?php echo !empty($_GET['end_date']) ? 'to ' . $_GET['end_date'] : '' ?>" />
 
                                 </div>
                                 <div class="hs-dropdown ti-dropdown">
@@ -126,14 +127,11 @@
                                         <a id="" class="ti-dropdown-item" href="javascript:void(0);">
                                             Semua jenis
                                         </a>
-                                        <a id="N" class="ti-dropdown-item" href="javascript:void(0);">
-                                            Mandiri
-                                        </a>
                                         <a id="I" class="ti-dropdown-item" href="javascript:void(0);">
                                             Import
                                         </a>
                                         <a id="N" class="ti-dropdown-item" href="javascript:void(0);">
-                                            Surveilance
+                                            Surveilance & Mandiri
                                         </a>
                                         <a id="K" class="ti-dropdown-item" href="javascript:void(0);">
                                             Domestik keluar
@@ -207,18 +205,23 @@
                                             <td><span
                                                     class="truncate whitespace-nowrap inline-block py-1 px-3 rounded-full text-xs font-medium bg-success/10 text-success/80">
                                                     <?php
-                                                    $value = $row['kd_kegiatan'];
+                                                    $kd_kegiatan = $row['kd_kegiatan'];
+                                                    $kd_mks = $row['kd_mks_kirim'];
 
-                                                    if ($value == 'E') {
+                                                    if ($kd_kegiatan == 'E') {
                                                         echo 'Eksport';
-                                                    } elseif ($value == 'I') {
+                                                    } elseif ($kd_kegiatan == 'I') {
                                                         echo 'Import';
-                                                    } elseif ($value == 'K') {
+                                                    } elseif ($kd_kegiatan == 'K') {
                                                         echo 'Domestik keluar';
-                                                    } elseif ($value == 'M') {
+                                                    } elseif ($kd_kegiatan == 'M') {
                                                         echo 'Domestik masuk';
-                                                    } elseif ($value == 'N') {
-                                                        echo 'Surveilance/Mandiri';
+                                                    } elseif ($kd_kegiatan == 'N' && $kd_mks == 16) {
+                                                        echo 'Mandiri';
+                                                    } elseif ($kd_kegiatan == 'N' && $kd_mks == 21) {
+                                                        echo 'Surveilance';
+                                                    } else {
+                                                        echo 'Lainnya';
                                                     }
                                                     ?>
                                                 </span>
@@ -244,7 +247,7 @@
                                             </td>
                                             <td class="font-medium space-x-2 rtl:space-x-reverse">
 
-                                                <a href="javascript:void(0);"
+                                                <a href="<?= site_url('fppc/create?ppk_id=' . $row['id_ppk']) ?>"
                                                     class="invoice-edit m-0 relative ti-btn rounded-full p-2 transition-none focus:outline-none ti-btn-soft-secondary">
                                                     <i class="ti ti-pencil"></i>
                                                     <p>

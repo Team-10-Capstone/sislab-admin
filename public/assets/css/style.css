@@ -1693,6 +1693,17 @@ select option:active,
   background-color: rgb(var(--dark-bg));
   color: rgb(255 255 255 / 0.7);
 }
+.ti-form-select-label{
+  margin-bottom: 0.5rem;
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+}
+:is(.dark .ti-form-select-label){
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
 .ti-form-label{
   margin-bottom: 0.5rem;
   display: block;
@@ -2805,9 +2816,6 @@ select option:active,
 .mt-7{
   margin-top: 1.75rem;
 }
-.mt-auto{
-  margin-top: auto;
-}
 .box-border{
   box-sizing: border-box;
 }
@@ -2966,9 +2974,6 @@ select option:active,
 }
 .min-w-fit{
   min-width: fit-content;
-}
-.max-w-7xl{
-  max-width: 80rem;
 }
 .max-w-md{
   max-width: 28rem;
@@ -3387,9 +3392,6 @@ select option:active,
 .gap-2{
   gap: 0.5rem;
 }
-.gap-4{
-  gap: 1rem;
-}
 .gap-6{
   gap: 1.5rem;
 }
@@ -3399,14 +3401,14 @@ select option:active,
 .gap-x-2\.5{
   column-gap: 0.625rem;
 }
+.gap-x-3{
+  column-gap: 0.75rem;
+}
 .gap-x-6{
   column-gap: 1.5rem;
 }
 .gap-y-4{
   row-gap: 1rem;
-}
-.gap-x-3{
-  column-gap: 0.75rem;
 }
 .space-x-2 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
@@ -3437,6 +3439,11 @@ select option:active,
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+.space-y-5 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.25rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.25rem * var(--tw-space-y-reverse));
 }
 .space-y-6 > :not([hidden]) ~ :not([hidden]){
   --tw-space-y-reverse: 0;
@@ -3479,6 +3486,10 @@ select option:active,
 }
 .divide-none > :not([hidden]) ~ :not([hidden]){
   border-style: none;
+}
+.divide-gray-200 > :not([hidden]) ~ :not([hidden]){
+  --tw-divide-opacity: 1;
+  border-color: rgb(226 232 240 / var(--tw-divide-opacity));
 }
 .place-self-auto{
   place-self: auto;
@@ -3970,6 +3981,10 @@ select option:active,
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }
+.py-10{
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
 .py-2{
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -3981,10 +3996,6 @@ select option:active,
 .py-4{
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
-.py-10{
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
 }
 .pb-8{
   padding-bottom: 2rem;
@@ -4042,6 +4053,10 @@ select option:active,
   font-size: 2.25rem;
   line-height: 2.5rem;
 }
+.text-9xl{
+  font-size: 8rem;
+  line-height: 1;
+}
 .text-base{
   font-size: 1rem;
   line-height: 1.5rem;
@@ -4061,10 +4076,6 @@ select option:active,
 .text-xs{
   font-size: 0.75rem;
   line-height: 1rem;
-}
-.text-9xl{
-  font-size: 8rem;
-  line-height: 1;
 }
 .\!font-normal{
   font-weight: 400 !important;
@@ -4194,10 +4205,6 @@ select option:active,
 .text-red-400{
   --tw-text-opacity: 1;
   color: rgb(248 113 113 / var(--tw-text-opacity));
-}
-.text-red-500{
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 .text-red-700{
   --tw-text-opacity: 1;
@@ -15018,6 +15025,10 @@ select.tabulator-page-size option{
   padding-right: 1.25rem;
 }
 
+:is(.dark .dark\:divide-white\/10) > :not([hidden]) ~ :not([hidden]){
+  border-color: rgb(255 255 255 / 0.1);
+}
+
 :is(.dark .dark\:border-white\/10){
   border-color: rgb(255 255 255 / 0.1);
 }
@@ -15198,6 +15209,9 @@ select.tabulator-page-size option{
   .sm\:gap-3{
     gap: 0.75rem;
   }
+  .sm\:gap-6{
+    gap: 1.5rem;
+  }
   .sm\:space-x-3 > :not([hidden]) ~ :not([hidden]){
     --tw-space-x-reverse: 0;
     margin-right: calc(0.75rem * var(--tw-space-x-reverse));
@@ -15322,8 +15336,14 @@ select.tabulator-page-size option{
   .xl\:col-span-3{
     grid-column: span 3 / span 3;
   }
+  .xl\:col-span-4{
+    grid-column: span 4 / span 4;
+  }
   .xl\:col-span-6{
     grid-column: span 6 / span 6;
+  }
+  .xl\:col-span-8{
+    grid-column: span 8 / span 8;
   }
   .xl\:col-span-9{
     grid-column: span 9 / span 9;

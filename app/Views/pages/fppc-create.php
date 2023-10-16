@@ -2,21 +2,28 @@
 
 <?= $this->section('styles'); ?>
 
-<!-- Quil Css -->
-<link id="style" href="<?php echo base_url('assets/libs/quill/quill.snow.css'); ?>" rel="stylesheet">
+<!-- Swiper Css -->
+<link rel="stylesheet" href="<?php echo base_url('assets/libs/swiper/swiper-bundle.min.css'); ?>">
 
 <!-- Choices Css -->
 <link rel="stylesheet" href="<?php echo base_url('assets/libs/choices.js/public/assets/styles/choices.min.css'); ?>">
 
-<!-- Filepond CSS -->
+<!-- Quill Css -->
+<link id="style" href="<?php echo base_url('assets/libs/quill/quill.snow.css'); ?>" rel="stylesheet">
+
+<!-- filepond File Upload  Css -->
 <link rel="stylesheet" href="<?php echo base_url('assets/libs/filepond/filepond.min.css'); ?>">
 <link rel="stylesheet"
     href="<?php echo base_url('assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css'); ?>">
 <link rel="stylesheet"
     href="<?php echo base_url('assets/libs/filepond-plugin-image-edit/filepond-plugin-image-edit.min.css'); ?>">
+<link rel="stylesheet"
+    href="<?php echo base_url('assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css'); ?>">
 
 <!-- Flatpickr Css -->
 <link rel="stylesheet" href="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.css'); ?>">
+
+
 
 <?= $this->endSection('styles'); ?>
 
@@ -32,19 +39,19 @@
             <div>
                 <h3
                     class="text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-white text-2xl font-medium">
-                    Add Product</h3>
+                    Buat Permohonan Pengujian FPPC</h3>
             </div>
             <ol class="flex items-center whitespace-nowrap min-w-0">
                 <li class="text-sm">
                     <a class="flex items-center font-semibold text-primary hover:text-primary dark:text-primary truncate"
                         href="javascript:void(0);">
-                        Pages
+                        Sislab
                         <i
                             class="ti ti-chevrons-right flex-shrink-0 mx-3 overflow-visible text-gray-300 dark:text-gray-300 rtl:rotate-180"></i>
                     </a>
                 </li>
                 <li class="text-sm text-gray-500 hover:text-primary dark:text-white/70 " aria-current="page">
-                    Add Product
+                    Buat FPPC
                 </li>
             </ol>
         </div>
@@ -56,198 +63,223 @@
                 <div class="box !bg-transparent border-0 shadow-none">
                     <div class="box-body p-0">
                         <div class="grid grid-cols-12 gap-x-6">
-                            <div class="col-span-12 xl:col-span-6">
-                                <div class="box ">
-                                    <div class="box-body">
-                                        <div class="space-y-3">
-                                            <div class="space-y-2">
-                                                <label class="ti-form-label mb-0">Product Title</label>
-                                                <input type="text" class="my-auto ti-form-input"
-                                                    placeholder="Dolar Leather Handbag For Women">
-                                            </div>
-                                            <div class="space-y-2">
-                                                <label class="ti-form-label mb-0">Product Id</label>
-                                                <input type="text" class="my-auto ti-form-input"
-                                                    placeholder="#2515445145">
-                                            </div>
-                                            <div class="">
-                                                <label class="ti-form-label">Product Description</label>
-                                                <div id="product-editor"></div>
-                                            </div>
-                                            <div class="space-y-2">
-                                                <label class="ti-form-label">Product Features</label>
-                                                <textarea class="ti-form-input" rows="2"></textarea>
-                                                <label
-                                                    class="ti-form-label mt-1 text-sm font-normal opacity-70 text-gray-500 dark:text-white/70 mb-0">*Description
-                                                    should not exceed 500 letters</label>
-                                            </div>
-                                            <div class="grid grid-cols-12 gap-4">
-                                                <div class="col-span-12 lg:col-span-6">
-                                                    <div class="space-y-2 product-1">
-                                                        <label class="ti-form-label mb-0">Product Status</label>
-                                                        <select class="ti-form-select product-search">
-                                                            <option value="">Status</option>
-                                                            <option value="Clothing">Publish</option>
-                                                            <option value="Footwear">Unpublish</option>
-                                                            <option value="Accesories">Schedule</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-span-12 lg:col-span-6">
-                                                    <div class="space-y-2  product-1">
-                                                        <label class="ti-form-label mb-0">Product Visibility</label>
-                                                        <select class="ti-form-select product-search">
-                                                            <option value="">Visibility</option>
-                                                            <option value="1">Private</option>
-                                                            <option value="2">Public</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            <div class="col-span-12 xl:col-span-4">
+                                <div class="box">
+                                    <div class="box-header">
+                                        <h5 class="box-title">Detail PPK</h5>
+                                    </div>
+                                    <div class="box-body p-0">
+                                        <div class="rounded-sm overflow-auto">
+                                            <table class="ti-custom-table ti-custom-table-head">
+                                                <tbody>
+                                                    <tr class="divide-x divide-gray-200 dark:divide-white/10">
+                                                        <td class="font-medium">
+                                                            Trader
+                                                        </td>
+                                                        <td>
+                                                            <?= $ppk['nm_trader']; ?>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr class="divide-x divide-gray-200 dark:divide-white/10">
+                                                        <td class="font-medium">
+                                                            Alamat Trader
+                                                        </td>
+                                                        <td>
+                                                            <?= $ppk['al_trader']; ?>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr class="divide-x divide-gray-200 dark:divide-white/10">
+                                                        <td class="font-medium">
+                                                            Penerima
+                                                        </td>
+                                                        <td>
+                                                            <?= $ppk['nm_penerima']; ?>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr class="divide-x divide-gray-200 dark:divide-white/10">
+                                                        <td class="font-medium">
+                                                            Alamat Penerima
+                                                        </td>
+                                                        <td>
+                                                            <?= $ppk['al_penerima']; ?>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr class="divide-x divide-gray-200 dark:divide-white/10">
+                                                        <td class="font-medium">Tipe Permohonan</td>
+                                                        <td>
+                                                            <span
+                                                                class="truncate whitespace-nowrap inline-block py-1 px-3 rounded-full text-xs font-medium bg-success/10 text-success/80">
+                                                                <?php
+                                                                $kd_kegiatan = $ppk['kd_kegiatan'];
+                                                                $kd_mks = $ppk['kd_mks_kirim'];
+
+                                                                if ($kd_kegiatan == 'E') {
+                                                                    echo 'Eksport';
+                                                                } elseif ($kd_kegiatan == 'I') {
+                                                                    echo 'Import';
+                                                                } elseif ($kd_kegiatan == 'K') {
+                                                                    echo 'Domestik keluar';
+                                                                } elseif ($kd_kegiatan == 'M') {
+                                                                    echo 'Domestik masuk';
+                                                                } elseif ($kd_kegiatan == 'N' && $kd_mks == 16) {
+                                                                    echo 'Mandiri';
+                                                                } elseif ($kd_kegiatan == 'N' && $kd_mks == 21) {
+                                                                    echo 'Surveilance';
+                                                                } else {
+                                                                    echo 'Lainnya';
+                                                                }
+                                                                ?>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr class="divide-x divide-gray-200 dark:divide-white/10">
+                                                        <td class="font-medium">Nilai Komoditas</td>
+                                                        <td>$
+                                                            <?php echo $ppk['nilai_komoditas_usd']; ?>
+                                                        </td>
+                                                    </tr>
+
+
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-span-12 xl:col-span-6">
+                            <div class="col-span-12 xl:col-span-8">
                                 <div class="box">
-                                    <div class="box-body space-y-3">
-                                        <div class="grid grid-cols-12 gap-4">
-                                            <div class="col-span-12 lg:col-span-4">
-                                                <div class="space-y-2 product-1">
-                                                    <label class="ti-form-label mb-0">Product Category</label>
-                                                    <select class="ti-form-select product-search">
-                                                        <option value="">Category</option>
-                                                        <option value="Clothing">Clothing</option>
-                                                        <option value="Footwear">Footwear</option>
-                                                        <option value="Accesories">Accesories</option>
-                                                        <option value="Grooming">Grooming</option>
-                                                        <option value="Ethnic &amp; Festive">Ethnic &amp; Festive
-                                                        </option>
-                                                        <option value="Jewellery">Jewellery</option>
-                                                        <option value="Toys &amp; Babycare">Toys &amp; Babycare</option>
-                                                        <option value="Festive Gifts">Festive Gifts</option>
-                                                        <option value="Kitchen">Kitchen</option>
-                                                        <option value="Dining">Dining</option>
-                                                        <option value="Home Decors">Home Decors</option>
-                                                        <option value="Stationery">Stationery</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-span-12 lg:col-span-4">
-                                                <div class="space-y-2  product-1">
-                                                    <label class="ti-form-label mb-0">Gender</label>
-                                                    <select class="ti-form-select product-search">
-                                                        <option value="">Gender</option>
-                                                        <option value="1">Male</option>
-                                                        <option value="2">Female</option>
-                                                        <option value="3">Others</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-span-12 lg:col-span-4">
-                                                <div class="space-y-2  product-1">
-                                                    <label class="ti-form-label mb-0">Brand</label>
-                                                    <select class="ti-form-select product-search">
-                                                        <option value="">Select</option>
-                                                        <option value="Armani">Armani</option>
-                                                        <option value="Lacoste">Lacoste</option>
-                                                        <option value="Puma">Puma</option>
-                                                        <option value="Spykar">Spykar</option>
-                                                        <option value="Mufti">Mufti</option>
-                                                        <option value="Home Town">Home Town</option>
-                                                        <option value="Arrabi">Arrabi</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-span-12 lg:col-span-6">
-                                                <div class="space-y-2  product-1">
-                                                    <label class="ti-form-label mb-0">Published Date and Time</label>
-                                                    <input type="text" class="ti-form-input focus:z-10 flatpickr-input"
-                                                        id="product-datetime" placeholder="Choose date" readonly>
-                                                </div>
-                                            </div>
-                                            <div class="col-span-12 lg:col-span-6">
-                                                <div class="space-y-2  product-1">
-                                                    <label class="ti-form-label mb-0">Product Size</label>
-                                                    <select class="ti-form-select product-search">
-                                                        <option value="Extra Small">Extra Small</option>
-                                                        <option value="Small">Small</option>
-                                                        <option value="Medium">Medium</option>
-                                                        <option value="Large">Large</option>
-                                                        <option value="XL">XL</option>
-                                                        <option value="xxl">xxl</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-span-12 lg:col-span-4">
-                                                <div class="space-y-2">
-                                                    <label class="ti-form-label mb-0">Actual Price </label>
-                                                    <input type="text" class="my-auto ti-form-input" placeholder="$550">
-                                                </div>
-                                            </div>
-                                            <div class="col-span-12 lg:col-span-4">
-                                                <div class="space-y-2">
-                                                    <label class="ti-form-label mb-0">Dealer Price </label>
-                                                    <input type="text" class="my-auto ti-form-input" placeholder="$400">
-                                                </div>
-                                            </div>
-                                            <div class="col-span-12 lg:col-span-4">
-                                                <div class="space-y-2">
-                                                    <label class="ti-form-label mb-0">Discount</label>
-                                                    <input type="text" class="my-auto ti-form-input" placeholder="10%">
-                                                </div>
-                                            </div>
-                                            <div class="col-span-12 lg:col-span-6">
-                                                <div class="space-y-2">
-                                                    <label class="ti-form-label">Available Colors</label>
-                                                    <select class="ti-form-select product-search">
-                                                        <option value="">Colors</option>
-                                                        <option value="1">blue</option>
-                                                        <option value="2">pink</option>
-                                                        <option value="3">yellow</option>
-                                                        <option value="4">orange</option>
-                                                        <option value="5">lemon-green</option>
-                                                        <option value="6">green</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-span-12 lg:col-span-6">
-                                                <div class="space-y-2  product-1">
-                                                    <label class="ti-form-label mb-0">Availabilty</label>
-                                                    <select class="ti-form-select product-search">
-                                                        <option value="">Availabilty</option>
-                                                        <option value="1">Instock</option>
-                                                        <option value="2">Out Of Stock</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-span-12 lg:col-span-6">
-                                                <div class="space-y-2  product-1">
-                                                    <label class="ti-form-label mb-0">Type</label>
-                                                    <input type="text" class="my-auto ti-form-input"
-                                                        placeholder="Hand Bag">
-                                                </div>
-                                            </div>
-                                            <div class="col-span-12 lg:col-span-6">
-                                                <div class="space-y-2  product-1">
-                                                    <label class="ti-form-label mb-0">Item Weight</label>
-                                                    <input type="text" class="my-auto ti-form-input"
-                                                        placeholder="250grams">
+                                    <div class="box-body space-y-5">
+                                        <div>
+                                            <label for="input-label1" class="ti-form-label">Blog Title</label>
+                                            <input type="text" id="input-label1" class="ti-form-input"
+                                                placeholder="blogtitle" value="Myths about Investment">
+                                        </div>
+                                        <div>
+                                            <label class="ti-form-select-label">Categories</label>
+                                            <select class="ti-form-select blog-tag2" multiple>
+                                                <option value="Choice 1">Health</option>
+                                                <option value="Choice 2">Lifestyle</option>
+                                                <option value="Choice 3" selected>Business</option>
+                                                <option value="Choice 4">Tourism</option>
+                                                <option value="Choice 5">Nature</option>
+                                                <option value="Choice 6">Development</option>
+                                                <option value="Choice 7">Housing</option>
+                                                <option value="Choice 8">Realestate</option>
+                                                <option value="Choice 9">Architecture</option>
+                                                <option value="Choice 9">Flowers</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="input-label" class="ti-form-label">Content</label>
+                                            <div class="ql-wrapper ql-wrapper-modal ht-250">
+                                                <div class="flex-1" id="blog-edit">
+                                                    <h1 class="text-xl">Blog Heading</h1>
+                                                    <br>
+                                                    <p class="text-gray-500 dark:text-white/70 text-sm">I must explain
+                                                        to you how all this mistaken idea
+                                                        of denouncing pleasure and praising pain was born and I will
+                                                        give you a complete account of the
+                                                        system, and expound the actual teachings of the great explorer
+                                                        of the truth, the master-builder of
+                                                        human happiness. No one rejects, dislikes, or avoids pleasure
+                                                        itself, because it is pleasure.</p>
+                                                    <br>
+                                                    <p class="text-gray-500 dark:text-white/70 text-sm">but because
+                                                        those who do not know how to pursue
+                                                        pleasure rationally encounter consequences that are extremely
+                                                        painful. Nor again is there anyone
+                                                        who loves or pursues or desires to obtain pain of itself,
+                                                        because it is pain, but because
+                                                        occasionally circumstances occur in which toil and pain can
+                                                        procure him some great pleasure. To
+                                                        take a trivial example.</p>
+                                                    <br>
+                                                    <p class="text-gray-500 dark:text-white/70 text-sm">Those who do not
+                                                        know how to pursue
+                                                        pleasure rationally encounter consequences that are extremely
+                                                        painful. Nor again is there anyone
+                                                        who loves or pursues or desires to obtain pain of itself,
+                                                        because it is pain, but because
+                                                        occasionally circumstances occur in which toil and pain can
+                                                        procure him some great pleasure. To
+                                                        take a trivial example.</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="space-y-2">
-                                            <label class="flex justify-between ti-form-label">
-                                                <span class="my-auto">Product Images</span></label>
+                                        <div>
+                                            <label for="input-label" class="ti-form-label">Upload</label>
                                             <input type="file" class="filepond multiple-filepond" name="filepond"
                                                 multiple data-allow-reorder="true" data-max-file-size="3MB"
                                                 data-max-files="5">
                                         </div>
-                                        <div class="space-y-2">
-                                            <label class="ti-form-label">Product Tags</label>
-                                            <input class="ti-form-input product-tags custom class" id="product-tags"
-                                                type="text" value="water-resistant, spacious ,5 pockets ,office bag"
-                                                placeholder="This is a placeholder">
+                                        <div class="sm:grid grid-cols-12 sm:gap-6 space-y-5 sm:space-y-0">
+                                            <div class="col-span-12 lg:col-span-6">
+                                                <label for="input-label2" class="ti-form-label">Blog Author</label>
+                                                <input type="text" id="input-label2" class="ti-form-input"
+                                                    placeholder="Enter Name">
+                                            </div>
+                                            <div class="col-span-12 lg:col-span-6">
+                                                <label for="input-label3" class="ti-form-label">Author Email</label>
+                                                <input type="email" id="input-label3" class="ti-form-input"
+                                                    placeholder="Enter Email">
+                                            </div>
+                                            <div class="col-span-12">
+                                                <label class="ti-form-select-label">Tags</label>
+                                                <select class="ti-form-select blog-tag" multiple>
+                                                    <option value="Choice 1">Health</option>
+                                                    <option value="Choice 2">Lifestyle</option>
+                                                    <option value="Choice 3" selected>Business</option>
+                                                    <option value="Choice 4">Tourism</option>
+                                                    <option value="Choice 5">Nature</option>
+                                                    <option value="Choice 6">Development</option>
+                                                    <option value="Choice 7">Housing</option>
+                                                    <option value="Choice 8">Realestate</option>
+                                                    <option value="Choice 9">Architecture</option>
+                                                    <option value="Choice 9">Flowers</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-span-12 lg:col-span-4">
+                                                <label for="input-label" class="ti-form-label">Blog Published
+                                                    Date</label>
+                                                <div class="flex rounded-sm shadow-sm">
+                                                    <div
+                                                        class="px-4 inline-flex items-center min-w-fit ltr:rounded-l-sm rtl:rounded-r-sm border ltr:border-r-0 rtl:border-l-0 border-gray-200 bg-gray-50 dark:bg-black/20 dark:border-white/10">
+                                                        <span class="text-sm text-gray-500 dark:text-white/70"><i
+                                                                class="ri ri-calendar-line"></i></span>
+                                                    </div>
+                                                    <input type="text"
+                                                        class="ti-form-input ltr:rounded-l-none rtl:rounded-r-none focus:z-10 flatpickr-input"
+                                                        id="blog-date" placeholder="Choose date" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-span-12 lg:col-span-4">
+                                                <label for="input-label" class="ti-form-label">Blog Published
+                                                    Time</label>
+                                                <div class="flex rounded-sm shadow-sm">
+                                                    <div
+                                                        class="px-4 inline-flex items-center min-w-fit ltr:rounded-l-sm rtl:rounded-r-sm border ltr:border-r-0 rtl:border-l-0 border-gray-200 bg-gray-50 dark:bg-black/20 dark:border-white/10">
+                                                        <span class="text-sm text-gray-500 dark:text-white/70"><i
+                                                                class="ri ri-time-line"></i></span>
+                                                    </div>
+                                                    <input type="text"
+                                                        class="ti-form-input ltr:rounded-l-none rtl:rounded-r-none focus:z-10 flatpickr-input"
+                                                        id="blog-time" placeholder="Choose date" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-span-12 lg:col-span-4">
+                                                <label class="ti-form-select-label">Publish Status</label>
+                                                <select class="ti-form-select blog-tag3" data-trigger>
+                                                    <option value="Choice 1">On-Hold</option>
+                                                    <option value="Choice 2">Published</option>
+                                                    <option value="Choice 3" selected>UnPublished</option>
+                                                    <option value="Choice 4">Discarded</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -273,39 +305,31 @@
 
 <?= $this->section('scripts'); ?>
 
-<!-- Quill Editor JS -->
-<script src="<?php echo base_url('assets/libs/quill/quill.min.js'); ?>"></script>
-
 <!-- Choices JS -->
 <script src="<?php echo base_url('assets/libs/choices.js/public/assets/scripts/choices.min.js'); ?>"></script>
 
-<!-- Filepond JS -->
-<script src="<?php echo base_url('assets/libs/filepond/filepond.min.js'); ?>"></script>
+<!-- Quill Editor  JS -->
+<script src="<?php echo base_url('assets/libs/quill/quill.min.js'); ?>"></script>
+
+<!-- Filepond File Upload JS -->
 <script
     src="<?php echo base_url('assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js'); ?>"></script>
 <script
-    src="<?php echo base_url('assets/libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js'); ?>"></script>
-<script
     src="<?php echo base_url('assets/libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js'); ?>"></script>
-<script
-    src="<?php echo base_url('assets/libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js'); ?>"></script>
 <script
     src="<?php echo base_url('assets/libs/filepond-plugin-image-edit/filepond-plugin-image-edit.min.js'); ?>"></script>
 <script
-    src="<?php echo base_url('assets/libs/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js'); ?>"></script>
-<script
-    src="<?php echo base_url('assets/libs/filepond-plugin-file-validate-type/filepond-plugin-file-validate-type.min.js'); ?>"></script>
-<script
-    src="<?php echo base_url('assets/libs/filepond-plugin-image-crop/filepond-plugin-image-crop.min.js'); ?>"></script>
-<script
-    src="<?php echo base_url('assets/libs/filepond-plugin-image-resize/filepond-plugin-image-resize.min.js'); ?>"></script>
-<script
-    src="<?php echo base_url('assets/libs/filepond-plugin-image-transform/filepond-plugin-image-transform.min.js'); ?>"></script>
+    src="<?php echo base_url('assets/libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/libs/filepond/filepond.min.js'); ?>"></script>
 
 <!-- Flatpickr JS -->
 <script src="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.js'); ?>"></script>
 
-<!-- ADD Product JS -->
-<script src="<?php echo base_url('assets/js/addproduct.js'); ?>"></script>
+<!-- Swiper JS -->
+<script src="<?php echo base_url('assets/libs/swiper/swiper-bundle.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/blog.js'); ?>"></script>
+
+<!--Blog Edit Js-->
+<script src="<?php echo base_url('assets/js/blog-edit.js'); ?>"></script>
 
 <?= $this->endSection('scripts'); ?>

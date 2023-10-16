@@ -28,15 +28,15 @@ class PpkController extends BaseController
 
         $order_by = explode('-', $order_by_raw);
 
-
         // Define the number of items per page
         $perPage = 10; // Adjust this value according to your requirements
 
         // Calculate the offset based on the current page and items per page
         $offset = ($page - 1) * $perPage;
 
-        $query = "SELECT * FROM tr_mst_pelaporan
+        $query = "SELECT * FROM comps
           WHERE (nm_penerima LIKE ? OR nm_trader LIKE ?)";
+
         $bindings = ['%' . $keyword . '%', '%' . $keyword . '%'];
 
 
