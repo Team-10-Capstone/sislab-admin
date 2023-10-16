@@ -1,26 +1,15 @@
 (function () {
   "use strict";
 
-  /**** Choice With Button js****/
-  const multipleCancelButton = new Choices(".blog-tag", {
-    allowHTML: true,
-    removeItemButton: true,
-  });
-  /**** Choice With Button js****/
-  const multipleCancelButton1 = new Choices(".blog-tag2", {
-    allowHTML: true,
-    removeItemButton: true,
-  });
   /* Start::Choices JS */
   document.addEventListener("DOMContentLoaded", function () {
-    var genericExamples = document.querySelectorAll("[data-trigger]");
+    var genericExamples = document.querySelectorAll(".blog-tag2");
     for (let i = 0; i < genericExamples.length; ++i) {
       var element = genericExamples[i];
       new Choices(element, {
         allowHTML: true,
-
-        placeholderValue: "This is a placeholder set in the config",
-        searchPlaceholderValue: "Search Crypto Currency",
+        removeItemButton: true,
+        placeholderValue: "Pilih parameter uji",
       });
     }
   });

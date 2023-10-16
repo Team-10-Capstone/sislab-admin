@@ -64,7 +64,7 @@
                     <div class="box-body p-0">
                         <div class="grid grid-cols-12 gap-x-6">
                             <div class="col-span-12 xl:col-span-4">
-                                <div class="box">
+                                <div class="box sticky top-24 left-0">
                                     <div class="box-header">
                                         <h5 class="box-title">Detail PPK</h5>
                                     </div>
@@ -152,88 +152,41 @@
                                 </div>
                             </div>
                             <div class="col-span-12 xl:col-span-8">
-                                <div class="box">
-                                    <div class="box-body space-y-5">
-                                        <div>
-                                            <label for="input-label1" class="ti-form-label">Blog Title</label>
-                                            <input type="text" id="input-label1" class="ti-form-input"
-                                                placeholder="blogtitle" value="Myths about Investment">
-                                        </div>
-                                        <div>
-                                            <label class="ti-form-select-label">Categories</label>
-                                            <select class="ti-form-select blog-tag2" multiple>
-                                                <option value="Choice 1">Health</option>
-                                                <option value="Choice 2">Lifestyle</option>
-                                                <option value="Choice 3" selected>Business</option>
-                                                <option value="Choice 4">Tourism</option>
-                                                <option value="Choice 5">Nature</option>
-                                                <option value="Choice 6">Development</option>
-                                                <option value="Choice 7">Housing</option>
-                                                <option value="Choice 8">Realestate</option>
-                                                <option value="Choice 9">Architecture</option>
-                                                <option value="Choice 9">Flowers</option>
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <label for="input-label" class="ti-form-label">Content</label>
-                                            <div class="ql-wrapper ql-wrapper-modal ht-250">
-                                                <div class="flex-1" id="blog-edit">
-                                                    <h1 class="text-xl">Blog Heading</h1>
-                                                    <br>
-                                                    <p class="text-gray-500 dark:text-white/70 text-sm">I must explain
-                                                        to you how all this mistaken idea
-                                                        of denouncing pleasure and praising pain was born and I will
-                                                        give you a complete account of the
-                                                        system, and expound the actual teachings of the great explorer
-                                                        of the truth, the master-builder of
-                                                        human happiness. No one rejects, dislikes, or avoids pleasure
-                                                        itself, because it is pleasure.</p>
-                                                    <br>
-                                                    <p class="text-gray-500 dark:text-white/70 text-sm">but because
-                                                        those who do not know how to pursue
-                                                        pleasure rationally encounter consequences that are extremely
-                                                        painful. Nor again is there anyone
-                                                        who loves or pursues or desires to obtain pain of itself,
-                                                        because it is pain, but because
-                                                        occasionally circumstances occur in which toil and pain can
-                                                        procure him some great pleasure. To
-                                                        take a trivial example.</p>
-                                                    <br>
-                                                    <p class="text-gray-500 dark:text-white/70 text-sm">Those who do not
-                                                        know how to pursue
-                                                        pleasure rationally encounter consequences that are extremely
-                                                        painful. Nor again is there anyone
-                                                        who loves or pursues or desires to obtain pain of itself,
-                                                        because it is pain, but because
-                                                        occasionally circumstances occur in which toil and pain can
-                                                        procure him some great pleasure. To
-                                                        take a trivial example.</p>
+                                <?php foreach ($ppkItems as $ppkItem): ?>
+                                    <div class="box">
+                                        <!-- loop ppkItems -->
+                                        <div class="box-body space-y-5">
+                                            <div>
+                                                <label for="input-label1" class="ti-form-label">
+                                                    Nama Komoditas
+                                                </label>
+                                                <input type="text" id="input-label1" class="ti-form-input"
+                                                    placeholder="blogtitle" disabled value="<?= $ppkItem['nm_lokal']; ?>">
+                                            </div>
+                                            <div class="md:grid grid-cols-2 gap-6">
+                                                <div>
+                                                    <label for="input-label1" class="ti-form-label">
+                                                        Nama Kel.Ikan
+                                                    </label>
+                                                    <input type="text" id="input-label1" class="ti-form-input"
+                                                        placeholder="blogtitle" disabled
+                                                        value="<?= $ppkItem['nm_kel_ikan']; ?>">
                                                 </div>
+                                                <div>
+                                                    <label for="input-label1" class="ti-form-label">
+                                                        Jml Sampel
+                                                    </label>
+                                                    <input type="text" id="input-label1" class="ti-form-input"
+                                                        placeholder="blogtitle" disabled value="<?= $ppkItem['jumlah']; ?>">
+                                                </div>
+
                                             </div>
-                                        </div>
-                                        <div>
-                                            <label for="input-label" class="ti-form-label">Upload</label>
-                                            <input type="file" class="filepond multiple-filepond" name="filepond"
-                                                multiple data-allow-reorder="true" data-max-file-size="3MB"
-                                                data-max-files="5">
-                                        </div>
-                                        <div class="sm:grid grid-cols-12 sm:gap-6 space-y-5 sm:space-y-0">
-                                            <div class="col-span-12 lg:col-span-6">
-                                                <label for="input-label2" class="ti-form-label">Blog Author</label>
-                                                <input type="text" id="input-label2" class="ti-form-input"
-                                                    placeholder="Enter Name">
-                                            </div>
-                                            <div class="col-span-12 lg:col-span-6">
-                                                <label for="input-label3" class="ti-form-label">Author Email</label>
-                                                <input type="email" id="input-label3" class="ti-form-input"
-                                                    placeholder="Enter Email">
-                                            </div>
-                                            <div class="col-span-12">
-                                                <label class="ti-form-select-label">Tags</label>
-                                                <select class="ti-form-select blog-tag" multiple>
+                                            <div>
+                                                <label class="ti-form-select-label">Target uji</label>
+                                                <select class="ti-form-select blog-tag2" multiple>
                                                     <option value="Choice 1">Health</option>
                                                     <option value="Choice 2">Lifestyle</option>
-                                                    <option value="Choice 3" selected>Business</option>
+                                                    <option value="Choice 3">Business</option>
                                                     <option value="Choice 4">Tourism</option>
                                                     <option value="Choice 5">Nature</option>
                                                     <option value="Choice 6">Development</option>
@@ -243,46 +196,16 @@
                                                     <option value="Choice 9">Flowers</option>
                                                 </select>
                                             </div>
-                                            <div class="col-span-12 lg:col-span-4">
-                                                <label for="input-label" class="ti-form-label">Blog Published
-                                                    Date</label>
-                                                <div class="flex rounded-sm shadow-sm">
-                                                    <div
-                                                        class="px-4 inline-flex items-center min-w-fit ltr:rounded-l-sm rtl:rounded-r-sm border ltr:border-r-0 rtl:border-l-0 border-gray-200 bg-gray-50 dark:bg-black/20 dark:border-white/10">
-                                                        <span class="text-sm text-gray-500 dark:text-white/70"><i
-                                                                class="ri ri-calendar-line"></i></span>
-                                                    </div>
-                                                    <input type="text"
-                                                        class="ti-form-input ltr:rounded-l-none rtl:rounded-r-none focus:z-10 flatpickr-input"
-                                                        id="blog-date" placeholder="Choose date" readonly>
-                                                </div>
-                                            </div>
-                                            <div class="col-span-12 lg:col-span-4">
-                                                <label for="input-label" class="ti-form-label">Blog Published
-                                                    Time</label>
-                                                <div class="flex rounded-sm shadow-sm">
-                                                    <div
-                                                        class="px-4 inline-flex items-center min-w-fit ltr:rounded-l-sm rtl:rounded-r-sm border ltr:border-r-0 rtl:border-l-0 border-gray-200 bg-gray-50 dark:bg-black/20 dark:border-white/10">
-                                                        <span class="text-sm text-gray-500 dark:text-white/70"><i
-                                                                class="ri ri-time-line"></i></span>
-                                                    </div>
-                                                    <input type="text"
-                                                        class="ti-form-input ltr:rounded-l-none rtl:rounded-r-none focus:z-10 flatpickr-input"
-                                                        id="blog-time" placeholder="Choose date" readonly>
-                                                </div>
-                                            </div>
-                                            <div class="col-span-12 lg:col-span-4">
-                                                <label class="ti-form-select-label">Publish Status</label>
-                                                <select class="ti-form-select blog-tag3" data-trigger>
-                                                    <option value="Choice 1">On-Hold</option>
-                                                    <option value="Choice 2">Published</option>
-                                                    <option value="Choice 3" selected>UnPublished</option>
-                                                    <option value="Choice 4">Discarded</option>
-                                                </select>
-                                            </div>
+
+                                            <!-- <div>
+                                                <label for="input-label" class="ti-form-label">Upload</label>
+                                                <input type="file" class="filepond multiple-filepond" name="filepond"
+                                                    multiple data-allow-reorder="true" data-max-file-size="3MB"
+                                                    data-max-files="5">
+                                            </div> -->
                                         </div>
                                     </div>
-                                </div>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
