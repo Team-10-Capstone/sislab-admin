@@ -21,6 +21,7 @@ class FppcModel extends Model
         'tgl_monsur',
         'petugas_monsur',
         'status',
+        'tipe_permohonan'
     ];
 
     protected $useTimestamps = true; // Set to true if you want to use timestamps

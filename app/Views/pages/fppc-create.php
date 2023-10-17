@@ -151,11 +151,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-span-12 xl:col-span-8">
-                                <?php foreach ($ppkItems as $ppkItem): ?>
+                            <form action="<?= base_url('fppcController/store/' . $ppk['id_ppk']); ?>"
+                                class="col-span-12 xl:col-span-8" method="post">
+                                <?php foreach ($ppkItems as $key => $ppkItem): ?>
                                     <div class="box">
                                         <!-- loop ppkItems -->
                                         <div class="box-body space-y-5">
+                                            <input type="hidden" name="ppk[<?= $key + 1; ?>][id_kd_ikan]"
+                                                value="<?= $ppkItem['id_kd_ikan']; ?>">
                                             <div>
                                                 <label for="input-label1" class="ti-form-label">
                                                     Nama Komoditas
@@ -183,36 +186,30 @@
                                             </div>
                                             <div>
                                                 <label class="ti-form-select-label">Target uji</label>
-                                                <select class="ti-form-select blog-tag2" multiple>
-                                                    <option value="Choice 1">Health</option>
-                                                    <option value="Choice 2">Lifestyle</option>
-                                                    <option value="Choice 3">Business</option>
-                                                    <option value="Choice 4">Tourism</option>
-                                                    <option value="Choice 5">Nature</option>
-                                                    <option value="Choice 6">Development</option>
-                                                    <option value="Choice 7">Housing</option>
-                                                    <option value="Choice 8">Realestate</option>
-                                                    <option value="Choice 9">Architecture</option>
-                                                    <option value="Choice 9">Flowers</option>
+                                                <select class="ti-form-select blog-tag2" multiple
+                                                    name="ppk[<?= $key + 1; ?>][target_uji][]">
+                                                    <?php foreach ($parameters as $parameter): ?>
+                                                        <option value="<?= $parameter['id']; ?>">
+                                                            <?= $parameter['keterangan_uji']; ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
                                                 </select>
                                             </div>
 
-                                            <!-- <div>
-                                                <label for="input-label" class="ti-form-label">Upload</label>
-                                                <input type="file" class="filepond multiple-filepond" name="filepond"
-                                                    multiple data-allow-reorder="true" data-max-file-size="3MB"
-                                                    data-max-files="5">
-                                            </div> -->
+
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
-                            </div>
+                                <div class="box-footer text-end border-t-0 px-0 flex items-center justify-end">
+                                    <a class="ti-btn btn ti-btn-danger cursor-pointer">
+                                        <i class="ti ti-arrow-back"></i>
+                                        Kembali</a>
+                                    <button type="submit" class="ti-btn btn ti-btn-secondary cursor-pointer"><i
+                                            class="ri-file-download-line"></i>
+                                        Simpan</button>
+                                </div>
+                            </form>
                         </div>
-                    </div>
-                    <div class="box-footer text-end border-t-0 px-0">
-                        <a class="ti-btn ti-btn-primary"><i class="ri-add-line"></i>Add Product</a>
-                        <a class="ti-btn ti-btn-secondary"><i class="ri-file-download-line"></i>Save Product</a>
-                        <a class="ti-btn ti-btn-danger"><i class="ri-delete-bin-line"></i>Discard Product</a>
                     </div>
                 </div>
             </div>

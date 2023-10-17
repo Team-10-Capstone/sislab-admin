@@ -50,6 +50,7 @@ $routes->get('/user', 'UserController::index', ['filter' => 'authGuard']);
 $routes->get('/user/add', 'UserController::add', ['filter' => 'authGuard']);
 $routes->get('/user/edit/(:num)', 'UserController::edit/$1', ['filter' => 'authGuard']);
 $routes->get('/fppc', 'FppcController::index', ['filter' => 'authGuard']);
+$routes->post('/fppc/store', 'FppcController::store', ['filter' => 'authGuard']);
 
 $routes->get('/ppk', 'PpkController::index', ['filter' => 'authGuard']);
 $routes->get('/fppc/create', 'FppcController::create', ['filter' => 'authGuard']);
