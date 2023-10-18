@@ -54,9 +54,9 @@ class CreateFppcTable extends Migration
                 'null' => true,
             ],
             'status' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-                'null' => true,
+                'type' => 'ENUM',
+                'constraint' => ['pending', 'diterima', 'ditolak', 'proses-pengujian', 'selesai-pengujian', 'terbit-lhu', 'selesai'],
+                'default' => 'pending'
             ],
             'created_at' => [
                 'type' => 'DATETIME',
@@ -78,6 +78,7 @@ class CreateFppcTable extends Migration
         // relation with trader
         $this->forge->addForeignKey('id_trader', 'users', 'user_id');
         $this->forge->addForeignKey('id_petugas', 'admin', 'adminId');
+
     }
 
     public function down()

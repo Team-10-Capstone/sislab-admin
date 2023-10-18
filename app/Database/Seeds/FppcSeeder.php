@@ -22,7 +22,6 @@ class FppcSeeder extends Seeder
                 'nip_baru' => '123456789012345678',
                 'tgl_monsur' => '2023-10-12',
                 'petugas_monsur' => 'Petugas ABC',
-                'status' => 'Approved',
             ],
 
             // Add more FPPC data as needed

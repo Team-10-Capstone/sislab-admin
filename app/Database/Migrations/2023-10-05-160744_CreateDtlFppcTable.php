@@ -22,6 +22,11 @@ class CreateDtlFppcTable extends Migration
                 'constraint' => 255,
                 'null' => true,
             ],
+            'id_wadah' => [
+                'type' => 'VARCHAR',
+                'constraint' => 255,
+                'null' => true,
+            ],
             'nama_lokal' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
@@ -71,20 +76,15 @@ class CreateDtlFppcTable extends Migration
                 'constraint' => 50,
                 'null' => true,
             ],
-            'wadah' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-                'null' => true,
-            ],
             'kondisi_sampel' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50,
                 'null' => true,
             ],
             'status' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-                'null' => true,
+                'type' => 'ENUM',
+                'constraint' => ['pending', 'dijadwalkan', 'pengujian', 'selesai'],
+                'default' => 'pending'
             ],
             'created_at' => [
                 'type' => 'DATETIME',
@@ -101,6 +101,7 @@ class CreateDtlFppcTable extends Migration
 
         // relation with fppc
         $this->forge->addForeignKey('id_fppc', 'fppc', 'id');
+        $this->forge->addForeignKey('id_wadah', 'wadah', 'id');
     }
 
     public function down()

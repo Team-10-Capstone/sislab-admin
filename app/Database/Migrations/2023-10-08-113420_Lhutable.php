@@ -39,9 +39,9 @@ class Lhutable extends Migration
                 'null' => true,
             ],
             'status' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-                'null' => true,
+                'type' => 'ENUM',
+                'constraint' => ['sementara', 'disetujui', 'ditolak'],
+                'default' => 'sementara'
             ],
             'created_at' => [
                 'type' => 'DATETIME',

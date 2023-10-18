@@ -2682,26 +2682,23 @@ select option:active,
 .end-1{
   inset-inline-end: 0.25rem;
 }
+.left-0{
+  left: 0px;
+}
 .start-1{
   inset-inline-start: 0.25rem;
 }
 .top-10{
   top: 2.5rem;
 }
+.top-24{
+  top: 6rem;
+}
 .top-5{
   top: 1.25rem;
 }
 .top-\[4\.5rem\]{
   top: 4.5rem;
-}
-.left-0{
-  left: 0px;
-}
-.top-24{
-  top: 6rem;
-}
-.top-20{
-  top: 5rem;
 }
 .isolate{
   isolation: isolate;
@@ -3400,9 +3397,6 @@ select option:active,
 }
 .gap-2{
   gap: 0.5rem;
-}
-.gap-5{
-  gap: 1.25rem;
 }
 .gap-6{
   gap: 1.5rem;

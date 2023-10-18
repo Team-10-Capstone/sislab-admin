@@ -6,22 +6,75 @@ use PHPUnit\Framework\Constraint\IsEmpty;
 
 class FppcController extends BaseController
 {
+    public function __construct()
+    {
+        $this->pager = \Config\Services::pager();
+    }
     public function index()
     {
-        // Load the FppcModel
+
         $fppcModel = new \App\Models\FppcModel();
-        $dtlFppcModel = new \App\Models\DtlFppcModel();
 
-        // Get all FPPC data from the model
-        $data['fppcData'] = $fppcModel->findAll();
+        // Get the page number from the URL, default to 1 if not provided
+        $page = $this->request->getVar('page') ?? 1;
 
-        //find all dtl_fppc with fppc_id 1
-        $data['dtlFppcData'] = $dtlFppcModel->where('id_fppc', 1)->findAll();
+        // search
+        $keyword = $this->request->getVar('keyword') ?? '';
 
-        dd($data['dtlFppcData']);
+        $start_date = $this->request->getVar('start_date');
+        $end_date = $this->request->getVar('end_date');
+        $tipe_permohonan = $this->request->getVar('tipe_permohonan');
+        $order_by_raw = $this->request->getVar('order_by') ?? 'created_at-asc';
 
-        // Load the view to display the FPPC data
-        return view('pages/fppc', $data);
+        $order_by = explode('-', $order_by_raw);
+
+        // Define the number of items per page
+        $perPage = 10; // Adjust this value according to your requirements
+
+        // Calculate the offset based on the current page and items per page
+        $offset = ($page - 1) * $perPage;
+
+        $query = $fppcModel->select('*')
+            ->orderBy($order_by[0], $order_by[1])
+            ->limit($perPage, $offset);
+
+        // Apply filters if provided
+        // if (!empty($keyword)) {
+        //     $query->like('column_name', $keyword); // Replace 'column_name' with the actual column to search in
+        // }
+
+        if (!empty($start_date)) {
+            $query->where('created_at >=', $start_date);
+        }
+
+        if (!empty($end_date)) {
+            $query->where('created_at <=', $end_date);
+        }
+
+        if (!empty($tipe_permohonan)) {
+            $query->where('tipe_permohonan', $tipe_permohonan);
+        }
+
+        // Execute the query to retrieve the results
+        $results = $query->findAll();
+
+
+        $totalRecords = count($results);
+        $pager_links = $this->pager->makeLinks($page, $perPage, $totalRecords, 'default');
+
+        // Create a pager instance
+        $pager = $this->pager;
+
+        return view('pages/fppc', [
+            'keyword' => $keyword,
+            'data' => $results,
+            'pager' => $pager,
+            'pager_links' => $pager_links,
+            'start_date' => $start_date,
+            'end_date' => $end_date,
+            'tipe_permohonan' => $tipe_permohonan,
+            'title' => 'Permohonan PPK'
+        ]);
     }
 
     public function create()
@@ -145,7 +198,7 @@ class FppcController extends BaseController
 
             session()->setFlashdata('create-fppc-message', 'Permohonan Uji Lab Berhasil Dibuat');
 
-            return redirect()->to('/permohonan-ppk');
+            return redirect()->to('/ppk');
         }
 
     }
