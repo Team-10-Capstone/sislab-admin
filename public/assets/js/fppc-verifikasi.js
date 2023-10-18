@@ -3,13 +3,34 @@
 
   /* Start::Choices JS */
   document.addEventListener("DOMContentLoaded", function () {
+    $(".cancel-button, .approve-button").click(function () {
+      var fppcId = $(this).data("fppc-id");
+      var status = $(this).hasClass("cancel-button") ? "ditolak" : "diterima";
+
+      $(".cancel-button, .approve-button").hide();
+      $(".ti-btn-disabled").show();
+
+      $.ajax({
+        type: "POST",
+        url: "/fppc/updateStatus",
+        data: { fppc_id: fppcId, status: status },
+        success: function (data) {
+          window.location.href = "/fppc";
+          $(".cancel-button, .approve-button").show();
+          $(".ti-btn-disabled").hide();
+        },
+        error: function () {
+          window.location.href = "/fppc";
+          $(".cancel-button, .approve-button").show();
+          $(".ti-btn-disabled").hide();
+        },
+      });
+    });
     var genericExamples = document.querySelectorAll(".blog-tag2");
     for (let i = 0; i < genericExamples.length; ++i) {
       var element = genericExamples[i];
       new Choices(element, {
         allowHTML: true,
-        removeItemButton: true,
-        placeholderValue: "Pilih parameter uji",
       });
     }
   });

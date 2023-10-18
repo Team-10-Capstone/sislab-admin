@@ -204,7 +204,7 @@
                                     <a class="ti-btn btn ti-btn-danger cursor-pointer">
                                         <i class="ti ti-arrow-back"></i>
                                         Kembali</a>
-                                    <button type="submit" class="ti-btn btn ti-btn-secondary cursor-pointer"><i
+                                    <button type="submit" class="ti-btn btn ti-btn-primary cursor-pointer"><i
                                             class="ri-file-download-line"></i>
                                         Simpan</button>
                                 </div>

@@ -145,8 +145,6 @@ class FppcController extends BaseController
                 'nip_baru' => null,
                 'tgl_monsur' => null,
                 'petugas_monsur' => null,
-                'status' => '0',
-                'tipe_permohonan' => '1',
             ];
 
             $fppcId = $fppcModel->insert($data_fppc);
@@ -166,9 +164,8 @@ class FppcController extends BaseController
                     'deskripsi_sampel' => null,
                     'kode_sampel' => $ppkItem['kd_ikan'],
                     'bentuk' => $ppkItem['ket_bentuk'],
-                    'wadah' => null,
+                    'wadah' => '1',
                     'kondisi_sampel' => null,
-                    'status' => '0',
                 ];
 
                 $dtlFppcId = $fppcDetailsModel->insert($data);
@@ -189,7 +186,6 @@ class FppcController extends BaseController
                             'dtl_fppc_id' => $dtlFppcId,
                             'parameter_uji_id' => $target,
                             'hasil_uji_id' => null,
-                            'status'
                         ];
 
                         $permohonanUjiModel->insert($data);
@@ -256,4 +252,19 @@ class FppcController extends BaseController
         return view('pages/fppc-verifikasi', $returnData);
 
     }
+
+    public function updateStatus()
+    {
+        $fppcModel = new \App\Models\FppcModel();
+
+        $id = $this->request->getVar('fppc_id');
+        $status = $this->request->getVar('status');
+
+        $fppcModel->update($id, ['status' => $status]);
+
+        session()->setFlashdata('approve-fppc-message', 'Permohonan Uji Lab Berhasil Diverifikasi');
+
+        return redirect()->to('/fppc');
+    }
+
 }

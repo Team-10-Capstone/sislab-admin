@@ -249,7 +249,7 @@
 
                                             <td class="font-medium space-x-2 rtl:space-x-reverse">
 
-                                                <a href="<?= site_url('fppc/create?ppk_id=' . $row['id_ppk']) ?>"
+                                                <a href="<?= site_url('fppc/verify?fppc_id=' . $row['id']) ?>"
                                                     class="invoice-edit m-0 relative ti-btn rounded-full p-2 transition-none focus:outline-none ti-btn-soft-secondary">
                                                     <i class="ti ti-pencil"></i>
                                                     <p>

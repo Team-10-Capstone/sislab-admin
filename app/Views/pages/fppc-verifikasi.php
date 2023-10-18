@@ -112,8 +112,16 @@
                                                             </span>
                                                         </td>
                                                     </tr>
+                                                    <tr class="divide-x divide-gray-200 dark:divide-white/10">
+                                                        <td class="font-medium">Status permohonan</td>
+                                                        <td>
+                                                            <span
+                                                                class="truncate whitespace-nowrap inline-block py-1 px-3 rounded-full text-xs font-medium bg-info/10 text-info/80">
+                                                                <?php echo $fppc['status']; ?>
 
-
+                                                            </span>
+                                                        </td>
+                                                    </tr>
 
 
                                                 </tbody>
@@ -122,8 +130,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <form action="<?= base_url('fppcController/store/' . $fppc['id_ppk']); ?>"
-                                class="col-span-12 xl:col-span-8" method="post">
+                            <div class="col-span-12 xl:col-span-8">
                                 <?php foreach ($fppc_details as $fppcItem): ?>
                                     <div class="box">
                                         <!-- loop ppkItems -->
@@ -172,14 +179,23 @@
                                     </div>
                                 <?php endforeach; ?>
                                 <div class="box-footer text-end border-t-0 px-0 flex items-center justify-end">
-                                    <a class="ti-btn btn ti-btn-danger cursor-pointer">
+                                    <button type="button" class="sm:m-0 ti-btn ti-btn-disabled ti-btn-primary" disabled
+                                        style="display: none;">
+                                        <span
+                                            class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full"
+                                            role="status" aria-label="loading"></span>
+                                        Loading
+                                    </button>
+                                    <button data-fppc-id="<?= $fppc['id']; ?>"
+                                        class="ti-btn btn ti-btn-danger cursor-pointer cancel-button">
                                         <i class="ti ti-circle-x"></i>
-                                        Tolak</a>
-                                    <button type="submit" class="ti-btn btn ti-btn-secondary cursor-pointer"><i
+                                        Tolak</button>
+                                    <button data-fppc-id="<?= $fppc['id']; ?>" type="submit"
+                                        class="ti-btn btn ti-btn-primary cursor-pointer approve-button"><i
                                             class="ti ti-circle-check"></i>
                                         Verifikasi</button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -195,7 +211,7 @@
 <?= $this->endSection('content'); ?>
 
 <?= $this->section('scripts'); ?>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Choices JS -->
 <script src="<?php echo base_url('assets/libs/choices.js/public/assets/scripts/choices.min.js'); ?>"></script>
 
@@ -221,6 +237,6 @@
 <script src="<?php echo base_url('assets/js/blog.js'); ?>"></script>
 
 <!--Blog Edit Js-->
-<script src="<?php echo base_url('assets/js/blog-edit.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/fppc-verifikasi.js'); ?>"></script>
 
 <?= $this->endSection('scripts'); ?>

@@ -55,6 +55,7 @@ $routes->get('/ppk', 'PpkController::index', ['filter' => 'authGuard']);
 $routes->get('/fppc', 'FppcController::index', ['filter' => 'authGuard']);
 $routes->get('/fppc/create', 'FppcController::create', ['filter' => 'authGuard']);
 $routes->get('/fppc/verify', 'FppcController::verify', ['filter' => 'authGuard']);
+$routes->post('/fppc/updateStatus', 'FppcController::updateStatus', ['filter' => 'authGuard']);
 $routes->post('/fppc/store', 'FppcController::store', ['filter' => 'authGuard']);
 
 
