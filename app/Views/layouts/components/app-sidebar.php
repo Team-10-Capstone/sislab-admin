@@ -39,21 +39,24 @@
 				</li>
 				<!-- End::slide -->
 
-				<!-- Start::slide -->
-				<li class="slide">
-					<a href="/daftar-lhu" class="side-menu__item">
-						<i class="ti ti-file-description side-menu__icon"></i>
-						<span class="side-menu__label">Daftar LHU</span>
-					</a>
-				</li>
-				<!-- End::slide -->
+
 
 				<!-- Start::slide -->
 				<li class="slide">
 					<a href="/ppk" class="side-menu__item">
-						<i class="ti ti-file-description side-menu__icon"></i>
+						<i class="ti ti-login side-menu__icon"></i>
 						<span class="side-menu__label">
 							Permohonan masuk
+						</span>
+					</a>
+				</li>
+				<!-- End::slide -->
+				<!-- Start::slide -->
+				<li class="slide">
+					<a href="/fppc" class="side-menu__item">
+						<i class="ti ti-file-description side-menu__icon"></i>
+						<span class="side-menu__label">
+							Form FPPC
 						</span>
 					</a>
 				</li>
@@ -105,6 +108,15 @@
 						<li class="slide"><a href="<?php echo base_url('index'); ?>" class="side-menu__item">Permintaan
 								Uji</a></li>
 					</ul>
+				</li>
+				<!-- End::slide -->
+
+				<!-- Start::slide -->
+				<li class="slide">
+					<a href="/daftar-lhu" class="side-menu__item">
+						<i class="ti ti-file-description side-menu__icon"></i>
+						<span class="side-menu__label">Daftar LHU</span>
+					</a>
 				</li>
 				<!-- End::slide -->
 

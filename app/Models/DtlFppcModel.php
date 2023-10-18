@@ -12,6 +12,7 @@ class DtlFppcModel extends Model
     protected $allowedFields = [
         'id_fppc',
         'id_ikan',
+        'id_wadah',
         'nama_lokal',
         'nama_latin',
         'nama_umum',
@@ -22,7 +23,6 @@ class DtlFppcModel extends Model
         'deskripsi_sampel',
         'kode_sampel',
         'bentuk',
-        'wadah',
         'kondisi_sampel',
         'status',
     ];

@@ -21,10 +21,6 @@ class CreateUserTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'typeof_document' => [
-                'type' => 'ENUM',
-                'constraint' => ['NPWP', 'NIK'],
-            ],
             'document_number' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,

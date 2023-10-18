@@ -34,14 +34,15 @@ class FppcController extends BaseController
         // Calculate the offset based on the current page and items per page
         $offset = ($page - 1) * $perPage;
 
-        $query = $fppcModel->select('*')
+        $query = $fppcModel->select('fppc.*, users.username as nama_trader, users.alamat as alamat_trader')
+            ->join('users', 'users.user_id = fppc.id_trader')
             ->orderBy($order_by[0], $order_by[1])
             ->limit($perPage, $offset);
 
-        // Apply filters if provided
-        // if (!empty($keyword)) {
-        //     $query->like('column_name', $keyword); // Replace 'column_name' with the actual column to search in
-        // }
+        if (!empty($keyword)) {
+            $query->like('no_fppc', $keyword);
+            $query->orLike('no_ppk', $keyword);
+        }
 
         if (!empty($start_date)) {
             $query->where('created_at >=', $start_date);
@@ -200,6 +201,59 @@ class FppcController extends BaseController
 
             return redirect()->to('/ppk');
         }
+
+    }
+
+    public function verify()
+    {
+        $fppcModel = new \App\Models\FppcModel();
+        $fppcDetailsModel = new \App\Models\DtlFppcModel();
+        $permohonanUjiModel = new \App\Models\PermohonanUjiModel();
+        $parameterUjiModel = new \App\Models\ParameterUjiModel();
+
+        $id = $this->request->getVar('fppc_id');
+
+        $fppcData = $fppcModel->select('fppc.*, users.username as nama_trader, users.alamat as alamat_trader')
+            ->join('users', 'users.user_id = fppc.id_trader')
+            ->where('fppc.id', $id)
+            ->first();
+
+        $fppcDetailsData = $fppcDetailsModel->where('id_fppc', $id)->findAll();
+        if (empty($fppcDetailsData)) {
+            return redirect()->to('/fppc');
+        }
+
+        $permohonanUjiData = $permohonanUjiModel->where('dtl_fppc_id', $fppcDetailsData[0]['id'])->findAll();
+
+        $mergedFppcDetailsAndPermohonanUji = [];
+
+        foreach ($fppcDetailsData as $fppcDetails) {
+            $permohonanUji = array_filter($permohonanUjiData, function ($permohonanUji) use ($fppcDetails) {
+                return $permohonanUji['dtl_fppc_id'] == $fppcDetails['id'];
+            });
+
+            $permohonanUji = array_values($permohonanUji);
+
+            $permohonanUjiQuery = $permohonanUjiModel->select('permohonan_uji.*, parameter_uji.keterangan_uji, parameter_uji.jenis_parameter, parameter_uji.no_ikm')
+                ->join('parameter_uji', 'parameter_uji.id = permohonan_uji.parameter_uji_id')
+                ->where('dtl_fppc_id', $fppcDetails['id'])
+                ->findAll();
+
+            $mergedFppcDetailsAndPermohonanUji[] = [
+                'fppc_details' => $fppcDetails,
+                'permohonan_uji' => $permohonanUjiQuery,
+            ];
+        }
+
+        $returnData = [
+            'fppc' => $fppcData,
+            'fppc_details' => $mergedFppcDetailsAndPermohonanUji,
+            'title' => 'Verifikasi Permohonan Uji Lab',
+        ];
+
+        // dd($returnData);
+
+        return view('pages/fppc-verifikasi', $returnData);
 
     }
 }

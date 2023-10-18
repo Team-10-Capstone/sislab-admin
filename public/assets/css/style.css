@@ -3416,6 +3416,9 @@ select option:active,
 .gap-y-4{
   row-gap: 1rem;
 }
+.gap-y-5{
+  row-gap: 1.25rem;
+}
 .space-x-2 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
@@ -4238,6 +4241,9 @@ select option:active,
 }
 .text-white\/80{
   color: rgb(255 255 255 / 0.8);
+}
+.text-info\/80{
+  color: rgb(var(--color-info) / 0.8);
 }
 .underline{
   text-decoration-line: underline;

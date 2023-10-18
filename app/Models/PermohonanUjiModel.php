@@ -6,7 +6,6 @@ use CodeIgniter\Model;
 
 class PermohonanUjiModel extends Model
 {
-    protected $useSoftDeletes = true;
     protected $table = 'permohonan_uji';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
@@ -22,7 +21,6 @@ class PermohonanUjiModel extends Model
 
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
-    protected $deletedField = 'deleted_at';
 
     // Define any validation rules or custom behaviors here if needed.
 

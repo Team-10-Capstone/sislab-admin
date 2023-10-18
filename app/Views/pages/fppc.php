@@ -69,14 +69,14 @@
 
                     </div>
                     <div class="box-body">
-                        <form method="get" action="<?= site_url('ppkController/index') ?>" onsubmit="return false;"
+                        <form method="get" action="<?= site_url('FppcController/index') ?>" onsubmit="return false;"
                             id="search-form" class="xl:flex xl:justify-between space-y-3 xl:space-y-0">
                             <div class="sm:flex sm:space-x-3 space-y-3 sm:space-y-0 rtl:space-x-reverse">
                                 <div class="relative max-w-xs">
                                     <label for="hs-table-search" class="sr-only">Pencarian</label>
                                     <input type="text" name="keyword" id="search-ppk"
                                         class="px-3 py-2 ltr:pr-10 rtl:pl-10 ti-form-input"
-                                        placeholder="Search for items"
+                                        placeholder="Cari nomor FPPC atau PPK"
                                         value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : '' ?>"
                                         autocomplete="off">
 
@@ -178,11 +178,10 @@
                                             </div>
                                         </th>
                                         <th scope="col" class="dark:text-white/70">No FPPC</th>
-                                        <th scope="col" class="dark:text-white/70">Tipe Permohonan</th>
                                         <th scope="col" class="dark:text-white/70">Trader</th>
+                                        <th scope="col" class="dark:text-white/70">Tipe Permohonan</th>
                                         <th scope="col" class="dark:text-white/70">Tanggal dibuat</th>
-                                        <th scope="col" class="dark:text-white/70">Penerima</th>
-                                        <th scope="col" class="dark:text-white/70">Nilai komoditas</th>
+                                        <th scope="col" class="dark:text-white/70">Status</th>
                                         <th scope="col" class="dark:text-white/70">Action</th>
                                     </tr>
                                 </thead>
@@ -204,16 +203,34 @@
                                                     <div class="block">
                                                         <p
                                                             class="block text-sm font-semibold text-gray-800 dark:text-white my-auto">
-                                                            <?php echo $row['id_trader']; ?>
+                                                            <?php echo $row['nama_trader']; ?>
                                                         </p>
                                                         </p>
                                                         <p class="block text-xs text-gray-500 dark:text-white/70 my-auto">
-                                                            <?php echo $row['id_trader']; ?>
+                                                            <?php echo $row['alamat_trader']; ?>
                                                         </p>
                                                         </p>
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td><span
+                                                    class="truncate whitespace-nowrap inline-block py-1 px-3 rounded-full text-xs font-medium bg-success/10 text-success/80">
+                                                    <?php
+                                                    $tipe_permohonan = $row['tipe_permohonan'];
+
+                                                    if ($tipe_permohonan == 'mandiri') {
+                                                        echo 'Mandiri';
+                                                    } elseif ($tipe_permohonan == 'monsur') {
+                                                        echo 'Monsur';
+                                                    } elseif ($tipe_permohonan == 'lalulintas') {
+                                                        echo 'Lalulintas';
+                                                    } else {
+                                                        echo 'Lainnya';
+                                                    }
+                                                    ?>
+                                                </span>
+                                            </td>
+
                                             <td>
                                                 <?php
                                                 $date = $row['created_at'];
@@ -222,47 +239,14 @@
                                                 echo $prettyDate;
                                                 ?>
                                             </td>
-                                            <td><span
-                                                    class="truncate whitespace-nowrap inline-block py-1 px-3 rounded-full text-xs font-medium bg-success/10 text-success/80">
-                                                    <?php
-                                                    $tipe_permohonan = $row['tipe_permohonan'];
 
-                                                    if ($tipe_permohonan == '1') {
-                                                        echo 'Eksport';
-                                                    } elseif ($tipe_permohonan == '2') {
-                                                        echo 'Import';
-                                                    } elseif ($tipe_permohonan == '3') {
-                                                        echo 'Domestik keluar';
-                                                    } elseif ($tipe_permohonan == '4') {
-                                                        echo 'Domestik masuk';
-                                                    } elseif ($tipe_permohonan == '5') {
-                                                        echo 'Mandiri';
-                                                    } elseif ($tipe_permohonan == '6') {
-                                                        echo 'Surveilance';
-                                                    } else {
-                                                        echo 'Lainnya';
-                                                    }
-                                                    ?>
+                                            <td class="max-w-sm overflow-hidden">
+                                                <span
+                                                    class='truncate whitespace-nowrap inline-block py-1 px-3 rounded-full text-xs font-medium bg-info/10 text-info/80'>
+                                                    <?php echo $row['status']; ?>
                                                 </span>
                                             </td>
-                                            <td class="max-w-sm overflow-hidden">
-                                                <div class="flex space-x-3 rtl:space-x-reverse text-start">
-                                                    <div class="block">
-                                                        <p
-                                                            class="block text-sm font-semibold text-gray-800 dark:text-white my-auto">
-                                                            <?php echo $row['id_trader']; ?>
-                                                        </p>
-                                                        </p>
-                                                        <p class="block text-xs text-gray-500 dark:text-white/70 my-auto">
-                                                            <?php echo $row['id_trader']; ?>
-                                                        </p>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                0
-                                            </td>
+
                                             <td class="font-medium space-x-2 rtl:space-x-reverse">
 
                                                 <a href="<?= site_url('fppc/create?ppk_id=' . $row['id_ppk']) ?>"

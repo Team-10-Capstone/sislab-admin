@@ -12,7 +12,6 @@ class UserSeeder extends Seeder
             [
                 'username' => 'user1',
                 'email' => 'user1@example.com',
-                'typeof_document' => 'NPWP',
                 'document_number' => '1234567890',
                 'password' => password_hash('password123', PASSWORD_DEFAULT),
                 'avatar' => 'user1.jpg',
@@ -25,7 +24,6 @@ class UserSeeder extends Seeder
             [
                 'username' => 'user2',
                 'email' => 'user2@example.com',
-                'typeof_document' => 'NIK',
                 'document_number' => '0987654321',
                 'password' => password_hash('password456', PASSWORD_DEFAULT),
                 'avatar' => 'user2.jpg',
