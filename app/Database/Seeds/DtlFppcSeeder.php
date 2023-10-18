@@ -25,6 +25,7 @@ class DtlFppcSeeder extends Seeder
                 'bentuk' => 'Shape 1',
                 'wadah' => 'Container 1',
                 'kondisi_sampel' => 'Sample Condition 1',
+                'id_wadah' => 1,
             ],
             [
                 'id_fppc' => 1,
@@ -42,6 +43,7 @@ class DtlFppcSeeder extends Seeder
                 'bentuk' => 'Shape 2',
                 'wadah' => 'Container 2',
                 'kondisi_sampel' => 'Sample Condition 2',
+                'id_wadah' => 2,
             ],
             // Add more dtl_fppc data as needed
         ];
