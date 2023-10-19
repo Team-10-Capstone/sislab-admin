@@ -250,6 +250,8 @@
 <script src="<?php echo base_url('assets/js/blog.js'); ?>"></script>
 
 <!--Blog Edit Js-->
-<script src="<?php echo base_url('assets/js/blog-edit.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/fppc-create.js'); ?>"></script>
+
+<script src="<?php echo base_url('assets/libs/awesome-notifications/index.var.js'); ?>"></script>
 
 <?= $this->endSection('scripts'); ?>

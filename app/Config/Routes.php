@@ -58,6 +58,12 @@ $routes->get('/fppc/verify', 'FppcController::verify', ['filter' => 'authGuard']
 $routes->post('/fppc/updateStatus', 'FppcController::updateStatus', ['filter' => 'authGuard']);
 $routes->post('/fppc/store', 'FppcController::store', ['filter' => 'authGuard']);
 
+$routes->get('/disposisi-penyelia', 'DisposisiController::index', ['filter' => 'authGuard']);
+$routes->get('/disposisi-penyelia/create', 'DisposisiController::create', ['filter' => 'authGuard']);
+$routes->get('/disposisi-penyelia', 'DisposisiController::verify', ['filter' => 'authGuard']);
+
+
+
 
 /*
  * --------------------------------------------------------------------

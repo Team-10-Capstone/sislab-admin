@@ -39,10 +39,10 @@
                                         <label class="ti-form-label mb-0">Role</label>
                                         <select class="ti-form-select" id="select-beast" autocomplete="off"
                                             name="roleId">
-                                            <option value="1">Petugas LAB</option>
+                                            <option value="1">Manajer Teknis</option>
                                             <option value="2">Penyelia</option>
                                             <option value="3">Analis</option>
-                                            <option value="4">Manajer Teknis</option>
+                                            <option value="4">Petugas LAB</option>
                                         </select>
                                     </div>
                                     <div class="space-y-2">

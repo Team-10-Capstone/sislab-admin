@@ -42,7 +42,7 @@
             <div>
                 <h3
                     class="text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-white text-2xl font-medium">
-                    Verifikasi Form FPPC</h3>
+                    Pilih Petugas Analis</h3>
             </div>
             <ol class="flex items-center whitespace-nowrap min-w-0">
                 <li class="text-sm">
@@ -54,7 +54,7 @@
                     </a>
                 </li>
                 <li class="text-sm text-gray-500 hover:text-primary dark:text-white/70 " aria-current="page">
-                    Verifikasi FPPC
+                    Pilih Petugas Analis
                 </li>
             </ol>
         </div>
@@ -165,19 +165,54 @@
                                                 </div>
 
                                             </div>
+
+                                            <div class="md:grid grid-cols-2 gap-6">
+                                                <div>
+                                                    <label for="input-label" class="ti-form-label">
+                                                        Tanggal Pengujian
+                                                    </label>
+                                                    <div class="flex rounded-sm shadow-sm">
+                                                        <div
+                                                            class="px-4 inline-flex items-center min-w-fit ltr:rounded-l-sm rtl:rounded-r-sm border ltr:border-r-0 rtl:border-l-0 border-gray-200 bg-gray-50 dark:bg-black/20 dark:border-white/10">
+                                                            <span class="text-sm text-gray-500 dark:text-white/70"><i
+                                                                    class="ri ri-calendar-line"></i></span>
+                                                        </div>
+                                                        <input type="text"
+                                                            class="ti-form-input ltr:rounded-l-none rtl:rounded-r-none focus:z-10 flatpickr-input"
+                                                            id="blog-date" placeholder="Choose date" readonly>
+                                                    </div>
+                                                </div>
+
+                                                <div class="">
+                                                    <div class="col-span-12 lg:col-span-4">
+                                                        <label for="input-label" class="ti-form-label">
+                                                            Waktu Pengujian
+                                                        </label>
+                                                        <div class="flex rounded-sm shadow-sm">
+                                                            <div
+                                                                class="px-4 inline-flex items-center min-w-fit ltr:rounded-l-sm rtl:rounded-r-sm border ltr:border-r-0 rtl:border-l-0 border-gray-200 bg-gray-50 dark:bg-black/20 dark:border-white/10">
+                                                                <span class="text-sm text-gray-500 dark:text-white/70"><i
+                                                                        class="ri ri-time-line"></i></span>
+                                                            </div>
+                                                            <input type="text"
+                                                                class="ti-form-input ltr:rounded-l-none rtl:rounded-r-none focus:z-10 flatpickr-input"
+                                                                id="blog-time" placeholder="Choose date" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <div>
-                                                <label class="ti-form-select-label">Target uji</label>
+                                                <label class="ti-form-select-label">Pilih Petugas Analis</label>
                                                 <select class="ti-form-select blog-tag2" multiple
-                                                    name="choices-multiple-default" id="choices-multiple-default" disabled>
-                                                    <?php foreach ($fppcItem['permohonan_uji'] as $parameter): ?>
-                                                        <option value="<?= $parameter['id']; ?>" selected>
-                                                            <?= $parameter['keterangan_uji']; ?>
+                                                    name="choices-multiple-default" id="choices-multiple-default">
+                                                    <?php foreach ($admin as $adminItem): ?>
+                                                        <option value="<?= $adminItem['adminId']; ?>">
+                                                            <?= $adminItem['name']; ?>
                                                         </option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
-
-
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
@@ -189,14 +224,16 @@
                                             role="status" aria-label="loading"></span>
                                         Loading
                                     </button>
-                                    <button data-fppc-id="<?= $fppc['id']; ?>"
-                                        class="ti-btn btn ti-btn-danger cursor-pointer cancel-button">
-                                        <i class="ti ti-circle-x"></i>
-                                        Tolak</button>
+                                    <a href="/disposisi-penyelia" class="text-white">
+                                        <button class="ti-btn btn ti-btn-danger cursor-pointer cancel-button">
+                                            <i class="ti ti-circle-x"></i>
+                                            Batal
+                                        </button>
+                                    </a>
                                     <button data-fppc-id="<?= $fppc['id']; ?>" type="submit"
                                         class="ti-btn btn ti-btn-primary cursor-pointer approve-button"><i
                                             class="ti ti-circle-check"></i>
-                                        Verifikasi</button>
+                                        Simpan</button>
                                 </div>
                             </div>
                         </div>
@@ -241,7 +278,11 @@
 
 <!--Blog Edit Js-->
 <script src="<?php echo base_url('assets/libs/awesome-notifications/index.var.js'); ?>"></script>
-<script src="<?php echo base_url('assets/js/fppc-verifikasi.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/disposisi-penyelia.js'); ?>"></script>
+
+<!-- Flatpickr JS -->
+<script src="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.js'); ?>"></script>
+
 
 
 

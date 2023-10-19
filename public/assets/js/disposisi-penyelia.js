@@ -5,7 +5,7 @@
 
   /* Start::Choices JS */
   document.addEventListener("DOMContentLoaded", function () {
-    $(".cancel-button, .approve-button").click(function () {
+    $(".approve-button").click(function () {
       var fppcId = $(this).data("fppc-id");
       var status = $(this).hasClass("cancel-button") ? "ditolak" : "diterima";
 
@@ -19,7 +19,7 @@
         success: function (data) {
           $(".cancel-button, .approve-button").hide();
           $(".ti-btn-disabled").hide();
-          notifier.success("Berhasil memperbarui status");
+          notifier.success("This Is An Example Of Success");
           // set timeout to hide the alert
           setTimeout(function () {
             window.location.href = "/fppc";
@@ -37,6 +37,8 @@
       var element = genericExamples[i];
       new Choices(element, {
         allowHTML: true,
+        removeItemButton: true,
+        placeholderValue: "Pilih petugas analis",
       });
     }
   });

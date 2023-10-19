@@ -51,16 +51,6 @@
 					</a>
 				</li>
 				<!-- End::slide -->
-				<!-- Start::slide -->
-				<li class="slide">
-					<a href="/fppc" class="side-menu__item">
-						<i class="ti ti-file-description side-menu__icon"></i>
-						<span class="side-menu__label">
-							Form FPPC
-						</span>
-					</a>
-				</li>
-				<!-- End::slide -->
 
 				<!-- Start::slide -->
 				<li class="slide  has-sub">
@@ -71,7 +61,7 @@
 					</a>
 					<ul class="slide-menu child1">
 						<li class="slide side-menu__label1"><a href="javascript:void(0)">Verifikasi</a></li>
-						<li class="slide"><a href="<?php echo base_url('index'); ?>" class="side-menu__item">Verifikasi
+						<li class="slide"><a href="/fppc" class="side-menu__item">Verifikasi
 								FPPC</a></li>
 						<li class="slide"><a href="<?php echo base_url('index'); ?>" class="side-menu__item">Verifikasi
 								LHUS</a></li>
@@ -81,7 +71,7 @@
 
 				<!-- Start::slide -->
 				<li class="slide">
-					<a href="javascript:void(0);" class="side-menu__item">
+					<a href="/disposisi-penyelia" class="side-menu__item">
 						<i class="ti ti-mail-exclamation side-menu__icon"></i>
 						<span class="side-menu__label">Disposisi Ke Penyelia</span>
 					</a>
