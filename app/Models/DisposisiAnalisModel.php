@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class DisposisiAnalis extends Model
+class DisposisiAnalisModel extends Model
 {
     protected $useSoftDeletes = true;
     protected $table = 'disposisi_analis';
@@ -13,7 +13,7 @@ class DisposisiAnalis extends Model
     protected $allowedFields = [
         'id_fppc',
         'id_dtl_fppc',
-        'analisis_id',
+        'analis_id',
         'penyelia_id',
         'status',
     ];

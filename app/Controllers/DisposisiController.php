@@ -78,89 +78,38 @@ class DisposisiController extends BaseController
         ]);
     }
 
-    public function store($id)
+    public function store()
     {
         $data = [];
 
-        // Load the FPPCModel and FPPCDetailsModel
-        $fppcModel = new \App\Models\FppcModel();
-        $fppcDetailsModel = new \App\Models\DtlFppcModel();
-        $permohonanUjiModel = new \App\Models\PermohonanUjiModel();
+        $DisposisiAnalisModel = new \App\Models\DisposisiAnalisModel();
 
         if ($this->request->getMethod() === 'post') {
-            $forms = $this->request->getPost('ppk');
+            // get admin id from session
+            $adminId = session()->get('adminId');
 
-            $karimutu = db_connect('karimutu');
+            $disposisis = $this->request->getPost('disposisi');
 
-            // get ppk details data from tr_master_pelaporan single data
-            $ppk = $karimutu->query("SELECT * FROM tr_mst_pelaporan WHERE id_ppk = ?", [$id])->getRowArray();
+            foreach ($disposisis as $disposisi) {
+                foreach ($disposisi['petugas_analis'] as $petugas_analis) {
+                    // parse int id_analis
+                    $petugas_analis = (int) $petugas_analis;
 
-            // get all ppk item related to ppk details from v_dtl_pelaporan
-            $ppkItems = $karimutu->query("SELECT * FROM v_dtl_pelaporan WHERE id_ppk = ?", [$id])->getResultArray();
+                    $data = [
+                        'id_fppc' => $disposisi['id_fppc'],
+                        'id_dtl_fppc' => $disposisi['id_dtl_fppc'],
+                        'penyelia_id' => $adminId,
+                        'analis_id' => $petugas_analis,
+                    ];
 
-            $data_fppc = [
-                'no_fppc' => $ppk['id_ppk'] . '-' . $ppk['id_trader'],
-                'no_ppk' => $ppk['no_ppk'],
-                'tgl_ppk' => $ppk['tgl_ppk'],
-                'id_ppk' => $ppk['id_ppk'],
-                'id_trader' => $ppk['id_trader'],
-                'id_petugas' => null,
-                'nip_baru' => null,
-                'tgl_monsur' => null,
-                'petugas_monsur' => null,
-            ];
-
-            $fppcId = $fppcModel->insert($data_fppc);
-
-            // loop ppkItems and get related data in $targetUji, then post to fppc_details
-            foreach ($ppkItems as $ppkItem) {
-                $data = [
-                    'id_fppc' => $fppcId,
-                    'id_ikan' => $ppkItem['id_kd_ikan'],
-                    'nama_lokal' => $ppkItem['nm_lokal'],
-                    'nama_latin' => $ppkItem['nm_latin'],
-                    'nama_umum' => $ppkItem['nm_umum'],
-                    'jenis_ikan' => $ppkItem['nm_kel_ikan'],
-                    'asal_sampel' => $ppkItem['asal_cmdts'],
-                    'jumlah_sampel' => $ppkItem['jumlah'],
-                    'kode_pelanggan' => null,
-                    'deskripsi_sampel' => null,
-                    'kode_sampel' => $ppkItem['kd_ikan'],
-                    'bentuk' => $ppkItem['ket_bentuk'],
-                    'wadah' => '1',
-                    'kondisi_sampel' => null,
-                ];
-
-                $dtlFppcId = $fppcDetailsModel->insert($data);
-
-                // find form that match with ppk item, compared using id_ikan
-                $form = array_filter($forms, function ($form) use ($ppkItem) {
-                    return $form['id_kd_ikan'] == $ppkItem['id_kd_ikan'];
-                });
-
-                // if form found, get property target_uji inside form, loop and insert to permohonan uji
-                if (!empty($form)) {
-                    $form = array_values($form)[0];
-
-                    $targetUji = $form['target_uji'];
-
-                    foreach ($targetUji as $target) {
-                        $data = [
-                            'dtl_fppc_id' => $dtlFppcId,
-                            'parameter_uji_id' => $target,
-                            'hasil_uji_id' => null,
-                        ];
-
-                        $permohonanUjiModel->insert($data);
-                    }
+                    $DisposisiAnalisModel->insert($data);
                 }
             }
 
-            session()->setFlashdata('create-fppc-message', 'Permohonan Uji Lab Berhasil Dibuat');
+            session()->setFlashdata('success', 'Berhasil membuat disposisi');
 
-            return redirect()->to('/ppk');
+            return redirect()->to('/disposisi-penyelia');
         }
-
     }
 
     public function create()
@@ -219,19 +168,4 @@ class DisposisiController extends BaseController
         return view('pages/disposisi-penyelia-create', $returnData);
 
     }
-
-    public function updateStatus()
-    {
-        $fppcModel = new \App\Models\FppcModel();
-
-        $id = $this->request->getVar('fppc_id');
-        $status = $this->request->getVar('status');
-
-        $fppcModel->update($id, ['status' => $status]);
-
-        session()->setFlashdata('approve-fppc-message', 'Permohonan Uji Lab Berhasil Diverifikasi');
-
-        return redirect()->to('/fppc');
-    }
-
 }

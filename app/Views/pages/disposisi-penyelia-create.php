@@ -133,9 +133,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-span-12 xl:col-span-8">
-                                <?php foreach ($fppc_details as $fppcItem): ?>
+                            <form class="col-span-12 xl:col-span-8" id="form-disposisi-penyelia" method="POST"
+                                action="<?= base_url('disposisi-penyelia/store') ?>">
+                                <?php foreach ($fppc_details as $key => $fppcItem): ?>
                                     <div class="box">
+                                        <input type="hidden" name="disposisi[<?= $key + 1; ?>][id_fppc]"
+                                            value="<?= $fppcItem['fppc_details']['id_fppc']; ?>">
+                                        <input type="hidden" name="disposisi[<?= $key + 1; ?>][id_dtl_fppc]"
+                                            value="<?= $fppcItem['fppc_details']['id']; ?>">
                                         <!-- loop ppkItems -->
                                         <div class="box-body space-y-5">
                                             <div>
@@ -179,7 +184,8 @@
                                                         </div>
                                                         <input type="text"
                                                             class="ti-form-input ltr:rounded-l-none rtl:rounded-r-none focus:z-10 flatpickr-input"
-                                                            id="blog-date" placeholder="Choose date" readonly>
+                                                            id="blog-date" placeholder="Choose date"
+                                                            name="disposisi[<?= $key + 1; ?>][tanggal_pengujian]" />
                                                     </div>
                                                 </div>
 
@@ -196,7 +202,8 @@
                                                             </div>
                                                             <input type="text"
                                                                 class="ti-form-input ltr:rounded-l-none rtl:rounded-r-none focus:z-10 flatpickr-input"
-                                                                id="blog-time" placeholder="Choose date" readonly>
+                                                                id="blog-time" placeholder="Choose date"
+                                                                name="disposisi[<?= $key + 1; ?>][waktu_pengujian]" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -205,7 +212,8 @@
                                             <div>
                                                 <label class="ti-form-select-label">Pilih Petugas Analis</label>
                                                 <select class="ti-form-select blog-tag2" multiple
-                                                    name="choices-multiple-default" id="choices-multiple-default">
+                                                    id="choices-multiple-default"
+                                                    name="disposisi[<?= $key + 1; ?>][petugas_analis][]">
                                                     <?php foreach ($admin as $adminItem): ?>
                                                         <option value="<?= $adminItem['adminId']; ?>">
                                                             <?= $adminItem['name']; ?>
@@ -235,7 +243,7 @@
                                             class="ti ti-circle-check"></i>
                                         Simpan</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

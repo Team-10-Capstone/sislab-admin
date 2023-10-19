@@ -5,33 +5,33 @@
 
   /* Start::Choices JS */
   document.addEventListener("DOMContentLoaded", function () {
-    $(".approve-button").click(function () {
-      var fppcId = $(this).data("fppc-id");
-      var status = $(this).hasClass("cancel-button") ? "ditolak" : "diterima";
+    // $(".approve-button").click(function () {
+    //   var fppcId = $(this).data("fppc-id");
+    //   var status = $(this).hasClass("cancel-button") ? "ditolak" : "diterima";
 
-      $(".cancel-button, .approve-button").hide();
-      $(".ti-btn-disabled").show();
+    //   $(".cancel-button, .approve-button").hide();
+    //   $(".ti-btn-disabled").show();
 
-      $.ajax({
-        type: "POST",
-        url: "/fppc/updateStatus",
-        data: { fppc_id: fppcId, status: status },
-        success: function (data) {
-          $(".cancel-button, .approve-button").hide();
-          $(".ti-btn-disabled").hide();
-          notifier.success("This Is An Example Of Success");
-          // set timeout to hide the alert
-          setTimeout(function () {
-            window.location.href = "/fppc";
-          }, 2000);
-        },
-        error: function () {
-          window.location.href = "/fppc";
-          $(".cancel-button, .approve-button").show();
-          $(".ti-btn-disabled").hide();
-        },
-      });
-    });
+    //   $.ajax({
+    //     type: "POST",
+    //     url: "/fppc/updateStatus",
+    //     data: { fppc_id: fppcId, status: status },
+    //     success: function (data) {
+    //       $(".cancel-button, .approve-button").hide();
+    //       $(".ti-btn-disabled").hide();
+    //       notifier.success("This Is An Example Of Success");
+    //       // set timeout to hide the alert
+    //       setTimeout(function () {
+    //         window.location.href = "/fppc";
+    //       }, 2000);
+    //     },
+    //     error: function () {
+    //       window.location.href = "/fppc";
+    //       $(".cancel-button, .approve-button").show();
+    //       $(".ti-btn-disabled").hide();
+    //     },
+    //   });
+    // });
     var genericExamples = document.querySelectorAll(".blog-tag2");
     for (let i = 0; i < genericExamples.length; ++i) {
       var element = genericExamples[i];
