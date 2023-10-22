@@ -1,6 +1,7 @@
 <!-- popperjs -->
 <script src="<?php echo base_url('assets/libs/@popperjs/core/umd/popper.min.js'); ?>"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="<?php echo base_url('assets/libs/awesome-notifications/index.var.js'); ?>"></script>
 <!-- Custom-Switcher JS -->
 <script src="<?php echo base_url('assets/js/custom-switcher.js'); ?>"></script>
 

@@ -64,6 +64,14 @@ $routes->get('/disposisi-penyelia', 'DisposisiController::verify', ['filter' => 
 $routes->post('/disposisi-penyelia/store', 'DisposisiController::store', ['filter' => 'authGuard']);
 
 
+$routes->get('/wadah', 'WadahController::index', ['filter' => 'authGuard']);
+$routes->post('/wadah/create', 'WadahController::create', ['filter' => 'authGuard']);
+$routes->post('/wadah/edit/(:num)', 'WadahController::edit/$1', ['filter' => 'authGuard']);
+$routes->get('/wadah/delete/(:num)', 'WadahController::delete/$1', ['filter' => 'authGuard']);
+
+$routes->get('/uploads/(:segment)', 'ImageController::show/$1');
+
+
 
 
 

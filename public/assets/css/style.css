@@ -1174,6 +1174,22 @@ select option:active,
 :is(.dark .ti-btn-soft-secondary:focus){
   --tw-ring-offset-color: rgb(255 255 255 / 0.1);
 }
+.ti-btn-soft-warning{
+  background-color: rgb(var(--color-warning) / 0.1);
+  color: rgb(var(--color-warning));
+  --tw-ring-offset-color: #fff;
+}
+.ti-btn-soft-warning:hover{
+  background-color: rgb(var(--color-warning));
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.ti-btn-soft-warning:focus{
+  --tw-ring-color: rgb(var(--color-warning));
+}
+:is(.dark .ti-btn-soft-warning:focus){
+  --tw-ring-offset-color: rgb(255 255 255 / 0.1);
+}
 .ti-btn-soft-danger{
   background-color: rgb(var(--color-danger) / 0.1);
   color: rgb(var(--color-danger));
@@ -2910,6 +2926,9 @@ select option:active,
 .h-3{
   height: 0.75rem;
 }
+.h-3\.5{
+  height: 0.875rem;
+}
 .h-4{
   height: 1rem;
 }
@@ -2948,6 +2967,12 @@ select option:active,
 }
 .w-24{
   width: 6rem;
+}
+.w-3{
+  width: 0.75rem;
+}
+.w-3\.5{
+  width: 0.875rem;
 }
 .w-4{
   width: 1rem;
@@ -3847,6 +3872,9 @@ select option:active,
 }
 .bg-success\/20{
   background-color: rgb(var(--color-success) / 0.2);
+}
+.bg-transparent{
+  background-color: transparent;
 }
 .bg-warning\/10{
   background-color: rgb(var(--color-warning) / 0.1);
@@ -14874,6 +14902,14 @@ select.tabulator-page-size option{
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.open.hs-overlay-open\:mt-7{
+  margin-top: 1.75rem;
+}
+
+.open .hs-overlay-open\:mt-7{
+  margin-top: 1.75rem;
+}
+
 .dark .hs-dark-mode-active\:flex{
   display: flex;
 }
@@ -15233,6 +15269,9 @@ select.tabulator-page-size option{
   .sm\:flex-row{
     flex-direction: row;
   }
+  .sm\:justify-between{
+    justify-content: space-between;
+  }
   .sm\:gap-3{
     gap: 0.75rem;
   }
@@ -15326,6 +15365,9 @@ select.tabulator-page-size option{
   }
   .lg\:flex{
     display: flex;
+  }
+  .lg\:max-w-\[100px\]{
+    max-width: 100px;
   }
   .lg\:grid-cols-2{
     grid-template-columns: repeat(2, minmax(0, 1fr));
