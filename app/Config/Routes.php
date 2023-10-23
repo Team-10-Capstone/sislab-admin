@@ -70,6 +70,9 @@ $routes->post('/wadah/edit/(:num)', 'WadahController::edit/$1', ['filter' => 'au
 $routes->get('/wadah/delete/(:num)', 'WadahController::delete/$1', ['filter' => 'authGuard']);
 
 $routes->get('/bentuk', 'BentukController::index', ['filter' => 'authGuard']);
+$routes->post('/bentuk/create', 'BentukController::create', ['filter' => 'authGuard']);
+$routes->post('/bentuk/edit/(:num)', 'BentukController::edit/$1', ['filter' => 'authGuard']);
+$routes->get('/bentuk/delete/(:num)', 'BentukController::delete/$1', ['filter' => 'authGuard']);
 
 $routes->get('/uploads/(:segment)', 'ImageController::show/$1');
 
