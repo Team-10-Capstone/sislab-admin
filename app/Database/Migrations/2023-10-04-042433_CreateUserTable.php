@@ -17,11 +17,11 @@ class CreateUserTable extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => 100,
             ],
-            'email' => [
+            'fullname' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
-            'document_number' => [
+            'email' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,
             ],
