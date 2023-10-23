@@ -89,7 +89,7 @@
 						<li class="slide side-menu__label1"><a href="javascript:void(0)">Referensi Penyelia</a></li>
 						<li class="slide"><a href="<?php echo base_url('wadah'); ?>" class="side-menu__item">Wadah</a>
 						</li>
-						<li class="slide"><a href="<?php echo base_url('index'); ?>" class="side-menu__item">Bentuk</a>
+						<li class="slide"><a href="<?php echo base_url('bentuk'); ?>" class="side-menu__item">Bentuk</a>
 						</li>
 						<li class="slide"><a href="<?php echo base_url('index'); ?>"
 								class="side-menu__item">Organoleptik</a></li>

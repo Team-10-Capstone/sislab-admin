@@ -69,6 +69,8 @@ $routes->post('/wadah/create', 'WadahController::create', ['filter' => 'authGuar
 $routes->post('/wadah/edit/(:num)', 'WadahController::edit/$1', ['filter' => 'authGuard']);
 $routes->get('/wadah/delete/(:num)', 'WadahController::delete/$1', ['filter' => 'authGuard']);
 
+$routes->get('/bentuk', 'BentukController::index', ['filter' => 'authGuard']);
+
 $routes->get('/uploads/(:segment)', 'ImageController::show/$1');
 
 

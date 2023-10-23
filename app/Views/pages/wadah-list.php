@@ -243,24 +243,8 @@
                         </tbody>
                     </table>
                 </div>
-                <nav class="flex justify-end items-center space-x-2 rtl:space-x-reverse mt-5">
-                    <a class="w-10 h-10 bg-transparent text-gray-500 hover:bg-primary hover:text-white p-2 inline-flex justify-center text-sm font-medium items-center gap-2 rounded-full"
-                        href="javascript:void(0);">
-                        <span aria-hidden="true">«</span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="w-10 h-10 bg-primary text-white p-2 inline-flex items-center justify-center text-sm font-medium rounded-full"
-                        href="javascript:void(0);" aria-current="page">1</a>
-                    <a class="w-10 h-10 bg-transparent text-gray-500 hover:bg-primary hover:text-white p-2 inline-flex justify-center items-center text-sm font-medium rounded-full"
-                        href="javascript:void(0);">2</a>
-                    <a class="w-10 h-10 bg-transparent text-gray-500 hover:bg-primary hover:text-white p-2 inline-flex justify-center items-center text-sm font-medium rounded-full"
-                        href="javascript:void(0);">3</a>
-                    <a class="w-10 h-10 bg-transparent text-gray-500 hover:bg-primary hover:text-white p-2 inline-flex justify-center text-sm font-medium items-center gap-2 rounded-full"
-                        href="javascript:void(0);">
-                        <span class="sr-only">Next</span>
-                        <span aria-hidden="true">»</span>
-                    </a>
-                </nav>
+
+                <?= $pager_links ?>
             </div>
         </div>
         <!-- End::row-1 -->

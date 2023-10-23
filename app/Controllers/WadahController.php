@@ -7,15 +7,33 @@ use App\Models\WadahModel;
 
 class WadahController extends BaseController
 {
+    protected $pager;
+    public function __construct()
+    {
+        $this->pager = \Config\Services::pager();
+    }
     public function index()
     {
         $WadahModel = new WadahModel();
 
-        $wadah = $WadahModel->findAll();
+        $page = $this->request->getVar('page') ?? 1;
+
+        // Define the number of items per page
+        $perPage = 10; // Adjust this value according to your requirements
+
+        // Calculate the offset based on the current page and items per page
+        $offset = ($page - 1) * $perPage;
+
+        $wadah = $WadahModel->findAll($perPage, $offset);
+
+        $totalRecords = count($WadahModel->findAll());
+
+        $pager_links = $this->pager->makeLinks($page, $perPage, $totalRecords, 'default');
 
         return view('pages/wadah-list', [
             'title' => 'Daftar Wadah',
             'wadahs' => $wadah,
+            'pager_links' => $pager_links,
         ]);
     }
 
