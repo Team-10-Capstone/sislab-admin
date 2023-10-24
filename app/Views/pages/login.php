@@ -42,17 +42,12 @@
     <div class="mt-7 bg-white rounded-sm shadow-sm dark:bg-bgdark">
         <div class="p-4 sm:p-7">
             <div class="text-center">
-                <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Sign in</h1>
-                <p class="mt-3 text-sm text-gray-600 dark:text-white/70">
-                    Don't have an account yet?
-                    <a class="text-primary decoration-2 hover:underline font-medium"
-                        href="<?php echo base_url('register'); ?>">
-                        Sign up here
-                    </a>
-                </p>
+                <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">
+                    Sign in
+                </h1>
             </div>
 
-            <div class="mt-5">
+            <div class="mt-6">
                 <!-- Form -->
                 <form action="<?php echo base_url(); ?>/LoginController/loginAuth" method="post">
                     <div class="grid gap-y-4">

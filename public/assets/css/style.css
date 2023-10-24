@@ -1174,22 +1174,6 @@ select option:active,
 :is(.dark .ti-btn-soft-secondary:focus){
   --tw-ring-offset-color: rgb(255 255 255 / 0.1);
 }
-.ti-btn-soft-warning{
-  background-color: rgb(var(--color-warning) / 0.1);
-  color: rgb(var(--color-warning));
-  --tw-ring-offset-color: #fff;
-}
-.ti-btn-soft-warning:hover{
-  background-color: rgb(var(--color-warning));
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-.ti-btn-soft-warning:focus{
-  --tw-ring-color: rgb(var(--color-warning));
-}
-:is(.dark .ti-btn-soft-warning:focus){
-  --tw-ring-offset-color: rgb(255 255 255 / 0.1);
-}
 .ti-btn-soft-danger{
   background-color: rgb(var(--color-danger) / 0.1);
   color: rgb(var(--color-danger));
@@ -2711,6 +2695,9 @@ select option:active,
 .top-\[4\.5rem\]{
   top: 4.5rem;
 }
+.top-0{
+  top: 0px;
+}
 .isolate{
   isolation: isolate;
 }
@@ -2833,6 +2820,18 @@ select option:active,
 .mt-7{
   margin-top: 1.75rem;
 }
+.mt-8{
+  margin-top: 2rem;
+}
+.mt-6{
+  margin-top: 1.5rem;
+}
+.mb-5{
+  margin-bottom: 1.25rem;
+}
+.ml-1{
+  margin-left: 0.25rem;
+}
 .box-border{
   box-sizing: border-box;
 }
@@ -2950,6 +2949,9 @@ select option:active,
 .h-full{
   height: 100%;
 }
+.h-40{
+  height: 10rem;
+}
 .\!w-full{
   width: 100% !important;
 }
@@ -2988,6 +2990,9 @@ select option:active,
 }
 .w-full{
   width: 100%;
+}
+.w-40{
+  width: 10rem;
 }
 .min-w-0{
   min-width: 0px;
@@ -3487,6 +3492,11 @@ select option:active,
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
 }
+.-space-x-2 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-x-reverse: 0;
+  margin-right: calc(-0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(-0.5rem * calc(1 - var(--tw-space-x-reverse)));
+}
 .space-y-reverse > :not([hidden]) ~ :not([hidden]){
   --tw-space-y-reverse: 1;
 }
@@ -3729,6 +3739,9 @@ select option:active,
 .border-\[3px\]{
   border-width: 3px;
 }
+.border-2{
+  border-width: 2px;
+}
 .border-x{
   border-left-width: 1px;
   border-right-width: 1px;
@@ -3800,6 +3813,9 @@ select option:active,
 }
 .border-transparent{
   border-color: transparent;
+}
+.border-white\/20{
+  border-color: rgb(255 255 255 / 0.2);
 }
 .border-t-transparent{
   border-top-color: transparent;
@@ -3873,9 +3889,6 @@ select option:active,
 .bg-success\/20{
   background-color: rgb(var(--color-success) / 0.2);
 }
-.bg-transparent{
-  background-color: transparent;
-}
 .bg-warning\/10{
   background-color: rgb(var(--color-warning) / 0.1);
 }
@@ -3888,6 +3901,9 @@ select option:active,
 }
 .bg-white\/10{
   background-color: rgb(255 255 255 / 0.1);
+}
+.bg-white\/20{
+  background-color: rgb(255 255 255 / 0.2);
 }
 .bg-opacity-50{
   --tw-bg-opacity: 0.5;
@@ -4285,6 +4301,14 @@ select option:active,
 .text-white\/80{
   color: rgb(255 255 255 / 0.8);
 }
+.text-pink-500{
+  --tw-text-opacity: 1;
+  color: rgb(236 72 153 / var(--tw-text-opacity));
+}
+.text-teal-500{
+  --tw-text-opacity: 1;
+  color: rgb(20 184 166 / var(--tw-text-opacity));
+}
 .underline{
   text-decoration-line: underline;
 }
@@ -4328,6 +4352,12 @@ select option:active,
 }
 .opacity-70{
   opacity: 0.7;
+}
+.opacity-50{
+  opacity: 0.5;
+}
+.opacity-60{
+  opacity: 0.6;
 }
 .bg-blend-normal{
   background-blend-mode: normal;
@@ -4487,6 +4517,11 @@ select option:active,
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
+.ring-0{
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
 .ring-inset{
   --tw-ring-inset: inset;
 }
@@ -4502,6 +4537,9 @@ select option:active,
 }
 .ring-white\/10{
   --tw-ring-color: rgb(255 255 255 / 0.1);
+}
+.ring-transparent{
+  --tw-ring-color: transparent;
 }
 .ring-offset-white{
   --tw-ring-offset-color: #fff;
@@ -15247,6 +15285,9 @@ select.tabulator-page-size option{
   }
   .sm\:col-span-6{
     grid-column: span 6 / span 6;
+  }
+  .sm\:col-span-3{
+    grid-column: span 3 / span 3;
   }
   .sm\:m-0{
     margin: 0px;

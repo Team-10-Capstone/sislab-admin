@@ -180,9 +180,31 @@
                                                         Jml Sampel
                                                     </label>
                                                     <input type="text" id="input-label1" class="ti-form-input"
-                                                        placeholder="blogtitle" disabled value="<?= $ppkItem['jumlah']; ?>">
+                                                        name="ppk[<?= $key + 1; ?>][jumlah]" placeholder="blogtitle"
+                                                        value="<?= $ppkItem['jumlah']; ?>">
                                                 </div>
-
+                                                <div>
+                                                    <label class="ti-form-select-label">Wadah</label>
+                                                    <select class="ti-form-select blog-tag2"
+                                                        name="ppk[<?= $key + 1; ?>][wadah]">
+                                                        <?php foreach ($wadahs as $wadah): ?>
+                                                            <option value="<?= $wadah['id']; ?>">
+                                                                <?= $wadah['nama_wadah']; ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label class="ti-form-select-label">Bentuk</label>
+                                                    <select class="ti-form-select blog-tag2"
+                                                        name="ppk[<?= $key + 1; ?>][bentuk]">
+                                                        <?php foreach ($bentuks as $bentuk): ?>
+                                                            <option value="<?= $bentuk['id']; ?>">
+                                                                <?= $bentuk['nama_bentuk']; ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
                                             </div>
                                             <div>
                                                 <label class="ti-form-select-label">Target uji</label>
