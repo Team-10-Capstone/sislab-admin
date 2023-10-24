@@ -260,7 +260,6 @@
     src="<?php echo base_url('assets/libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js'); ?>"></script>
 <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
 <script src="<?php echo base_url('assets/libs/filepond/filepond.min.js'); ?>"></script>
-<script src="<?php echo base_url('assets/libs/awesome-notifications/index.var.js'); ?>"></script>
 
 <!-- Edit Product JS -->
 <script src="<?php echo base_url('assets/js/wadah-list.js'); ?>"></script>

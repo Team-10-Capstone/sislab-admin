@@ -96,5 +96,6 @@ class Autoload extends AutoloadConfig
      */
     public $helpers = [
         'role_helper',
+        'tipepermohonan_helper',
     ];
 }

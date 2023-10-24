@@ -55,23 +55,4 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = \Config\Services::session();
     }
-
-    public function getStatus($kd_kegiatan, $kd_mks)
-    {
-        if ($kd_kegiatan == 'E') {
-            echo 'Eksport';
-        } elseif ($kd_kegiatan == 'I') {
-            echo 'Import';
-        } elseif ($kd_kegiatan == 'K') {
-            echo 'Domestik keluar';
-        } elseif ($kd_kegiatan == 'M') {
-            echo 'Domestik masuk';
-        } elseif ($kd_kegiatan == 'N' && $kd_mks == 16) {
-            echo 'Mandiri';
-        } elseif ($kd_kegiatan == 'N' && $kd_mks == 21) {
-            echo 'Surveilance';
-        } else {
-            echo 'Lainnya';
-        }
-    }
 }
