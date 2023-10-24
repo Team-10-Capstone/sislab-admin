@@ -30,6 +30,7 @@
 				<li class="slide__category"><span class="category-name">Main Navigations</span></li>
 				<!-- End::slide__category -->
 
+
 				<!-- Start::slide -->
 				<li class="slide">
 					<a href="/" class="side-menu__item">
@@ -39,85 +40,128 @@
 				</li>
 				<!-- End::slide -->
 
+				<?php
+				helper('role_helper');
 
+				$userRole = session()->get('role');
 
-				<!-- Start::slide -->
-				<li class="slide">
+				if (canDisplayLink($userRole, [1, 2, 3])) {
+					// Display links for users with allowed roles
+					echo '<li class="slide">
 					<a href="/ppk" class="side-menu__item">
 						<i class="ti ti-login side-menu__icon"></i>
 						<span class="side-menu__label">
 							Permohonan masuk
 						</span>
 					</a>
-				</li>
-				<!-- End::slide -->
+				</li>';
+				}
+				?>
 
-				<!-- Start::slide -->
-				<li class="slide  has-sub">
-					<a href="javascript:void(0);" class="side-menu__item">
-						<i class="ti ti-zoom-check side-menu__icon"></i>
-						<span class="side-menu__label">Verifikasi</span>
-						<i class="ri ri-arrow-right-s-line side-menu__angle"></i>
+				<?php
+				helper('role_helper');
+
+				$userRole = session()->get('role');
+
+				if (canDisplayLink($userRole, [1])) {
+					// Display links for users with allowed roles
+					echo "<li class='slide  has-sub'>
+					<a href='javascript:void(0);' class='side-menu__item'>
+						<i class='ti ti-zoom-check side-menu__icon'></i>
+						<span class='side-menu__label'>Verifikasi</span>
+						<i class='ri ri-arrow-right-s-line side-menu__angle'></i>
 					</a>
-					<ul class="slide-menu child1">
-						<li class="slide side-menu__label1"><a href="javascript:void(0)">Verifikasi</a></li>
-						<li class="slide"><a href="/fppc" class="side-menu__item">Verifikasi
+					<ul class='slide-menu child1'>
+						<li class='slide side-menu__label1'><a>Verifikasi</a></li>
+						<li class='slide'><a href='/fppc' class='side-menu__item'>Verifikasi
 								FPPC</a></li>
-						<li class="slide"><a href="<?php echo base_url('index'); ?>" class="side-menu__item">Verifikasi
+						<li class='slide'><a href='/lhu' class='side-menu__item'>Verifikasi
 								LHUS</a></li>
 					</ul>
-				</li>
-				<!-- End::slide -->
+				</li>";
+				}
+				?>
 
-				<!-- Start::slide -->
-				<li class="slide">
-					<a href="/disposisi-penyelia" class="side-menu__item">
-						<i class="ti ti-mail-exclamation side-menu__icon"></i>
-						<span class="side-menu__label">Disposisi Ke Penyelia</span>
-					</a>
-				</li>
-				<!-- End::slide -->
+				<?php
+				helper('role_helper');
 
-				<!-- Start::slide -->
-				<li class="slide  has-sub">
-					<a href="javascript:void(0);" class="side-menu__item">
-						<i class="ti ti-eye side-menu__icon"></i>
-						<span class="side-menu__label">Referensi Penyelia</span>
-						<i class="ri ri-arrow-right-s-line side-menu__angle"></i>
+				$userRole = session()->get('role');
+
+				if (canDisplayLink($userRole, [1])) {
+					// Display links for users with allowed roles
+					echo "<li class='slide'>
+					<a href='/disposisi-penyelia' class='side-menu__item'>
+						<i class='ti ti-mail-exclamation side-menu__icon'></i>
+						<span class='side-menu__label'>Disposisi Ke Penyelia</span>
 					</a>
-					<ul class="slide-menu child1">
-						<li class="slide side-menu__label1"><a href="javascript:void(0)">Referensi Penyelia</a></li>
-						<li class="slide"><a href="<?php echo base_url('wadah'); ?>" class="side-menu__item">Wadah</a>
+				</li>";
+				}
+				?>
+
+
+				<?php
+				helper('role_helper');
+
+				$userRole = session()->get('role');
+
+				if (canDisplayLink($userRole, [1, 2, 3, 4])) {
+					// Display links for users with allowed roles
+					echo "<li class='slide  has-sub'>
+					<a href='javascript:void(0);' class='side-menu__item'>
+						<i class='ti ti-eye side-menu__icon'></i>
+						<span class='side-menu__label'>Referensi Penyelia</span>
+						<i class='ri ri-arrow-right-s-line side-menu__angle'></i>
+					</a>
+					<ul class='slide-menu child1'>
+						<li class='slide side-menu__label1'><a href='javascript:void(0)'>Referensi Penyelia</a></li>
+						<li class='slide'><a href='/wadah' class='side-menu__item'>Wadah</a>
 						</li>
-						<li class="slide"><a href="<?php echo base_url('bentuk'); ?>" class="side-menu__item">Bentuk</a>
+						<li class='slide'><a href='/bentuk' class='side-menu__item'>Bentuk</a>
 						</li>
-						<li class="slide"><a href="<?php echo base_url('index'); ?>"
-								class="side-menu__item">Organoleptik</a></li>
-						<li class="slide"><a href="<?php echo base_url('index'); ?>" class="side-menu__item">Kode Asal
+						<li class='slide'><a href='/parameter' class='side-menu__item'>Parameter Uji</a>
+						</li>
+						<li class='slide'><a href='/index'
+								class='side-menu__item'>Organoleptik</a></li>
+						<li class='slide'><a href='/index' class='side-menu__item'>Kode Asal
 								Sampel</a></li>
-						<li class="slide"><a href="<?php echo base_url('index'); ?>" class="side-menu__item">Permintaan
+						<li class='slide'><a href='/index' class='side-menu__item'>Permintaan
 								Uji</a></li>
 					</ul>
-				</li>
-				<!-- End::slide -->
+				</li>";
+				}
+				?>
 
-				<!-- Start::slide -->
-				<li class="slide">
-					<a href="/daftar-lhu" class="side-menu__item">
-						<i class="ti ti-file-description side-menu__icon"></i>
-						<span class="side-menu__label">Daftar LHU</span>
-					</a>
-				</li>
-				<!-- End::slide -->
+				<?php
+				helper('role_helper');
 
-				<!-- Start::slide -->
-				<li class="slide">
-					<a href="/user" class="side-menu__item">
-						<i class="ti ti-user-plus side-menu__icon"></i>
-						<span class="side-menu__label">Daftar User</span>
+				$userRole = session()->get('role');
+
+				if (canDisplayLink($userRole, [1, 2, 3, 4])) {
+					// Display links for users with allowed roles
+					echo "<li class='slide'>
+					<a href='/daftar-lhu' class='side-menu__item'>
+						<i class='ti ti-file-description side-menu__icon'></i>
+						<span class='side-menu__label'>Daftar LHU</span>
 					</a>
-				</li>
-				<!-- End::slide -->
+				</li>";
+				}
+				?>
+
+				<?php
+				helper('role_helper');
+
+				$userRole = session()->get('role');
+
+				if (canDisplayLink($userRole, [0])) {
+					// Display links for users with allowed roles
+					echo "<li class='slide'>
+					<a href='/user' class='side-menu__item'>
+						<i class='ti ti-user-plus side-menu__icon'></i>
+						<span class='side-menu__label'>Daftar User</span>
+					</a>
+				</li>";
+				}
+				?>
 
 			</ul>
 			<div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24"

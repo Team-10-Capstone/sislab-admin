@@ -57,12 +57,12 @@ $routes->get('/fppc/create', 'FppcController::create', ['filter' => 'authGuard']
 $routes->get('/fppc/verify', 'FppcController::verify', ['filter' => 'authGuard']);
 $routes->post('/fppc/updateStatus', 'FppcController::updateStatus', ['filter' => 'authGuard']);
 $routes->post('/fppc/store', 'FppcController::store', ['filter' => 'authGuard']);
+$routes->get('/fppc/delete/(:segment)', 'FppcController::delete/$1', ['filter' => 'authGuard']);
 
 $routes->get('/disposisi-penyelia', 'DisposisiController::index', ['filter' => 'authGuard']);
 $routes->get('/disposisi-penyelia/create', 'DisposisiController::create', ['filter' => 'authGuard']);
 $routes->get('/disposisi-penyelia', 'DisposisiController::verify', ['filter' => 'authGuard']);
 $routes->post('/disposisi-penyelia/store', 'DisposisiController::store', ['filter' => 'authGuard']);
-
 
 $routes->get('/wadah', 'WadahController::index', ['filter' => 'authGuard']);
 $routes->post('/wadah/create', 'WadahController::create', ['filter' => 'authGuard']);
@@ -73,6 +73,11 @@ $routes->get('/bentuk', 'BentukController::index', ['filter' => 'authGuard']);
 $routes->post('/bentuk/create', 'BentukController::create', ['filter' => 'authGuard']);
 $routes->post('/bentuk/edit/(:num)', 'BentukController::edit/$1', ['filter' => 'authGuard']);
 $routes->get('/bentuk/delete/(:num)', 'BentukController::delete/$1', ['filter' => 'authGuard']);
+
+$routes->get('/parameter', 'ParameterUjiController::index', ['filter' => 'authGuard']);
+$routes->post('/parameter/create', 'ParameterUjiController::create', ['filter' => 'authGuard']);
+$routes->post('/parameter/edit/(:num)', 'ParameterUjiController::edit/$1', ['filter' => 'authGuard']);
+$routes->get('/parameter/delete/(:num)', 'ParameterUjiController::delete/$1', ['filter' => 'authGuard']);
 
 $routes->get('/uploads/(:segment)', 'ImageController::show/$1');
 

@@ -217,8 +217,6 @@
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
-
-
                                         </div>
                                     </div>
                                 <?php endforeach; ?>

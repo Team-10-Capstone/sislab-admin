@@ -50,7 +50,7 @@
             <div>
                 <h3
                     class="text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-white text-2xl font-medium">
-                    Daftar Wadah</h3>
+                    Daftar Parameter Uji</h3>
             </div>
             <ol class="flex items-center whitespace-nowrap min-w-0">
                 <li class="text-sm">
@@ -62,7 +62,7 @@
                     </a>
                 </li>
                 <li class="text-sm text-gray-500 hover:text-primary dark:text-white/70 " aria-current="page">
-                    Wadah
+                    Parameter
                 </li>
             </ol>
         </div>
@@ -71,11 +71,11 @@
         <!-- Start::row-1 -->
         <div class="box">
             <div class="box-header sm:flex sm:justify-between space-y-3 sm:space-y-0">
-                <h5 class="box-title my-auto">Daftar Wadah</h5>
+                <h5 class="box-title my-auto">Daftar Parameter</h5>
                 <button type="button" class="hs-dropdown-toggle ti-btn ti-btn-primary m-0 py-2"
                     data-hs-overlay="#hs-focus-management-modal">
                     <i class="ri ri-add-line"></i>
-                    Tambah Wadah
+                    Tambah Parameter
                 </button>
 
                 <div id="hs-focus-management-modal" class="hs-overlay hidden ti-modal">
@@ -83,7 +83,7 @@
                         <div class="ti-modal-content">
                             <div class="ti-modal-header">
                                 <h3 class="ti-modal-title">
-                                    Wadah baru
+                                    Parameter Baru
                                 </h3>
                                 <button type="button" class="hs-dropdown-toggle ti-modal-close-btn"
                                     data-hs-overlay="#hs-focus-management-modal">
@@ -96,15 +96,24 @@
                                     </svg>
                                 </button>
                             </div>
-                            <form id="create-wadah" method="post" action="<?php echo base_url('wadah/create'); ?>"
-                                enctype="multipart/form-data">
+                            <form id="create-parameter" method="post"
+                                action="<?php echo base_url('parameter/create'); ?>" enctype="multipart/form-data">
                                 <div class="ti-modal-body space-y-4">
-                                    <label for="input-label" class="ti-form-label">Nama</label>
-                                    <input type="text" id="nama" class="ti-form-input" placeholder="Nama" autofocus
-                                        name="nama">
-                                    <label for="input-label" class="ti-form-label">Image</label>
-                                    <input type="file" class="filepond" name="image" data-max-file-size="3MB"
-                                        id="image">
+                                    <label for="kode_uji" class="ti-form-label">Kode Uji</label>
+                                    <input type="text" id="kode_uji" class="ti-form-input"
+                                        placeholder="Masukkan kode uji" autofocus name="kode_uji">
+                                    <label for="jenis_parameter" class="ti-form-label">Jenis Parameter</label>
+                                    <input type="text" id="jenis_parameter" class="ti-form-input"
+                                        placeholder="Masukkan jenis parameter" name="jenis_parameter">
+                                    <label for="keterangan_uji" class="ti-form-label">Keterangan Uji</label>
+                                    <input type="text" id="keterangan_uji" class="ti-form-input"
+                                        placeholder="Masukkan keterangan uji" name="keterangan_uji">
+                                    <label for="standar_uji" class="ti-form-label">Standar Uji</label>
+                                    <input type="text" id="standar_uji" class="ti-form-input"
+                                        placeholder="Masukkan standar uji" name="standar_uji">
+                                    <label for="no_ikm" class="ti-form-label">No. IKM</label>
+                                    <input type="text" id="no_ikm" class="ti-form-input" placeholder="Masukkan No. IKM"
+                                        name="no_ikm">
                                 </div>
 
                                 <div class="ti-modal-footer">
@@ -134,28 +143,62 @@
                         <thead class="bg-gray-100 dark:bg-black/20">
                             <tr class="">
 
-                                <th scope="col" class="dark:text-white/70">Nama</th>
+                                <th scope="col" class="dark:text-white/70">Kode Uji</th>
+                                <th scope="col" class="dark:text-white/70">Jenis Parameter</th>
+                                <th scope="col" class="dark:text-white/70">Keterangan Uji</th>
+                                <th scope="col" class="dark:text-white/70">Standar Uji</th>
+                                <th scope="col" class="dark:text-white/70">No Ikm</th>
                                 <th scope="col" class="dark:text-white/70">Dibuat</th>
                                 <th scope="col" class="flex justify-center dark:text-white/70">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($wadahs as $wadah): ?>
+                            <?php foreach ($parameters as $parameter): ?>
                                 <tr class="product-list">
 
                                     <td>
                                         <div class="flex space-x-3 rtl:space-x-reverse">
-                                            <img class="avatar avatar-sm rounded-sm bg-gray-100 dark:bg-black/20 p-1"
-                                                src=<?php echo $wadah['image']; ?>>
                                             <span
                                                 class="block text-sm font-semibold text-gray-800 dark:text-white my-auto truncate lg:max-w-[100px]">
-                                                <?php echo $wadah['nama_wadah']; ?>
+                                                <?php echo $parameter['kode_uji']; ?>
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex space-x-3 rtl:space-x-reverse">
+                                            <span
+                                                class="block text-sm font-semibold text-gray-800 dark:text-white my-auto truncate lg:max-w-[100px]">
+                                                <?php echo $parameter['jenis_parameter']; ?>
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex space-x-3 rtl:space-x-reverse">
+                                            <span
+                                                class="block text-sm font-semibold text-gray-800 dark:text-white my-auto truncate">
+                                                <?php echo $parameter['keterangan_uji']; ?>
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex space-x-3 rtl:space-x-reverse">
+                                            <span
+                                                class="block text-sm text-gray-800 dark:text-white my-auto truncate lg:max-w-[100px]">
+                                                <?php echo $parameter['standar_uji']; ?>
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="flex space-x-3 rtl:space-x-reverse">
+                                            <span
+                                                class="block text-sm text-gray-800 dark:text-white my-auto truncate lg:max-w-[100px]">
+                                                <?php echo $parameter['no_ikm']; ?>
                                             </span>
                                         </div>
                                     </td>
                                     <td>
                                         <?php
-                                        $date = date_create($wadah['created_at']);
+                                        $date = date_create($parameter['created_at']);
                                         echo date_format($date, 'd M Y');
                                         ?>
                                     </td>
@@ -163,20 +206,20 @@
 
                                         <button type="button"
                                             class="hs-dropdown-toggle w-8 h-8 ti-btn rounded-full p-0 transition-none focus:outline-none ti-btn-soft-secondary"
-                                            data-hs-overlay="#hs-focus-management-modal<?php echo $wadah['id']; ?>">
+                                            data-hs-overlay="#hs-focus-management-modal<?php echo $parameter['id']; ?>">
                                             <i class="ti ti-pencil"></i>
                                         </button>
 
-                                        <div id="hs-focus-management-modal<?php echo $wadah['id']; ?>"
+                                        <div id="hs-focus-management-modal<?php echo $parameter['id']; ?>"
                                             class="hs-overlay hidden ti-modal text-left">
                                             <div class="hs-overlay-open:mt-7 ti-modal-box mt-0 ease-out">
                                                 <div class="ti-modal-content">
                                                     <div class="ti-modal-header">
                                                         <h3 class="ti-modal-title">
-                                                            Edit Wadah
+                                                            Edit Parameter
                                                         </h3>
                                                         <button type="button" class="hs-dropdown-toggle ti-modal-close-btn"
-                                                            data-hs-overlay="#hs-focus-management-modal<?php echo $wadah['id']; ?>">
+                                                            data-hs-overlay="#hs-focus-management-modal<?php echo $parameter['id']; ?>">
                                                             <span class="sr-only">Close</span>
                                                             <svg class="w-3.5 h-3.5" width="8" height="8" viewBox="0 0 8 8"
                                                                 fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -186,24 +229,42 @@
                                                             </svg>
                                                         </button>
                                                     </div>
-                                                    <form id="edit-wadah" method="post"
-                                                        action="<?php echo base_url("wadah/edit/{$wadah['id']}"); ?>"
+                                                    <form id="edit-parameter" method="post"
+                                                        action="<?php echo base_url("parameter/edit/{$parameter['id']}"); ?>"
                                                         enctype="multipart/form-data">
                                                         <div class="ti-modal-body space-y-4">
-                                                            <label for="input-label" class="ti-form-label">Nama</label>
-                                                            <input type="text" id="nama" class="ti-form-input"
-                                                                value="<?php echo $wadah['nama_wadah']; ?>"
-                                                                placeholder="Nama" name="nama">
-                                                            <label for="input-label" class="ti-form-label">Image</label>
-                                                            <input type="file" class="filepond" name="image"
-                                                                value="<?php echo $wadah['image']; ?>"
-                                                                data-max-file-size="3MB" id="image">
+                                                            <input type="hidden" name="parameter_id"
+                                                                value="<?php echo $parameter['id']; ?>">
+                                                            <label for="kode_uji" class="ti-form-label">Kode Uji</label>
+                                                            <input type="text" id="kode_uji" class="ti-form-input"
+                                                                placeholder="Masukkan kode uji" name="kode_uji"
+                                                                value="<?php echo $parameter['kode_uji']; ?>">
+                                                            <label for="jenis_parameter" class="ti-form-label">Jenis
+                                                                Parameter</label>
+                                                            <input type="text" id="jenis_parameter" class="ti-form-input"
+                                                                placeholder="Masukkan jenis parameter"
+                                                                name="jenis_parameter"
+                                                                value="<?php echo $parameter['jenis_parameter']; ?>">
+                                                            <label for="keterangan_uji" class="ti-form-label">Keterangan
+                                                                Uji</label>
+                                                            <input type="text" id="keterangan_uji" class="ti-form-input"
+                                                                placeholder="Masukkan keterangan uji" name="keterangan_uji"
+                                                                value="<?php echo $parameter['keterangan_uji']; ?>">
+                                                            <label for="standar_uji" class="ti-form-label">Standar
+                                                                Uji</label>
+                                                            <input type="text" id="standar_uji" class="ti-form-input"
+                                                                placeholder="Masukkan standar uji" name="standar_uji"
+                                                                value="<?php echo $parameter['standar_uji']; ?>">
+                                                            <label for="no_ikm" class="ti-form-label">No. IKM</label>
+                                                            <input type="text" id="no_ikm" class="ti-form-input"
+                                                                placeholder="Masukkan No. IKM" name="no_ikm"
+                                                                value="<?php echo $parameter['no_ikm']; ?>">
                                                         </div>
 
                                                         <div class="ti-modal-footer">
                                                             <button
                                                                 class="ti-btn btn ti-btn-danger cursor-pointer cancel-button"
-                                                                data-hs-overlay="#hs-focus-management-modalhs-focus-management-modal<?php echo $wadah['id']; ?>"
+                                                                data-hs-overlay="#hs-focus-management-modalhs-focus-management-modal<?php echo $parameter['id']; ?>"
                                                                 type='button'>
                                                                 <i class="ti ti-circle-x"></i>
                                                                 Batal
@@ -219,7 +280,8 @@
                                             </div>
                                         </div>
 
-                                        <a aria-label="anchor" href="<?php echo base_url("wadah/delete/{$wadah['id']}"); ?>"
+                                        <a aria-label="anchor"
+                                            href="<?php echo base_url("parameter/delete/{$parameter['id']}"); ?>"
                                             class="product-btn w-8 h-8 ti-btn rounded-full p-0 transition-none focus:outline-none ti-btn-soft-danger">
                                             <i class="ti ti-trash"></i>
                                         </a>
@@ -246,23 +308,9 @@
 <?= $this->section('scripts'); ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<?php echo base_url('assets/libs/awesome-notifications/index.var.js'); ?>"></script>
-<!-- Flatpickr JS -->
-<script src="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.js'); ?>"></script>
-
-<!-- Filepond File Upload JS -->
-<script
-    src="<?php echo base_url('assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js'); ?>"></script>
-<script
-    src="<?php echo base_url('assets/libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js'); ?>"></script>
-<script
-    src="<?php echo base_url('assets/libs/filepond-plugin-image-edit/filepond-plugin-image-edit.min.js'); ?>"></script>
-<script
-    src="<?php echo base_url('assets/libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js'); ?>"></script>
-<script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
-<script src="<?php echo base_url('assets/libs/filepond/filepond.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/libs/awesome-notifications/index.var.js'); ?>"></script>
 
 <!-- Edit Product JS -->
-<script src="<?php echo base_url('assets/js/wadah-list.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/parameter-list.js'); ?>"></script>
 
 <?= $this->endSection('scripts'); ?>

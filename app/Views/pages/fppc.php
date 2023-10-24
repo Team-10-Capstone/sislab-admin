@@ -16,7 +16,7 @@
 
     <!-- Start::main-content -->
     <div class="main-content">
-        <?php if (session()->getFlashdata('create-fppc-message')): ?>
+        <?php if (session()->getFlashdata('success')): ?>
             <div class="toast-container">
                 <div class="ti-toast bg-white dark:bg-bgdark dark:border-white/10" role="alert">
                     <div class="flex p-4">
@@ -29,7 +29,7 @@
                         </div>
                         <div class="ltr:ml-3 rtl:mr-3">
                             <p class="text-sm text-gray-700 dark:text-white/70">
-                                <?= session()->getFlashdata('create-fppc-message') ?>
+                                <?= session()->getFlashdata('success') ?>
                             </p>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
 
                     </div>
                     <div class="box-body">
-                        <form method="get" action="<?= site_url('FppcController/index') ?>" onsubmit="return false;"
+                        <form method="get" action="<?= site_url('fppc/index') ?>" onsubmit="return false;"
                             id="search-form" class="xl:flex xl:justify-between space-y-3 xl:space-y-0">
                             <div class="sm:flex sm:space-x-3 space-y-3 sm:space-y-0 rtl:space-x-reverse">
                                 <div class="relative max-w-xs">
@@ -168,15 +168,6 @@
                                 class="ti-custom-table ti-custom-table-head edit-table whitespace-nowrap text-center">
                                 <thead class="bg-gray-50 dark:bg-black/20">
                                     <tr class="cart-box">
-                                        <th scope="col" class="dark:text-white/70">
-                                            <div class="flex leading-[0] justify-center">
-                                                <input type="checkbox"
-                                                    class="border-gray-500 ti-form-checkbox mt-0.5 check-all"
-                                                    id="hs-default-checkbox">
-                                                <label for="hs-default-checkbox"
-                                                    class="text-sm text-gray-500 dark:text-white/70"></label>
-                                            </div>
-                                        </th>
                                         <th scope="col" class="dark:text-white/70">No FPPC</th>
                                         <th scope="col" class="dark:text-white/70">Trader</th>
                                         <th scope="col" class="dark:text-white/70">Tipe Permohonan</th>
@@ -188,13 +179,7 @@
                                 <tbody>
                                     <?php foreach ($data as $row): ?>
                                         <tr class="invoice-list">
-                                            <td class="">
-                                                <div class="flex items-center h-5 invoice-checkbox justify-center">
-                                                    <input id="invoice-check-1" type="checkbox"
-                                                        class="border-gray-500 ti-form-checkbox">
-                                                    <label for="invoice-check-1" class="sr-only">Checkbox</label>
-                                                </div>
-                                            </td>
+
                                             <td>
                                                 <?php echo $row['no_ppk']; ?>
                                             </td>
@@ -258,10 +243,9 @@
                                                 </a>
 
                                                 <div class="hs-tooltip ti-main-tooltip">
-                                                    <a href="javascript:void(0);"
+                                                    <a href="<?= site_url('fppc/delete/' . $row['id']) ?>"
                                                         class="invoice-btn m-0 hs-tooltip-toggle relative  w-8 h-8 ti-btn rounded-full p-0 transition-none focus:outline-none ti-btn-soft-danger">
                                                         <i class="ti ti-trash"></i>
-
                                                     </a>
                                                 </div>
                                             </td>
@@ -298,6 +282,6 @@
 <script src="<?php echo base_url('assets/libs/choices.js/public/assets/scripts/choices.min.js'); ?>"></script>
 
 <!-- Invoice JS -->
-<script src="<?php echo base_url('assets/js/permohonan-ppk.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/fppc.js'); ?>"></script>
 
 <?= $this->endSection('scripts'); ?>

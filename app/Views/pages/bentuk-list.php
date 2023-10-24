@@ -50,7 +50,7 @@
             <div>
                 <h3
                     class="text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-white text-2xl font-medium">
-                    Daftar bentuk</h3>
+                    Daftar Bentuk</h3>
             </div>
             <ol class="flex items-center whitespace-nowrap min-w-0">
                 <li class="text-sm">
@@ -62,7 +62,7 @@
                     </a>
                 </li>
                 <li class="text-sm text-gray-500 hover:text-primary dark:text-white/70 " aria-current="page">
-                    bentuk
+                    Bentuk
                 </li>
             </ol>
         </div>
@@ -71,11 +71,11 @@
         <!-- Start::row-1 -->
         <div class="box">
             <div class="box-header sm:flex sm:justify-between space-y-3 sm:space-y-0">
-                <h5 class="box-title my-auto">Daftar bentuk</h5>
+                <h5 class="box-title my-auto">Daftar Bentuk</h5>
                 <button type="button" class="hs-dropdown-toggle ti-btn ti-btn-primary m-0 py-2"
                     data-hs-overlay="#hs-focus-management-modal">
                     <i class="ri ri-add-line"></i>
-                    Tambah bentuk
+                    Tambah Bentuk
                 </button>
 
                 <div id="hs-focus-management-modal" class="hs-overlay hidden ti-modal">
@@ -83,7 +83,7 @@
                         <div class="ti-modal-content">
                             <div class="ti-modal-header">
                                 <h3 class="ti-modal-title">
-                                    bentuk baru
+                                    Bentuk Baru
                                 </h3>
                                 <button type="button" class="hs-dropdown-toggle ti-modal-close-btn"
                                     data-hs-overlay="#hs-focus-management-modal">
@@ -130,14 +130,7 @@
                     <table class="ti-custom-table ti-custom-table-head edit-table">
                         <thead class="bg-gray-100 dark:bg-black/20">
                             <tr class="">
-                                <th scope="col" class="dark:text-white/70">
-                                    <div class="flex leading-[0] justify-center">
-                                        <input type="checkbox" class="border-gray-500 ti-form-checkbox mt-0.5 check-all"
-                                            id="hs-default-checkbox">
-                                        <label for="hs-default-checkbox"
-                                            class="text-sm text-gray-500 dark:text-white/70"></label>
-                                    </div>
-                                </th>
+
                                 <th scope="col" class="dark:text-white/70">Nama</th>
                                 <th scope="col" class="dark:text-white/70">Dibuat</th>
                                 <th scope="col" class="flex justify-center dark:text-white/70">Action</th>
@@ -146,13 +139,7 @@
                         <tbody>
                             <?php foreach ($bentuks as $bentuk): ?>
                                 <tr class="product-list">
-                                    <td class="">
-                                        <div class="flex items-center h-5 product-checkbox justify-center">
-                                            <input id="product-check-1" type="checkbox"
-                                                class="border-gray-500 ti-form-checkbox">
-                                            <label for="product-check-1" class="sr-only">Checkbox</label>
-                                        </div>
-                                    </td>
+
                                     <td>
                                         <div class="flex space-x-3 rtl:space-x-reverse">
                                             <span
@@ -181,7 +168,7 @@
                                                 <div class="ti-modal-content">
                                                     <div class="ti-modal-header">
                                                         <h3 class="ti-modal-title">
-                                                            Edit bentuk
+                                                            Edit Bentuk
                                                         </h3>
                                                         <button type="button" class="hs-dropdown-toggle ti-modal-close-btn"
                                                             data-hs-overlay="#hs-focus-management-modal<?php echo $bentuk['id']; ?>">

@@ -201,7 +201,7 @@ class FppcController extends BaseController
                 }
             }
 
-            session()->setFlashdata('create-fppc-message', 'Permohonan Uji Lab Berhasil Dibuat');
+            session()->setFlashdata('success', 'Permohonan Uji Lab Berhasil Dibuat');
 
             return redirect()->to('/ppk');
         }
@@ -256,6 +256,7 @@ class FppcController extends BaseController
         ];
 
         // dd($returnData);
+        session()->setFlashdata('success', 'Permohonan Uji Lab Berhasil Diverifikasi');
 
         return view('pages/fppc-verifikasi', $returnData);
 
@@ -270,9 +271,24 @@ class FppcController extends BaseController
 
         $fppcModel->update($id, ['status' => $status]);
 
-        session()->setFlashdata('approve-fppc-message', 'Permohonan Uji Lab Berhasil Diverifikasi');
+        session()->setFlashdata('success', 'Permohonan Uji Lab Berhasil Diverifikasi');
 
         return redirect()->to('/fppc');
     }
 
+    public function delete($ids)
+    {
+        // $ids will contain the captured IDs as a single string
+        // You need to split the string into an array of IDs
+        $idArray = explode(',', $ids);
+
+        // Loop through the IDs and delete the corresponding records
+        foreach ($idArray as $id) {
+            $fppcModel = new \App\Models\FppcModel();
+            $fppcModel->delete($id);
+        }
+
+        session()->setFlashdata('success', 'Permohonan Uji Lab Berhasil Dihapus');
+        return redirect()->to('/fppc');
+    }
 }

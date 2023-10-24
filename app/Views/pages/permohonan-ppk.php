@@ -89,10 +89,6 @@
                                     class="ti-btn px-3 py-2 ti-btn-outline border-gray-200 text-gray-500 dark:text-white/70 hover:text-white hover:bg-gray-500 hover:border-gray-500 focus:ring-gray-200  dark:hover:bg-black/30 dark:border-white/10 dark:hover:border-white/20 dark:focus:ring-white/10 dark:focus:ring-offset-white/10 m-0">
                                     <i class="ri-refresh-line leading-none text-lg"></i>
                                 </button>
-                                <button aria-label="button" type="button" id="delete-btn"
-                                    class="ti-btn px-3 py-2 ti-btn-danger m-0">
-                                    <i class="ri-delete-bin-7-line leading-none text-lg"></i>
-                                </button>
                             </div>
                             <div class="sm:space-x-3 sm:flex space-y-3 sm:space-y-0 rtl:space-x-reverse">
                                 <div class="inline-flex">
@@ -168,15 +164,7 @@
                                 class="ti-custom-table ti-custom-table-head edit-table whitespace-nowrap text-center">
                                 <thead class="bg-gray-50 dark:bg-black/20">
                                     <tr class="cart-box">
-                                        <th scope="col" class="dark:text-white/70">
-                                            <div class="flex leading-[0] justify-center">
-                                                <input type="checkbox"
-                                                    class="border-gray-500 ti-form-checkbox mt-0.5 check-all"
-                                                    id="hs-default-checkbox">
-                                                <label for="hs-default-checkbox"
-                                                    class="text-sm text-gray-500 dark:text-white/70"></label>
-                                            </div>
-                                        </th>
+
                                         <th scope="col" class="dark:text-white/70">No PPK</th>
                                         <th scope="col" class="dark:text-white/70">Trader</th>
                                         <th scope="col" class="dark:text-white/70">Tanggal dibuat</th>
@@ -189,13 +177,7 @@
                                 <tbody>
                                     <?php foreach ($data as $row): ?>
                                         <tr class="invoice-list">
-                                            <td class="">
-                                                <div class="flex items-center h-5 invoice-checkbox justify-center">
-                                                    <input id="invoice-check-1" type="checkbox"
-                                                        class="border-gray-500 ti-form-checkbox">
-                                                    <label for="invoice-check-1" class="sr-only">Checkbox</label>
-                                                </div>
-                                            </td>
+
                                             <td>
                                                 <?php echo $row['no_ppk']; ?>
                                             </td>
@@ -275,13 +257,7 @@
                                                     </p>
                                                 </a>
 
-                                                <div class="hs-tooltip ti-main-tooltip">
-                                                    <a href="javascript:void(0);"
-                                                        class="invoice-btn m-0 hs-tooltip-toggle relative  w-8 h-8 ti-btn rounded-full p-0 transition-none focus:outline-none ti-btn-soft-danger">
-                                                        <i class="ti ti-trash"></i>
 
-                                                    </a>
-                                                </div>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
