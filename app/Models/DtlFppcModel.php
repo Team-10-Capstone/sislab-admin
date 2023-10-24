@@ -13,6 +13,7 @@ class DtlFppcModel extends Model
         'id_fppc',
         'id_ikan',
         'id_wadah',
+        'id_bentuk',
         'nama_lokal',
         'nama_latin',
         'nama_umum',
@@ -22,7 +23,6 @@ class DtlFppcModel extends Model
         'kode_pelanggan',
         'deskripsi_sampel',
         'kode_sampel',
-        'bentuk',
         'kondisi_sampel',
         'status',
     ];

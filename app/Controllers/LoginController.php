@@ -30,6 +30,7 @@ class LoginController extends Controller
                     'adminId' => $data['adminId'],
                     'name' => $data['name'],
                     'email' => $data['email'],
+                    'role' => $data['roleId'],
                     'isLoggedIn' => TRUE
                 ];
                 $session->set($ses_data);

@@ -89,6 +89,8 @@ class FppcController extends BaseController
         // Load the FppcModel
         $fppcModel = new \App\Models\FppcModel();
         $parameterUjiModel = new \App\Models\ParameterUjiModel();
+        $WadahModel = new \App\Models\WadahModel();
+        $BentukModel = new \App\Models\BentukModel();
 
         // check if id ppk exist in fppc
         $fppcData = $fppcModel->where('id_ppk', $ppkId)->first();
@@ -107,10 +109,15 @@ class FppcController extends BaseController
 
         $parameters = $parameterUjiModel->findAll();
 
+        $wadahs = $WadahModel->findAll();
+        $bentuks = $BentukModel->findAll();
+
         return view('pages/fppc-create', [
             'ppk' => $ppk,
             'ppkItems' => $ppkItems,
             'parameters' => $parameters,
+            'wadahs' => $wadahs,
+            'bentuks' => $bentuks,
             'title' => 'Pengajuan Permohonan Uji Lab',
         ]);
     }
@@ -151,24 +158,6 @@ class FppcController extends BaseController
 
             // loop ppkItems and get related data in $targetUji, then post to fppc_details
             foreach ($ppkItems as $ppkItem) {
-                $data = [
-                    'id_fppc' => $fppcId,
-                    'id_ikan' => $ppkItem['id_kd_ikan'],
-                    'nama_lokal' => $ppkItem['nm_lokal'],
-                    'nama_latin' => $ppkItem['nm_latin'],
-                    'nama_umum' => $ppkItem['nm_umum'],
-                    'jenis_ikan' => $ppkItem['nm_kel_ikan'],
-                    'asal_sampel' => $ppkItem['asal_cmdts'],
-                    'jumlah_sampel' => $ppkItem['jumlah'],
-                    'kode_pelanggan' => null,
-                    'deskripsi_sampel' => null,
-                    'kode_sampel' => $ppkItem['kd_ikan'],
-                    'bentuk' => $ppkItem['ket_bentuk'],
-                    'wadah' => '1',
-                    'kondisi_sampel' => null,
-                ];
-
-                $dtlFppcId = $fppcDetailsModel->insert($data);
 
                 // find form that match with ppk item, compared using id_ikan
                 $form = array_filter($forms, function ($form) use ($ppkItem) {
@@ -177,9 +166,28 @@ class FppcController extends BaseController
 
                 // if form found, get property target_uji inside form, loop and insert to permohonan uji
                 if (!empty($form)) {
-                    $form = array_values($form)[0];
+                    $formObj = array_values($form)[0];
 
-                    $targetUji = $form['target_uji'];
+                    $data = [
+                        'id_fppc' => $fppcId,
+                        'id_ikan' => $ppkItem['id_kd_ikan'],
+                        'nama_lokal' => $ppkItem['nm_lokal'],
+                        'nama_latin' => $ppkItem['nm_latin'],
+                        'nama_umum' => $ppkItem['nm_umum'],
+                        'jenis_ikan' => $ppkItem['nm_kel_ikan'],
+                        'asal_sampel' => $ppkItem['asal_cmdts'],
+                        'jumlah_sampel' => $ppkItem['jumlah'],
+                        'kode_pelanggan' => null,
+                        'deskripsi_sampel' => null,
+                        'kode_sampel' => $ppkItem['kd_ikan'],
+                        'bentuk' => $ppkItem['ket_bentuk'],
+                        'kondisi_sampel' => null,
+                        'id_wadah' => $formObj['wadah'],
+                        'id_bentuk' => $formObj['bentuk'],
+                    ];
+
+                    $dtlFppcId = $fppcDetailsModel->insert($data);
+                    $targetUji = $formObj['target_uji'];
 
                     foreach ($targetUji as $target) {
                         $data = [
@@ -193,7 +201,7 @@ class FppcController extends BaseController
                 }
             }
 
-            session()->setFlashdata('create-fppc-message', 'Permohonan Uji Lab Berhasil Dibuat');
+            session()->setFlashdata('success', 'Permohonan Uji Lab Berhasil Dibuat');
 
             return redirect()->to('/ppk');
         }
@@ -248,6 +256,7 @@ class FppcController extends BaseController
         ];
 
         // dd($returnData);
+        session()->setFlashdata('success', 'Permohonan Uji Lab Berhasil Diverifikasi');
 
         return view('pages/fppc-verifikasi', $returnData);
 
@@ -262,9 +271,24 @@ class FppcController extends BaseController
 
         $fppcModel->update($id, ['status' => $status]);
 
-        session()->setFlashdata('approve-fppc-message', 'Permohonan Uji Lab Berhasil Diverifikasi');
+        session()->setFlashdata('success', 'Permohonan Uji Lab Berhasil Diverifikasi');
 
         return redirect()->to('/fppc');
     }
 
+    public function delete($ids)
+    {
+        // $ids will contain the captured IDs as a single string
+        // You need to split the string into an array of IDs
+        $idArray = explode(',', $ids);
+
+        // Loop through the IDs and delete the corresponding records
+        foreach ($idArray as $id) {
+            $fppcModel = new \App\Models\FppcModel();
+            $fppcModel->delete($id);
+        }
+
+        session()->setFlashdata('success', 'Permohonan Uji Lab Berhasil Dihapus');
+        return redirect()->to('/fppc');
+    }
 }

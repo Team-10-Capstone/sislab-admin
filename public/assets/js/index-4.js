@@ -1,17 +1,17 @@
 var options = {
   series: [
     {
-      name: "Total Candidates",
-      type: "column",
+      name: "Monsur",
+      type: "line",
       data: [20, 38, 38, 72, 55, 63, 43, 76, 55, 80, 40, 80],
     },
     {
-      name: "Total Candidates",
-      type: "area",
+      name: "Lalu lintas",
+      type: "line",
       data: [85, 65, 75, 38, 85, 35, 62, 40, 40, 64, 50, 89],
     },
     {
-      name: "Shortlisted",
+      name: "Mandiri",
       type: "line",
       data: [25, 48, 48, 82, 65, 73, 53, 86, 65, 90, 50, 90],
     },
@@ -30,12 +30,12 @@ var options = {
   grid: {
     borderColor: "rgba(107 ,114 ,128,0.1)",
   },
-  colors: ["rgb(90,102,241)", "rgb(203,213,225)","rgb(96, 165 ,250)"],
+  colors: ["rgb(90,102,241)", "rgb(203,213,225)", "rgb(96, 165 ,250)"],
   legend: {
     show: false,
   },
   stroke: {
-    width: [0, 0, 2],
+    width: [2, 2, 2],
     curve: "smooth",
   },
   plotOptions: {
@@ -205,11 +205,11 @@ chart1.render();
 
 function subOverview() {
   chart.updateOptions({
-    colors: ["rgb(" + myVarVal + ")", "#d1dae5","rgb(96, 165 ,250)"],
+    colors: ["rgb(" + myVarVal + ")", "rgb(203,213,225)", "rgb(96, 165 ,250)"],
   });
 }
 function Candidates() {
   chart1.updateOptions({
-    colors: ["rgb(" + myVarVal + ")", "#60a5fa"],
+    colors: ["rgb(" + myVarVal + ")", "rgb(203,213,225)", "rgb(96, 165 ,250)"],
   });
 }

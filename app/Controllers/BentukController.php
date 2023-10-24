@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\BentukModal;
+use App\Models\BentukModel;
 
 class BentukController extends BaseController
 {
@@ -14,7 +14,7 @@ class BentukController extends BaseController
     }
     public function index()
     {
-        $BentukModal = new BentukModal();
+        $BentukModel = new BentukModel();
 
         $page = $this->request->getVar('page') ?? 1;
 
@@ -24,9 +24,9 @@ class BentukController extends BaseController
         // Calculate the offset based on the current page and items per page
         $offset = ($page - 1) * $perPage;
 
-        $bentuk = $BentukModal->findAll($perPage, $offset);
+        $bentuk = $BentukModel->findAll($perPage, $offset);
 
-        $totalRecords = count($BentukModal->findAll());
+        $totalRecords = count($BentukModel->findAll());
 
         $pager_links = $this->pager->makeLinks($page, $perPage, $totalRecords, 'default');
 
@@ -41,13 +41,13 @@ class BentukController extends BaseController
     {
         helper(['form', 'url']);
 
-        $BentukModal = new BentukModal();
+        $BentukModel = new BentukModel();
 
         $data = [
             'nama_bentuk' => $this->request->getPost('nama'),
         ];
 
-        $BentukModal->insert($data);
+        $BentukModel->insert($data);
 
         session()->setFlashdata('success', 'bentuk berhasil ditambahkan.');
         return redirect()->to('/bentuk');
@@ -58,12 +58,12 @@ class BentukController extends BaseController
     {
         helper(['form', 'url']);
 
-        $BentukModal = new BentukModal();
+        $BentukModel = new BentukModel();
         $data = [
             'nama_bentuk' => $this->request->getPost('nama'),
         ];
 
-        $BentukModal->update($id, $data);
+        $BentukModel->update($id, $data);
 
         session()->setFlashdata('success', 'bentuk berhasil diubah.');
         return redirect()->to('/bentuk');
@@ -71,9 +71,9 @@ class BentukController extends BaseController
 
     public function delete($id)
     {
-        $BentukModal = new BentukModal();
+        $BentukModel = new BentukModel();
 
-        $BentukModal->delete($id);
+        $BentukModel->delete($id);
 
         session()->setFlashdata('success', 'bentuk berhasil dihapus.');
         return redirect()->to('/bentuk');
