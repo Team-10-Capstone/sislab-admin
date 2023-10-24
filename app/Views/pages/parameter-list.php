@@ -174,8 +174,7 @@
                                     </td>
                                     <td>
                                         <div class="flex space-x-3 rtl:space-x-reverse">
-                                            <span
-                                                class="block text-sm font-semibold text-gray-800 dark:text-white my-auto truncate">
+                                            <span class="block text-sm text-gray-800 dark:text-white my-auto truncate">
                                                 <?php echo $parameter['keterangan_uji']; ?>
                                             </span>
                                         </div>

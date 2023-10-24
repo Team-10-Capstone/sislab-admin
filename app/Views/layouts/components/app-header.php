@@ -55,30 +55,18 @@
 											src="<?php echo base_url('assets/img/users/1.jpg'); ?>" alt="profile-img">
 									</div>
 									<div>
-										<p class="ti-dropdown-header-title !text-white">Json Taylor</p>
-										<p class="ti-dropdown-header-content !text-white/50">Web Designer</p>
+										<p class="ti-dropdown-header-title !text-white">
+											<?php echo session()->get('name'); ?>
+										</p>
+										<p class="ti-dropdown-header-content !text-white/50">
+											<?php echo getRoleName(session()->get('role')); ?>
+										</p>
 									</div>
 								</div>
 								<div class="mt-2 ti-dropdown-divider">
 									<a href="javascript:void(0);" class="ti-dropdown-item">
 										<i class="ti ti-user-circle text-lg"></i>
 										Profile
-									</a>
-									<a href="javascript:void(0);" class="ti-dropdown-item">
-										<i class="ti ti-inbox text-lg"></i>
-										Inbox
-									</a>
-									<a href="javascript:void(0);" class="ti-dropdown-item">
-										<i class="ti ti-clipboard-check text-lg"></i>
-										Task Manager
-									</a>
-									<a href="javascript:void(0);" class="ti-dropdown-item">
-										<i class="ti ti-adjustments-horizontal text-lg"></i>
-										Settings
-									</a>
-									<a href="javascript:void(0);" class="ti-dropdown-item">
-										<i class="ti ti-wallet text-lg"></i>
-										Bal: $7,12,950
 									</a>
 									<a href="<?php echo base_url(); ?>/LoginController/logout" class="ti-dropdown-item">
 										<i class="ti ti-logout  text-lg"></i>
