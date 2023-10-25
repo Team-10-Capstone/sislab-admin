@@ -104,34 +104,63 @@ class PengujianController extends BaseController
             return redirect()->to('/fppc');
         }
 
-        $permohonanUjiData = $permohonanUjiModel->where('dtl_fppc_id', $fppcDetailsData[0]['id'])->findAll();
+        $groupedPermohonanUjiWithArrOfDtlFppc = [];
 
-        $mergedFppcDetailsAndPermohonanUji = [];
+        $dtlFppcIds = array_column($fppcDetailsData, 'id');
 
-        foreach ($fppcDetailsData as $fppcDetails) {
-            $permohonanUji = array_filter($permohonanUjiData, function ($permohonanUji) use ($fppcDetails) {
-                return $permohonanUji['dtl_fppc_id'] == $fppcDetails['id'];
-            });
+        $PermohonanUjiRelated = $permohonanUjiModel
+            ->whereIn('dtl_fppc_id', $dtlFppcIds)
+            ->select('permohonan_uji.*, dtl_fppc.id as dtl_fppc_id, dtl_fppc.id_fppc as fppc_id, 
+            dtl_fppc.id_wadah as id_wadah, dtl_fppc.id_bentuk as id_bentuk, dtl_fppc.nama_lokal as nama_lokal, dtl_fppc.nama_latin as nama_latin, dtl_fppc.jumlah_sampel as jumlah_sampel 
+            , parameter_uji.jenis_parameter as jenis_parameter, parameter_uji.standar_uji as standar_uji,
+            parameter_uji.keterangan_uji as keterangan_uji, wadah.nama_wadah as nama_wadah, bentuk.nama_bentuk as nama_bentuk, wadah.image as image_wadah')
+            ->join('dtl_fppc', 'dtl_fppc.id = permohonan_uji.dtl_fppc_id')
+            ->join('parameter_uji', 'parameter_uji.id = permohonan_uji.parameter_uji_id')
+            ->join('bentuk', 'bentuk.id = dtl_fppc.id_bentuk')
+            ->join('wadah', 'wadah.id = dtl_fppc.id_wadah')
+            ->findAll();
 
-            $permohonanUji = array_values($permohonanUji);
-
-            $permohonanUjiQuery = $permohonanUjiModel->select('permohonan_uji.*, parameter_uji.keterangan_uji, parameter_uji.jenis_parameter, parameter_uji.no_ikm')
-                ->join('parameter_uji', 'parameter_uji.id = permohonan_uji.parameter_uji_id')
-                ->where('dtl_fppc_id', $fppcDetails['id'])
-                ->findAll();
-
-            $mergedFppcDetailsAndPermohonanUji[] = [
-                'fppc_details' => $fppcDetails,
-                'permohonan_uji' => $permohonanUjiQuery,
+        foreach ($PermohonanUjiRelated as $key => $value) {
+            $parameterUji = [
+                'jenis_parameter' => $value['jenis_parameter'],
+                'standar_uji' => $value['standar_uji'],
+                'keterangan_uji' => $value['keterangan_uji'],
             ];
+
+            $parameterUjiKey = $value['parameter_uji_id'];
+            if (!isset($groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey])) {
+                $groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey] = [
+                    'parameter_uji' => $parameterUji,
+                    'dtl_fppc' => [],
+                ];
+            }
+
+            $dtlFppcData = [
+                'permohonan_uji_id' => $value['id'],
+                'dtl_fppc_id' => $value['dtl_fppc_id'],
+                'fppc_id' => $value['fppc_id'],
+                'id_wadah' => $value['id_wadah'],
+                'id_bentuk' => $value['id_bentuk'],
+                'nama_lokal' => $value['nama_lokal'],
+                'nama_latin' => $value['nama_latin'],
+                'jumlah_sampel' => $value['jumlah_sampel'],
+                'nama_wadah' => $value['nama_wadah'],
+                'nama_bentuk' => $value['nama_bentuk'],
+                'image_wadah' => $value['image_wadah'],
+            ];
+
+            $groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey]['dtl_fppc'][] = $dtlFppcData;
         }
+
+        $analis = $AdminModel->where('roleId', 3)->findAll();
 
         return view('pages/pengujian-input-hasil', [
             'fppc' => $fppcData,
-            'fppc_details' => $mergedFppcDetailsAndPermohonanUji,
             'title' => 'Disposisi Penyelia',
             'disposisis' => $disposisis,
             'managerData' => $managerData,
+            'permohonans' => $groupedPermohonanUjiWithArrOfDtlFppc,
+            'analiss' => $analis,
         ]);
     }
 }

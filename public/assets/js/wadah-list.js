@@ -1,22 +1,4 @@
-let checkAll = document.querySelector(".check-all");
-checkAll.addEventListener("click", checkAllFn);
-
 var options = {};
-var notifier = new AWN(options);
-
-function checkAllFn() {
-  if (checkAll.checked) {
-    document.querySelectorAll(".product-checkbox input").forEach(function (e) {
-      e.closest(".product-list").classList.add("selected");
-      e.checked = true;
-    });
-  } else {
-    document.querySelectorAll(".product-checkbox input").forEach(function (e) {
-      e.closest(".product-list").classList.remove("selected");
-      e.checked = false;
-    });
-  }
-}
 /**** Filepond js****/
 FilePond.registerPlugin(
   FilePondPluginImagePreview,
