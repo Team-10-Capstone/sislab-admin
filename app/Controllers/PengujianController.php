@@ -2,9 +2,7 @@
 
 namespace App\Controllers;
 
-use PHPUnit\Framework\Constraint\IsEmpty;
-
-class DisposisiController extends BaseController
+class PengujianController extends BaseController
 {
     public function __construct()
     {
@@ -38,7 +36,7 @@ class DisposisiController extends BaseController
             ->orderBy($order_by[0], $order_by[1])
             ->limit($perPage, $offset);
 
-        $query->like('fppc.status', "menunggu-disposisi");
+        $query->like('fppc.status', "menunggu-pengujian");
 
         if (!empty($keyword)) {
             $query->like('no_fppc', $keyword);
@@ -67,7 +65,7 @@ class DisposisiController extends BaseController
         // Create a pager instance
         $pager = $this->pager;
 
-        return view('pages/disposisi-penyelia', [
+        return view('pages/pengujian', [
             'keyword' => $keyword,
             'data' => $results,
             'pager' => $pager,
@@ -79,67 +77,29 @@ class DisposisiController extends BaseController
         ]);
     }
 
-    public function store()
-    {
-        $data = [];
-
-        $DisposisiPenyelia = new \App\Models\DisposisiPenyeliaModel();
-        $FppcModel = new \App\Models\FppcModel();
-
-        if ($this->request->getMethod() === 'post') {
-            // get admin id from session
-            $adminId = session()->get('adminId');
-
-            $disposisi = $this->request->getPost('disposisi');
-            foreach ($disposisi['petugas_penyelia'] as $petugas_penyelia) {
-                // parse int id_analis
-                $petugas_penyelia = (int) $petugas_penyelia;
-
-                $tanggal_pengujian = $disposisi['tanggal_pengujian'];
-                $waktu_pengujian = $disposisi['waktu_pengujian'];
-
-                $mergedDateTime = $tanggal_pengujian . ' ' . $waktu_pengujian;
-
-                // Create a DateTime object from the merged date and time string
-                $datetime = new \DateTime($mergedDateTime);
-
-                // Format the DateTime object in the desired format (datetime2)
-                $formattedDateTime = $datetime->format('Y-m-d H:i:s');
-
-                $data = [
-                    'id_fppc' => $disposisi['id_fppc'],
-                    'penyelia_id' => $petugas_penyelia,
-                    'manajer_teknis_id' => $adminId,
-                    'tanggal_pengujian' => $formattedDateTime,
-                    'waktu_pengujian' => $waktu_pengujian,
-                ];
-
-                $DisposisiPenyelia->insert($data);
-            }
-
-
-            $FppcModel->update($disposisi['id_fppc'], ['status' => 'menunggu-pengujian']);
-
-            session()->setFlashdata('success', 'Berhasil membuat disposisi');
-
-            return redirect()->to('/disposisi-penyelia');
-        }
-    }
-
-    public function create()
+    public function input($id)
     {
         $fppcModel = new \App\Models\FppcModel();
         $fppcDetailsModel = new \App\Models\DtlFppcModel();
         $permohonanUjiModel = new \App\Models\PermohonanUjiModel();
-        $adminModel = new \App\Models\AdminModel();
+        $DisposisiPenyelia = new \App\Models\DisposisiPenyeliaModel();
+        $AdminModel = new \App\Models\AdminModel();
 
-        $id = $this->request->getVar('fppc_id');
+        $fppcData = $fppcModel->where('id', $id)->first();
 
-        $fppcData = $fppcModel->select('*')
-            ->where('fppc.id', $id)
-            ->first();
+        $disposisis = $DisposisiPenyelia->select('disposisi_penyelia.*, admin.name as nama_admin, admin.email as email_admin, admin.mobile as mobile_admin')
+            ->join('admin', 'admin.adminId = disposisi_penyelia.penyelia_id')
+            ->where('disposisi_penyelia.id_fppc', $id)
+            ->findAll();
 
-        $fppcDetailsData = $fppcDetailsModel->where('id_fppc', $id)->findAll();
+        $manajer_id = $disposisis[0]['manajer_teknis_id'];
+
+        $managerData = $AdminModel->where('adminId', $manajer_id)->first();
+
+        $fppcDetailsData = $fppcDetailsModel
+            ->where('id_fppc', $id)
+            ->findAll();
+
         if (empty($fppcDetailsData)) {
             return redirect()->to('/fppc');
         }
@@ -166,18 +126,12 @@ class DisposisiController extends BaseController
             ];
         }
 
-        $adminData = $adminModel->where('roleId', 2)->findAll();
-
-        $returnData = [
+        return view('pages/pengujian-input-hasil', [
             'fppc' => $fppcData,
             'fppc_details' => $mergedFppcDetailsAndPermohonanUji,
             'title' => 'Disposisi Penyelia',
-            'admin' => $adminData,
-        ];
-
-        // dd($returnData);
-
-        return view('pages/disposisi-penyelia-create', $returnData);
-
+            'disposisis' => $disposisis,
+            'managerData' => $managerData,
+        ]);
     }
 }

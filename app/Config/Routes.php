@@ -79,6 +79,9 @@ $routes->post('/parameter/create', 'ParameterUjiController::create', ['filter' =
 $routes->post('/parameter/edit/(:num)', 'ParameterUjiController::edit/$1', ['filter' => 'authGuard']);
 $routes->get('/parameter/delete/(:num)', 'ParameterUjiController::delete/$1', ['filter' => 'authGuard']);
 
+$routes->get('/pengujian', 'PengujianController::index', ['filter' => 'authGuard']);
+$routes->get('/pengujian/input-hasil/(:num)', 'PengujianController::input/$1', ['filter' => 'authGuard']);
+
 $routes->get('/uploads/(:segment)', 'ImageController::show/$1');
 
 

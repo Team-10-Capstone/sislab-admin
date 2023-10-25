@@ -6,7 +6,6 @@ use CodeIgniter\Model;
 
 class DisposisiPenyeliaModel extends Model
 {
-    protected $useSoftDeletes = true;
     protected $table = 'disposisi_penyelia';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
@@ -15,6 +14,8 @@ class DisposisiPenyeliaModel extends Model
         'manajer_teknis_id',
         'penyelia_id',
         'status',
+        'tanggal_pengujian',
+        'waktu_pengujian',
     ];
 
     protected $useTimestamps = true;
@@ -22,7 +23,6 @@ class DisposisiPenyeliaModel extends Model
 
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
-    protected $deletedField = 'deleted_at';
 
     // Define any validation rules or custom behaviors here if needed.
 

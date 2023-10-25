@@ -42,7 +42,7 @@
             <div>
                 <h3
                     class="text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-white text-2xl font-medium">
-                    Disposisi Penyelia</h3>
+                    Pengujian Laboratorium</h3>
             </div>
             <ol class="flex items-center whitespace-nowrap min-w-0">
                 <li class="text-sm">
@@ -54,7 +54,7 @@
                     </a>
                 </li>
                 <li class="text-sm text-gray-500 hover:text-primary dark:text-white/70 " aria-current="page">
-                    Disposisi Penyelia
+                    Pengujian Laboratorium
                 </li>
             </ol>
         </div>
@@ -248,8 +248,7 @@
                                             </td>
 
                                             <td class="font-medium space-x-2 rtl:space-x-reverse">
-
-                                                <a href="<?= site_url('disposisi-penyelia/create?fppc_id=' . $row['id']) ?>"
+                                                <a href="<?= site_url('pengujian/input-hasil/' . $row['id']) ?>"
                                                     class="invoice-edit m-0 relative ti-btn rounded-full p-2 transition-none focus:outline-none ti-btn-soft-secondary">
                                                     <i class="ti ti-pencil"></i>
                                                     <p>

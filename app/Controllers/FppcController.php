@@ -36,7 +36,8 @@ class FppcController extends BaseController
 
         // find all fppc data
         $query = $fppcModel->select('*')
-            ->orderBy($order_by[0], $order_by[1]);
+            ->orderBy($order_by[0], $order_by[1])
+            ->limit($perPage, $offset);
 
         if (!empty($keyword)) {
             $query->like('no_fppc', $keyword);

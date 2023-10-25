@@ -11,22 +11,22 @@ class AddTraderDetails extends Migration
         $this->forge->addColumn('fppc', [
             'nama_trader' => [
                 'type' => 'VARCHAR',
-                'constraint' => 100,
+                'constraint' => 255,
                 'null' => true,
             ],
             'alamat_trader' => [
                 'type' => 'VARCHAR',
-                'constraint' => 100,
+                'constraint' => 255,
                 'null' => true,
             ],
             'nama_penerima' => [
                 'type' => 'VARCHAR',
-                'constraint' => 100,
+                'constraint' => 255,
                 'null' => true,
             ],
             'alamat_penerima' => [
                 'type' => 'VARCHAR',
-                'constraint' => 100,
+                'constraint' => 255,
                 'null' => true,
             ],
         ]);

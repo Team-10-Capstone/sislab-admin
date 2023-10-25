@@ -120,13 +120,25 @@
 						</li>
 						<li class='slide'><a href='/parameter' class='side-menu__item'>Parameter Uji</a>
 						</li>
-						<li class='slide'><a href='/index'
-								class='side-menu__item'>Organoleptik</a></li>
-						<li class='slide'><a href='/index' class='side-menu__item'>Kode Asal
-								Sampel</a></li>
-						<li class='slide'><a href='/index' class='side-menu__item'>Permintaan
-								Uji</a></li>
 					</ul>
+				</li>";
+				}
+				?>
+
+				<?php
+				helper('role_helper');
+
+				$userRole = session()->get('role');
+
+				if (canDisplayLink($userRole, [1, 2, 3, 4])) {
+					// Display links for users with allowed roles
+					echo "<li class='slide'>
+					<a href='/pengujian' class='side-menu__item'>
+						<i class='ti ti-report-search side-menu__icon'></i>
+						<span class='side-menu__label'>
+							Pengujian Laboratorium
+						</span>
+					</a>	
 				</li>";
 				}
 				?>
@@ -147,12 +159,14 @@
 				}
 				?>
 
+
+
 				<?php
 				helper('role_helper');
 
 				$userRole = session()->get('role');
 
-				if (canDisplayLink($userRole, [0])) {
+				if (canDisplayLink($userRole, [1])) {
 					// Display links for users with allowed roles
 					echo "<li class='slide'>
 					<a href='/user' class='side-menu__item'>
