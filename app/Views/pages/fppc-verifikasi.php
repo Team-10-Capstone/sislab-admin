@@ -163,8 +163,30 @@
                                                         placeholder="blogtitle" disabled
                                                         value="<?= $fppcItem['fppc_details']['jumlah_sampel']; ?>">
                                                 </div>
-
+                                                <div>
+                                                    <label class="ti-form-select-label">Wadah</label>
+                                                    <select class="ti-form-select blog-tag2"
+                                                        value="<?= $fppcItem['fppc_details']['id_wadah']; ?>" disabled>
+                                                        <?php foreach ($wadahs as $wadah): ?>
+                                                            <option value="<?= $wadah['id']; ?>">
+                                                                <?= $wadah['nama_wadah']; ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label class="ti-form-select-label">Bentuk</label>
+                                                    <select class="ti-form-select blog-tag2"
+                                                        value="<?= $fppcItem['fppc_details']['id_bentuk']; ?>" disabled>
+                                                        <?php foreach ($bentuks as $bentuk): ?>
+                                                            <option value="<?= $bentuk['id']; ?>">
+                                                                <?= $bentuk['nama_bentuk']; ?>
+                                                            </option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
                                             </div>
+
                                             <div>
                                                 <label class="ti-form-select-label">Target uji</label>
                                                 <select class="ti-form-select blog-tag2" multiple
@@ -189,14 +211,14 @@
                                             role="status" aria-label="loading"></span>
                                         Loading
                                     </button>
-                                    <button data-fppc-id="<?= $fppc['id']; ?>"
+                                    <a href="<?= base_url('fppc/verify-status/' . $fppc['id']) . '/0'; ?>"
                                         class="ti-btn btn ti-btn-danger cursor-pointer cancel-button">
                                         <i class="ti ti-circle-x"></i>
-                                        Tolak</button>
-                                    <button data-fppc-id="<?= $fppc['id']; ?>" type="submit"
+                                        Tolak</a>
+                                    <a href="<?= base_url('fppc/verify-status/' . $fppc['id']) . '/1'; ?>"
                                         class="ti-btn btn ti-btn-primary cursor-pointer approve-button"><i
                                             class="ti ti-circle-check"></i>
-                                        Verifikasi</button>
+                                        Verifikasi</a>
                                 </div>
                             </div>
                         </div>

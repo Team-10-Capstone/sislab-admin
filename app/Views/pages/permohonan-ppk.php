@@ -16,7 +16,7 @@
 
     <!-- Start::main-content -->
     <div class="main-content">
-        <?php if (session()->getFlashdata('create-fppc-message')): ?>
+        <?php if (session()->getFlashdata('success')): ?>
             <div class="toast-container">
                 <div class="ti-toast bg-white dark:bg-bgdark dark:border-white/10" role="alert">
                     <div class="flex p-4">
@@ -29,7 +29,7 @@
                         </div>
                         <div class="ltr:ml-3 rtl:mr-3">
                             <p class="text-sm text-gray-700 dark:text-white/70">
-                                <?= session()->getFlashdata('create-fppc-message') ?>
+                                <?= session()->getFlashdata('success') ?>
                             </p>
                         </div>
                     </div>
@@ -210,21 +210,9 @@
                                                     $kd_kegiatan = $row['kd_kegiatan'];
                                                     $kd_mks = $row['kd_mks_kirim'];
 
-                                                    if ($kd_kegiatan == 'E') {
-                                                        echo 'Eksport';
-                                                    } elseif ($kd_kegiatan == 'I') {
-                                                        echo 'Import';
-                                                    } elseif ($kd_kegiatan == 'K') {
-                                                        echo 'Domestik keluar';
-                                                    } elseif ($kd_kegiatan == 'M') {
-                                                        echo 'Domestik masuk';
-                                                    } elseif ($kd_kegiatan == 'N' && $kd_mks == 16) {
-                                                        echo 'Mandiri';
-                                                    } elseif ($kd_kegiatan == 'N' && $kd_mks == 21) {
-                                                        echo 'Surveilance';
-                                                    } else {
-                                                        echo 'Lainnya';
-                                                    }
+                                                    helper('tipepermohonan');
+
+                                                    getPpkTipePermohonan($kd_kegiatan, $kd_mks);
                                                     ?>
                                                 </span>
                                             </td>

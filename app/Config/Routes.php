@@ -55,7 +55,7 @@ $routes->get('/ppk', 'PpkController::index', ['filter' => 'authGuard']);
 $routes->get('/fppc', 'FppcController::index', ['filter' => 'authGuard']);
 $routes->get('/fppc/create', 'FppcController::create', ['filter' => 'authGuard']);
 $routes->get('/fppc/verify', 'FppcController::verify', ['filter' => 'authGuard']);
-$routes->post('/fppc/updateStatus', 'FppcController::updateStatus', ['filter' => 'authGuard']);
+$routes->get('/fppc/verify-status/(:num)/(:num)', 'FppcController::updateStatus/$1/$2', ['filter' => 'authGuard']);
 $routes->post('/fppc/store', 'FppcController::store', ['filter' => 'authGuard']);
 $routes->get('/fppc/delete/(:segment)', 'FppcController::delete/$1', ['filter' => 'authGuard']);
 
@@ -78,6 +78,9 @@ $routes->get('/parameter', 'ParameterUjiController::index', ['filter' => 'authGu
 $routes->post('/parameter/create', 'ParameterUjiController::create', ['filter' => 'authGuard']);
 $routes->post('/parameter/edit/(:num)', 'ParameterUjiController::edit/$1', ['filter' => 'authGuard']);
 $routes->get('/parameter/delete/(:num)', 'ParameterUjiController::delete/$1', ['filter' => 'authGuard']);
+
+$routes->get('/pengujian', 'PengujianController::index', ['filter' => 'authGuard']);
+$routes->get('/pengujian/input-hasil/(:num)', 'PengujianController::input/$1', ['filter' => 'authGuard']);
 
 $routes->get('/uploads/(:segment)', 'ImageController::show/$1');
 

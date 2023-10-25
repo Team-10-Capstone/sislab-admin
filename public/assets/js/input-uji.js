@@ -37,8 +37,6 @@
       var element = genericExamples[i];
       new Choices(element, {
         allowHTML: true,
-        removeItemButton: true,
-        placeholderValue: "Pilih petugas penyelia",
       });
     }
   });

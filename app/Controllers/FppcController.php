@@ -34,8 +34,8 @@ class FppcController extends BaseController
         // Calculate the offset based on the current page and items per page
         $offset = ($page - 1) * $perPage;
 
-        $query = $fppcModel->select('fppc.*, users.username as nama_trader, users.alamat as alamat_trader')
-            ->join('users', 'users.user_id = fppc.id_trader')
+        // find all fppc data
+        $query = $fppcModel->select('*')
             ->orderBy($order_by[0], $order_by[1])
             ->limit($perPage, $offset);
 
@@ -43,6 +43,8 @@ class FppcController extends BaseController
             $query->like('no_fppc', $keyword);
             $query->orLike('no_ppk', $keyword);
         }
+
+        $query->like('fppc.status', "pending");
 
         if (!empty($start_date)) {
             $query->where('created_at >=', $start_date);
@@ -53,12 +55,11 @@ class FppcController extends BaseController
         }
 
         if (!empty($tipe_permohonan)) {
-            $query->where('tipe_permohonan', $tipe_permohonan);
+            $query->like('fppc.tipe_permohonan', $tipe_permohonan);
         }
 
         // Execute the query to retrieve the results
         $results = $query->findAll();
-
 
         $totalRecords = count($results);
         $pager_links = $this->pager->makeLinks($page, $perPage, $totalRecords, 'default');
@@ -126,10 +127,14 @@ class FppcController extends BaseController
     {
         $data = [];
 
+        helper('tipepermohonan');
+
         // Load the FPPCModel and FPPCDetailsModel
         $fppcModel = new \App\Models\FppcModel();
         $fppcDetailsModel = new \App\Models\DtlFppcModel();
         $permohonanUjiModel = new \App\Models\PermohonanUjiModel();
+
+        $adminId = session()->get('adminId');
 
         if ($this->request->getMethod() === 'post') {
             $forms = $this->request->getPost('ppk');
@@ -142,16 +147,23 @@ class FppcController extends BaseController
             // get all ppk item related to ppk details from v_dtl_pelaporan
             $ppkItems = $karimutu->query("SELECT * FROM v_dtl_pelaporan WHERE id_ppk = ?", [$id])->getResultArray();
 
+            $tipe = convertPpkTipeToFppcTipe($ppk['kd_kegiatan'], $ppk['kd_mks_kirim']);
+
             $data_fppc = [
                 'no_fppc' => $ppk['id_ppk'] . '-' . $ppk['id_trader'],
                 'no_ppk' => $ppk['no_ppk'],
                 'tgl_ppk' => $ppk['tgl_ppk'],
                 'id_ppk' => $ppk['id_ppk'],
                 'id_trader' => $ppk['id_trader'],
-                'id_petugas' => null,
+                'id_petugas' => $adminId,
                 'nip_baru' => null,
                 'tgl_monsur' => null,
                 'petugas_monsur' => null,
+                'nama_trader' => $ppk['nm_trader'],
+                'alamat_trader' => $ppk['al_trader'],
+                'nama_penerima' => $ppk['nm_penerima'],
+                'alamat_penerima' => $ppk['al_penerima'],
+                'tipe_permohonan' => $tipe,
             ];
 
             $fppcId = $fppcModel->insert($data_fppc);
@@ -213,12 +225,12 @@ class FppcController extends BaseController
         $fppcModel = new \App\Models\FppcModel();
         $fppcDetailsModel = new \App\Models\DtlFppcModel();
         $permohonanUjiModel = new \App\Models\PermohonanUjiModel();
-        $parameterUjiModel = new \App\Models\ParameterUjiModel();
+        $bentukModel = new \App\Models\BentukModel();
+        $wadahModel = new \App\Models\WadahModel();
 
         $id = $this->request->getVar('fppc_id');
 
-        $fppcData = $fppcModel->select('fppc.*, users.username as nama_trader, users.alamat as alamat_trader')
-            ->join('users', 'users.user_id = fppc.id_trader')
+        $fppcData = $fppcModel->select('*')
             ->where('fppc.id', $id)
             ->first();
 
@@ -249,29 +261,36 @@ class FppcController extends BaseController
             ];
         }
 
+        $bentuks = $bentukModel->findAll();
+        $wadahs = $wadahModel->findAll();
+
         $returnData = [
             'fppc' => $fppcData,
             'fppc_details' => $mergedFppcDetailsAndPermohonanUji,
             'title' => 'Verifikasi Permohonan Uji Lab',
+            'bentuks' => $bentuks,
+            'wadahs' => $wadahs,
         ];
-
-        // dd($returnData);
-        session()->setFlashdata('success', 'Permohonan Uji Lab Berhasil Diverifikasi');
 
         return view('pages/fppc-verifikasi', $returnData);
 
     }
 
-    public function updateStatus()
+    public function updateStatus($id, $status)
     {
+        $statusData = [
+            '1' => 'menunggu-disposisi',
+            '0' => 'ditolak',
+        ];
         $fppcModel = new \App\Models\FppcModel();
 
-        $id = $this->request->getVar('fppc_id');
-        $status = $this->request->getVar('status');
+        $fppcModel->update($id, ['status' => $statusData[$status]]);
 
-        $fppcModel->update($id, ['status' => $status]);
-
-        session()->setFlashdata('success', 'Permohonan Uji Lab Berhasil Diverifikasi');
+        if ($status == 1) {
+            session()->setFlashdata('success', 'Permohonan Uji Lab Berhasil Diterima');
+        } else {
+            session()->setFlashdata('success', 'Permohonan Uji Lab Berhasil Ditolak');
+        }
 
         return redirect()->to('/fppc');
     }

@@ -42,7 +42,7 @@
             <div>
                 <h3
                     class="text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-white text-2xl font-medium">
-                    Pilih Petugas Penyelia</h3>
+                    Input Hasil Uji</h3>
             </div>
             <ol class="flex items-center whitespace-nowrap min-w-0">
                 <li class="text-sm">
@@ -54,7 +54,7 @@
                     </a>
                 </li>
                 <li class="text-sm text-gray-500 hover:text-primary dark:text-white/70 " aria-current="page">
-                    Pilih Petugas Penyelia
+                    Input Hasil Uji
                 </li>
             </ol>
         </div>
@@ -67,7 +67,7 @@
                     <div class="box-body p-0">
                         <div class="grid grid-cols-12 gap-x-6">
                             <div class="col-span-12 xl:col-span-4">
-                                <div class="box sticky top-24 left-0">
+                                <div class="box">
                                     <div class="box-header">
                                         <h5 class="box-title">Detail FPPC</h5>
                                     </div>
@@ -132,12 +132,124 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="box">
+                                    <div class="box-header">
+                                        <div class="flex justify-between">
+                                            <h5 class="box-title">Petugas</h5>
+                                        </div>
+                                    </div>
+                                    <div class="box-body space-y-4 text-center">
+                                        <ul class="flex flex-col">
+                                            <li
+                                                class="ti-list-group bg-white text-gray-800 dark:bg-bgdark dark:border-white/10 dark:text-white">
+                                                <div class="flex space-y-2 xxxl:space-y-0 justify-between w-full">
+                                                    <div class="flex items-center">
+                                                        <img class="avatar avatar-xs rounded-sm"
+                                                            src="<?php echo base_url('assets/img/users/2.jpg'); ?>"
+                                                            alt="Image Description">
+                                                        <div class="ltr:ml-4 rtl:mr-4">
+                                                            <h5 class="text-gray-800 dark:text-white">
+                                                                <?= $managerData['name']; ?>
+                                                            </h5>
+                                                            <p class="text-xs text-gray-500 dark:text-white/70">
+                                                                <?= $managerData['email']; ?>
+                                                            </p>
+                                                            <p class="text-xs text-blue-500 mt-1 dark:text-white/70">
+                                                                <?= $managerData['mobile']; ?>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="my-auto">
+                                                        <button type="button"
+                                                            class="ti-btn p-1 m-0 text-xs font-medium bg-white border-gray-200 text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:ring-offset-white focus:ring-primary dark:bg-bgdark dark:hover:bg-black/20 dark:border-white/10 dark:text-white/70 dark:hover:text-white dark:focus:ring-offset-white/10">
+                                                            <i class="ri-user-unfollow-line"></i>
+                                                            Manager Teknis
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <?php foreach ($disposisis as $disposisi): ?>
+                                                <li
+                                                    class="ti-list-group bg-white text-gray-800 dark:bg-bgdark dark:border-white/10 dark:text-white">
+                                                    <div class="flex space-y-2 xxxl:space-y-0 justify-between w-full">
+                                                        <div class="flex items-center">
+                                                            <img class="avatar avatar-xs rounded-sm"
+                                                                src="<?php echo base_url('assets/img/users/2.jpg'); ?>"
+                                                                alt="Image Description">
+                                                            <div class="ltr:ml-4 rtl:mr-4">
+                                                                <h5 class="text-gray-800 dark:text-white">
+                                                                    <?= $disposisi['nama_admin']; ?>
+                                                                </h5>
+                                                                <p class="text-xs text-gray-500 dark:text-white/70">
+                                                                    <?= $disposisi['email_admin']; ?>
+                                                                </p>
+                                                                <p class="text-xs text-blue-500 mt-1 dark:text-white/70">
+                                                                    <?= $disposisi['mobile_admin']; ?>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="my-auto">
+                                                            <button type="button"
+                                                                class="ti-btn p-1 m-0 text-xs font-medium bg-white border-gray-200 text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:ring-offset-white focus:ring-primary dark:bg-bgdark dark:hover:bg-black/20 dark:border-white/10 dark:text-white/70 dark:hover:text-white dark:focus:ring-offset-white/10">
+                                                                <i class="ri-user-unfollow-line"></i> Penyelia
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="box">
+                                    <div class="box-body space-y-5">
+                                        <div class="md:grid grid-cols-2 gap-6">
+                                            <div>
+                                                <label for="input-label" class="ti-form-label">
+                                                    Tanggal Pengujian
+                                                </label>
+                                                <div class="flex rounded-sm shadow-sm">
+                                                    <div
+                                                        class="px-4 inline-flex items-center min-w-fit ltr:rounded-l-sm rtl:rounded-r-sm border ltr:border-r-0 rtl:border-l-0 border-gray-200 bg-gray-50 dark:bg-black/20 dark:border-white/10">
+                                                        <span class="text-sm text-gray-500 dark:text-white/70"><i
+                                                                class="ri ri-calendar-line"></i></span>
+                                                    </div>
+                                                    <input type="text"
+                                                        class="ti-form-input ltr:rounded-l-none rtl:rounded-r-none focus:z-10 flatpickr-input"
+                                                        id="blog-date" placeholder="Choose date"
+                                                        value="<?= $disposisis[0]['tanggal_pengujian']; ?>" />
+                                                </div>
+                                            </div>
+
+                                            <div class="">
+                                                <div class="col-span-12 lg:col-span-4">
+                                                    <label for="input-label" class="ti-form-label">
+                                                        Waktu Pengujian
+                                                    </label>
+                                                    <div class="flex rounded-sm shadow-sm">
+                                                        <div
+                                                            class="px-4 inline-flex items-center min-w-fit ltr:rounded-l-sm rtl:rounded-r-sm border ltr:border-r-0 rtl:border-l-0 border-gray-200 bg-gray-50 dark:bg-black/20 dark:border-white/10">
+                                                            <span class="text-sm text-gray-500 dark:text-white/70"><i
+                                                                    class="ri ri-time-line"></i></span>
+                                                        </div>
+                                                        <input type="text"
+                                                            class="ti-form-input ltr:rounded-l-none rtl:rounded-r-none focus:z-10 flatpickr-input"
+                                                            id="blog-time" placeholder="Choose date"
+                                                            value="<?= $disposisis[0]['waktu_pengujian']; ?>" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <form class="col-span-12 xl:col-span-8" id="form-disposisi-penyelia" method="POST"
                                 action="<?= base_url('disposisi-penyelia/store') ?>">
                                 <?php foreach ($fppc_details as $key => $fppcItem): ?>
                                     <div class="box">
-
+                                        <input type="hidden" name="disposisi[<?= $key + 1; ?>][id_fppc]"
+                                            value="<?= $fppcItem['fppc_details']['id_fppc']; ?>">
+                                        <input type="hidden" name="disposisi[<?= $key + 1; ?>][id_dtl_fppc]"
+                                            value="<?= $fppcItem['fppc_details']['id']; ?>">
                                         <!-- loop ppkItems -->
                                         <div class="box-body space-y-5">
                                             <div>
@@ -171,63 +283,6 @@
                                     </div>
                                 <?php endforeach; ?>
 
-                                <div class="box">
-                                    <input type="hidden" name="disposisi[id_fppc]"
-                                        value="<?= $fppcItem['fppc_details']['id_fppc']; ?>">
-                                    <input type="hidden" name="disposisi[id_dtl_fppc]"
-                                        value="<?= $fppcItem['fppc_details']['id']; ?>">
-                                    <div class="box-body space-y-5">
-                                        <div class="md:grid grid-cols-2 gap-6">
-                                            <div>
-                                                <label for="input-label" class="ti-form-label">
-                                                    Tanggal Pengujian
-                                                </label>
-                                                <div class="flex rounded-sm shadow-sm">
-                                                    <div
-                                                        class="px-4 inline-flex items-center min-w-fit ltr:rounded-l-sm rtl:rounded-r-sm border ltr:border-r-0 rtl:border-l-0 border-gray-200 bg-gray-50 dark:bg-black/20 dark:border-white/10">
-                                                        <span class="text-sm text-gray-500 dark:text-white/70"><i
-                                                                class="ri ri-calendar-line"></i></span>
-                                                    </div>
-                                                    <input type="text"
-                                                        class="ti-form-input ltr:rounded-l-none rtl:rounded-r-none focus:z-10 flatpickr-input"
-                                                        id="blog-date" placeholder="Choose date"
-                                                        name="disposisi[tanggal_pengujian]" />
-                                                </div>
-                                            </div>
-
-                                            <div class="">
-                                                <div class="col-span-12 lg:col-span-4">
-                                                    <label for="input-label" class="ti-form-label">
-                                                        Waktu Pengujian
-                                                    </label>
-                                                    <div class="flex rounded-sm shadow-sm">
-                                                        <div
-                                                            class="px-4 inline-flex items-center min-w-fit ltr:rounded-l-sm rtl:rounded-r-sm border ltr:border-r-0 rtl:border-l-0 border-gray-200 bg-gray-50 dark:bg-black/20 dark:border-white/10">
-                                                            <span class="text-sm text-gray-500 dark:text-white/70"><i
-                                                                    class="ri ri-time-line"></i></span>
-                                                        </div>
-                                                        <input type="text"
-                                                            class="ti-form-input ltr:rounded-l-none rtl:rounded-r-none focus:z-10 flatpickr-input"
-                                                            id="blog-time" placeholder="Choose date"
-                                                            name="disposisi[waktu_pengujian]" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <label class="ti-form-select-label">Pilih Petugas Penyelia</label>
-                                            <select class="ti-form-select blog-tag2" multiple
-                                                id="choices-multiple-default" name="disposisi[petugas_penyelia][]">
-                                                <?php foreach ($admin as $adminItem): ?>
-                                                    <option value="<?= $adminItem['adminId']; ?>">
-                                                        <?= $adminItem['name']; ?>
-                                                    </option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <div class="box-footer text-end border-t-0 px-0 flex items-center justify-end">
                                     <button type="button" class="sm:m-0 ti-btn ti-btn-disabled ti-btn-primary" disabled
@@ -291,7 +346,7 @@
 
 <!--Blog Edit Js-->
 <script src="<?php echo base_url('assets/libs/awesome-notifications/index.var.js'); ?>"></script>
-<script src="<?php echo base_url('assets/js/disposisi-penyelia.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/input-uji.js'); ?>"></script>
 
 <!-- Flatpickr JS -->
 <script src="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.js'); ?>"></script>
