@@ -71,11 +71,6 @@ class CreateDtlFppcTable extends Migration
                 'constraint' => 50,
                 'null' => true,
             ],
-            'bentuk' => [
-                'type' => 'VARCHAR',
-                'constraint' => 50,
-                'null' => true,
-            ],
             'kondisi_sampel' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50,
