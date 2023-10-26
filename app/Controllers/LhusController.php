@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class PengujianController extends BaseController
+class LhusController extends BaseController
 {
     public function __construct()
     {
@@ -36,7 +36,7 @@ class PengujianController extends BaseController
             ->orderBy($order_by[0], $order_by[1])
             ->limit($perPage, $offset);
 
-        $query->like('fppc.status', "menunggu-pengujian");
+        $query->like('fppc.status', "selesai-pengujian");
 
         if (!empty($keyword)) {
             $query->like('no_fppc', $keyword);
@@ -65,7 +65,7 @@ class PengujianController extends BaseController
         // Create a pager instance
         $pager = $this->pager;
 
-        return view('pages/pengujian', [
+        return view('pages/lhus', [
             'keyword' => $keyword,
             'data' => $results,
             'pager' => $pager,
@@ -73,11 +73,11 @@ class PengujianController extends BaseController
             'start_date' => $start_date,
             'end_date' => $end_date,
             'tipe_permohonan' => $tipe_permohonan,
-            'title' => 'Pengujian Laboratorium',
+            'title' => 'Daftar LHUS',
         ]);
     }
 
-    public function input($id)
+    public function verifikasipage($id)
     {
         $fppcModel = new \App\Models\FppcModel();
         $fppcDetailsModel = new \App\Models\DtlFppcModel();
@@ -174,9 +174,9 @@ class PengujianController extends BaseController
             $groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey]['dtl_fppc'][] = $dtlFppcData;
         }
 
-        return view('pages/pengujian-input-hasil', [
+        return view('pages/lhus-verifikasi', [
             'fppc' => $fppcData,
-            'title' => 'Input Hasil Uji',
+            'title' => 'Verifikasi Hasil Uji',
             'disposisis' => $disposisis,
             'managerData' => $managerData,
             'permohonans' => $groupedPermohonanUjiWithArrOfDtlFppc,
@@ -184,35 +184,4 @@ class PengujianController extends BaseController
         ]);
     }
 
-
-    public function selesaikan($id)
-    {
-        $fppc_id = $id;
-
-
-        $DtlFppcModel = new \App\Models\DtlFppcModel();
-        $PermohonanUjiModel = new \App\Models\PermohonanUjiModel();
-
-        $dtlFppcs = $DtlFppcModel->where('id_fppc', $fppc_id)->findAll();
-
-        $ids = array_column($dtlFppcs, 'id');
-
-        $permohonanRelated = $PermohonanUjiModel->whereIn('dtl_fppc_id', $ids)->findAll();
-
-        $statuses = array_column($permohonanRelated, 'status');
-
-        // check if all permohonan uji is selesai
-        if (!in_array('selesai', $statuses)) {
-            session()->setFlashdata('errors', 'Tidak dapat menyelesaikan pengujian, karena masih ada permohonan uji yang belum selesai');
-            return redirect()->to('/pengujian/input-hasil/' . $fppc_id);
-        }
-
-        $FppcModel = new \App\Models\FppcModel();
-
-        $FppcModel->update($fppc_id, ['status' => 'selesai-pengujian']);
-
-        session()->setFlashdata('success', 'Berhasil menyelesaikan pengujian');
-
-        return redirect()->to('/pengujian');
-    }
 }

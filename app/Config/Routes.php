@@ -45,7 +45,6 @@ $routes->match(['get', 'post'], 'RegisterController/store', 'RegisterController:
 $routes->match(['get', 'post'], 'LoginController/loginAuth', 'LoginController::loginAuth');
 $routes->get('/login', 'LoginController::index', ['filter' => 'noauth']);
 $routes->get('/profile', 'ProfileController::index', ['filter' => 'authGuard']);
-$routes->get('/daftar-lhu', 'DaftarLhuController::index', ['filter' => 'authGuard']);
 $routes->get('/user', 'UserController::index', ['filter' => 'authGuard']);
 $routes->get('/user/add', 'UserController::add', ['filter' => 'authGuard']);
 $routes->get('/user/edit/(:num)', 'UserController::edit/$1', ['filter' => 'authGuard']);
@@ -85,7 +84,12 @@ $routes->get('/pengujian/selesai/(:num)', 'PengujianController::selesaikan/$1', 
 
 $routes->post('/hasil-uji/create', 'HasilUjiController::create', ['filter' => 'authGuard']);
 
+$routes->get('/lhus', 'LhusController::index', ['filter' => 'authGuard']);
+$routes->get('/lhus/verifikasi/(:num)', 'LhusController::verifikasipage/$1', ['filter' => 'authGuard']);
+
 $routes->get('/uploads/(:segment)', 'ImageController::show/$1');
+
+$routes->get('/print-lhu', 'LhuController::print', ['filter' => 'authGuard']);
 
 
 
