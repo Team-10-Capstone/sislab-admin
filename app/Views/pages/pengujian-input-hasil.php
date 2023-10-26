@@ -664,16 +664,17 @@
                                             role="status" aria-label="loading"></span>
                                         Loading
                                     </button>
-                                    <a href="/disposisi-penyelia" class="text-white">
+                                    <a href="/pengujian" class="text-white">
                                         <button class="ti-btn btn ti-btn-danger cursor-pointer cancel-button">
                                             <i class="ti ti-circle-x"></i>
                                             Batal
                                         </button>
                                     </a>
-                                    <button data-fppc-id="<?= $fppc['id']; ?>" type="submit"
+                                    <a href="<?php echo base_url("pengujian/selesai/" . $fppc['id']); ?>"
                                         class="ti-btn btn ti-btn-primary cursor-pointer approve-button"><i
                                             class="ti ti-circle-check"></i>
-                                        Simpan</button>
+                                        Selesaikan Pengujian
+                                    </a>
                                 </div>
                             </div>
                         </div>

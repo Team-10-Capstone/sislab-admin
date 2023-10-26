@@ -81,6 +81,7 @@ $routes->get('/parameter/delete/(:num)', 'ParameterUjiController::delete/$1', ['
 
 $routes->get('/pengujian', 'PengujianController::index', ['filter' => 'authGuard']);
 $routes->get('/pengujian/input-hasil/(:num)', 'PengujianController::input/$1', ['filter' => 'authGuard']);
+$routes->get('/pengujian/selesai/(:num)', 'PengujianController::selesaikan/$1', ['filter' => 'authGuard']);
 
 $routes->post('/hasil-uji/create', 'HasilUjiController::create', ['filter' => 'authGuard']);
 

@@ -174,8 +174,6 @@ class PengujianController extends BaseController
             $groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey]['dtl_fppc'][] = $dtlFppcData;
         }
 
-
-
         return view('pages/pengujian-input-hasil', [
             'fppc' => $fppcData,
             'title' => 'Disposisi Penyelia',
@@ -184,5 +182,37 @@ class PengujianController extends BaseController
             'permohonans' => $groupedPermohonanUjiWithArrOfDtlFppc,
             'analiss' => $analis,
         ]);
+    }
+
+
+    public function selesaikan($id)
+    {
+        $fppc_id = $id;
+
+
+        $DtlFppcModel = new \App\Models\DtlFppcModel();
+        $PermohonanUjiModel = new \App\Models\PermohonanUjiModel();
+
+        $dtlFppcs = $DtlFppcModel->where('id_fppc', $fppc_id)->findAll();
+
+        $ids = array_column($dtlFppcs, 'id');
+
+        $permohonanRelated = $PermohonanUjiModel->whereIn('dtl_fppc_id', $ids)->findAll();
+
+        $statuses = array_column($permohonanRelated, 'status');
+
+        // check if all permohonan uji is selesai
+        if (!in_array('selesai', $statuses)) {
+            session()->setFlashdata('errors', 'Tidak dapat menyelesaikan pengujian, karena masih ada permohonan uji yang belum selesai');
+            return redirect()->to('/pengujian/input-hasil/' . $fppc_id);
+        }
+
+        $FppcModel = new \App\Models\FppcModel();
+
+        $FppcModel->update($fppc_id, ['status' => 'selesai-pengujian']);
+
+        session()->setFlashdata('success', 'Berhasil menyelesaikan pengujian');
+
+        return redirect()->to('/pengujian');
     }
 }
