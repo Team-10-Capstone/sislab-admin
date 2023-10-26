@@ -17,6 +17,7 @@ class HasilUjiModel extends Model
         'hasil_uji',
         'keterangan',
         'nilai',
+        'permohonan_uji_id',
     ];
 
     protected $useTimestamps = true;

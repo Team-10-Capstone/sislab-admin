@@ -2701,6 +2701,9 @@ select option:active,
 .mt-3{
   margin-top: 0.75rem;
 }
+.mt-4{
+  margin-top: 1rem;
+}
 .mt-5{
   margin-top: 1.25rem;
 }
@@ -2709,9 +2712,6 @@ select option:active,
 }
 .mt-7{
   margin-top: 1.75rem;
-}
-.mt-4{
-  margin-top: 1rem;
 }
 .box-border{
   box-sizing: border-box;
@@ -2830,8 +2830,8 @@ select option:active,
 .h-full{
   height: 100%;
 }
-.h-20{
-  height: 5rem;
+.h-max{
+  height: max-content;
 }
 .\!w-full{
   width: 100% !important;
@@ -3315,9 +3315,6 @@ select option:active,
 .gap-y-4{
   row-gap: 1rem;
 }
-.gap-x-5{
-  column-gap: 1.25rem;
-}
 .space-x-2 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
   margin-right: calc(0.5rem * var(--tw-space-x-reverse));
@@ -3692,6 +3689,9 @@ select option:active,
 .bg-black\/10{
   background-color: rgb(0 0 0 / 0.1);
 }
+.bg-blue-500\/20{
+  background-color: rgb(59 130 246 / 0.2);
+}
 .bg-danger{
   background-color: rgb(var(--color-danger));
 }
@@ -3713,6 +3713,9 @@ select option:active,
 .bg-info\/10{
   background-color: rgb(var(--color-info) / 0.1);
 }
+.bg-info\/20{
+  background-color: rgb(var(--color-info) / 0.2);
+}
 .bg-primary{
   background-color: rgb(var(--color-primary));
 }
@@ -3726,6 +3729,9 @@ select option:active,
   --tw-bg-opacity: 1;
   background-color: rgb(254 242 242 / var(--tw-bg-opacity));
 }
+.bg-red-500\/20{
+  background-color: rgb(239 68 68 / 0.2);
+}
 .bg-secondary{
   background-color: rgb(var(--color-secondary));
 }
@@ -3738,8 +3744,14 @@ select option:active,
 .bg-success\/10{
   background-color: rgb(var(--color-success) / 0.1);
 }
+.bg-success\/20{
+  background-color: rgb(var(--color-success) / 0.2);
+}
 .bg-warning\/10{
   background-color: rgb(var(--color-warning) / 0.1);
+}
+.bg-warning\/20{
+  background-color: rgb(var(--color-warning) / 0.2);
 }
 .bg-white{
   --tw-bg-opacity: 1;
@@ -3747,21 +3759,6 @@ select option:active,
 }
 .bg-white\/10{
   background-color: rgb(255 255 255 / 0.1);
-}
-.bg-danger\/20{
-  background-color: rgb(var(--color-danger) / 0.2);
-}
-.bg-warning\/20{
-  background-color: rgb(var(--color-warning) / 0.2);
-}
-.bg-info\/20{
-  background-color: rgb(var(--color-info) / 0.2);
-}
-.bg-blue-500\/20{
-  background-color: rgb(59 130 246 / 0.2);
-}
-.bg-red-500\/20{
-  background-color: rgb(239 68 68 / 0.2);
 }
 .bg-opacity-50{
   --tw-bg-opacity: 0.5;
@@ -3862,9 +3859,6 @@ select option:active,
 .p-6{
   padding: 1.5rem;
 }
-.p-5{
-  padding: 1.25rem;
-}
 .px-0{
   padding-left: 0px;
   padding-right: 0px;
@@ -3905,14 +3899,14 @@ select option:active,
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
+.pb-32{
+  padding-bottom: 8rem;
+}
 .pb-8{
   padding-bottom: 2rem;
 }
 .pt-0{
   padding-top: 0px;
-}
-.pb-32{
-  padding-bottom: 8rem;
 }
 .text-left{
   text-align: left;
@@ -4118,6 +4112,10 @@ select option:active,
   --tw-text-opacity: 1;
   color: rgb(248 113 113 / var(--tw-text-opacity));
 }
+.text-red-500{
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity));
+}
 .text-red-700{
   --tw-text-opacity: 1;
   color: rgb(185 28 28 / var(--tw-text-opacity));
@@ -4145,10 +4143,6 @@ select option:active,
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-.text-red-500{
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 .underline{
   text-decoration-line: underline;
@@ -4303,6 +4297,11 @@ select option:active,
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
+.shadow-lg{
+  --tw-shadow: 0 0.75rem 1.5rem rgba(15,23,42,.03);
+  --tw-shadow-colored: 0 0.75rem 1.5rem var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
 .shadow-none{
   --tw-shadow: 0 0 #0000;
   --tw-shadow-colored: 0 0 #0000;
@@ -4312,28 +4311,6 @@ select option:active,
   --tw-shadow: 0 1px 3px 0 rgba(15,23,42,0.07), 0 1px 2px 0 rgba(15,23,42,0.03);
   --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-.shadow-md{
-  --tw-shadow: 0 4px 6px -1px rgba(15,23,42,0.07), 0 2px 4px -1px rgba(15,23,42,0.03);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -1px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-.shadow-lg{
-  --tw-shadow: 0 0.75rem 1.5rem rgba(15,23,42,.03);
-  --tw-shadow-colored: 0 0.75rem 1.5rem var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-.shadow-gray-300\/20{
-  --tw-shadow-color: rgb(203 213 225 / 0.2);
-  --tw-shadow: var(--tw-shadow-colored);
-}
-.shadow-gray-500\/20{
-  --tw-shadow-color: rgb(100 116 139 / 0.2);
-  --tw-shadow: var(--tw-shadow-colored);
-}
-.shadow-gray-400\/20{
-  --tw-shadow-color: rgb(148 163 184 / 0.2);
-  --tw-shadow: var(--tw-shadow-colored);
 }
 .shadow-gray-400\/10{
   --tw-shadow-color: rgb(148 163 184 / 0.1);
@@ -14853,12 +14830,12 @@ select.tabulator-page-size option{
   padding-right: 2.5rem;
 }
 
-:is([dir="ltr"] .ltr\:pr-4){
-  padding-right: 1rem;
-}
-
 :is([dir="ltr"] .ltr\:pr-2){
   padding-right: 0.5rem;
+}
+
+:is([dir="ltr"] .ltr\:pr-4){
+  padding-right: 1rem;
 }
 
 :is([dir="rtl"] .rtl\:left-0){
@@ -14929,6 +14906,10 @@ select.tabulator-page-size option{
   padding-left: 2.5rem;
 }
 
+:is([dir="rtl"] .rtl\:pl-2){
+  padding-left: 0.5rem;
+}
+
 :is([dir="rtl"] .rtl\:pl-4){
   padding-left: 1rem;
 }
@@ -14939,10 +14920,6 @@ select.tabulator-page-size option{
 
 :is([dir="rtl"] .rtl\:pr-5){
   padding-right: 1.25rem;
-}
-
-:is([dir="rtl"] .rtl\:pl-2){
-  padding-left: 0.5rem;
 }
 
 :is(.dark .dark\:divide-white\/10) > :not([hidden]) ~ :not([hidden]){
@@ -15154,14 +15131,8 @@ select.tabulator-page-size option{
 }
 
 @media (min-width: 768px){
-  .md\:col-span-6{
-    grid-column: span 6 / span 6;
-  }
   .md\:grid{
     display: grid;
-  }
-  .md\:gap-x-6{
-    column-gap: 1.5rem;
   }
 }
 
@@ -15213,9 +15184,6 @@ select.tabulator-page-size option{
   }
   .xl\:flex{
     display: flex;
-  }
-  .xl\:grid{
-    display: grid;
   }
   .xl\:justify-between{
     justify-content: space-between;

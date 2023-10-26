@@ -104,16 +104,19 @@ class PengujianController extends BaseController
             return redirect()->to('/fppc');
         }
 
+        $analis = $AdminModel->where('roleId', 3)->findAll();
+
         $groupedPermohonanUjiWithArrOfDtlFppc = [];
 
         $dtlFppcIds = array_column($fppcDetailsData, 'id');
 
         $PermohonanUjiRelated = $permohonanUjiModel
-            ->whereIn('dtl_fppc_id', $dtlFppcIds)
-            ->select('permohonan_uji.*, dtl_fppc.id as dtl_fppc_id, dtl_fppc.id_fppc as fppc_id, 
+            ->whereIn('permohonan_uji.dtl_fppc_id', $dtlFppcIds)
+            ->select('permohonan_uji.*, dtl_fppc.id_fppc as fppc_id, 
             dtl_fppc.id_wadah as id_wadah, dtl_fppc.id_bentuk as id_bentuk, dtl_fppc.nama_lokal as nama_lokal, dtl_fppc.nama_latin as nama_latin, dtl_fppc.jumlah_sampel as jumlah_sampel 
             , parameter_uji.jenis_parameter as jenis_parameter, parameter_uji.standar_uji as standar_uji,
-            parameter_uji.keterangan_uji as keterangan_uji, wadah.nama_wadah as nama_wadah, bentuk.nama_bentuk as nama_bentuk, wadah.image as image_wadah')
+            parameter_uji.keterangan_uji as keterangan_uji, wadah.nama_wadah as nama_wadah, bentuk.nama_bentuk as nama_bentuk, wadah.image as image_wadah, hasil_uji.keterangan as keterangan_hasil, hasil_uji.nilai as nilai_hasil, hasil_uji.hasil_uji as hasil_uji, hasil_uji.id as hasil_uji_id, hasil_uji.analis_id as analis_id')
+            ->join('hasil_uji', 'hasil_uji.permohonan_uji_id = permohonan_uji.id', 'left')
             ->join('dtl_fppc', 'dtl_fppc.id = permohonan_uji.dtl_fppc_id')
             ->join('parameter_uji', 'parameter_uji.id = permohonan_uji.parameter_uji_id')
             ->join('bentuk', 'bentuk.id = dtl_fppc.id_bentuk')
@@ -125,6 +128,7 @@ class PengujianController extends BaseController
                 'jenis_parameter' => $value['jenis_parameter'],
                 'standar_uji' => $value['standar_uji'],
                 'keterangan_uji' => $value['keterangan_uji'],
+                'status' => $value['status'],
             ];
 
             $parameterUjiKey = $value['parameter_uji_id'];
@@ -149,10 +153,28 @@ class PengujianController extends BaseController
                 'image_wadah' => $value['image_wadah'],
             ];
 
+            if (!empty($value['hasil_uji_id'])) {
+                $analis_id = $value['analis_id'];
+
+                $analisData = $AdminModel->where('adminId', $analis_id)->first();
+
+                $dtlFppcData['keterangan_hasil'] = $value['keterangan_hasil'];
+                $dtlFppcData['nilai_hasil'] = $value['nilai_hasil'];
+                $dtlFppcData['hasil_uji'] = $value['hasil_uji'];
+                $dtlFppcData['hasil_uji_id'] = $value['hasil_uji_id'];
+                $dtlFppcData['analis'] = $analisData['name'];
+            } else {
+                $dtlFppcData['keterangan_hasil'] = '';
+                $dtlFppcData['nilai_hasil'] = '';
+                $dtlFppcData['hasil_uji'] = '';
+                $dtlFppcData['hasil_uji_id'] = '';
+                $dtlFppcData['analis'] = '';
+            }
+
             $groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey]['dtl_fppc'][] = $dtlFppcData;
         }
 
-        $analis = $AdminModel->where('roleId', 3)->findAll();
+
 
         return view('pages/pengujian-input-hasil', [
             'fppc' => $fppcData,
