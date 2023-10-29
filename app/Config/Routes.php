@@ -86,6 +86,7 @@ $routes->post('/hasil-uji/create', 'HasilUjiController::create', ['filter' => 'a
 
 $routes->get('/lhus', 'LhusController::index', ['filter' => 'authGuard']);
 $routes->get('/lhus/verifikasi/(:num)', 'LhusController::verifikasipage/$1', ['filter' => 'authGuard']);
+$routes->get('/lhus/verifikasi-lhus/(:num)', 'LhusController::verifikasiLhus/$1', ['filter' => 'authGuard']);
 
 $routes->get('/uploads/(:segment)', 'ImageController::show/$1');
 

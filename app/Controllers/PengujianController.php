@@ -201,10 +201,11 @@ class PengujianController extends BaseController
 
         $statuses = array_column($permohonanRelated, 'status');
 
-        // check if all permohonan uji is selesai
-        if (!in_array('selesai', $statuses)) {
-            session()->setFlashdata('errors', 'Tidak dapat menyelesaikan pengujian, karena masih ada permohonan uji yang belum selesai');
-            return redirect()->to('/pengujian/input-hasil/' . $fppc_id);
+        foreach ($statuses as $key => $value) {
+            if ($value != 'selesai') {
+                session()->setFlashdata('errors', 'Tidak dapat menyelesaikan pengujian, karena masih ada permohonan uji yang belum selesai');
+                return redirect()->to('/pengujian/input-hasil/' . $fppc_id);
+            }
         }
 
         $FppcModel = new \App\Models\FppcModel();

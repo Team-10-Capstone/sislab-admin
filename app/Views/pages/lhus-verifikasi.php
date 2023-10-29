@@ -277,8 +277,13 @@
                                                         </div>
                                                         <input type="text"
                                                             class="ti-form-input ltr:rounded-l-none rtl:rounded-r-none focus:z-10 flatpickr-input"
-                                                            id="blog-time" placeholder="Choose date"
-                                                            value="<?= $disposisis[0]['waktu_pengujian']; ?>" />
+                                                            id="blog-time" placeholder="Choose date" value="<?php
+                                                            // 04:00:00.0000000
+                                                            $time = $disposisis[0]['waktu_pengujian'];
+
+                                                            $pretty = date("H:i", strtotime($time));
+                                                            echo $pretty;
+                                                            ?>" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -670,7 +675,7 @@
                                             Batal
                                         </button>
                                     </a>
-                                    <a href="<?php echo base_url("pengujian/selesai/" . $fppc['id']); ?>"
+                                    <a href="<?php echo base_url("lhus/verifikasi-lhus/" . $fppc['id']); ?>"
                                         class="ti-btn btn ti-btn-primary cursor-pointer approve-button"><i
                                             class="ti ti-circle-check"></i>
                                         Verifikasi

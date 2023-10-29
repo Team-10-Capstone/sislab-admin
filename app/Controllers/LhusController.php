@@ -184,4 +184,19 @@ class LhusController extends BaseController
         ]);
     }
 
+    public function verifikasiLhus($id)
+    {
+        $fppcModel = new \App\Models\FppcModel();
+
+        $fppcData = $fppcModel->where('id', $id)->first();
+
+        $fppcModel->update($id, [
+            'status' => 'lhus',
+        ]);
+
+        session()->setFlashdata('success', 'Berhasil memverifikasi LHUS');
+
+        return redirect()->to('/lhus');
+    }
+
 }

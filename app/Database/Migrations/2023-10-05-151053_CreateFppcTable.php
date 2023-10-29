@@ -55,7 +55,7 @@ class CreateFppcTable extends Migration
             ],
             'status' => [
                 'type' => 'ENUM',
-                'constraint' => ['pending', 'ditolak', 'menunggu-disposisi', 'menunggu-pengujian', 'proses-pengujian', 'selesai-pengujian', 'terbit-lhu', 'selesai'],
+                'constraint' => ['pending', 'ditolak', 'menunggu-disposisi', 'menunggu-pengujian', 'proses-pengujian', 'selesai-pengujian', 'lhus', 'terbit-lhu', 'selesai'],
                 'default' => 'pending'
             ],
             'created_at' => [
