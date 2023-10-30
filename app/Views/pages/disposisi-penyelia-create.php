@@ -26,8 +26,6 @@
 <!-- Flatpickr Css -->
 <link rel="stylesheet" href="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.css'); ?>">
 
-
-
 <?= $this->endSection('styles'); ?>
 
 <?= $this->section('content'); ?>

@@ -1,37 +1,38 @@
 (function () {
-    "use strict";
+  "use strict";
 
-    let checkAll = document.querySelector('.check-all');
-    checkAll.addEventListener('click', checkAllFn)
+  let checkAll = document.querySelector(".check-all");
+  checkAll.addEventListener("click", checkAllFn);
 
-    function checkAllFn() {
-        if (checkAll.checked) {
-            document.querySelectorAll('.invoice-checkbox input').forEach(function (e) {
-                e.closest('.invoice-list').classList.add('selected');
-                e.checked = true;
-            });
-        }
-        else {
-            document.querySelectorAll('.invoice-checkbox input').forEach(function (e) {
-                e.closest('.invoice-list').classList.remove('selected');
-                e.checked = false;
-            });
-        }
+  function checkAllFn() {
+    if (checkAll.checked) {
+      document
+        .querySelectorAll(".invoice-checkbox input")
+        .forEach(function (e) {
+          e.closest(".invoice-list").classList.add("selected");
+          e.checked = true;
+        });
+    } else {
+      document
+        .querySelectorAll(".invoice-checkbox input")
+        .forEach(function (e) {
+          e.closest(".invoice-list").classList.remove("selected");
+          e.checked = false;
+        });
     }
+  }
 
-    //For Date Range Picker
-    flatpickr("#daterange", {
-        mode: "range",
-        dateFormat: "d-m-y",
-    });
+  //For Date Range Picker
+  flatpickr("#daterange", {
+    mode: "range",
+    dateFormat: "d-m-y",
+  });
 
-    //To choose date
-    flatpickr(".invoice-date", {});
+  //To choose date
 
-
-    let index = 0
-    document.querySelector(".invoice-add-item").onclick = () => {
-        let element = `<tr class="invoice-list">
+  let index = 0;
+  document.querySelector(".invoice-add-item").onclick = () => {
+    let element = `<tr class="invoice-list">
         <td class=""><input type="number" class="ti-form-input " placeholder="s.no"></td>
         <td class=""><input type="text" class="ti-form-input " placeholder="Product name"></td>
         <td class="font-semibold ">
@@ -64,94 +65,83 @@
                                                 </a>
                                             </div>
                                         </td>
-        </tr>`
-        document.querySelector(".invoice-body").innerHTML += element
-        index = index + 1
+        </tr>`;
+    document.querySelector(".invoice-body").innerHTML += element;
+    index = index + 1;
+  };
+
+  var minusBtn = document.querySelectorAll(".quantity-minus"),
+    PlusBtn = document.querySelectorAll(".quantity-plus"),
+    minValue = 0,
+    maxValue = 30;
+
+  minusBtn.forEach((eleBtn1) => {
+    eleBtn1.onclick = function (e) {
+      let value = e.currentTarget.nextElementSibling.value;
+      if (value > minValue) {
+        value = value - 1;
+        e.currentTarget.nextElementSibling.value = value;
+      }
+    };
+  });
+  PlusBtn.forEach((eleBtn2) => {
+    eleBtn2.onclick = function (e) {
+      let value = e.currentTarget.previousElementSibling.value;
+      if (value < maxValue) {
+        value = Number(value) + 1;
+        e.currentTarget.previousElementSibling.value = value;
+      }
+    };
+  });
+
+  /* Start::Choices JS */
+  document.addEventListener("DOMContentLoaded", function () {
+    var genericExamples = document.querySelectorAll("[data-trigger]");
+    for (let i = 0; i < genericExamples.length; ++i) {
+      var element = genericExamples[i];
+      new Choices(element, {
+        allowHTML: true,
+        searchEnabled: false,
+        removeItemButton: true,
+      });
     }
+  });
 
-    var minusBtn = document.querySelectorAll(".quantity-minus"),
-        PlusBtn = document.querySelectorAll(".quantity-plus"),
-        
-       
-        minValue = 0,
-        maxValue = 30;
+  //delete Btn
+  let invoicebtn = document.querySelectorAll(".invoice-btn");
 
-
-    minusBtn.forEach((eleBtn1) => {
-        eleBtn1.onclick = function (e) {
-            let value =  e.currentTarget.nextElementSibling.value
-            if (value > minValue) {
-                value = value - 1;
-                e.currentTarget.nextElementSibling.value=value;
-            }
-        }
-    })
-    PlusBtn.forEach((eleBtn2) => {
-        eleBtn2.onclick = function (e) {
-            let value =  e.currentTarget.previousElementSibling.value
-            if (value < maxValue) {
-                value = Number(value) + 1;
-                e.currentTarget.previousElementSibling.value=value;
-            }
-        }
-    })
-
-
-    /* Start::Choices JS */
-    document.addEventListener('DOMContentLoaded', function () {
-        var genericExamples = document.querySelectorAll('[data-trigger]');
-        for (let i = 0; i < genericExamples.length; ++i) {
-            var element = genericExamples[i];
-            new Choices(element, {
-                allowHTML: true,
-                searchEnabled: false,
-                removeItemButton: true,
-            });
-        }
-    });
-
-
-    //delete Btn
-    let invoicebtn = document.querySelectorAll(".invoice-btn");
-
-    invoicebtn.forEach((eleBtn) => {
-        eleBtn.onclick = () => {
-            let invoice = eleBtn.closest(".invoice-list")
-            invoice.remove();
-        }
-    })
-
-
-
+  invoicebtn.forEach((eleBtn) => {
+    eleBtn.onclick = () => {
+      let invoice = eleBtn.closest(".invoice-list");
+      invoice.remove();
+    };
+  });
 })();
 
-let GuantityPlus = (ele) => {
-}
-
+let GuantityPlus = (ele) => {};
 
 let changeTheInfo = (title, name, address, address1, id, create, due) => {
-    document.querySelector(".invoice-title").innerHTML = title,
-        document.querySelectorAll(".company-name").forEach((companyval) => {
-            companyval.value = name
-        }),
-        document.querySelectorAll(".company-address").forEach((companyadr) => {
-            companyadr.value = address
-        }),
-        document.querySelectorAll(".company-address1").forEach((companyadr1) => {
-            companyadr1.value = address1
-        }),
-        document.querySelector(".invoice-id").value = id,
-        document.querySelector(".create-date").value = create,
-        document.querySelector(".due-date").value = due
-}
+  (document.querySelector(".invoice-title").innerHTML = title),
+    document.querySelectorAll(".company-name").forEach((companyval) => {
+      companyval.value = name;
+    }),
+    document.querySelectorAll(".company-address").forEach((companyadr) => {
+      companyadr.value = address;
+    }),
+    document.querySelectorAll(".company-address1").forEach((companyadr1) => {
+      companyadr1.value = address1;
+    }),
+    (document.querySelector(".invoice-id").value = id),
+    (document.querySelector(".create-date").value = create),
+    (document.querySelector(".due-date").value = due);
+};
 
 document.getElementById("invoice-create").onclick = () => {
-    document.querySelector(".invoice-title").innerHTML = "Create Invoice"
-
-}
-let invoicePrint = (ele)=>{
-    document.querySelector(".invoice-edit").click()
-    setTimeout(()=>{
-        window.print()
-    },100)
-}
+  document.querySelector(".invoice-title").innerHTML = "Create Invoice";
+};
+let invoicePrint = (ele) => {
+  document.querySelector(".invoice-edit").click();
+  setTimeout(() => {
+    window.print();
+  }, 100);
+};

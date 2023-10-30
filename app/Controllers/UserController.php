@@ -33,11 +33,16 @@ class UserController extends BaseController
     public function update($id)
     {
         $adminModel = new AdminModel();
+
+        $password = $this->request->getVar('password');
+
+        $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+
         $adminModel->update($id, [
             'name' => $this->request->getVar('name'),
             'roleId' => $this->request->getVar('roleId'),
             'email' => $this->request->getVar('email'),
-            'password' => $this->request->getVar('password'),
+            'password' => $hashPassword,
             'mobile' => $this->request->getVar('mobile'),
         ]);
         return redirect()->to('/user');

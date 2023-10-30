@@ -151,9 +151,25 @@
 				if (canDisplayLink($userRole, [1, 2, 3, 4])) {
 					// Display links for users with allowed roles
 					echo "<li class='slide'>
-					<a href='/daftar-lhu' class='side-menu__item'>
+					<a href='/lhus' class='side-menu__item'>
 						<i class='ti ti-file-description side-menu__icon'></i>
-						<span class='side-menu__label'>Daftar LHU</span>
+						<span class='side-menu__label'>Daftar LHUS</span>
+					</a>
+				</li>";
+				}
+				?>
+
+				<?php
+				helper('role_helper');
+
+				$userRole = session()->get('role');
+
+				if (canDisplayLink($userRole, [1, 2, 3, 4])) {
+					// Display links for users with allowed roles
+					echo "<li class='slide'>
+					<a href='/lhus' class='side-menu__item'>
+						<i class='ti ti-file-description side-menu__icon'></i>
+						<span class='side-menu__label'>Unduh LHU</span>
 					</a>
 				</li>";
 				}

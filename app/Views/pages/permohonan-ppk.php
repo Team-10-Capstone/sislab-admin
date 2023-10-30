@@ -76,9 +76,7 @@
                                     <label for="hs-table-search" class="sr-only">Pencarian</label>
                                     <input type="text" name="keyword" id="search-ppk"
                                         class="px-3 py-2 ltr:pr-10 rtl:pl-10 ti-form-input"
-                                        placeholder="Search for items"
-                                        value="<?php echo isset($_GET['keyword']) ? $_GET['keyword'] : '' ?>"
-                                        autocomplete="off">
+                                        placeholder="Search for items" autocomplete="off">
 
                                     <div
                                         class="absolute inset-y-0 ltr:right-0 rtl:left-0 flex items-center pointer-events-none ltr:pr-4 rtl:pl-4">

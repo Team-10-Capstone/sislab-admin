@@ -1,27 +1,6 @@
 (function () {
   "use strict";
 
-  let checkAll = document.querySelector(".check-all");
-  checkAll.addEventListener("click", checkAllFn);
-
-  function checkAllFn() {
-    if (checkAll.checked) {
-      document
-        .querySelectorAll(".invoice-checkbox input")
-        .forEach(function (e) {
-          e.closest(".invoice-list").classList.add("selected");
-          e.checked = true;
-        });
-    } else {
-      document
-        .querySelectorAll(".invoice-checkbox input")
-        .forEach(function (e) {
-          e.closest(".invoice-list").classList.remove("selected");
-          e.checked = false;
-        });
-    }
-  }
-
   //For Date Range Picker
   flatpickr("#daterange", {
     mode: "range",
@@ -29,7 +8,6 @@
   });
 
   //To choose date
-  flatpickr(".invoice-date", {});
 
   /* Start::Choices JS */
   document.addEventListener("DOMContentLoaded", function () {

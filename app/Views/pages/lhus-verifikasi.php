@@ -68,7 +68,7 @@
             <div>
                 <h3
                     class="text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-white text-2xl font-medium">
-                    Input Hasil Uji</h3>
+                    Verifikasi Hasil Uji</h3>
             </div>
             <ol class="flex items-center whitespace-nowrap min-w-0">
                 <li class="text-sm">
@@ -80,7 +80,7 @@
                     </a>
                 </li>
                 <li class="text-sm text-gray-500 hover:text-primary dark:text-white/70 " aria-current="page">
-                    Input Hasil Uji
+                    Verifikasi Hasil Uji
                 </li>
             </ol>
         </div>
@@ -176,7 +176,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="box h-max">
+                                <div class="box">
                                     <div class="box-header">
                                         <div class="flex justify-between">
                                             <h5 class="box-title">Petugas</h5>
@@ -244,7 +244,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="box h-max">
+                                <div class="box">
                                     <div class="box-body space-y-5">
                                         <div class="md:grid grid-cols-2 gap-6">
                                             <div>
@@ -317,10 +317,7 @@
                                         }
                                         ?>
 
-
                                         <div class="box-body">
-
-
                                             <div class="flex relative mb-4">
                                                 <div class="absolute h-full w-full inset-0"></div>
                                                 <div class="ltr:pr-2 rtl:pl-2">
@@ -336,7 +333,7 @@
                                                                 class="ti ti-circles text-xs ltr:mr-1 rtl:ml-1"></i>
                                                             <?php
                                                             echo count($permohonan['dtl_fppc']);
-                                                            ?> Kode Sampel
+                                                            ?> Sampel
                                                         </span>
                                                     </div>
                                                     <div class="flex justify-between items-center text-xs">
@@ -658,34 +655,6 @@
                                                 </div>
                                             </div>
 
-
-                                            <?php
-                                            $isHaveAccess = $permohonan['isPenyeliaHasAccess'];
-                                            if (!$isHaveAccess) {
-                                                echo '<div class="bg-yellow-50 border border-yellow-200 alert mt-6" role="alert">
-                                                    <div class="flex">
-                                                        <div class="flex-shrink-0">
-                                                            <svg class="h-4 w-4 text-yellow-400 mt-0.5"
-                                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                                fill="currentColor" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                                                            </svg>
-                                                        </div>
-                                                        <div class="ltr:ml-2 rtl:mr-2">
-                                                            <h3 class="text-sm text-yellow-800 font-semibold">
-                                                                Tidak ada akses
-                                                            </h3>
-                                                            <div class="mt-1 text-sm text-yellow-700">
-                                                               Anda tidak memiliki akses untuk melakukan input hasil uji ini
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>'
-                                                ;
-                                            }
-                                            ?>
-
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
@@ -706,10 +675,10 @@
                                             Batal
                                         </button>
                                     </a>
-                                    <a href="<?php echo base_url("pengujian/selesai/" . $fppc['id']); ?>"
+                                    <a href="<?php echo base_url("lhus/verifikasi-lhus/" . $fppc['id']); ?>"
                                         class="ti-btn btn ti-btn-primary cursor-pointer approve-button"><i
                                             class="ti ti-circle-check"></i>
-                                        Selesaikan Pengujian
+                                        Verifikasi
                                     </a>
                                 </div>
                             </div>

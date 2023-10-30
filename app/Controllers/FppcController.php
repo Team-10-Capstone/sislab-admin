@@ -138,8 +138,19 @@ class FppcController extends BaseController
 
         if ($this->request->getMethod() === 'post') {
             $forms = $this->request->getPost('ppk');
+            $is_perulangan = $this->request->getPost('is_perulangan');
 
             $karimutu = db_connect('karimutu');
+
+            // if its perulangan
+            if ($is_perulangan == 'true') {
+                $fppcData = $fppcModel->where('id', $id)->first();
+
+                $fppcData['is_perulangan'] = true;
+                $fppcData['no_fppc_sebelumnya'] = $fppcData['no_fppc'];
+
+                $dtlFppcs = $fppcDetailsModel->where('id_fppc', $id)->findAll();
+            }
 
             // get ppk details data from tr_master_pelaporan single data
             $ppk = $karimutu->query("SELECT * FROM tr_mst_pelaporan WHERE id_ppk = ?", [$id])->getRowArray();

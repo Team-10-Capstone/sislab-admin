@@ -42,7 +42,8 @@
             <div>
                 <h3
                     class="text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-white text-2xl font-medium">
-                    Disposisi Penyelia</h3>
+                    Laporan Hasil Uji Sementara
+                </h3>
             </div>
             <ol class="flex items-center whitespace-nowrap min-w-0">
                 <li class="text-sm">
@@ -54,7 +55,7 @@
                     </a>
                 </li>
                 <li class="text-sm text-gray-500 hover:text-primary dark:text-white/70 " aria-current="page">
-                    Disposisi Penyelia
+                    Laporan Hasil Uji Sementara
                 </li>
             </ol>
         </div>
@@ -160,7 +161,15 @@
                                 class="ti-custom-table ti-custom-table-head edit-table whitespace-nowrap text-center">
                                 <thead class="bg-gray-50 dark:bg-black/20">
                                     <tr class="cart-box">
-
+                                        <th scope="col" class="dark:text-white/70">
+                                            <div class="flex leading-[0] justify-center">
+                                                <input type="checkbox"
+                                                    class="border-gray-500 ti-form-checkbox mt-0.5 check-all"
+                                                    id="hs-default-checkbox">
+                                                <label for="hs-default-checkbox"
+                                                    class="text-sm text-gray-500 dark:text-white/70"></label>
+                                            </div>
+                                        </th>
                                         <th scope="col" class="dark:text-white/70">No FPPC</th>
                                         <th scope="col" class="dark:text-white/70">Trader</th>
                                         <th scope="col" class="dark:text-white/70">Tipe Permohonan</th>
@@ -172,7 +181,13 @@
                                 <tbody>
                                     <?php foreach ($data as $row): ?>
                                         <tr class="invoice-list">
-
+                                            <td class="">
+                                                <div class="flex items-center h-5 invoice-checkbox justify-center">
+                                                    <input id="invoice-check-1" type="checkbox"
+                                                        class="border-gray-500 ti-form-checkbox">
+                                                    <label for="invoice-check-1" class="sr-only">Checkbox</label>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <?php echo $row['no_ppk']; ?>
                                             </td>
@@ -226,12 +241,11 @@
                                             </td>
 
                                             <td class="font-medium space-x-2 rtl:space-x-reverse">
-
-                                                <a href="<?= site_url('disposisi-penyelia/create/' . $row['id']) ?>"
+                                                <a href="<?= site_url('lhus/verifikasi/' . $row['id']) ?>"
                                                     class="invoice-edit m-0 relative ti-btn rounded-full p-2 transition-none focus:outline-none ti-btn-soft-secondary">
                                                     <i class="ti ti-pencil"></i>
                                                     <p>
-                                                        Lihat Detail
+                                                        Verifikasi
                                                     </p>
                                                 </a>
                                             </td>
