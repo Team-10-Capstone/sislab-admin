@@ -85,14 +85,6 @@
                                         <i class="ri-search-line text-gray-500 dark:text-white/70"></i>
                                     </div>
                                 </div>
-                                <button aria-label="button" type="button"
-                                    class="ti-btn px-3 py-2 ti-btn-outline border-gray-200 text-gray-500 dark:text-white/70 hover:text-white hover:bg-gray-500 hover:border-gray-500 focus:ring-gray-200  dark:hover:bg-black/30 dark:border-white/10 dark:hover:border-white/20 dark:focus:ring-white/10 dark:focus:ring-offset-white/10 m-0">
-                                    <i class="ri-refresh-line leading-none text-lg"></i>
-                                </button>
-                                <button aria-label="button" type="button" id="delete-btn"
-                                    class="ti-btn px-3 py-2 ti-btn-danger m-0">
-                                    <i class="ri-delete-bin-7-line leading-none text-lg"></i>
-                                </button>
                             </div>
                             <div class="sm:space-x-3 sm:flex space-y-3 sm:space-y-0 rtl:space-x-reverse">
                                 <div class="inline-flex">

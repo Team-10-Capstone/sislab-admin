@@ -87,10 +87,43 @@ class PengujianController extends BaseController
 
         $fppcData = $fppcModel->where('id', $id)->first();
 
-        $disposisis = $DisposisiPenyelia->select('disposisi_penyelia.*, admin.name as nama_admin, admin.email as email_admin, admin.mobile as mobile_admin')
-            ->join('admin', 'admin.adminId = disposisi_penyelia.penyelia_id')
-            ->where('disposisi_penyelia.id_fppc', $id)
+        $disposisis = $DisposisiPenyelia->select('disposisi_penyelia_baru.*, admin.name as nama_admin, admin.email as email_admin, admin.mobile as mobile_admin, permohonan_uji.parameter_uji_id')
+            ->where('disposisi_penyelia_baru.id_fppc', $id)
+            ->join('permohonan_uji', 'permohonan_uji.id = disposisi_penyelia_baru.id_permohonan_uji')
+            ->join('admin', 'admin.adminId = disposisi_penyelia_baru.penyelia_id')
             ->findAll();
+
+        $groupedPenyeliaAccess = [];
+        $uniqueDisposisiWithPenyelia = [];
+
+        foreach ($disposisis as $disposisi) {
+            $parameter_uji_id = $disposisi['parameter_uji_id'];
+
+
+            if (!isset($groupedPenyeliaAccess[$parameter_uji_id])) {
+                $groupedPenyeliaAccess[$parameter_uji_id] = [];
+            }
+
+
+
+            $groupedPenyeliaAccess[$parameter_uji_id]['penyelia'][] = [
+                'id' => $disposisi['penyelia_id'],
+                'name' => $disposisi['nama_admin'],
+                'email' => $disposisi['email_admin'],
+            ];
+
+
+            if (
+                in_array(
+                    $disposisi['penyelia_id'],
+                    array_column($uniqueDisposisiWithPenyelia, 'penyelia_id')
+                )
+            ) {
+                continue;
+            }
+
+            $uniqueDisposisiWithPenyelia[] = $disposisi;
+        }
 
         $manajer_id = $disposisis[0]['manajer_teknis_id'];
 
@@ -109,6 +142,8 @@ class PengujianController extends BaseController
         $groupedPermohonanUjiWithArrOfDtlFppc = [];
 
         $dtlFppcIds = array_column($fppcDetailsData, 'id');
+
+        $currentPenyeliaId = session()->get('adminId');
 
         $PermohonanUjiRelated = $permohonanUjiModel
             ->whereIn('permohonan_uji.dtl_fppc_id', $dtlFppcIds)
@@ -133,8 +168,11 @@ class PengujianController extends BaseController
 
             $parameterUjiKey = $value['parameter_uji_id'];
             if (!isset($groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey])) {
+                $isPenyeliaHasAccess = in_array($currentPenyeliaId, array_column($groupedPenyeliaAccess[$parameterUjiKey]['penyelia'], 'id'));
+
                 $groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey] = [
                     'parameter_uji' => $parameterUji,
+                    'isPenyeliaHasAccess' => $isPenyeliaHasAccess,
                     'dtl_fppc' => [],
                 ];
             }
@@ -177,7 +215,7 @@ class PengujianController extends BaseController
         return view('pages/pengujian-input-hasil', [
             'fppc' => $fppcData,
             'title' => 'Input Hasil Uji',
-            'disposisis' => $disposisis,
+            'disposisis' => $uniqueDisposisiWithPenyelia,
             'managerData' => $managerData,
             'permohonans' => $groupedPermohonanUjiWithArrOfDtlFppc,
             'analiss' => $analis,

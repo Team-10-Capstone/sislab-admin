@@ -87,9 +87,9 @@ class LhusController extends BaseController
 
         $fppcData = $fppcModel->where('id', $id)->first();
 
-        $disposisis = $DisposisiPenyelia->select('disposisi_penyelia.*, admin.name as nama_admin, admin.email as email_admin, admin.mobile as mobile_admin')
-            ->join('admin', 'admin.adminId = disposisi_penyelia.penyelia_id')
-            ->where('disposisi_penyelia.id_fppc', $id)
+        $disposisis = $DisposisiPenyelia->select('disposisi_penyelia_baru.*, admin.name as nama_admin, admin.email as email_admin, admin.mobile as mobile_admin')
+            ->join('admin', 'admin.adminId = disposisi_penyelia_baru.penyelia_id')
+            ->where('disposisi_penyelia_baru.id_fppc', $id)
             ->findAll();
 
         $manajer_id = $disposisis[0]['manajer_teknis_id'];

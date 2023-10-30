@@ -2713,6 +2713,9 @@ select option:active,
 .mt-7{
   margin-top: 1.75rem;
 }
+.mb-6{
+  margin-bottom: 1.5rem;
+}
 .box-border{
   box-sizing: border-box;
 }
@@ -3669,6 +3672,10 @@ select option:active,
 .border-transparent{
   border-color: transparent;
 }
+.border-yellow-200{
+  --tw-border-opacity: 1;
+  border-color: rgb(254 240 138 / var(--tw-border-opacity));
+}
 .border-t-transparent{
   border-top-color: transparent;
 }
@@ -3759,6 +3766,10 @@ select option:active,
 }
 .bg-white\/10{
   background-color: rgb(255 255 255 / 0.1);
+}
+.bg-yellow-50{
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 252 232 / var(--tw-bg-opacity));
 }
 .bg-opacity-50{
   --tw-bg-opacity: 0.5;
@@ -4143,6 +4154,18 @@ select option:active,
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+.text-yellow-400{
+  --tw-text-opacity: 1;
+  color: rgb(250 204 21 / var(--tw-text-opacity));
+}
+.text-yellow-700{
+  --tw-text-opacity: 1;
+  color: rgb(161 98 7 / var(--tw-text-opacity));
+}
+.text-yellow-800{
+  --tw-text-opacity: 1;
+  color: rgb(133 77 14 / var(--tw-text-opacity));
 }
 .underline{
   text-decoration-line: underline;

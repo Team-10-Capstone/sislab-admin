@@ -86,44 +86,157 @@ class DisposisiController extends BaseController
         $DisposisiPenyelia = new \App\Models\DisposisiPenyeliaModel();
         $FppcModel = new \App\Models\FppcModel();
 
+        $disposisi = $this->request->getPost('disposisi');
+
         if ($this->request->getMethod() === 'post') {
             // get admin id from session
             $adminId = session()->get('adminId');
 
             $disposisi = $this->request->getPost('disposisi');
-            foreach ($disposisi['petugas_penyelia'] as $petugas_penyelia) {
-                // parse int id_analis
-                $petugas_penyelia = (int) $petugas_penyelia;
 
-                $tanggal_pengujian = $disposisi['tanggal_pengujian'];
-                $waktu_pengujian = $disposisi['waktu_pengujian'];
+            //    get fppc_id from first array
+            $fppc_id = $disposisi[array_key_first($disposisi)]['fppc_id'];
 
-                $mergedDateTime = $tanggal_pengujian . ' ' . $waktu_pengujian;
+            foreach ($disposisi as $eachDisposisi) {
 
-                // Create a DateTime object from the merged date and time string
-                $datetime = new \DateTime($mergedDateTime);
+                foreach ($eachDisposisi['permohonan_uji_id'] as $permohonan_uji_id) {
+                    // parse int id_analis
+                    $permohonan_uji_id = (int) $permohonan_uji_id;
 
-                // Format the DateTime object in the desired format (datetime2)
-                $formattedDateTime = $datetime->format('Y-m-d H:i:s');
+                    $tanggal_pengujian = $eachDisposisi['tanggal_pengujian'];
+                    $waktu_pengujian = $eachDisposisi['waktu_pengujian'];
 
-                $data = [
-                    'id_fppc' => $disposisi['id_fppc'],
-                    'penyelia_id' => $petugas_penyelia,
-                    'manajer_teknis_id' => $adminId,
-                    'tanggal_pengujian' => $formattedDateTime,
-                    'waktu_pengujian' => $waktu_pengujian,
-                ];
+                    $mergedDateTime = $tanggal_pengujian . ' ' . $waktu_pengujian;
 
-                $DisposisiPenyelia->insert($data);
+                    // Create a DateTime object from the merged date and time string
+                    $datetime = new \DateTime($mergedDateTime);
+
+                    // Format the DateTime object in the desired format (datetime2)
+                    $formattedDateTime = $datetime->format('Y-m-d H:i:s');
+
+                    foreach ($eachDisposisi['petugas_penyelia'] as $petugas_penyelia) {
+                        // parse int id_analis
+                        $petugas_penyelia = (int) $petugas_penyelia;
+
+                        $data = [
+                            'id_fppc' => $eachDisposisi['fppc_id'],
+                            'id_permohonan_uji' => $permohonan_uji_id,
+                            'penyelia_id' => $petugas_penyelia,
+                            'manajer_teknis_id' => $adminId,
+                            'tanggal_pengujian' => $formattedDateTime,
+                            'waktu_pengujian' => $waktu_pengujian,
+                        ];
+
+                        $DisposisiPenyelia->insert($data);
+                    }
+                }
             }
 
-
-            $FppcModel->update($disposisi['id_fppc'], ['status' => 'menunggu-pengujian']);
+            $FppcModel->update($fppc_id, ['status' => 'menunggu-pengujian']);
 
             session()->setFlashdata('success', 'Berhasil membuat disposisi');
 
             return redirect()->to('/disposisi-penyelia');
         }
+    }
+
+    public function createDisposisiViews($id)
+    {
+        $fppcModel = new \App\Models\FppcModel();
+        $fppcDetailsModel = new \App\Models\DtlFppcModel();
+        $permohonanUjiModel = new \App\Models\PermohonanUjiModel();
+        $AdminModel = new \App\Models\AdminModel();
+
+        $fppcData = $fppcModel->where('id', $id)->first();
+
+        $fppcDetailsData = $fppcDetailsModel
+            ->where('id_fppc', $id)
+            ->findAll();
+
+        if (empty($fppcDetailsData)) {
+            return redirect()->to('/fppc');
+        }
+
+        $analis = $AdminModel->where('roleId', 3)->findAll();
+
+        $groupedPermohonanUjiWithArrOfDtlFppc = [];
+
+        $dtlFppcIds = array_column($fppcDetailsData, 'id');
+
+        $PermohonanUjiRelated = $permohonanUjiModel
+            ->whereIn('permohonan_uji.dtl_fppc_id', $dtlFppcIds)
+            ->select('permohonan_uji.*, dtl_fppc.id_fppc as fppc_id, 
+            dtl_fppc.id_wadah as id_wadah, dtl_fppc.id_bentuk as id_bentuk, dtl_fppc.nama_lokal as nama_lokal, dtl_fppc.nama_latin as nama_latin, dtl_fppc.jumlah_sampel as jumlah_sampel 
+            , parameter_uji.jenis_parameter as jenis_parameter, parameter_uji.standar_uji as standar_uji,
+            parameter_uji.keterangan_uji as keterangan_uji, wadah.nama_wadah as nama_wadah, bentuk.nama_bentuk as nama_bentuk, wadah.image as image_wadah, hasil_uji.keterangan as keterangan_hasil, hasil_uji.nilai as nilai_hasil, hasil_uji.hasil_uji as hasil_uji, hasil_uji.id as hasil_uji_id, hasil_uji.analis_id as analis_id')
+            ->join('hasil_uji', 'hasil_uji.permohonan_uji_id = permohonan_uji.id', 'left')
+            ->join('dtl_fppc', 'dtl_fppc.id = permohonan_uji.dtl_fppc_id')
+            ->join('parameter_uji', 'parameter_uji.id = permohonan_uji.parameter_uji_id')
+            ->join('bentuk', 'bentuk.id = dtl_fppc.id_bentuk')
+            ->join('wadah', 'wadah.id = dtl_fppc.id_wadah')
+            ->findAll();
+
+        foreach ($PermohonanUjiRelated as $key => $value) {
+            $parameterUji = [
+                'jenis_parameter' => $value['jenis_parameter'],
+                'standar_uji' => $value['standar_uji'],
+                'keterangan_uji' => $value['keterangan_uji'],
+                'status' => $value['status'],
+            ];
+
+            $parameterUjiKey = $value['parameter_uji_id'];
+            if (!isset($groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey])) {
+                $groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey] = [
+                    'parameter_uji' => $parameterUji,
+                    'dtl_fppc' => [],
+                ];
+            }
+
+            $dtlFppcData = [
+                'permohonan_uji_id' => $value['id'],
+                'dtl_fppc_id' => $value['dtl_fppc_id'],
+                'fppc_id' => $value['fppc_id'],
+                'id_wadah' => $value['id_wadah'],
+                'id_bentuk' => $value['id_bentuk'],
+                'nama_lokal' => $value['nama_lokal'],
+                'nama_latin' => $value['nama_latin'],
+                'jumlah_sampel' => $value['jumlah_sampel'],
+                'nama_wadah' => $value['nama_wadah'],
+                'nama_bentuk' => $value['nama_bentuk'],
+                'image_wadah' => $value['image_wadah'],
+            ];
+
+            if (!empty($value['hasil_uji_id'])) {
+                $analis_id = $value['analis_id'];
+
+                $analisData = $AdminModel->where('adminId', $analis_id)->first();
+
+                $dtlFppcData['keterangan_hasil'] = $value['keterangan_hasil'];
+                $dtlFppcData['nilai_hasil'] = $value['nilai_hasil'];
+                $dtlFppcData['hasil_uji'] = $value['hasil_uji'];
+                $dtlFppcData['hasil_uji_id'] = $value['hasil_uji_id'];
+                $dtlFppcData['analis'] = $analisData['name'];
+            } else {
+                $dtlFppcData['keterangan_hasil'] = '';
+                $dtlFppcData['nilai_hasil'] = '';
+                $dtlFppcData['hasil_uji'] = '';
+                $dtlFppcData['hasil_uji_id'] = '';
+                $dtlFppcData['analis'] = '';
+            }
+
+            $groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey]['dtl_fppc'][] = $dtlFppcData;
+            $groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey]['permohonan_uji_id'][] = $value['id'];
+        }
+
+        $adminData = $AdminModel->where('roleId', 2)->findAll();
+
+        return view('pages/disposisi', [
+            'fppc' => $fppcData,
+            'title' => 'Disposisi Penyelia',
+            'admin' => $adminData,
+            'permohonans' => $groupedPermohonanUjiWithArrOfDtlFppc,
+            'analiss' => $analis,
+        ]);
     }
 
     public function create()
