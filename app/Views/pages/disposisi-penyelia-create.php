@@ -133,128 +133,137 @@
                             </div>
                             <form class="col-span-12 xl:col-span-8" id="form-disposisi-penyelia" method="POST"
                                 action="<?= base_url('disposisi-penyelia/store') ?>">
-                                <?php foreach ($fppc_details as $key => $fppcItem): ?>
-                                    <div class="box">
-
-                                        <!-- loop ppkItems -->
-                                        <div class="box-body space-y-5">
-                                            <div>
-                                                <label for="input-label1" class="ti-form-label">
-                                                    Nama Lokal
-                                                </label>
-                                                <input type="text" id="input-label1" class="ti-form-input"
-                                                    placeholder="blogtitle" disabled
-                                                    value="<?= $fppcItem['fppc_details']['nama_lokal']; ?>">
-                                            </div>
-                                            <div class="md:grid grid-cols-2 gap-6">
-                                                <div>
-                                                    <label for="input-label1" class="ti-form-label">
-                                                        Nama Latin
-                                                    </label>
-                                                    <input type="text" id="input-label1" class="ti-form-input"
-                                                        placeholder="blogtitle" disabled
-                                                        value="<?= $fppcItem['fppc_details']['nama_latin']; ?>">
-                                                </div>
-                                                <div>
-                                                    <label for="input-label1" class="ti-form-label">
-                                                        Jml Sampel
-                                                    </label>
-                                                    <input type="text" id="input-label1" class="ti-form-input"
-                                                        placeholder="blogtitle" disabled
-                                                        value="<?= $fppcItem['fppc_details']['jumlah_sampel']; ?>">
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
-
-                                <div class="box">
-                                    <input type="hidden" name="disposisi[id_fppc]"
-                                        value="<?= $fppcItem['fppc_details']['id_fppc']; ?>">
-                                    <input type="hidden" name="disposisi[id_dtl_fppc]"
-                                        value="<?= $fppcItem['fppc_details']['id']; ?>">
-                                    <div class="box-body space-y-5">
-                                        <div class="md:grid grid-cols-2 gap-6">
-                                            <div>
-                                                <label for="input-label" class="ti-form-label">
-                                                    Tanggal Pengujian
-                                                </label>
-                                                <div class="flex rounded-sm shadow-sm">
-                                                    <div
-                                                        class="px-4 inline-flex items-center min-w-fit ltr:rounded-l-sm rtl:rounded-r-sm border ltr:border-r-0 rtl:border-l-0 border-gray-200 bg-gray-50 dark:bg-black/20 dark:border-white/10">
-                                                        <span class="text-sm text-gray-500 dark:text-white/70"><i
-                                                                class="ri ri-calendar-line"></i></span>
-                                                    </div>
-                                                    <input type="text"
-                                                        class="ti-form-input ltr:rounded-l-none rtl:rounded-r-none focus:z-10 flatpickr-input"
-                                                        id="blog-date" placeholder="Choose date"
-                                                        name="disposisi[tanggal_pengujian]" />
-                                                </div>
-                                            </div>
-
-                                            <div class="">
-                                                <div class="col-span-12 lg:col-span-4">
-                                                    <label for="input-label" class="ti-form-label">
-                                                        Waktu Pengujian
-                                                    </label>
-                                                    <div class="flex rounded-sm shadow-sm">
-                                                        <div
-                                                            class="px-4 inline-flex items-center min-w-fit ltr:rounded-l-sm rtl:rounded-r-sm border ltr:border-r-0 rtl:border-l-0 border-gray-200 bg-gray-50 dark:bg-black/20 dark:border-white/10">
-                                                            <span class="text-sm text-gray-500 dark:text-white/70"><i
-                                                                    class="ri ri-time-line"></i></span>
-                                                        </div>
-                                                        <input type="text"
-                                                            class="ti-form-input ltr:rounded-l-none rtl:rounded-r-none focus:z-10 flatpickr-input"
-                                                            id="blog-time" placeholder="Choose date"
-                                                            name="disposisi[waktu_pengujian]" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <label class="ti-form-select-label">Pilih Petugas Penyelia</label>
-                                            <select class="ti-form-select blog-tag2" multiple
-                                                id="choices-multiple-default" name="disposisi[petugas_penyelia][]">
-                                                <?php foreach ($admin as $adminItem): ?>
-                                                    <option value="<?= $adminItem['adminId']; ?>">
-                                                        <?= $adminItem['name']; ?>
-                                                    </option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
+                                <div class="w-full h-[400px] relative overflow-hidden">
+                                    <div
+                                        class="absolute z-40 inset-0 w-full bg-gradient-to-t from-black/50 to-transparent pointer-events-none">
                                     </div>
                                 </div>
 
-                                <div class="box-footer text-end border-t-0 px-0 flex items-center justify-end">
-                                    <button type="button" class="sm:m-0 ti-btn ti-btn-disabled ti-btn-primary" disabled
-                                        style="display: none;">
-                                        <span
-                                            class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full"
-                                            role="status" aria-label="loading"></span>
-                                        Loading
-                                    </button>
-                                    <a href="/disposisi-penyelia" class="text-white">
-                                        <button class="ti-btn btn ti-btn-danger cursor-pointer cancel-button">
-                                            <i class="ti ti-circle-x"></i>
-                                            Batal
-                                        </button>
-                                    </a>
-                                    <button data-fppc-id="<?= $fppc['id']; ?>" type="submit"
-                                        class="ti-btn btn ti-btn-primary cursor-pointer approve-button"><i
-                                            class="ti ti-circle-check"></i>
-                                        Simpan</button>
+                                <div>
+                                    <?php foreach ($fppc_details as $key => $fppcItem): ?>
+                                        <div class="box">
+
+                                            <!-- loop ppkItems -->
+                                            <div class="box-body space-y-5">
+                                                <div>
+                                                    <label for="input-label1" class="ti-form-label">
+                                                        Nama Lokal
+                                                    </label>
+                                                    <input type="text" id="input-label1" class="ti-form-input"
+                                                        placeholder="blogtitle" disabled
+                                                        value="<?= $fppcItem['fppc_details']['nama_lokal']; ?>">
+                                                </div>
+                                                <div class="md:grid grid-cols-2 gap-6">
+                                                    <div>
+                                                        <label for="input-label1" class="ti-form-label">
+                                                            Nama Latin
+                                                        </label>
+                                                        <input type="text" id="input-label1" class="ti-form-input"
+                                                            placeholder="blogtitle" disabled
+                                                            value="<?= $fppcItem['fppc_details']['nama_latin']; ?>">
+                                                    </div>
+                                                    <div>
+                                                        <label for="input-label1" class="ti-form-label">
+                                                            Jml Sampel
+                                                        </label>
+                                                        <input type="text" id="input-label1" class="ti-form-input"
+                                                            placeholder="blogtitle" disabled
+                                                            value="<?= $fppcItem['fppc_details']['jumlah_sampel']; ?>">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
                                 </div>
-                            </form>
                         </div>
+
+                        <div class="box">
+                            <input type="hidden" name="disposisi[id_fppc]"
+                                value="<?= $fppcItem['fppc_details']['id_fppc']; ?>">
+                            <input type="hidden" name="disposisi[id_dtl_fppc]"
+                                value="<?= $fppcItem['fppc_details']['id']; ?>">
+                            <div class="box-body space-y-5">
+                                <div class="md:grid grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="input-label" class="ti-form-label">
+                                            Tanggal Pengujian
+                                        </label>
+                                        <div class="flex rounded-sm shadow-sm">
+                                            <div
+                                                class="px-4 inline-flex items-center min-w-fit ltr:rounded-l-sm rtl:rounded-r-sm border ltr:border-r-0 rtl:border-l-0 border-gray-200 bg-gray-50 dark:bg-black/20 dark:border-white/10">
+                                                <span class="text-sm text-gray-500 dark:text-white/70"><i
+                                                        class="ri ri-calendar-line"></i></span>
+                                            </div>
+                                            <input type="text"
+                                                class="ti-form-input ltr:rounded-l-none rtl:rounded-r-none focus:z-10 flatpickr-input"
+                                                id="blog-date" placeholder="Choose date"
+                                                name="disposisi[tanggal_pengujian]" />
+                                        </div>
+                                    </div>
+
+                                    <div class="">
+                                        <div class="col-span-12 lg:col-span-4">
+                                            <label for="input-label" class="ti-form-label">
+                                                Waktu Pengujian
+                                            </label>
+                                            <div class="flex rounded-sm shadow-sm">
+                                                <div
+                                                    class="px-4 inline-flex items-center min-w-fit ltr:rounded-l-sm rtl:rounded-r-sm border ltr:border-r-0 rtl:border-l-0 border-gray-200 bg-gray-50 dark:bg-black/20 dark:border-white/10">
+                                                    <span class="text-sm text-gray-500 dark:text-white/70"><i
+                                                            class="ri ri-time-line"></i></span>
+                                                </div>
+                                                <input type="text"
+                                                    class="ti-form-input ltr:rounded-l-none rtl:rounded-r-none focus:z-10 flatpickr-input"
+                                                    id="blog-time" placeholder="Choose date"
+                                                    name="disposisi[waktu_pengujian]" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="ti-form-select-label">Pilih Petugas Penyelia</label>
+                                    <select class="ti-form-select blog-tag2" multiple id="choices-multiple-default"
+                                        name="disposisi[petugas_penyelia][]">
+                                        <?php foreach ($admin as $adminItem): ?>
+                                            <option value="<?= $adminItem['adminId']; ?>">
+                                                <?= $adminItem['name']; ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box-footer text-end border-t-0 px-0 flex items-center justify-end">
+                            <button type="button" class="sm:m-0 ti-btn ti-btn-disabled ti-btn-primary" disabled
+                                style="display: none;">
+                                <span
+                                    class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full"
+                                    role="status" aria-label="loading"></span>
+                                Loading
+                            </button>
+                            <a href="/disposisi-penyelia" class="text-white">
+                                <button class="ti-btn btn ti-btn-danger cursor-pointer cancel-button">
+                                    <i class="ti ti-circle-x"></i>
+                                    Batal
+                                </button>
+                            </a>
+                            <button data-fppc-id="<?= $fppc['id']; ?>" type="submit"
+                                class="ti-btn btn ti-btn-primary cursor-pointer approve-button"><i
+                                    class="ti ti-circle-check"></i>
+                                Simpan</button>
+                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- End::row-1 -->
-
     </div>
+    <!-- End::row-1 -->
+
+</div>
 
 </div>
 <!-- Start::main-content -->

@@ -183,7 +183,7 @@
                                     <?php foreach ($permohonans as $keypermohonan => $permohonan): ?>
                                         <input type="hidden" name="disposisi[<?= $keypermohonan + 1; ?>][fppc_id]"
                                             value="<?= $fppc['id']; ?>">
-                                        <div class="box">
+                                        <div class="box h-max">
                                             <div class="box-body">
                                                 <div class="flex relative mb-4">
                                                     <div class="absolute h-full w-full inset-0"></div>
@@ -298,55 +298,71 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <?php foreach ($permohonan['dtl_fppc'] as $key => $sampel): ?>
-                                                    <div class="box">
-                                                        <div class="box-body border-b">
-                                                            <div class="flex relative">
-                                                                <div class="absolute h-full w-full inset-0">
-                                                                </div>
-                                                                <div class="ltr:pr-2 rtl:pl-2">
-                                                                    <span
-                                                                        class="avatar rounded-sm bg-blue-500/20 text-blue-500 p-2.5"><i
-                                                                            class="ti ti-fish text-2xl leading-none"></i></span>
-                                                                </div>
-                                                                <div class="flex-1">
-                                                                    <div class="flex justify-between items-center mb-1 text-sm">
-                                                                        <span
-                                                                            class="text-base font-semibold text-gray-800 dark:text-white">
-                                                                            <?= $sampel['nama_lokal']; ?>
-                                                                        </span>
-
-                                                                    </div>
-
-                                                                    <p class="text-smtext-gray-500 dark:text-white/70">
-                                                                        <?= $sampel['jumlah_sampel']; ?>
-                                                                        Sampel
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="flex flex-wrap space-x-3 mt-4">
-                                                                <button type="button"
-                                                                    class="ti-btn p-1 m-0 text-xs font-medium bg-white border-gray-200 text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:ring-offset-white focus:ring-primary dark:bg-bgdark dark:hover:bg-black/20 dark:border-white/10 dark:text-white/70 dark:hover:text-white dark:focus:ring-offset-white/10">
-                                                                    <i class="ti ti-hexagon"></i>
-                                                                    <span class=" text-gray-500
-                                                                                            dark:text-white/70">
-                                                                        <?= $sampel['nama_bentuk']; ?>
-                                                                    </span>
-                                                                </button>
-
-                                                                <button type="button"
-                                                                    class="ti-btn p-1 m-0 text-xs font-medium bg-white border-gray-200 text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:ring-offset-white focus:ring-primary dark:bg-bgdark dark:hover:bg-black/20 dark:border-white/10 dark:text-white/70 dark:hover:text-white dark:focus:ring-offset-white/10">
-                                                                    <i class="ti ti-bucket"></i>
-                                                                    <span class=" text-gray-500
-                                                                                            dark:text-white/70">
-                                                                        <?= $sampel['nama_wadah']; ?>
-                                                                    </span>
-                                                                </button>
-
-                                                            </div>
+                                                <div class="relative mb-6 h-full transition-all duration-500"
+                                                    id="expand-<?= $keypermohonan + 1; ?>"
+                                                    style="max-height: 20rem; overflow: hidden;">
+                                                    <div id="overlay-<?= $keypermohonan + 1; ?>"
+                                                        class="absolute z-40 inset-0 bg-gradient-to-t from-white via-transparent ">
+                                                        <div class="flex h-full items-end justify-center">
+                                                            <button type="button" id="<?= $keypermohonan + 1; ?>"
+                                                                class="ti-btn ti-btn-light ti-btn-sm expandbtn">Lihat
+                                                                semua</button>
                                                         </div>
                                                     </div>
-                                                <?php endforeach; ?>
+
+                                                    <div>
+                                                        <?php foreach ($permohonan['dtl_fppc'] as $key => $sampel): ?>
+                                                            <div class="box mb-3">
+                                                                <div class="box-body border-b">
+                                                                    <div class="flex relative">
+                                                                        <div class="absolute h-full w-full inset-0">
+                                                                        </div>
+                                                                        <div class="ltr:pr-2 rtl:pl-2">
+                                                                            <span
+                                                                                class="avatar rounded-sm bg-blue-500/20 text-blue-500 p-2.5"><i
+                                                                                    class="ti ti-fish text-2xl leading-none"></i></span>
+                                                                        </div>
+                                                                        <div class="flex-1">
+                                                                            <div
+                                                                                class="flex justify-between items-center mb-1 text-sm">
+                                                                                <span
+                                                                                    class="text-base font-semibold text-gray-800 dark:text-white">
+                                                                                    <?= $sampel['nama_lokal']; ?>
+                                                                                </span>
+
+                                                                            </div>
+
+                                                                            <p class="text-smtext-gray-500 dark:text-white/70">
+                                                                                <?= $sampel['jumlah_sampel']; ?>
+                                                                                Sampel
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="flex flex-wrap space-x-3 mt-4">
+                                                                        <button type="button"
+                                                                            class="ti-btn p-1 m-0 text-xs font-medium bg-white border-gray-200 text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:ring-offset-white focus:ring-primary dark:bg-bgdark dark:hover:bg-black/20 dark:border-white/10 dark:text-white/70 dark:hover:text-white dark:focus:ring-offset-white/10">
+                                                                            <i class="ti ti-hexagon"></i>
+                                                                            <span class=" text-gray-500
+                                                                                            dark:text-white/70">
+                                                                                <?= $sampel['nama_bentuk']; ?>
+                                                                            </span>
+                                                                        </button>
+
+                                                                        <button type="button"
+                                                                            class="ti-btn p-1 m-0 text-xs font-medium bg-white border-gray-200 text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:ring-offset-white focus:ring-primary dark:bg-bgdark dark:hover:bg-black/20 dark:border-white/10 dark:text-white/70 dark:hover:text-white dark:focus:ring-offset-white/10">
+                                                                            <i class="ti ti-bucket"></i>
+                                                                            <span class=" text-gray-500
+                                                                                            dark:text-white/70">
+                                                                                <?= $sampel['nama_wadah']; ?>
+                                                                            </span>
+                                                                        </button>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        <?php endforeach; ?>
+                                                    </div>
+                                                </div>
 
 
                                                 <?php foreach ($permohonan['permohonan_uji_id'] as $key => $permohonan_uji_id): ?>
@@ -460,6 +476,24 @@
 
 <!-- Flatpickr JS -->
 
+<script>
+    const expandbtns = document.querySelectorAll('.expandbtn');
+
+    expandbtns.forEach(btn => {
+        const id = btn.id;
+
+        btn.addEventListener('click', () => {
+            const expand = document.getElementById(`expand-${id}`);
+            const overlay = document.getElementById(`overlay-${id}`);
+
+            expand.style.maxHeight = 'none';
+            expand.style.overflow = 'visible';
+            btn.style.display = 'none';
+            overlay.style.display = 'none';
+
+        })
+    })
+</script>
 
 
 

@@ -75,7 +75,7 @@
 						<li class='slide side-menu__label1'><a>Verifikasi</a></li>
 						<li class='slide'><a href='/fppc' class='side-menu__item'>Verifikasi
 								FPPC</a></li>
-						<li class='slide'><a href='/lhu' class='side-menu__item'>Verifikasi
+						<li class='slide'><a href='/lhus/verifikasi' class='side-menu__item'>Verifikasi
 								LHUS</a></li>
 					</ul>
 				</li>";

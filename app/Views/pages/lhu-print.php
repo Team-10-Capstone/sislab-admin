@@ -53,10 +53,12 @@
         <!-- Page Header Close -->
 
         <div class="w-full justify-center">
+            <button onclick="printLHU()" class="btn btn-primary">Print</button>
 
             <div class="container w-full"
                 style="display: flex;justify-content: center; align-items: center; height: auto;">
-                <div class="table-wrapper" style="background-color: white; display: inline-block; padding: 0px;">
+                <div class="table-wrapper" id="lhu-doc"
+                    style="background-color: white; display: inline-block; padding: 0px;">
                     <!-- kop surat -->
                     <table class="header-print">
                         <tr>
@@ -323,6 +325,17 @@
 <?= $this->endSection('content'); ?>
 
 <?= $this->section('scripts'); ?>
+
+<script>
+    function printLHU() {
+        const doc = document.getElementById('lhu-doc');
+
+        const newWin = window.open('', 'Print-Window');
+        newWin.document.open();
+        newWin.document.write('<html><body onload="window.print()">' + doc.innerHTML + '</body></html>');
+        newWin.print();
+    }
+</script>
 
 
 
