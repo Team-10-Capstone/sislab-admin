@@ -22,7 +22,6 @@ class AddBentukToDtlFppc extends Migration
     public function down()
     {
         //
-        $this->forge->dropForeignKey('dtl_fppc', 'id_bentuk');
         $this->forge->dropColumn('dtl_fppc', 'id_bentuk');
     }
 }

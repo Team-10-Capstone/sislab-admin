@@ -18,6 +18,11 @@ class CreateFppcTable extends Migration
                 'constraint' => 50,
                 'null' => true,
             ],
+            'no_fppc_lama' => [
+                'type' => 'VARCHAR',
+                'constraint' => 50,
+                'null' => true,
+            ],
             'no_ppk' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50,
@@ -78,7 +83,6 @@ class CreateFppcTable extends Migration
         // relation with trader
         $this->forge->addForeignKey('id_trader', 'users', 'user_id');
         $this->forge->addForeignKey('id_petugas', 'admin', 'adminId');
-
     }
 
     public function down()

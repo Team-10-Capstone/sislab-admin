@@ -10,11 +10,9 @@ class WadahSeeder extends Seeder
     {
         $data = [
             [
-                'id' => 1,
                 'nama_wadah' => 'Wadah 1',
             ],
             [
-                'id' => 2,
                 'nama_wadah' => 'Wadah 2',
             ],
 
