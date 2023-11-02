@@ -2713,9 +2713,6 @@ select option:active,
 .mt-7{
   margin-top: 1.75rem;
 }
-.mb-6{
-  margin-bottom: 1.5rem;
-}
 .box-border{
   box-sizing: border-box;
 }
@@ -2818,9 +2815,6 @@ select option:active,
 .h-40{
   height: 10rem;
 }
-.h-5{
-  height: 1.25rem;
-}
 .h-8{
   height: 2rem;
 }
@@ -2835,6 +2829,9 @@ select option:active,
 }
 .h-max{
   height: max-content;
+}
+.h-6{
+  height: 1.5rem;
 }
 .\!w-full{
   width: 100% !important;
@@ -2875,11 +2872,17 @@ select option:active,
 .w-full{
   width: 100%;
 }
+.w-6{
+  width: 1.5rem;
+}
 .min-w-0{
   min-width: 0px;
 }
 .min-w-fit{
   min-width: fit-content;
+}
+.\!max-w-2xl{
+  max-width: 42rem !important;
 }
 .max-w-md{
   max-width: 28rem;
@@ -3152,6 +3155,9 @@ select option:active,
 }
 .grid-flow-col-dense{
   grid-auto-flow: column dense;
+}
+.grid-cols-1{
+  grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 .grid-cols-12{
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -3588,6 +3594,9 @@ select option:active,
 .rounded-sm{
   border-radius: 0.25rem;
 }
+.rounded-md{
+  border-radius: 0.5rem;
+}
 .\!border{
   border-width: 1px !important;
 }
@@ -3656,10 +3665,6 @@ select option:active,
 .border-gray-200{
   --tw-border-opacity: 1;
   border-color: rgb(226 232 240 / var(--tw-border-opacity));
-}
-.border-gray-500{
-  --tw-border-opacity: 1;
-  border-color: rgb(100 116 139 / var(--tw-border-opacity));
 }
 .border-red-200{
   --tw-border-opacity: 1;
@@ -3919,6 +3924,12 @@ select option:active,
 .pt-0{
   padding-top: 0px;
 }
+.pt-4{
+  padding-top: 1rem;
+}
+.pt-8{
+  padding-top: 2rem;
+}
 .text-left{
   text-align: left;
 }
@@ -4054,9 +4065,6 @@ select option:active,
 .stacked-fractions{
   --tw-numeric-fraction: stacked-fractions;
   font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
-}
-.leading-\[0\]{
-  line-height: 0;
 }
 .leading-none{
   line-height: 1;
@@ -15179,6 +15187,9 @@ select.tabulator-page-size option{
     --tw-space-y-reverse: 0;
     margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
     margin-bottom: calc(0px * var(--tw-space-y-reverse));
+  }
+  .lg\:border-r{
+    border-right-width: 1px;
   }
   .lg\:px-8{
     padding-left: 2rem;

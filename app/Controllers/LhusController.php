@@ -87,10 +87,39 @@ class LhusController extends BaseController
 
         $fppcData = $fppcModel->where('id', $id)->first();
 
-        $disposisis = $DisposisiPenyelia->select('disposisi_penyelia_baru.*, admin.name as nama_admin, admin.email as email_admin, admin.mobile as mobile_admin')
-            ->join('admin', 'admin.adminId = disposisi_penyelia_baru.penyelia_id')
+        $disposisis = $DisposisiPenyelia->select('disposisi_penyelia_baru.*, admin.name as nama_admin, admin.email as email_admin, admin.mobile as mobile_admin, permohonan_uji.parameter_uji_id')
             ->where('disposisi_penyelia_baru.id_fppc', $id)
+            ->join('permohonan_uji', 'permohonan_uji.id = disposisi_penyelia_baru.id_permohonan_uji')
+            ->join('admin', 'admin.adminId = disposisi_penyelia_baru.penyelia_id')
             ->findAll();
+
+        $groupedPenyeliaAccess = [];
+        $uniqueDisposisiWithPenyelia = [];
+
+        foreach ($disposisis as $disposisi) {
+            $parameter_uji_id = $disposisi['parameter_uji_id'];
+
+            if (!isset($groupedPenyeliaAccess[$parameter_uji_id])) {
+                $groupedPenyeliaAccess[$parameter_uji_id] = [];
+            }
+
+            $groupedPenyeliaAccess[$parameter_uji_id]['penyelia'][] = [
+                'id' => $disposisi['penyelia_id'],
+                'name' => $disposisi['nama_admin'],
+                'email' => $disposisi['email_admin'],
+            ];
+
+            if (
+                in_array(
+                    $disposisi['penyelia_id'],
+                    array_column($uniqueDisposisiWithPenyelia, 'penyelia_id')
+                )
+            ) {
+                continue;
+            }
+
+            $uniqueDisposisiWithPenyelia[] = $disposisi;
+        }
 
         $manajer_id = $disposisis[0]['manajer_teknis_id'];
 
@@ -109,6 +138,8 @@ class LhusController extends BaseController
         $groupedPermohonanUjiWithArrOfDtlFppc = [];
 
         $dtlFppcIds = array_column($fppcDetailsData, 'id');
+
+        $currentPenyeliaId = session()->get('adminId');
 
         $PermohonanUjiRelated = $permohonanUjiModel
             ->whereIn('permohonan_uji.dtl_fppc_id', $dtlFppcIds)
@@ -133,8 +164,11 @@ class LhusController extends BaseController
 
             $parameterUjiKey = $value['parameter_uji_id'];
             if (!isset($groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey])) {
+                $isPenyeliaHasAccess = in_array($currentPenyeliaId, array_column($groupedPenyeliaAccess[$parameterUjiKey]['penyelia'], 'id'));
+
                 $groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey] = [
                     'parameter_uji' => $parameterUji,
+                    'isPenyeliaHasAccess' => $isPenyeliaHasAccess,
                     'dtl_fppc' => [],
                 ];
             }
@@ -164,11 +198,11 @@ class LhusController extends BaseController
                 $dtlFppcData['hasil_uji_id'] = $value['hasil_uji_id'];
                 $dtlFppcData['analis'] = $analisData['name'];
             } else {
-                $dtlFppcData['keterangan_hasil'] = '';
-                $dtlFppcData['nilai_hasil'] = '';
-                $dtlFppcData['hasil_uji'] = '';
-                $dtlFppcData['hasil_uji_id'] = '';
-                $dtlFppcData['analis'] = '';
+                $dtlFppcData['keterangan_hasil'] = 'Belum dilakukan pengujian';
+                $dtlFppcData['nilai_hasil'] = 'Belum dilakukan pengujian';
+                $dtlFppcData['hasil_uji'] = 'Belum dilakukan pengujian';
+                $dtlFppcData['hasil_uji_id'] = 'Belum dilakukan pengujian';
+                $dtlFppcData['analis'] = 'Belum dilakukan pengujian';
             }
 
             $groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey]['dtl_fppc'][] = $dtlFppcData;
@@ -176,8 +210,8 @@ class LhusController extends BaseController
 
         return view('pages/lhus-verifikasi', [
             'fppc' => $fppcData,
-            'title' => 'Verifikasi Hasil Uji',
-            'disposisis' => $disposisis,
+            'title' => 'Input Hasil Uji',
+            'disposisis' => $uniqueDisposisiWithPenyelia,
             'managerData' => $managerData,
             'permohonans' => $groupedPermohonanUjiWithArrOfDtlFppc,
             'analiss' => $analis,

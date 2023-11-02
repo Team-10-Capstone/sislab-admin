@@ -678,7 +678,7 @@
                                     <a href="<?php echo base_url("lhus/verifikasi-lhus/" . $fppc['id']); ?>"
                                         class="ti-btn btn ti-btn-primary cursor-pointer approve-button"><i
                                             class="ti ti-circle-check"></i>
-                                        Verifikasi
+                                        Ajukan LHUS
                                     </a>
                                 </div>
                             </div>

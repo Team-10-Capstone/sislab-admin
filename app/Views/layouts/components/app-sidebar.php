@@ -153,7 +153,7 @@
 					echo "<li class='slide'>
 					<a href='/lhus' class='side-menu__item'>
 						<i class='ti ti-file-description side-menu__icon'></i>
-						<span class='side-menu__label'>Daftar LHUS</span>
+						<span class='side-menu__label'>Daftar Hasil Uji</span>
 					</a>
 				</li>";
 				}

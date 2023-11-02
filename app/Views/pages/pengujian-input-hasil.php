@@ -12,6 +12,17 @@
 
 <!-- Flatpickr Css -->
 <link rel="stylesheet" href="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.css'); ?>">
+
+<link rel="stylesheet" href="<?php echo base_url('assets/libs/@simonwep/pickr/themes/nano.min.css'); ?>">
+
+<!-- filepond File Upload  Css -->
+<link rel="stylesheet" href="<?php echo base_url('assets/libs/filepond/filepond.min.css'); ?>">
+<link rel="stylesheet"
+    href="<?php echo base_url('assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css'); ?>">
+<link rel="stylesheet"
+    href="<?php echo base_url('assets/libs/filepond-plugin-image-edit/filepond-plugin-image-edit.min.css'); ?>">
+<link rel="stylesheet"
+    href="<?php echo base_url('assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css'); ?>">
 <?= $this->endSection('styles'); ?>
 
 <?= $this->section('content'); ?>
@@ -70,21 +81,29 @@
                     class="text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-white text-2xl font-medium">
                     Input Hasil Uji</h3>
             </div>
-            <ol class="flex items-center whitespace-nowrap min-w-0">
-                <li class="text-sm">
-                    <a class="flex items-center font-semibold text-primary hover:text-primary dark:text-primary truncate"
-                        href="javascript:void(0);">
-                        Sislab
-                        <i
-                            class="ti ti-chevrons-right flex-shrink-0 mx-3 overflow-visible text-gray-300 dark:text-gray-300 rtl:rotate-180"></i>
-                    </a>
-                </li>
-                <li class="text-sm text-gray-500 hover:text-primary dark:text-white/70 " aria-current="page">
-                    Input Hasil Uji
-                </li>
-            </ol>
+            <div class="text-end border-t-0 px-0 flex items-center justify-end">
+                <button type="button" class="sm:m-0 ti-btn ti-btn-disabled ti-btn-primary" disabled
+                    style="display: none;">
+                    <span
+                        class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full"
+                        role="status" aria-label="loading"></span>
+                    Loading
+                </button>
+                <a href="/pengujian" class="text-white">
+                    <button class="ti-btn btn ti-btn-danger cursor-pointer cancel-button">
+                        <i class="ti ti-circle-x"></i>
+                        Batal
+                    </button>
+                </a>
+                <a href="<?php echo base_url("pengujian/selesai/" . $fppc['id']); ?>"
+                    class="ti-btn btn ti-btn-primary cursor-pointer approve-button"><i class="ti ti-circle-check"></i>
+                    Selesaikan Pengujian
+                </a>
+            </div>
         </div>
         <!-- Page Header Close -->
+
+
 
         <!-- Start::row-1 -->
         <div class="grid grid-cols-12 gap-x-6">
@@ -92,7 +111,7 @@
                 <div class="box !bg-transparent border-0 shadow-none">
                     <div class="box-body p-0">
                         <div class="grid grid-cols-12 gap-x-6">
-                            <div class="col-span-12 xl:col-span-8 md:grid gap-x-6 grid-cols-2">
+                            <div class="col-span-12 xl:col-span-4 md:grid grid-cols-1">
                                 <div class="box h-max">
                                     <div class="box-header">
                                         <h5 class="box-title">Detail FPPC</h5>
@@ -291,9 +310,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-span-12 xl:col-span-4">
+                            <div class="col-span-12 xl:col-span-8 grid grid-cols-2 gap-6">
                                 <?php foreach ($permohonans as $permohonan): ?>
-                                    <div class="box">
+                                    <div class="box h-max">
                                         <?php
                                         $status = $permohonan['parameter_uji']['status'];
                                         if ($status == 'pending') {
@@ -347,19 +366,28 @@
                                                 </div>
                                             </div>
                                             <div class="flex items-center">
-                                                <button class="flex-1 m-0 py-1 ti-btn ti-btn-soft-light ltr:mr-2 rtl:ml-2">
+                                                <button
+                                                    class="hs-dropdown-toggle flex-1 m-0 py-1 ti-btn ti-btn-soft-light ltr:mr-2 rtl:ml-2"
+                                                    data-hs-overlay="#hs-focus-management-modal<?php
+                                                    echo $permohonan['parameter_uji']['jenis_parameter'] . '2'
+                                                        ?>">
                                                     Lihat Detail
                                                 </button>
-                                                <button
-                                                    class="hs-dropdown-toggle flex-1 m-0 py-1 ti-btn ti-btn-soft-primary"
-                                                    data-hs-overlay="#hs-focus-management-modal<?php
-                                                    $status = $permohonan['parameter_uji']['status'];
-                                                    if ($status == 'selesai') {
-                                                        echo $permohonan['parameter_uji']['jenis_parameter'] . '2';
-                                                    } else {
-                                                        echo $permohonan['parameter_uji']['jenis_parameter'];
-                                                    }
-                                                    ?>">
+                                                <button class="hs-dropdown-toggle flex-1 m-0 py-1 ti-btn ti-btn-soft-primary <?php
+                                                $hasAccess = $permohonan['isPenyeliaHasAccess'];
+
+                                                if (!$hasAccess) {
+                                                    echo ' hidden';
+                                                }
+                                                ;
+                                                ?>" data-hs-overlay="#hs-focus-management-modal<?php
+                                                $status = $permohonan['parameter_uji']['status'];
+                                                if ($status == 'selesai') {
+                                                    echo $permohonan['parameter_uji']['jenis_parameter'] . '2';
+                                                } else {
+                                                    echo $permohonan['parameter_uji']['jenis_parameter'];
+                                                }
+                                                ?>">
                                                     <?php
                                                     $status = $permohonan['parameter_uji']['status'];
                                                     if ($status == 'selesai') {
@@ -372,7 +400,7 @@
 
                                                 <div id="hs-focus-management-modal<?php echo $permohonan['parameter_uji']['jenis_parameter']; ?>"
                                                     class="hs-overlay hidden ti-modal text-left">
-                                                    <div class="hs-overlay-open:mt-7 ti-modal-box mt-0 ease-out">
+                                                    <div class="hs-overlay-open:mt-7 ti-modal-box mt-0 ease-out !max-w-2xl">
                                                         <div class="ti-modal-content">
                                                             <div class="ti-modal-header">
                                                                 <h3 class="ti-modal-title">
@@ -391,10 +419,138 @@
                                                                     </svg>
                                                                 </button>
                                                             </div>
+
+
                                                             <form id="create-hasil-uji" method="post"
                                                                 action="<?php echo base_url("hasil-uji/create"); ?>"
                                                                 enctype="multipart/form-data">
+                                                                <!-- upload graph -->
+                                                                <div class="box">
+                                                                    <div class="box-header">
+                                                                        <h5 class="box-title">
+                                                                            Gambar
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div class="box-body">
+
+                                                                        <input type="file" class="filepond" name="image"
+                                                                            data-max-file-size="3MB" id="image">
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <input type="hidden"
+                                                                    name="permohonan[<?= $permohonan['parameter_uji']['kode_uji']; ?>][kontrol_positif_warna]"
+                                                                    id="warna-<?= $permohonan['parameter_uji']['kode_uji']; ?>"
+                                                                    value="#000">
+
+                                                                <input type="hidden"
+                                                                    name="permohonan[<?= $permohonan['parameter_uji']['kode_uji']; ?>][kontrol_negatif_warna]"
+                                                                    id="warna-<?= $permohonan['parameter_uji']['kode_uji']; ?>2"
+                                                                    value="#000">
+                                                                <!-- perkontrollan -->
+                                                                <div class="lg:flex items-center border-t">
+                                                                    <div class="border-b lg:border-r">
+                                                                        <div class="box-header">
+                                                                            <h5 class="box-title">Kontrol Positif</h5>
+                                                                        </div>
+                                                                        <div class="box-body">
+                                                                            <div class="flex gap-6">
+                                                                                <div class="flex justify-between">
+                                                                                    <div>
+                                                                                        <p class="mb-2">
+                                                                                            Warna
+                                                                                        </p>
+                                                                                        <div class="theme-container2"></div>
+                                                                                        <div id="<?= $permohonan['parameter_uji']['kode_uji']; ?>"
+                                                                                            class="pickr-container2 text-center">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="flex-1 space-y-4">
+                                                                                    <div>
+                                                                                        <label
+                                                                                            class="ti-form-select-label">Hasil
+                                                                                            Uji</label>
+                                                                                        <select
+                                                                                            class="ti-form-select blog-tag2"
+                                                                                            name="permohonan[<?= $permohonan['parameter_uji']['kode_uji']; ?>][kontrol_positif_hasil]">
+                                                                                            >
+                                                                                            <option value="negatif"
+                                                                                                selected>
+                                                                                                Negatif
+                                                                                            </option>
+                                                                                            <option value="positif">Positif
+                                                                                            </option>
+
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <label for="input-label1"
+                                                                                            class="ti-form-label">
+                                                                                            CT
+                                                                                        </label>
+                                                                                        <input type="text" id="input-label1"
+                                                                                            class="ti-form-input"
+                                                                                            placeholder="CT"
+                                                                                            name="permohonan[<?= $permohonan['parameter_uji']['kode_uji']; ?>][kontrol_positif_ct]" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="border-b">
+                                                                        <div class="box-header">
+                                                                            <h5 class="box-title">Kontrol Negatif</h5>
+                                                                        </div>
+                                                                        <div class="box-body">
+                                                                            <div class="flex gap-6">
+                                                                                <div class="flex justify-between">
+                                                                                    <div>
+                                                                                        <p class="mb-2">
+                                                                                            Warna
+                                                                                        </p>
+                                                                                        <div class="theme-container3"></div>
+                                                                                        <div id="<?= $permohonan['parameter_uji']['kode_uji']; ?>2"
+                                                                                            class="pickr-container3 text-center">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="flex-1 space-y-4">
+                                                                                    <div>
+                                                                                        <label
+                                                                                            class="ti-form-select-label">Hasil
+                                                                                            Uji</label>
+                                                                                        <select
+                                                                                            class="ti-form-select blog-tag2"
+                                                                                            name="permohonan[<?= $permohonan['parameter_uji']['kode_uji']; ?>][kontrol_negatif_hasil]">
+                                                                                            >
+                                                                                            <option value="negatif"
+                                                                                                selected>
+                                                                                                Negatif
+                                                                                            </option>
+                                                                                            <option value="positif">Positif
+                                                                                            </option>
+
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <label for="input-label1"
+                                                                                            class="ti-form-label">
+                                                                                            CT
+                                                                                        </label>
+                                                                                        <input type="text" id="input-label1"
+                                                                                            class="ti-form-input"
+                                                                                            placeholder="CT"
+                                                                                            name="permohonan[<?= $permohonan['parameter_uji']['kode_uji']; ?>][kontrol_negatif_ct]" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                                 <div class="ti-modal-body pb-32 space-y-4">
+                                                                    <h5 class="box-title">Pengujian Sampel</h5>
                                                                     <?php foreach ($permohonan['dtl_fppc'] as $key => $sampel): ?>
                                                                         <div class="box shadow-lg shadow-gray-400/10">
                                                                             <input type="hidden"
@@ -406,56 +562,77 @@
                                                                             <input type="hidden"
                                                                                 name="sampels[<?= $key; ?>][permohonan_uji_id]"
                                                                                 value="<?= $sampel['permohonan_uji_id']; ?>">
+                                                                            <input type="hidden"
+                                                                                name="sampels[<?= $key; ?>][kode_uji]"
+                                                                                value="<?= $permohonan['parameter_uji']['kode_uji']; ?>">
 
-                                                                            <div class="box-body border-b">
-                                                                                <div class="flex relative">
-                                                                                    <div class="absolute h-full w-full inset-0">
-                                                                                    </div>
-                                                                                    <div class="ltr:pr-2 rtl:pl-2">
-                                                                                        <span
-                                                                                            class="avatar rounded-sm bg-blue-500/20 text-blue-500 p-2.5"><i
-                                                                                                class="ti ti-fish text-2xl leading-none"></i></span>
-                                                                                    </div>
-                                                                                    <div class="flex-1">
+
+                                                                            <div class="box-body border-b flex justify-between">
+                                                                                <div class="">
+                                                                                    <div class="flex relative">
                                                                                         <div
-                                                                                            class="flex justify-between items-center mb-1 text-sm">
-                                                                                            <span
-                                                                                                class="text-base font-semibold text-gray-800 dark:text-white">
-                                                                                                <?= $sampel['nama_lokal']; ?>
-                                                                                            </span>
-
+                                                                                            class="absolute h-full w-full inset-0">
                                                                                         </div>
+                                                                                        <div class="ltr:pr-2 rtl:pl-2">
+                                                                                            <span
+                                                                                                class="avatar rounded-sm bg-blue-500/20 text-blue-500 p-2.5"><i
+                                                                                                    class="ti ti-fish text-2xl leading-none"></i></span>
+                                                                                        </div>
+                                                                                        <div class="flex-1">
+                                                                                            <div
+                                                                                                class="flex justify-between items-center mb-1 text-sm">
+                                                                                                <span
+                                                                                                    class="text-base font-semibold text-gray-800 dark:text-white">
+                                                                                                    <?= $sampel['nama_lokal']; ?>
+                                                                                                </span>
 
-                                                                                        <p
-                                                                                            class="text-smtext-gray-500 dark:text-white/70">
-                                                                                            <?= $sampel['jumlah_sampel']; ?>
-                                                                                            Sampel
-                                                                                        </p>
+                                                                                            </div>
+
+                                                                                            <p
+                                                                                                class="text-smtext-gray-500 dark:text-white/70">
+                                                                                                <?= $sampel['jumlah_sampel']; ?>
+                                                                                                Sampel
+                                                                                            </p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="flex flex-wrap space-x-3 mt-4">
+                                                                                        <button type="button"
+                                                                                            class="ti-btn p-1 m-0 text-xs font-medium bg-white border-gray-200 text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:ring-offset-white focus:ring-primary dark:bg-bgdark dark:hover:bg-black/20 dark:border-white/10 dark:text-white/70 dark:hover:text-white dark:focus:ring-offset-white/10">
+                                                                                            <i class="ti ti-hexagon"></i>
+                                                                                            <span class=" text-gray-500
+                                                                                            dark:text-white/70">
+                                                                                                <?= $sampel['nama_bentuk']; ?>
+                                                                                            </span>
+                                                                                        </button>
+
+                                                                                        <button type="button"
+                                                                                            class="ti-btn p-1 m-0 text-xs font-medium bg-white border-gray-200 text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:ring-offset-white focus:ring-primary dark:bg-bgdark dark:hover:bg-black/20 dark:border-white/10 dark:text-white/70 dark:hover:text-white dark:focus:ring-offset-white/10">
+                                                                                            <i class="ti ti-bucket"></i>
+                                                                                            <span class=" text-gray-500
+                                                                                            dark:text-white/70">
+                                                                                                <?= $sampel['nama_wadah']; ?>
+                                                                                            </span>
+                                                                                        </button>
+
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="flex flex-wrap space-x-3 mt-4">
-                                                                                    <button type="button"
-                                                                                        class="ti-btn p-1 m-0 text-xs font-medium bg-white border-gray-200 text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:ring-offset-white focus:ring-primary dark:bg-bgdark dark:hover:bg-black/20 dark:border-white/10 dark:text-white/70 dark:hover:text-white dark:focus:ring-offset-white/10">
-                                                                                        <i class="ti ti-hexagon"></i>
-                                                                                        <span class=" text-gray-500
-                                                                                            dark:text-white/70">
-                                                                                            <?= $sampel['nama_bentuk']; ?>
-                                                                                        </span>
-                                                                                    </button>
 
-                                                                                    <button type="button"
-                                                                                        class="ti-btn p-1 m-0 text-xs font-medium bg-white border-gray-200 text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:ring-offset-white focus:ring-primary dark:bg-bgdark dark:hover:bg-black/20 dark:border-white/10 dark:text-white/70 dark:hover:text-white dark:focus:ring-offset-white/10">
-                                                                                        <i class="ti ti-bucket"></i>
-                                                                                        <span class=" text-gray-500
-                                                                                            dark:text-white/70">
-                                                                                            <?= $sampel['nama_wadah']; ?>
-                                                                                        </span>
-                                                                                    </button>
+                                                                                <div class="flex flex-col items-center">
+                                                                                    <p class="mb-2">
+                                                                                        Warna
+                                                                                    </p>
+                                                                                    <div class="warna-sampel"
+                                                                                        id="warna<?= $key; ?>">
 
+                                                                                    </div>
                                                                                 </div>
+
+                                                                                <input type="hidden"
+                                                                                    name="sampels[<?= $key; ?>][warna]"
+                                                                                    id="input-warna<?= $key; ?>" value="#000" />
                                                                             </div>
 
-                                                                            <div class="box-body space-y-4">
+                                                                            <div class="box-body grid lg:grid-cols-2 gap-6">
                                                                                 <div>
                                                                                     <label class="ti-form-select-label">Hasil
                                                                                         Uji</label>
@@ -472,12 +649,12 @@
                                                                                 <div>
                                                                                     <label for="input-label1"
                                                                                         class="ti-form-label">
-                                                                                        Nilai
+                                                                                        CT
                                                                                     </label>
                                                                                     <input type="text" id="input-label1"
                                                                                         class="ti-form-input"
-                                                                                        name="sampels[<?= $key; ?>][nilai]"
-                                                                                        placeholder="Nilai" />
+                                                                                        name="sampels[<?= $key; ?>][ct]"
+                                                                                        placeholder="CT" />
                                                                                 </div>
                                                                                 <div>
                                                                                     <label for="input-label1"
@@ -529,7 +706,7 @@
 
                                                 <div id="hs-focus-management-modal<?php echo $permohonan['parameter_uji']['jenis_parameter']; ?>2"
                                                     class="hs-overlay hidden ti-modal text-left">
-                                                    <div class="hs-overlay-open:mt-7 ti-modal-box mt-0 ease-out">
+                                                    <div class="hs-overlay-open:mt-7 ti-modal-box mt-0 ease-out !max-w-2xl">
                                                         <div class="ti-modal-content">
                                                             <div class="ti-modal-header">
                                                                 <h3 class="ti-modal-title">
@@ -550,6 +727,120 @@
                                                             </div>
 
                                                             <div class="ti-modal-body pb-32 space-y-4">
+                                                                <div class="box">
+                                                                    <div class="box-header">
+                                                                        <h5 class="box-title">
+                                                                            Gambar
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div class="box-body">
+
+                                                                        <img src="<?php echo $permohonan['image']; ?>"
+                                                                            alt="Image Description">
+                                                                    </div>
+                                                                </div>
+                                                                <!-- perkontrollan -->
+                                                                <div
+                                                                    class="border-r border-l rounded-sm lg:flex items-center border-t">
+                                                                    <div class="border-b lg:border-r">
+                                                                        <div class="box-header">
+                                                                            <h5 class="box-title">Kontrol Positif</h5>
+                                                                        </div>
+                                                                        <div class="box-body">
+                                                                            <div class="flex gap-6">
+                                                                                <div class="flex justify-between">
+                                                                                    <div>
+                                                                                        <p class="mb-2">
+                                                                                            Warna
+                                                                                        </p>
+                                                                                        <div class="w-8 h-8 rounded-md"
+                                                                                            style="background-color: <?= $permohonan['kontrol_positif_warna']; ?>;">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="flex-1 space-y-4">
+                                                                                    <div>
+                                                                                        <label
+                                                                                            class="ti-form-select-label">Hasil
+                                                                                            Uji</label>
+                                                                                        <select
+                                                                                            class="ti-form-select blog-tag2"
+                                                                                            name="kontrol_negatif['hasil']"
+                                                                                            disabled
+                                                                                            value="<?= $permohonan['kontrol_positif_hasil']; ?>">
+                                                                                            <option selected
+                                                                                                value="<?= $permohonan['kontrol_positif_hasil']; ?>">
+                                                                                                <?= $permohonan['kontrol_positif_hasil']; ?>
+                                                                                            </option>
+
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <label for="input-label1"
+                                                                                            class="ti-form-label">
+                                                                                            CT
+                                                                                        </label>
+                                                                                        <input type="text" id="input-label1"
+                                                                                            class="ti-form-input"
+                                                                                            placeholder="CT" disabled
+                                                                                            value="<?= $permohonan['kontrol_positif_ct']; ?>"
+                                                                                            name="kontrol_positif['ct']" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="border-b">
+                                                                        <div class="box-header">
+                                                                            <h5 class="box-title">Kontrol Negatif</h5>
+                                                                        </div>
+                                                                        <div class="box-body">
+                                                                            <div class="flex gap-6">
+                                                                                <div class="flex justify-between">
+                                                                                    <div>
+                                                                                        <p class="mb-2">
+                                                                                            Warna
+                                                                                        </p>
+                                                                                        <div class="w-8 h-8 rounded-md"
+                                                                                            style="background-color: <?= $permohonan['kontrol_negatif_warna']; ?>;">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="flex-1 space-y-4">
+                                                                                    <div>
+                                                                                        <label
+                                                                                            class="ti-form-select-label">Hasil
+                                                                                            Uji</label>
+                                                                                        <select
+                                                                                            class="ti-form-select blog-tag2"
+                                                                                            name="kontrol_negatif['hasil']"
+                                                                                            disabled
+                                                                                            value="<?= $permohonan['kontrol_negatif_hasil']; ?>">
+                                                                                            <option selected
+                                                                                                value="<?= $permohonan['kontrol_negatif_hasil']; ?>">
+                                                                                                <?= $permohonan['kontrol_negatif_hasil']; ?>
+                                                                                            </option>
+
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <label for="input-label1"
+                                                                                            class="ti-form-label">
+                                                                                            CT
+                                                                                        </label>
+                                                                                        <input type="text" id="input-label1"
+                                                                                            class="ti-form-input"
+                                                                                            placeholder="CT"
+                                                                                            name="kontrol_negatif['ct']"
+                                                                                            disabled
+                                                                                            value="<?= $permohonan['kontrol_negatif_ct']; ?>" />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <h5 class="box-title">Pengujian Sampel</h5>
                                                                 <?php foreach ($permohonan['dtl_fppc'] as $key => $sampel): ?>
                                                                     <div class="box shadow-lg shadow-gray-400/10">
                                                                         <div class="box-body border-b">
@@ -618,10 +909,10 @@
                                                                                         <tr
                                                                                             class="divide-x divide-gray-200 dark:divide-white/10">
                                                                                             <td class="font-medium">
-                                                                                                Nilai Uji
+                                                                                                CT
                                                                                             </td>
                                                                                             <td>
-                                                                                                <?= $sampel['nilai_hasil']; ?>
+                                                                                                <?= $sampel['ct']; ?>
                                                                                             </td>
                                                                                         </tr>
 
@@ -692,26 +983,7 @@
 
 
 
-                                <div class="box-footer text-end border-t-0 px-0 flex items-center justify-end">
-                                    <button type="button" class="sm:m-0 ti-btn ti-btn-disabled ti-btn-primary" disabled
-                                        style="display: none;">
-                                        <span
-                                            class="animate-spin inline-block w-4 h-4 border-[3px] border-current border-t-transparent text-white rounded-full"
-                                            role="status" aria-label="loading"></span>
-                                        Loading
-                                    </button>
-                                    <a href="/pengujian" class="text-white">
-                                        <button class="ti-btn btn ti-btn-danger cursor-pointer cancel-button">
-                                            <i class="ti ti-circle-x"></i>
-                                            Batal
-                                        </button>
-                                    </a>
-                                    <a href="<?php echo base_url("pengujian/selesai/" . $fppc['id']); ?>"
-                                        class="ti-btn btn ti-btn-primary cursor-pointer approve-button"><i
-                                            class="ti ti-circle-check"></i>
-                                        Selesaikan Pengujian
-                                    </a>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -732,13 +1004,26 @@
 <!-- Choices JS -->
 <script src="<?php echo base_url('assets/libs/choices.js/public/assets/scripts/choices.min.js'); ?>"></script>
 
+<!-- Filepond File Upload JS -->
+<script
+    src="<?php echo base_url('assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js'); ?>"></script>
+<script
+    src="<?php echo base_url('assets/libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js'); ?>"></script>
+<script
+    src="<?php echo base_url('assets/libs/filepond-plugin-image-edit/filepond-plugin-image-edit.min.js'); ?>"></script>
+<script
+    src="<?php echo base_url('assets/libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js'); ?>"></script>
+<script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
+<script src="<?php echo base_url('assets/libs/filepond/filepond.min.js'); ?>"></script>
+
 <!-- Quill Editor  JS -->
 <script src="<?php echo base_url('assets/libs/quill/quill.min.js'); ?>"></script>
 
 <script src="<?php echo base_url('assets/libs/flatpickr/flatpickr.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/libs/@simonwep/pickr/pickr.es5.min.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/input-uji.js'); ?>"></script>
 
-<!-- Flatpickr JS -->
+<!-- Color Picker JS -->
 
 
 

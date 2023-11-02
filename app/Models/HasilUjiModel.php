@@ -18,6 +18,14 @@ class HasilUjiModel extends Model
         'keterangan',
         'nilai',
         'permohonan_uji_id',
+        'ct',
+        'kontrol_positif_warna',
+        'kontrol_negatif_warna',
+        'kontrol_positif_hasil',
+        'kontrol_negatif_hasil',
+        'image',
+        'kontrol_positif_ct',
+        'kontrol_negatif_ct',
     ];
 
     protected $useTimestamps = true;

@@ -1,37 +1,12 @@
 (function () {
   "use strict";
   var options = {};
-  var notifier = new AWN(options);
+
+  const pickrPositifs = document.querySelectorAll(".pickr-container2");
+  const pickrNegatifs = document.querySelectorAll(".pickr-container3");
 
   /* Start::Choices JS */
   document.addEventListener("DOMContentLoaded", function () {
-    // $(".approve-button").click(function () {
-    //   var fppcId = $(this).data("fppc-id");
-    //   var status = $(this).hasClass("cancel-button") ? "ditolak" : "diterima";
-
-    //   $(".cancel-button, .approve-button").hide();
-    //   $(".ti-btn-disabled").show();
-
-    //   $.ajax({
-    //     type: "POST",
-    //     url: "/fppc/updateStatus",
-    //     data: { fppc_id: fppcId, status: status },
-    //     success: function (data) {
-    //       $(".cancel-button, .approve-button").hide();
-    //       $(".ti-btn-disabled").hide();
-    //       notifier.success("This Is An Example Of Success");
-    //       // set timeout to hide the alert
-    //       setTimeout(function () {
-    //         window.location.href = "/fppc";
-    //       }, 2000);
-    //     },
-    //     error: function () {
-    //       window.location.href = "/fppc";
-    //       $(".cancel-button, .approve-button").show();
-    //       $(".ti-btn-disabled").hide();
-    //     },
-    //   });
-    // });
     var genericExamples = document.querySelectorAll(".blog-tag2");
     for (let i = 0; i < genericExamples.length; ++i) {
       var element = genericExamples[i];
@@ -40,49 +15,172 @@
       });
     }
   });
+
+  const nanoThemes = [
+    [
+      "nano",
+      {
+        swatches: [
+          "rgba(244, 67, 54, 1)",
+          "rgba(233, 30, 99, 0.95)",
+          "rgba(156, 39, 176, 0.9)",
+          "rgba(103, 58, 183, 0.85)",
+          "rgba(63, 81, 181, 0.8)",
+          "rgba(33, 150, 243, 0.75)",
+          "rgba(3, 169, 244, 0.7)",
+        ],
+
+        defaultRepresentation: "HEXA",
+        components: {
+          preview: true,
+          opacity: true,
+          hue: true,
+
+          interaction: {
+            hex: false,
+            rgba: false,
+            hsva: false,
+            input: true,
+            clear: true,
+            save: true,
+          },
+        },
+      },
+    ],
+  ];
+
+  for (const [theme, config] of nanoThemes) {
+    pickrPositifs.forEach((pickrPositif) => {
+      const el = document.createElement("p");
+      pickrPositif.appendChild(el);
+
+      const pickr = new Pickr(
+        Object.assign(
+          {
+            el,
+            theme,
+            default: "#000",
+          },
+          config
+        )
+      );
+
+      pickr
+        .on("init", (instance) => {})
+        .on("hide", (instance) => {})
+        .on("show", (color, instance) => {})
+        .on("save", (color, instance) => {
+          const id = pickrPositif.getAttribute("id");
+
+          const input = document.querySelector(`#warna-${id}`);
+
+          input.value = color.toHEXA().toString();
+        })
+        .on("clear", (instance) => {})
+        .on("change", (color, source, instance) => {})
+        .on("changestop", (source, instance) => {})
+        .on("cancel", (instance) => {})
+        .on("swatchselect", (color, instance) => {});
+    });
+
+    pickrNegatifs.forEach((pickrNegatif) => {
+      const el = document.createElement("p");
+      pickrNegatif.appendChild(el);
+
+      const pickr = new Pickr(
+        Object.assign(
+          {
+            el,
+            theme,
+            default: "#000",
+          },
+          config
+        )
+      );
+
+      pickr
+        .on("init", (instance) => {})
+        .on("hide", (instance) => {})
+        .on("show", (color, instance) => {})
+        .on("save", (color, instance) => {
+          const id = pickrNegatif.getAttribute("id");
+
+          const input = document.querySelector(`#warna-${id}2`);
+
+          input.value = color.toHEXA().toString();
+        })
+        .on("clear", (instance) => {})
+        .on("change", (color, source, instance) => {})
+        .on("changestop", (source, instance) => {})
+        .on("cancel", (instance) => {})
+        .on("swatchselect", (color, instance) => {});
+    });
+  }
   /**** quil Editor js****/
 
-  var icons = Quill.import("ui/icons");
-  icons["bold"] = '<i class="ri ri-bold" aria-hidden="true"></i>';
-  icons["italic"] = '<i class="ri ri-italic" aria-hidden="true"></i>';
-  icons["underline"] = '<i class="ri ri-underline" aria-hidden="true"></i>';
-  icons["strike"] = '<i class="ri ri-strikethrough" aria-hidden="true"></i>';
-  icons["list"]["ordered"] =
-    '<i class="ri ri-list-ordered" aria-hidden="true"></i>';
-  icons["list"]["bullet"] =
-    '<i class="ri ri-list-unordered" aria-hidden="true"></i>';
-  icons["link"] = '<i class="ri ri-links-line" aria-hidden="true"></i>';
-  icons["image"] = '<i class="ri ri-image-line" aria-hidden="true"></i>';
-  icons["video"] = '<i class="ri ri-film-line" aria-hidden="true"></i>';
-  icons["code-block"] = '<i class="ri ri-code-line" aria-hidden="true"></i>';
-  var toolbarOptions = [
-    [{ header: [1, 2, 3, 4, 5, 6, false] }],
-    [{ font: [] }],
-    ["bold", "italic", "underline", "strike"], // toggled buttons
-    [{ list: "ordered" }, { list: "bullet" }],
-    [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
-    [{ direction: "rtl" }], // text direction
-    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
-    ["image", "video"],
-  ];
-  var quill = new Quill("#blog-edit", {
-    modules: {
-      toolbar: toolbarOptions,
-    },
-    theme: "snow",
+  const warnaSampels = document.querySelectorAll(".warna-sampel");
+  warnaSampels.forEach((warnaSampel) => {
+    const id = warnaSampel.getAttribute("id");
+    const el = document.createElement("p");
+    const [theme, config] = nanoThemes[0];
+    warnaSampel.appendChild(el);
+
+    const warnaInput = document.querySelector(`#input-${id}`);
+
+    const nanoPickr = new Pickr(
+      Object.assign(
+        {
+          el,
+          theme,
+          default: "#000",
+        },
+        config
+      )
+    );
+
+    nanoPickr
+      .on("init", (instance) => {})
+      .on("hide", (instance) => {})
+      .on("show", (color, instance) => {})
+      .on("save", (color, instance) => {
+        warnaInput.value = color.toHEXA().toString();
+      })
+      .on("clear", (instance) => {})
+      .on("change", (color, source, instance) => {})
+      .on("changestop", (source, instance) => {})
+      .on("cancel", (instance) => {})
+      .on("swatchselect", (color, instance) => {});
   });
 
-  /**** Filepond js****/
   FilePond.registerPlugin(
     FilePondPluginImagePreview,
     FilePondPluginImageExifOrientation,
     FilePondPluginFileValidateSize,
-    FilePondPluginImageEdit
+    FilePondPluginFileEncode
   );
 
-  const MultipleElement = document.querySelector(".multiple-filepond");
-  /* default input */
-  FilePond.create(MultipleElement);
+  const FileUploads = document.querySelectorAll(".filepond");
+
+  FileUploads.forEach((FileUpload) => {
+    const pond = FilePond.create(FileUpload);
+
+    // Get the initial image URL from the value attribute of the input element
+    const initialImageUrl = FileUpload.getAttribute("value");
+
+    if (initialImageUrl) {
+      // Create a File object from the initial image URL
+      fetch(initialImageUrl)
+        .then((response) => response.blob())
+        .then((blob) => {
+          const file = new File([blob], "initial-image.jpg", {
+            type: "image/jpeg",
+          });
+
+          // Add the file to the pond
+          pond.addFile(file);
+        });
+    }
+  });
 
   //For Human Friendly dates
   flatpickr("#blog-date", {

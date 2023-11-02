@@ -43,7 +43,7 @@
         event.preventDefault();
         const form = document.getElementById("search-form");
 
-        form.elements.kd_kegiatan.value = this.id;
+        form.elements.tipe_permohonan.value = this.id;
 
         form.submit();
       });

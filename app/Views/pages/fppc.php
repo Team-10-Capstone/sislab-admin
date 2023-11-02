@@ -132,7 +132,7 @@
                                         </svg>
                                     </button>
 
-                                    <input type="hidden" name="kd_kegiatan" value="">
+                                    <input type="hidden" name="tipe_permohonan" value="">
 
                                     <div id="dropdown-tipe" aria-labelledby="hs-dropdown-transform-style"
                                         data-hs-transition
@@ -140,17 +140,14 @@
                                         <a id="" class="ti-dropdown-item" href="javascript:void(0);">
                                             Semua jenis
                                         </a>
-                                        <a id="I" class="ti-dropdown-item" href="javascript:void(0);">
-                                            Import
+                                        <a id="lalulintas" class="ti-dropdown-item" href="javascript:void(0);">
+                                            Lalulintas
                                         </a>
-                                        <a id="N" class="ti-dropdown-item" href="javascript:void(0);">
-                                            Surveilance & Mandiri
+                                        <a id="mandiri" class="ti-dropdown-item" href="javascript:void(0);">
+                                            Mandiri
                                         </a>
-                                        <a id="K" class="ti-dropdown-item" href="javascript:void(0);">
-                                            Domestik keluar
-                                        </a>
-                                        <a id="M" class="ti-dropdown-item" href="javascript:void(0);">
-                                            Domestik masuk
+                                        <a id="monsur" class="ti-dropdown-item" href="javascript:void(0);">
+                                            Monsur
                                         </a>
                                     </div>
                                 </div>

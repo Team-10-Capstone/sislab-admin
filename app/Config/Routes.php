@@ -57,9 +57,9 @@ $routes->get('/fppc/verify', 'FppcController::verify', ['filter' => 'authGuard']
 $routes->get('/fppc/verify-status/(:num)/(:num)', 'FppcController::updateStatus/$1/$2', ['filter' => 'authGuard']);
 $routes->post('/fppc/store', 'FppcController::store', ['filter' => 'authGuard']);
 $routes->get('/fppc/delete/(:segment)', 'FppcController::delete/$1', ['filter' => 'authGuard']);
+$routes->get('/fppc/index', 'FppcController::index', ['filter' => 'authGuard']);
 
 $routes->get('/disposisi-penyelia', 'DisposisiController::index', ['filter' => 'authGuard']);
-// $routes->get('/disposisi-penyelia/create', 'DisposisiController::create', ['filter' => 'authGuard']);
 $routes->get('/disposisi-penyelia/create/(:num)', 'DisposisiController::createDisposisiViews/$1', ['filter' => 'authGuard']);
 $routes->get('/disposisi-penyelia', 'DisposisiController::verify', ['filter' => 'authGuard']);
 $routes->post('/disposisi-penyelia/store', 'DisposisiController::store', ['filter' => 'authGuard']);

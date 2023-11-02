@@ -160,15 +160,7 @@
                                 class="ti-custom-table ti-custom-table-head edit-table whitespace-nowrap text-center">
                                 <thead class="bg-gray-50 dark:bg-black/20">
                                     <tr class="cart-box">
-                                        <th scope="col" class="dark:text-white/70">
-                                            <div class="flex leading-[0] justify-center">
-                                                <input type="checkbox"
-                                                    class="border-gray-500 ti-form-checkbox mt-0.5 check-all"
-                                                    id="hs-default-checkbox">
-                                                <label for="hs-default-checkbox"
-                                                    class="text-sm text-gray-500 dark:text-white/70"></label>
-                                            </div>
-                                        </th>
+
                                         <th scope="col" class="dark:text-white/70">No FPPC</th>
                                         <th scope="col" class="dark:text-white/70">Trader</th>
                                         <th scope="col" class="dark:text-white/70">Tipe Permohonan</th>
@@ -180,13 +172,7 @@
                                 <tbody>
                                     <?php foreach ($data as $row): ?>
                                         <tr class="invoice-list">
-                                            <td class="">
-                                                <div class="flex items-center h-5 invoice-checkbox justify-center">
-                                                    <input id="invoice-check-1" type="checkbox"
-                                                        class="border-gray-500 ti-form-checkbox">
-                                                    <label for="invoice-check-1" class="sr-only">Checkbox</label>
-                                                </div>
-                                            </td>
+
                                             <td>
                                                 <?php echo $row['no_ppk']; ?>
                                             </td>
