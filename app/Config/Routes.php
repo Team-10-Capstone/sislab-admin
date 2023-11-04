@@ -94,6 +94,7 @@ $routes->get('/lhus/verifikasi/(:num)', 'LhusController::VerifikasiDetails/$1', 
 $routes->get('/uploads/(:segment)', 'ImageController::show/$1');
 
 $routes->get('/print-lhu', 'LhuController::print', ['filter' => 'authGuard']);
+$routes->get('/print-lhus/(:num)/(:num)', 'LhusController::print/$1/$2', ['filter' => 'authGuard']);
 
 
 

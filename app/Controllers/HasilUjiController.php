@@ -17,6 +17,8 @@ class HasilUjiController extends Controller
         $image = $this->request->getPost('image');
         $permohonan = $this->request->getPost('permohonan');
 
+        dd($sampels, $image, $permohonan);
+
         $imageData = json_decode($image);
 
         $fileNama = $imageData->name;

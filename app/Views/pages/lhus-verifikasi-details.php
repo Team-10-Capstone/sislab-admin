@@ -601,11 +601,11 @@
                                                 </div>
 
                                                 <!-- print button -->
-                                                <button type="button"
+                                                <a href="<?php echo base_url('print-lhus/' . $permohonan['dtl_fppc'][0]['fppc_id']) . '/' . $permohonan['parameter_uji']['parameter_uji_id']; ?>"
                                                     class="w-full ti-btn bg-gray-500 text-white hover:bg-gray-600 focus:ring-gray-500 dark:bg-black/20 dark:hover:bg-black/30 dark:focus:ring-offset-white/10 mt-4">
                                                     <i class="ti ti-printer"></i>
                                                     Cetak PDF
-                                                </button>
+                                                </a>
 
 
                                             </div>

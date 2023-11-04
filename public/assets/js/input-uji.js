@@ -87,6 +87,10 @@
       const el = document.createElement("p");
       pickrNegatif.appendChild(el);
 
+      const id = pickrNegatif.getAttribute("id");
+
+      const input = document.querySelector(`#warna-${id}`);
+
       const pickr = new Pickr(
         Object.assign(
           {
@@ -103,10 +107,6 @@
         .on("hide", (instance) => {})
         .on("show", (color, instance) => {})
         .on("save", (color, instance) => {
-          const id = pickrNegatif.getAttribute("id");
-
-          const input = document.querySelector(`#warna-${id}2`);
-
           input.value = color.toHEXA().toString();
         })
         .on("clear", (instance) => {})
@@ -125,8 +125,6 @@
     const [theme, config] = nanoThemes[0];
     warnaSampel.appendChild(el);
 
-    const warnaInput = document.querySelector(`#input-${id}`);
-
     const nanoPickr = new Pickr(
       Object.assign(
         {
@@ -143,6 +141,7 @@
       .on("hide", (instance) => {})
       .on("show", (color, instance) => {})
       .on("save", (color, instance) => {
+        const warnaInput = document.querySelector(`#input-${id}`);
         warnaInput.value = color.toHEXA().toString();
       })
       .on("clear", (instance) => {})
