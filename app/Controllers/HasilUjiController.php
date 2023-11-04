@@ -17,8 +17,6 @@ class HasilUjiController extends Controller
         $image = $this->request->getPost('image');
         $permohonan = $this->request->getPost('permohonan');
 
-        dd($sampels, $image, $permohonan);
-
         $imageData = json_decode($image);
 
         $fileNama = $imageData->name;
@@ -60,6 +58,7 @@ class HasilUjiController extends Controller
                 'image' => $imageUrl,
                 'kontrol_positif_ct' => $permohonanRelated['kontrol_positif_ct'],
                 'kontrol_negatif_ct' => $permohonanRelated['kontrol_negatif_ct'],
+                'warna' => $sampel['warna']
             ];
 
             $permohonan_uji_id = $sampel['permohonan_uji_id'];
@@ -82,6 +81,7 @@ class HasilUjiController extends Controller
                 'image' => 'required',
                 'kontrol_positif_ct' => 'required',
                 'kontrol_negatif_ct' => 'required',
+                'warna' => 'required'
             ]);
 
             $isDataValid = $validation->run($data);

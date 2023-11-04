@@ -517,29 +517,41 @@
                                                                 <?php foreach ($permohonan['dtl_fppc'] as $key => $sampel): ?>
                                                                     <div class="box shadow-lg shadow-gray-400/10">
                                                                         <div class="box-body border-b">
-                                                                            <div class="flex relative">
-                                                                                <div class="absolute h-full w-full inset-0">
-                                                                                </div>
-                                                                                <div class="ltr:pr-2 rtl:pl-2">
-                                                                                    <span
-                                                                                        class="avatar rounded-sm bg-blue-500/20 text-blue-500 p-2.5"><i
-                                                                                            class="ti ti-fish text-2xl leading-none"></i></span>
-                                                                                </div>
-                                                                                <div class="flex-1">
-                                                                                    <div
-                                                                                        class="flex justify-between items-center mb-1 text-sm">
-                                                                                        <span
-                                                                                            class="text-base font-semibold text-gray-800 dark:text-white">
-                                                                                            <?= $sampel['nama_lokal']; ?>
-                                                                                        </span>
-
+                                                                            <div class="flex justify-between items-center">
+                                                                                <div class="flex relative">
+                                                                                    <div class="absolute h-full w-full inset-0">
                                                                                     </div>
+                                                                                    <div class="ltr:pr-2 rtl:pl-2">
+                                                                                        <span
+                                                                                            class="avatar rounded-sm bg-blue-500/20 text-blue-500 p-2.5"><i
+                                                                                                class="ti ti-fish text-2xl leading-none"></i></span>
+                                                                                    </div>
+                                                                                    <div class="flex-1">
+                                                                                        <div
+                                                                                            class="flex justify-between items-center mb-1 text-sm">
+                                                                                            <span
+                                                                                                class="text-base font-semibold text-gray-800 dark:text-white">
+                                                                                                <?= $sampel['nama_lokal']; ?>
+                                                                                            </span>
 
-                                                                                    <p
-                                                                                        class="text-smtext-gray-500 dark:text-white/70">
-                                                                                        <?= $sampel['jumlah_sampel']; ?>
-                                                                                        Sampel
-                                                                                    </p>
+                                                                                        </div>
+
+                                                                                        <p
+                                                                                            class="text-smtext-gray-500 dark:text-white/70">
+                                                                                            <?= $sampel['jumlah_sampel']; ?>
+                                                                                            Sampel
+                                                                                        </p>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="flex justify-between">
+                                                                                    <div>
+                                                                                        <p class="mb-2">
+                                                                                            Warna
+                                                                                        </p>
+                                                                                        <div class="w-8 h-8 rounded-md"
+                                                                                            style="background-color: <?= $sampel['warna']; ?>;">
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="flex flex-wrap space-x-3 mt-4">

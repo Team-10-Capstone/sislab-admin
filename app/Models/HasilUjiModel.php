@@ -26,6 +26,7 @@ class HasilUjiModel extends Model
         'image',
         'kontrol_positif_ct',
         'kontrol_negatif_ct',
+        'warna'
     ];
 
     protected $useTimestamps = true;

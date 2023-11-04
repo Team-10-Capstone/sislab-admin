@@ -100,16 +100,16 @@ class DisposisiController extends BaseController
              * [
              * 'fppc_id' => 1,
              * 'permohonan_uji_id' => [1,2,3],
-             * 'petugas_penyelia' => [1,2,3],
+             * 'petugas_penyelia' => [2,3],
              * 'tanggal_pengujian' => '2021-08-01',
-             * 'waktu_pengujian' => '08:00:00',
+             * 'waktu_pengujian' => '08:00',
              * ],
              * [
              * 'fppc_id' => 2,
              * 'permohonan_uji_id' => [4,5,6],
              * 'petugas_penyelia' => [4,5,6],
              * 'tanggal_pengujian' => '2021-08-01',
-             * 'waktu_pengujian' => '08:00:00',
+             * 'waktu_pengujian' => '08:00',
              * ],
              * ]
              */
@@ -157,8 +157,9 @@ class DisposisiController extends BaseController
 
             session()->setFlashdata('success', 'Berhasil membuat disposisi');
 
-            return redirect()->to('/disposisi-penyelia');
         }
+
+        return redirect()->to('/disposisi-penyelia');
     }
 
     public function createDisposisiViews($id)
