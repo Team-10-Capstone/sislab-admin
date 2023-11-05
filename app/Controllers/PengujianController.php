@@ -37,6 +37,7 @@ class PengujianController extends BaseController
             ->limit($perPage, $offset);
 
         $query->like('fppc.status', "menunggu-pengujian");
+        $query->orLike('fppc.status', "perbaikan");
 
         if (!empty($keyword)) {
             $query->like('no_fppc', $keyword);
@@ -84,6 +85,7 @@ class PengujianController extends BaseController
         $permohonanUjiModel = new \App\Models\PermohonanUjiModel();
         $DisposisiPenyelia = new \App\Models\DisposisiPenyeliaModel();
         $AdminModel = new \App\Models\AdminModel();
+        $perbaikan = new \App\Models\PerbaikanModel();
 
         $fppcData = $fppcModel->where('id', $id)->first();
 
@@ -92,6 +94,8 @@ class PengujianController extends BaseController
             ->join('permohonan_uji', 'permohonan_uji.id = disposisi_penyelia_baru.id_permohonan_uji')
             ->join('admin', 'admin.adminId = disposisi_penyelia_baru.penyelia_id')
             ->findAll();
+
+        $perbaikan = $perbaikan->where('id_fppc', $id)->first();
 
         $groupedPenyeliaAccess = [];
         $uniqueDisposisiWithPenyelia = [];
@@ -103,8 +107,6 @@ class PengujianController extends BaseController
             if (!isset($groupedPenyeliaAccess[$parameter_uji_id])) {
                 $groupedPenyeliaAccess[$parameter_uji_id] = [];
             }
-
-
 
             $groupedPenyeliaAccess[$parameter_uji_id]['penyelia'][] = [
                 'id' => $disposisi['penyelia_id'],
@@ -228,6 +230,7 @@ class PengujianController extends BaseController
             'managerData' => $managerData,
             'permohonans' => $groupedPermohonanUjiWithArrOfDtlFppc,
             'analiss' => $analis,
+            'perbaikan' => $perbaikan,
         ]);
     }
 
@@ -262,5 +265,30 @@ class PengujianController extends BaseController
         session()->setFlashdata('success', 'Berhasil menyelesaikan pengujian');
 
         return redirect()->to('/pengujian');
+    }
+
+    public function reset($id)
+    {
+        $permohonanUjiModel = new \App\Models\PermohonanUjiModel();
+        $hasilUjiModel = new \App\Models\HasilUjiModel();
+
+        $sampels = $this->request->getPost('sampels');
+
+        $permohonanIds = $sampels['permohonan_id'];
+
+        if (empty($permohonanIds)) {
+            session()->setFlashdata('errors', 'Tidak ada sampel yang dipilih');
+            return redirect()->to('/pengujian/input-hasil/' . $id);
+        }
+
+        foreach ($permohonanIds as $value) {
+            $permohonanUjiModel->update($value, ['status' => 'pending']);
+        }
+
+        $hasilUjiModel->whereIn('permohonan_uji_id', $permohonanIds)->delete();
+
+        session()->setFlashdata('success', 'Berhasil mereset pengujian');
+
+        return redirect()->to('/pengujian/input-hasil/' . $id);
     }
 }

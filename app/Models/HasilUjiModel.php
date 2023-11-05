@@ -6,7 +6,6 @@ use CodeIgniter\Model;
 
 class HasilUjiModel extends Model
 {
-    protected $useSoftDeletes = true;
     protected $table = 'hasil_uji';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;

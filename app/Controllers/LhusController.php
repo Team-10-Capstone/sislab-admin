@@ -458,10 +458,10 @@ class LhusController extends BaseController
         ]);
     }
 
-
     public function verifikasiLhus($id)
     {
         $fppcModel = new \App\Models\FppcModel();
+        $lhuModel = new \App\Models\LhuModel();
 
         $fppcModel->update($id, [
             'status' => 'lhus',
@@ -471,6 +471,33 @@ class LhusController extends BaseController
 
         return redirect()->to('/lhus');
     }
+
+    public function perbaikanLhus($id)
+    {
+        $fppcModel = new \App\Models\FppcModel();
+        $perbaikanModel = new \App\Models\PerbaikanModel();
+
+        $alasan = $this->request->getPost('alasan_perbaikan');
+
+        if (empty($alasan)) {
+            session()->setFlashdata('errors', 'Alasan perbaikan tidak boleh kosong');
+            return redirect()->to('/lhus/verifikasi/' . $id);
+        }
+
+        $perbaikanModel->insert([
+            'id_fppc' => $id,
+            'alasan' => $alasan,
+        ]);
+
+        $fppcModel->update($id, [
+            'status' => 'perbaikan',
+        ]);
+
+        session()->setFlashdata('success', 'Berhasil mengajukan perbaikan');
+
+        return redirect()->to('/lhus');
+    }
+
     public function ajukanLhus($id)
     {
         $fppcModel = new \App\Models\FppcModel();

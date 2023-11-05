@@ -495,29 +495,42 @@
                                                                     <?php foreach ($permohonan['dtl_fppc'] as $key => $sampel): ?>
                                                                         <div class="box shadow-lg shadow-gray-400/10">
                                                                             <div class="box-body border-b">
-                                                                                <div class="flex relative">
-                                                                                    <div class="absolute h-full w-full inset-0">
-                                                                                    </div>
-                                                                                    <div class="ltr:pr-2 rtl:pl-2">
-                                                                                        <span
-                                                                                            class="avatar rounded-sm bg-blue-500/20 text-blue-500 p-2.5"><i
-                                                                                                class="ti ti-fish text-2xl leading-none"></i></span>
-                                                                                    </div>
-                                                                                    <div class="flex-1">
+                                                                                <div class="flex items-center justify-between">
+                                                                                    <div class="flex relative">
                                                                                         <div
-                                                                                            class="flex justify-between items-center mb-1 text-sm">
-                                                                                            <span
-                                                                                                class="text-base font-semibold text-gray-800 dark:text-white">
-                                                                                                <?= $sampel['nama_lokal']; ?>
-                                                                                            </span>
-
+                                                                                            class="absolute h-full w-full inset-0">
                                                                                         </div>
+                                                                                        <div class="ltr:pr-2 rtl:pl-2">
+                                                                                            <span
+                                                                                                class="avatar rounded-sm bg-blue-500/20 text-blue-500 p-2.5"><i
+                                                                                                    class="ti ti-fish text-2xl leading-none"></i></span>
+                                                                                        </div>
+                                                                                        <div class="flex-1">
+                                                                                            <div
+                                                                                                class="flex justify-between items-center mb-1 text-sm">
+                                                                                                <span
+                                                                                                    class="text-base font-semibold text-gray-800 dark:text-white">
+                                                                                                    <?= $sampel['nama_lokal']; ?>
+                                                                                                </span>
 
-                                                                                        <p
-                                                                                            class="text-smtext-gray-500 dark:text-white/70">
-                                                                                            <?= $sampel['jumlah_sampel']; ?>
-                                                                                            Sampel
-                                                                                        </p>
+                                                                                            </div>
+
+                                                                                            <p
+                                                                                                class="text-smtext-gray-500 dark:text-white/70">
+                                                                                                <?= $sampel['jumlah_sampel']; ?>
+                                                                                                Sampel
+                                                                                            </p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="flex justify-between">
+                                                                                        <div>
+                                                                                            <p class="mb-2">
+                                                                                                Warna
+                                                                                            </p>
+                                                                                            <div class="w-8 h-8 rounded-md"
+                                                                                                style="background-color: <?= $sampel['warna']; ?>;">
+                                                                                            </div>
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="flex flex-wrap space-x-3 mt-4">
@@ -619,20 +632,23 @@
                                         <div class="box-body">
                                             <div class="grid grid-cols-2">
 
-                                                <div class="pr-4 space-y-4">
+                                                <form method="post"
+                                                    action="<?php echo base_url('lhus/perbaikan/' . $permohonan['dtl_fppc'][0]['fppc_id']); ?>"
+                                                    class="pr-4 space-y-4">
                                                     <p>
                                                         Klik tombol ini untuk meminta perbaikan data dari penyelia
                                                     </p>
                                                     <input type="text"
                                                         class="ti-form-input ti-form-input-danger ti-input-perbaikan"
+                                                        name="alasan_perbaikan"
                                                         placeholder="Masukkan alasan perbaikan data" />
 
-                                                    <button type="button"
+                                                    <button type="submit"
                                                         class="w-full ti-btn btn ti-btn-danger cursor-pointer reject-button">
                                                         <i class="ti ti-close"></i>
                                                         Tolak
                                                     </button>
-                                                </div>
+                                                </form>
                                                 <div class="pl-4 border-l flex flex-col justify-between space-y-4">
                                                     <p>
                                                         Klik tombol di bawah ini untuk melakukan verifikasi
