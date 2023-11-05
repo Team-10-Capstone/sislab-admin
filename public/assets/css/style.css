@@ -2208,27 +2208,6 @@ select option:active,
   --tw-text-opacity: 1;
   color: rgb(226 232 240 / var(--tw-text-opacity));
 }
-.ti-striped-table tbody tr:nth-child(odd){
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-.ti-striped-table tbody tr:nth-child(even){
-  --tw-bg-opacity: 1;
-  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
-}
-:is(.dark .ti-striped-table tbody tr:nth-child(odd)){
-  background-color: rgb(var(--dark-bg));
-}
-:is(.dark .ti-striped-table tbody tr:nth-child(even)){
-  background-color: rgb(0 0 0 / 0.2);
-}
-.ti-custom-table-hover tbody tr:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
-}
-:is(.dark .ti-custom-table-hover tbody tr:hover){
-  background-color: rgb(0 0 0 / 0.2);
-}
 .table-bordered{
   border-width: 1px;
 }
@@ -15238,11 +15217,17 @@ select.tabulator-page-size option{
 }
 
 @media (min-width: 992px){
+  .lg\:col-span-2{
+    grid-column: span 2 / span 2;
+  }
   .lg\:col-span-4{
     grid-column: span 4 / span 4;
   }
   .lg\:flex{
     display: flex;
+  }
+  .lg\:grid{
+    display: grid;
   }
   .lg\:max-w-\[100px\]{
     max-width: 100px;
