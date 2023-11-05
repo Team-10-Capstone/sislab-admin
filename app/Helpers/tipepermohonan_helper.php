@@ -38,3 +38,23 @@ function convertPpkTipeToFppcTipe($kd_kegiatan, $kd_mks)
         return null;
     }
 }
+function getKodeSampel($kd_kegiatan, $kd_mks, $hidup)
+{
+    if ($kd_kegiatan == 'K') {
+        return 'DK';
+    } elseif ($kd_kegiatan == 'I' && $hidup == 1) {
+        return 'IH';
+    } else if ($kd_kegiatan == 'I' && $hidup == 2) {
+        return 'IB';
+    } else if ($kd_kegiatan == 'E') {
+        return 'EK';
+    } else {
+        return 'LL';
+    }
+}
+
+function keyToAlpha($key)
+{
+    $alphabet = range('A', 'Z');
+    return $alphabet[$key];
+}

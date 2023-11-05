@@ -10,6 +10,7 @@ class PermohonanUjiModel extends Model
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $allowedFields = [
+        'kode_sampel',
         'dtl_fppc_id',
         'parameter_uji_id',
         'hasil_uji_id',

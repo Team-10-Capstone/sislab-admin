@@ -220,7 +220,7 @@ class DisposisiController extends BaseController
                 'fppc_id' => $value['fppc_id'],
                 'id_wadah' => $value['id_wadah'],
                 'id_bentuk' => $value['id_bentuk'],
-                'nama_lokal' => $value['nama_lokal'],
+                'nama_lokal' => $value['nama_lokal'] . ' (' . $value['kode_sampel'] . ')',
                 'nama_latin' => $value['nama_latin'],
                 'jumlah_sampel' => $value['jumlah_sampel'],
                 'nama_wadah' => $value['nama_wadah'],

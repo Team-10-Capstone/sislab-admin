@@ -115,39 +115,50 @@ class WadahController extends BaseController
             $imageString = $this->request->getPost('image');
 
             $isImageStartsWithHttp = strpos($imageString, 'http') === 0;
-            
-            if(!$isImageStartsWithHttp) {
-            $imageData = json_decode($imageString);
-            
 
-            // if imageData name is initial-image.jpg, ignore the image
-            if ($imageData->name !== 'initial-image.jpg') {
-                $fileNama = $imageData->name;
+            if (!$isImageStartsWithHttp) {
+                $imageData = json_decode($imageString);
 
-                $uploadPath = WRITEPATH . 'uploads/';
 
-                $imageBinary = base64_decode($imageData->data);
+                // if imageData name is initial-image.jpg, ignore the image
+                if ($imageData->name !== 'initial-image.jpg') {
+                    $fileNama = $imageData->name;
 
-                $fileSize = file_put_contents($uploadPath . $fileNama, $imageBinary);
+                    $uploadPath = WRITEPATH . 'uploads/';
 
-                if ($fileSize === false) {
-                    session()->setFlashdata('error', 'Gagal membuat wadah baru.');
+                    $imageBinary = base64_decode($imageData->data);
+
+                    $fileSize = file_put_contents($uploadPath . $fileNama, $imageBinary);
+
+                    if ($fileSize === false) {
+                        session()->setFlashdata('error', 'Gagal membuat wadah baru.');
+                        return redirect()->to('/wadah');
+                    }
+
+
+                    $data = [
+                        'nama_wadah' => $this->request->getPost('nama'),
+                        'image' => base_url('uploads/' . $fileNama),
+                    ];
+
+                    $WadahModel->update($id, $data);
+
+                    session()->setFlashdata('success', 'Wadah berhasil diubah.');
+                    return redirect()->to('/wadah');
+                } else {
+                    $data = [
+                        'nama_wadah' => $this->request->getPost('nama'),
+                    ];
+
+                    $WadahModel->update($id, $data);
+
+                    session()->setFlashdata('success', 'Wadah berhasil diubah.');
                     return redirect()->to('/wadah');
                 }
-
-
-                $data = [
-                    'nama_wadah' => $this->request->getPost('nama'),
-                    'image' => base_url('uploads/' . $fileNama),
-                ];
-
-                $WadahModel->update($id, $data);
-
-                session()->setFlashdata('success', 'Wadah berhasil diubah.');
-                return redirect()->to('/wadah');
             } else {
                 $data = [
                     'nama_wadah' => $this->request->getPost('nama'),
+                    'image' => $imageString,
                 ];
 
                 $WadahModel->update($id, $data);
@@ -155,17 +166,6 @@ class WadahController extends BaseController
                 session()->setFlashdata('success', 'Wadah berhasil diubah.');
                 return redirect()->to('/wadah');
             }
-        } else {
-            $data = [
-                'nama_wadah' => $this->request->getPost('nama'),
-                'image' => $imageString,
-            ];
-
-            $WadahModel->update($id, $data);
-
-            session()->setFlashdata('success', 'Wadah berhasil diubah.');
-            return redirect()->to('/wadah');
-        }
         } else {
 
             $wadah = $WadahModel->find($id);

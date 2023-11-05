@@ -17,6 +17,33 @@ class HasilUjiController extends Controller
         $image = $this->request->getPost('image');
         $permohonan = $this->request->getPost('permohonan');
 
+        $rules = [
+            'sampels' => 'required',
+            'image' => 'required',
+            'permohonan' => 'required'
+        ];
+
+        $validation = \Config\Services::validation();
+
+        $validation->setRules($rules);
+
+        $isDataValid = $validation->run([
+            'sampels' => $sampels,
+            'image' => $image,
+            'permohonan' => $permohonan
+        ]);
+
+        if (!$isDataValid) {
+            $errors = $validation->getErrors();
+
+            $errorString = implode("\n", $errors);
+
+            session()->setFlashdata('errors', $errorString);
+
+            return redirect()->to('/pengujian/input-hasil/' . $sampels[0]['fppc_id']);
+        }
+
+
         $imageData = json_decode($image);
 
         $fileNama = $imageData->name;

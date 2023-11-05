@@ -133,6 +133,7 @@ class FppcController extends BaseController
         $fppcModel = new \App\Models\FppcModel();
         $fppcDetailsModel = new \App\Models\DtlFppcModel();
         $permohonanUjiModel = new \App\Models\PermohonanUjiModel();
+        $parameterUjiModel = new \App\Models\ParameterUjiModel();
 
         $adminId = session()->get('adminId');
 
@@ -159,6 +160,8 @@ class FppcController extends BaseController
             // get all ppk item related to ppk details from v_dtl_pelaporan
             $ppkItems = $karimutu->query("SELECT * FROM v_dtl_pelaporan WHERE id_ppk = ?", [$id])->getResultArray();
 
+            $parameters = $parameterUjiModel->findAll();
+
             $tipe = convertPpkTipeToFppcTipe($ppk['kd_kegiatan'], $ppk['kd_mks_kirim']);
 
             $data_fppc = [
@@ -181,7 +184,7 @@ class FppcController extends BaseController
             $fppcId = $fppcModel->insert($data_fppc);
 
             // loop ppkItems and get related data in $targetUji, then post to fppc_details
-            foreach ($ppkItems as $ppkItem) {
+            foreach ($ppkItems as $key => $ppkItem) {
 
                 // find form that match with ppk item, compared using id_ikan
                 $form = array_filter($forms, function ($form) use ($ppkItem) {
@@ -214,7 +217,22 @@ class FppcController extends BaseController
                     $targetUji = $formObj['target_uji'];
 
                     foreach ($targetUji as $target) {
+                        $relatedParameter = array_filter($parameters, function ($parameter) use ($target) {
+                            return $parameter['id'] == $target;
+                        });
+
+                        $relatedParameterData = array_values($relatedParameter)[0];
+
+                        $kd_kegiatan = $ppk['kd_kegiatan'];
+
+                        $kode = getKodeSampel($kd_kegiatan, $ppk['kd_mks_kirim'], $ppkItem['hidup']);
+
+                        $sampel_key = keyToAlpha($key);
+
+                        $kode_final = $kode . $fppcId . $sampel_key . '.' . $relatedParameterData['kode_uji'];
+
                         $data = [
+                            'kode_sampel' => $kode_final,
                             'dtl_fppc_id' => $dtlFppcId,
                             'parameter_uji_id' => $target,
                             'hasil_uji_id' => null,

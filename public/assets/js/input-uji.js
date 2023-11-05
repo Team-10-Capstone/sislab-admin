@@ -141,8 +141,12 @@
       .on("hide", (instance) => {})
       .on("show", (color, instance) => {})
       .on("save", (color, instance) => {
-        const warnaInput = document.querySelector(`#input-${id}`);
-        warnaInput.value = color.toHEXA().toString();
+        const warnaInput = document.querySelectorAll(`#input-${id}`);
+
+        for (let i = 0; i < warnaInput.length; i++) {
+          const input = warnaInput[i];
+          input.value = color.toHEXA().toString();
+        }
       })
       .on("clear", (instance) => {})
       .on("change", (color, source, instance) => {})
