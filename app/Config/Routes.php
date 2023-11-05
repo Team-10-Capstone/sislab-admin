@@ -45,9 +45,11 @@ $routes->match(['get', 'post'], 'RegisterController/store', 'RegisterController:
 $routes->match(['get', 'post'], 'LoginController/loginAuth', 'LoginController::loginAuth');
 $routes->get('/login', 'LoginController::index', ['filter' => 'noauth']);
 $routes->get('/profile', 'ProfileController::index', ['filter' => 'authGuard']);
-$routes->get('/user', 'UserController::index', ['filter' => 'authGuard']);
-$routes->get('/user/add', 'UserController::add', ['filter' => 'authGuard']);
-$routes->get('/user/edit/(:num)', 'UserController::edit/$1', ['filter' => 'authGuard']);
+
+$routes->get('/admin', 'AdminController::index', ['filter' => 'authGuard']);
+$routes->post('/admin/add', 'AdminController::create', ['filter' => 'authGuard']);
+$routes->post('/admin/edit/(:num)', 'AdminController::edit/$1', ['filter' => 'authGuard']);
+$routes->get('/admin/delete/(:num)', 'AdminController::delete/$1', ['filter' => 'authGuard']);
 
 $routes->get('/ppk', 'PpkController::index', ['filter' => 'authGuard']);
 

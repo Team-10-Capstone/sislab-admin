@@ -182,10 +182,10 @@
 
 				$userRole = session()->get('role');
 
-				if (canDisplayLink($userRole, [1])) {
+				if (canDisplayLink($userRole, [0])) {
 					// Display links for users with allowed roles
 					echo "<li class='slide'>
-					<a href='/user' class='side-menu__item'>
+					<a href='/admin' class='side-menu__item'>
 						<i class='ti ti-user-plus side-menu__icon'></i>
 						<span class='side-menu__label'>Daftar User</span>
 					</a>
