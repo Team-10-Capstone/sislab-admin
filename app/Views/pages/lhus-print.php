@@ -172,18 +172,68 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <tr>
+                                        <td style="padding: 4px">
+                                            1
+                                        </td>
+                                        <td style="padding: 4px">
+                                            <div style="width: 20px; height: 20px; background-color:<?php echo $lhus['kontrol']['kontrol_positif_warna']; ?>;
+                                                margin:0 auto;">
+                                            </div>
+                                        </td>
+                                        <td style="padding: 4px">
+                                            Kontrol Positif
+                                        </td>
+                                        <td style="padding: 4px">
+
+                                        </td>
+                                        <td style="padding: 4px">
+                                            <?php echo $lhus['kontrol']['kontrol_positif_ct']; ?>
+                                        </td>
+                                        <td style="padding: 4px">
+                                            <?php echo $lhus['kontrol']['kontrol_positif_hasil']; ?>
+                                        </td>
+                                        <td style="padding: 4px">
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 4px">
+                                            2
+                                        </td>
+                                        <td style="padding: 4px">
+                                            <div style="width: 20px; height: 20px; background-color:<?php echo $lhus['kontrol']['kontrol_negatif_warna']; ?>;
+                                                margin:0 auto;">
+                                            </div>
+                                        </td>
+                                        <td style="padding: 4px">
+                                            Kontrol Negatif
+                                        </td>
+                                        <td style="padding: 4px">
+
+                                        </td>
+                                        <td style="padding: 4px">
+                                            <?php echo $lhus['kontrol']['kontrol_negatif_ct']; ?>
+                                        </td>
+                                        <td style="padding: 4px">
+                                            <?php echo $lhus['kontrol']['kontrol_negatif_hasil']; ?>
+                                        </td>
+                                        <td style="padding: 4px">
+                                        </td>
+                                        <td></td>
+                                    </tr>
                                     <?php foreach ($lhus['dtl_fppc'] as $key => $hasil_uji): ?>
                                         <tr>
                                             <td style="padding: 4px">
-                                                <?php echo $key + 1; ?>
+                                                <?php echo $key + 3; ?>
                                             </td>
                                             <td style="padding: 4px">
-                                                <div style="width: 20px; height: 20px; background-color: #000;
+                                                <div style="width: 20px; height: 20px; background-color:<?php echo $hasil_uji['warna']; ?>;
                                                 margin:0 auto;">
                                                 </div>
                                             </td>
                                             <td style="padding: 4px">
-                                                <?php echo $hasil_uji['dtl_fppc_id']; ?>
+                                                <?php echo $hasil_uji['kode_sampel']; ?>
                                             </td>
                                             <td style="padding: 4px">
                                                 <?php echo $hasil_uji['nama_lokal']; ?>
@@ -263,12 +313,12 @@
                                     <td style="border: none"> </td>
                                     <td colspan="2" style="font-size: 14px; padding-top: 64px; border: none;"></td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td style="border: none;"></td>
                                     <td colspan="2" style="font-size: 14px; border: none;"><u>
                                             Sri Wahyuni, S.Pi, M.Si
                                         </u></td>
-                                </tr>
+                                </tr> -->
 
                             </table>
                             <table style="border-collapse: collapse; background-color:white; width: 450px;">
@@ -290,12 +340,12 @@
                                     <td style="border: none"> </td>
                                     <td colspan="2" style="font-size: 14px; padding-top: 64px; border: none;"></td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td style="border: none;"></td>
                                     <td colspan="2" style="font-size: 14px; border: none;"><u>
                                             Sri Wahyuni, S.Pi, M.Si
                                         </u></td>
-                                </tr>
+                                </tr> -->
 
                             </table>
                         </div>

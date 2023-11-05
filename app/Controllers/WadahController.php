@@ -59,7 +59,11 @@ class WadahController extends BaseController
             ];
 
             if (!$validation->run($requestData)) {
-                session()->setFlashdata('error', 'Gagal membuat wadah baru.');
+                $errors = $validation->getErrors();
+
+                $errorString = implode("\n", $errors);
+
+                session()->setFlashdata('errors', $errorString);
                 return redirect()->to('/wadah');
             }
 
@@ -118,7 +122,6 @@ class WadahController extends BaseController
 
             if (!$isImageStartsWithHttp) {
                 $imageData = json_decode($imageString);
-
 
                 // if imageData name is initial-image.jpg, ignore the image
                 if ($imageData->name !== 'initial-image.jpg') {
