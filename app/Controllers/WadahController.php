@@ -46,25 +46,51 @@ class WadahController extends BaseController
         if ($this->request->getMethod() === 'post') {
             $imageString = $this->request->getPost('image');
 
-            $imageData = json_decode($imageString);
+            $validation = \Config\Services::validation();
 
-            $fileNama = $imageData->name;
+            $validation->setRules([
+                'nama' => 'required',
+                'image' => 'required',
+            ]);
 
-            $uploadPath = WRITEPATH . 'uploads/';
+            $requestData = [
+                'nama' => $this->request->getPost('nama'),
+                'image' => $this->request->getPost('image'),
+            ];
 
-            $imageBinary = base64_decode($imageData->data);
-
-            $fileSize = file_put_contents($uploadPath . $fileNama, $imageBinary);
-
-            if ($fileSize === false) {
+            if (!$validation->run($requestData)) {
                 session()->setFlashdata('error', 'Gagal membuat wadah baru.');
                 return redirect()->to('/wadah');
             }
 
-            $data = [
-                'nama_wadah' => $this->request->getPost('nama'),
-                'image' => base_url('uploads/' . $fileNama),
-            ];
+            $isImageStartsWithHttp = strpos($imageString, 'http') === 0;
+
+            if (!$isImageStartsWithHttp) {
+                $imageData = json_decode($imageString);
+
+                $fileNama = $imageData->name;
+
+                $uploadPath = WRITEPATH . 'uploads/';
+
+                $imageBinary = base64_decode($imageData->data);
+
+                $fileSize = file_put_contents($uploadPath . $fileNama, $imageBinary);
+
+                if ($fileSize === false) {
+                    session()->setFlashdata('error', 'Gagal membuat wadah baru.');
+                    return redirect()->to('/wadah');
+                }
+
+                $data = [
+                    'nama_wadah' => $this->request->getPost('nama'),
+                    'image' => base_url('uploads/' . $fileNama),
+                ];
+            } else {
+                $data = [
+                    'nama_wadah' => $this->request->getPost('nama'),
+                    'image' => $imageString,
+                ];
+            }
 
             $WadahModel->insert($data);
 
