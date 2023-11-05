@@ -4,21 +4,21 @@ namespace Tests\Controllers;
 
 use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\ControllerTester;
-use App\Controllers\BentukController;
+use App\Controllers\AdminController;
 use CodeIgniter\Test\DatabaseTestTrait;
 
-class BentukControllerTest extends CIUnitTestCase
+class AdminControllerTest extends CIUnitTestCase
 {
     use ControllerTester;
     use DatabaseTestTrait;
 
     public function testIndex()
     {
-        $result = $this->controller(BentukController::class)
+        $result = $this->controller(AdminController::class)
             ->execute('index');
 
         $this->assertTrue($result->isOK());
-        $this->assertStringContainsString('Daftar bentuk', $result->getBody());
+        $this->assertStringContainsString('Daftar Admin', $result->getBody());
     }
 
     public function testCreatePost()
@@ -26,38 +26,43 @@ class BentukControllerTest extends CIUnitTestCase
         $request = $this->request
             ->withMethod('post')
             ->setGlobal('post', [
-                'nama' => 'Bentuk 1',
+                'name' => 'Admin 1',
+                'email' => 'admin1@mail.com',
+                'roleId' => 1,
+                'password' => 'admin1',
             ]);
 
-        $result = $this->withRequest($request)->controller(BentukController::class)
+        $result = $this->withRequest($request)->controller(AdminController::class)
             ->execute('create');
 
         $result->assertOK();
-        $result->assertRedirectTo('/bentuk');
+        $result->assertRedirectTo('/admin');
     }
 
     public function testEdit() {
         $request = $this->request
             ->withMethod('post')
             ->setGlobal('post', [
-                'nama' => 'Bentuk 1',
+                'name' => 'Admin 1',
+                'email' => 'admin1@mail.com',
+                'roleId' => 1,
+                'password' => 'admin1',
             ]);
-        
-        $result = $this->withRequest($request)->controller(BentukController::class)
+
+        $result = $this->withRequest($request)->controller(AdminController::class)
             ->execute('edit', 1);
 
         $this->assertTrue($result->isOK());
-        $result->assertTrue(session()->has('success'));
-        $result->assertRedirectTo('/bentuk');
+        $result->assertRedirectTo('/admin');
     }
 
     public function testDelete() {
-        $result = $this->controller(BentukController::class)
+        $result = $this->controller(AdminController::class)
             ->execute('delete', 1);
 
         $this->assertTrue($result->isOK());
         $result->assertTrue(session()->has('success'));
-        $result->assertRedirectTo('/bentuk');
+        $result->assertRedirectTo('/admin');
     }
 }
 
