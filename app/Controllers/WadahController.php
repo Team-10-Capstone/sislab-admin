@@ -114,7 +114,11 @@ class WadahController extends BaseController
         if ($this->request->getMethod() === 'post') {
             $imageString = $this->request->getPost('image');
 
+            $isImageStartsWithHttp = strpos($imageString, 'http') === 0;
+            
+            if(!$isImageStartsWithHttp) {
             $imageData = json_decode($imageString);
+            
 
             // if imageData name is initial-image.jpg, ignore the image
             if ($imageData->name !== 'initial-image.jpg') {
@@ -151,6 +155,17 @@ class WadahController extends BaseController
                 session()->setFlashdata('success', 'Wadah berhasil diubah.');
                 return redirect()->to('/wadah');
             }
+        } else {
+            $data = [
+                'nama_wadah' => $this->request->getPost('nama'),
+                'image' => $imageString,
+            ];
+
+            $WadahModel->update($id, $data);
+
+            session()->setFlashdata('success', 'Wadah berhasil diubah.');
+            return redirect()->to('/wadah');
+        }
         } else {
 
             $wadah = $WadahModel->find($id);
