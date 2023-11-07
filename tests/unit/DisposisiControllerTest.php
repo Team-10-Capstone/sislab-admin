@@ -6,11 +6,14 @@ use CodeIgniter\Test\CIUnitTestCase;
 use CodeIgniter\Test\ControllerTester;
 use App\Controllers\FppcController;
 use App\Controllers\DisposisiController;
+use App\Controllers\AdminController;
 use CodeIgniter\Test\DatabaseTestTrait;
 use App\Models\FppcModel;
 use App\Models\WadahModel;
 use App\Models\BentukModel;
 use App\Models\ParameterUjiModel;
+use App\Models\PermohonanUjiModel;
+use App\Models\DtlFppcModel;
 use CodeIgniter\Test\Fabricator;
 
 class DisposisiControllerTest extends CIUnitTestCase
@@ -20,27 +23,87 @@ class DisposisiControllerTest extends CIUnitTestCase
 
     public function testCreatePost()
     {
-        $formatterFppc = [
-            'no_fppc' => 'randomNumber',
-            'no_ppk' => 'randomNumber',
-            'tgl_ppk' => 'date',
-            'id_ppk' => 'randomNumber',
-            'id_trader' => 'randomNumber',
-            'id_petugas' => 'randomNumber',
-            'nip_baru' => 'randomNumber',
-            'tgl_monsur' => 'date',
-            'petugas_monsur' => 'randomNumber',
-            'status' => 'randomNumber',
-            'tipe_permohonan' => 'randomNumber',
-            'nama_trader' => 'firstName',
-            'alamat_trader' => 'address',
-            'nama_penerima' => 'firstName',
-            'alamat_penerima' => 'address',
+        $fppcModel = new FppcModel();
+        $permohonanUjiModel = new PermohonanUjiModel();
+        $dtlFppcModel = new DtlFppcModel();
+
+        $formattersWadah = [
+            'nama_wadah' => 'firstName',
+            'image' => 'imageUrl',
         ];
 
-        $fabricatorFppc = new Fabricator(FppcModel::class, $formatterFppc);
+        $formattersBentuk = [
+            'nama_bentuk' => 'firstName',
+        ];
 
-        $fppc = $fabricatorFppc->create();
+        $formattersParameterUji = [
+            'kode_uji' => 'randomNumber',
+            'jenis_parameter' => 'randomElement',
+            'keterangan_uji' => 'sentence',
+            'standar_uji' => 'firstName',
+            'no_ikm' => 'randomNumber',
+        ];
+
+        $fabricatorWadah = new Fabricator(WadahModel::class, $formattersWadah);
+
+        $wadah = $fabricatorWadah->create();
+
+        $fabricatorBentuk = new Fabricator(BentukModel::class, $formattersBentuk);
+
+        $bentuk = $fabricatorBentuk->create();
+
+        $fabricatorParameterUji = new Fabricator(ParameterUjiModel::class, $formattersParameterUji);
+
+        $parameter_uji = $fabricatorParameterUji->create();
+
+        $fppcRequest = $this->request
+            ->withMethod('post')
+            ->setGlobal('post', [
+                'ppk' => [
+                    [
+                        'id_kd_ikan' => '48157',
+                        'jumlah' => '4',
+                        'wadah' => $wadah['id'],
+                        'bentuk' => $bentuk['id'],
+                        'target_uji' => [$parameter_uji['id']]
+                    ]
+                ]
+            ]);
+
+        $fppcResult = $this->withRequest($fppcRequest)->controller(FppcController::class)
+            ->execute('store', '711573');
+
+        $fppcResult->assertOK();
+
+        $requestAdmin = $this->request
+            ->withMethod('post')
+            ->setGlobal('post', [
+                'name' => 'Admin 1',
+                'email' => 'admin1@mail.com',
+                'roleId' => 1,
+                'password' => 'admin1',
+            ]);
+
+        $resultAdmin = $this->withRequest($requestAdmin)->controller(AdminController::class)
+            ->execute('create');
+
+        $resultAdmin->assertOK();
+
+        $fppc = $fppcModel->first();
+
+        $fppcId = $fppc['id'];
+
+        $dtlFppcs = $dtlFppcModel->where('id_fppc', $fppcId)->findAll();
+
+        $dtlFppcIds = array_map(function ($dtlFppc) {
+            return $dtlFppc['id'];
+        }, $dtlFppcs);
+
+        $permohonanRelated = $permohonanUjiModel->whereIn('dtl_fppc_id', $dtlFppcIds)->findAll();
+
+        $permohonanIds = array_map(function ($permohonan) {
+            return $permohonan['id'];
+        }, $permohonanRelated);
 
         $request = $this->request
             ->withMethod('post')
@@ -48,14 +111,7 @@ class DisposisiControllerTest extends CIUnitTestCase
                 'disposisi' => [
                     [
                         'fppc_id' => $fppc['id'],
-                        'permohonan_uji_id' => [],
-                        'petugas_penyelia' => [1],
-                        'tanggal_pengujian' => '2021-08-01',
-                        'waktu_pengujian' => '08:00',
-                    ],
-                    [
-                        'fppc_id' => $fppc['id'],
-                        'permohonan_uji_id' => [],
+                        'permohonan_uji_id' => $permohonanIds,
                         'petugas_penyelia' => [1],
                         'tanggal_pengujian' => '2021-08-01',
                         'waktu_pengujian' => '08:00',

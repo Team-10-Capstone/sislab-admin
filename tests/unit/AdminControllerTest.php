@@ -39,7 +39,8 @@ class AdminControllerTest extends CIUnitTestCase
         $result->assertRedirectTo('/admin');
     }
 
-    public function testEdit() {
+    public function testEdit()
+    {
         $request = $this->request
             ->withMethod('post')
             ->setGlobal('post', [
@@ -56,7 +57,8 @@ class AdminControllerTest extends CIUnitTestCase
         $result->assertRedirectTo('/admin');
     }
 
-    public function testDelete() {
+    public function testDelete()
+    {
         $result = $this->controller(AdminController::class)
             ->execute('delete', 1);
 

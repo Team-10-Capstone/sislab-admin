@@ -6,7 +6,6 @@
     .header-print {
         /* ubah angka sesuai kebutuhan */
         margin: 0 auto;
-        /* mengatur margin kiri dan kanan agar tabel berada di tengah */
         text-align: center;
         padding: 8px;
         border: 0px solid black;
@@ -61,7 +60,13 @@
                     <div class="table-wrapper" id="lhu-doc"
                         style="background-color: white; display: inline-block; padding: 0px;">
                         <!-- kop surat -->
-                        <table class="header-print">
+                        <table class="header-print" style="
+                            margin: 0 auto;
+        text-align: center;
+        padding: 8px;
+        border: 0px solid black;
+        background-color: #fff;
+        border-collapse: collapse;">
                             <tr>
                                 <td rowspan="2" style="padding-left: 8px; border:none;"><img
                                         src="<?php echo base_url('assets/img/logocpib.svg'); ?>" width="120px"></td>
@@ -345,8 +350,26 @@
         const doc = document.getElementById('lhu-doc');
 
         const newWin = window.open('', 'Print-Window');
+
+        var htmlToPrintCss = '' +
+            '<style type="text/css">' +
+            'table th, table td {' +
+            'border: 1px solid #000;' +
+            '}' +
+            '@page {' +
+            'size: A4; /* Set the page size to A4 */' +
+            'margin: 1cm;' +
+            '}' +
+            '</style>';
+
+        const html = '' +
+            '<html>' +
+            '<head>' + htmlToPrintCss + '</head>' +
+            '<body onload="window.print()">' + doc.innerHTML + '</body>' +
+            '</html>';
+
         newWin.document.open();
-        newWin.document.write('<html><body onload="window.print()">' + doc.innerHTML + '</body></html>');
+        newWin.document.write(html);
         newWin.print();
     }
 </script>

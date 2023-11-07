@@ -34,81 +34,84 @@ class AdminController extends BaseController
             'admins' => $admin,
             'pager_links' => $pager_links,
         ]);
-       
+
     }
 
-   public function create() {
-    helper(['form', 'url']);
+    public function create()
+    {
+        helper(['form', 'url']);
 
-    $adminModel = new AdminModel();
-   
-    if ($this->request->getMethod() === 'post') {
-        $rules = [
-            'name' => 'required',
-            'email' => 'required',
-            'roleId' => 'required',
-            'password' => 'required',
-        ];
+        $adminModel = new AdminModel();
 
-        if (!$this->validate($rules)) {
-            $errors = $this->validator->getErrors();
-            $errorString = implode("\n", $errors);
-            session()->setFlashdata('errors', $errorString);
+        if ($this->request->getMethod() === 'post') {
+            $rules = [
+                'name' => 'required',
+                'email' => 'required',
+                'roleId' => 'required',
+                'password' => 'required',
+            ];
+
+            // if (!$this->validate($rules)) {
+            //     dd($this->validator->getErrors());
+            //     $errors = $this->validator->getErrors();
+            //     $errorString = implode("\n", $errors);
+            //     session()->setFlashdata('errors', $errorString);
+            //     return redirect()->to('/admin');
+            // }
+
+            $data = [
+                'name' => $this->request->getPost('name'),
+                'email' => $this->request->getPost('email'),
+                'roleId' => $this->request->getPost('roleId'),
+                'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            ];
+
+            $adminModel->insert($data);
+
+            session()->setFlashdata('success', 'Berhasil menambahkan data.');
+
             return redirect()->to('/admin');
         }
 
-        $data = [
-            'name' => $this->request->getPost('name'),
-            'email' => $this->request->getPost('email'),
-            'roleId' => $this->request->getPost('roleId'),
-            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-        ];
-
-        $adminModel->insert($data);
-
-        session()->setFlashdata('success', 'Berhasil menambahkan data.');
-
-        return redirect()->to('/admin');
     }
 
-   }
+    public function edit($id)
+    {
+        helper(['form', 'url']);
 
-   public function edit($id) {
-    helper(['form', 'url']);
+        $adminModel = new AdminModel();
 
-    $adminModel = new AdminModel();
+        if ($this->request->getMethod() === 'post') {
+            $rules = [
+                'name' => 'required',
+                'email' => 'required',
+                'roleId' => 'required',
+                'password' => 'required',
+            ];
 
-    if ($this->request->getMethod() === 'post') {
-        $rules = [
-            'name' => 'required',
-            'email' => 'required',
-            'roleId' => 'required',
-            'password' => 'required',
-        ];
+            if (!$this->validate($rules)) {
+                $errors = $this->validator->getErrors();
+                $errorString = implode("\n", $errors);
+                session()->setFlashdata('errors', $errorString);
+                return redirect()->to('/admin');
+            }
 
-        if (!$this->validate($rules)) {
-            $errors = $this->validator->getErrors();
-            $errorString = implode("\n", $errors);
-            session()->setFlashdata('errors', $errorString);
+            $data = [
+                'name' => $this->request->getPost('name'),
+                'email' => $this->request->getPost('email'),
+                'roleId' => $this->request->getPost('roleId'),
+                'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            ];
+
+            $adminModel->update($id, $data);
+
+            session()->setFlashdata('success', 'Berhasil mengubah data.');
+
             return redirect()->to('/admin');
         }
-
-        $data = [
-            'name' => $this->request->getPost('name'),
-            'email' => $this->request->getPost('email'),
-            'roleId' => $this->request->getPost('roleId'),
-            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
-        ];
-
-        $adminModel->update($id, $data);
-
-        session()->setFlashdata('success', 'Berhasil mengubah data.');
-
-        return redirect()->to('/admin');
     }
-   }
 
-   public function delete($id)
+    public function delete($id)
     {
         $AdminModel = new AdminModel();
 

@@ -17,8 +17,8 @@ class LoginController extends Controller
     {
         $session = session();
         $adminModel = new AdminModel();
-        $email = $this->request->getVar('email');
-        $password = $this->request->getVar('password');
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
 
         $data = $adminModel->where('email', $email)->first();
 

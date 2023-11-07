@@ -62,11 +62,17 @@
                     <div class="table-wrapper" id="lhu-doc"
                         style="background-color: white; display: inline-block; padding: 0px;">
                         <!-- kop surat -->
-                        <table class="header-print" style="margin: 0 auto;">
+                        <table class="header-print" style="
+                            margin: 0 auto;
+        text-align: center;
+        padding: 8px;
+        border: 0px solid black;
+        background-color: #fff;
+        border-collapse: collapse;">
                             <tr>
                                 <td rowspan="2" style="padding-left: 8px; border:none;"><img
                                         src="<?php echo base_url('assets/img/logobkipm.webp'); ?>" width="80px"></td>
-                                <td style="width:400px; font-size:14px; border:none; font-weight:bold; font-family:Arial, Helvetica, sans-serif; color: #000;"
+                                <td style="width:450px; font-size:14px; border:none; font-weight:bold; font-family:Arial, Helvetica, sans-serif; color: #000;"
                                     class="!text-black">
                                     BALAI BESAR KARANTINA IKAN, PENGENDALIAN MUTU
                                     DAN KEAMANAN HASIL PERIKANAN JAKARTA I
@@ -89,7 +95,7 @@
                         <div style="display:flex; justify-content:center; padding:8px">
                             <!-- NO LHU -->
                             <table
-                                style="border-collapse: collapse; background-color:white; width: 600px; text-align: center;">
+                                style="border-collapse: collapse; background-color:white; width: 550px; text-align: center;">
                                 <tr>
 
                                     <td style="text-align: center; font-size: 14px; font-weight: bold; border: none;">
@@ -110,7 +116,7 @@
                         </div>
 
                         <div style="display:flex; justify-content:center; margin-top: 20px; ">
-                            <table style="border-collapse: collapse; background-color:white; width: 500px;
+                            <table style="border-collapse: collapse; background-color:white; width: 400px;
                                 border-color: black !important; color: black !important;
                                 font-size: 12px;
                             ">
@@ -158,7 +164,7 @@
                         <div style="display:flex; justify-content:center; margin-top: 20px; ">
                             <!-- Data -->
                             <table
-                                style="border-collapse: collapse; background-color:white; width: 600px; font-size: 14px; text-align: center;">
+                                style="border-collapse: collapse; background-color:white; width: 550px; font-size: 14px; text-align: center;">
                                 <thead>
                                     <tr>
                                         <th style="padding: 4px">No.</th>
@@ -259,7 +265,7 @@
                         <div style="display:flex; justify-content:center; margin-top: 20px; ">
                             <!-- Catatan -->
                             <table
-                                style="border-collapse: collapse; background-color:white; width:600px; font-size: 14px; text-align: left;">
+                                style="border-collapse: collapse; background-color:white; width:550px; font-size: 14px; text-align: left;">
                                 <thead>
                                     <tr>
                                         <th colspan="2" width="10%" style="font-size: 14px; border: none;">Catatan/</th>
@@ -299,7 +305,7 @@
                         </div>
 
                         <div
-                            style="display:flex; justify-content:space-between ;  width:600px; margin: 0 auto;margin-top: 48px; ">
+                            style="display:flex; justify-content:space-between ;  width:550px; margin: 0 auto;margin-top: 48px; ">
                             <!-- TTD -->
                             <table style="border-collapse: collapse; background-color:white; width: 200px;">
 
@@ -377,7 +383,6 @@
             'padding: 0.5em;' +
             '}' +
             '@page {' +
-            'size: A4; /* Set the page size to A4 */' +
             'margin: 1cm;' +
             '}' +
             '</style>';

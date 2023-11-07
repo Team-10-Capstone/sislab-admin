@@ -33,12 +33,14 @@ class WadahControllerTest extends CIUnitTestCase
         $result = $this->withRequest($request)->controller(WadahController::class)
             ->execute('create');
 
+        // $result->assertTrue(session()->has('success'));
         $result->assertOK();
         $result->assertRedirectTo('/wadah');
 
     }
 
-    public function testEdit() {
+    public function testEdit()
+    {
         $request = $this->request
             ->withMethod('post')
             ->setGlobal('post', [
@@ -54,7 +56,8 @@ class WadahControllerTest extends CIUnitTestCase
 
     }
 
-    public function testDelete() {
+    public function testDelete()
+    {
         $result = $this->controller(WadahController::class)
             ->execute('delete', 1);
 
