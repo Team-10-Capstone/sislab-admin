@@ -94,10 +94,13 @@ $routes->get('/lhus/ajukan-lhus/(:num)', 'LhusController::ajukanLhus/$1', ['filt
 $routes->get('/lhus/verifikasi', 'LhusController::VerifikasiIndex', ['filter' => 'authGuard']);
 $routes->get('/lhus/verifikasi/(:num)', 'LhusController::VerifikasiDetails/$1', ['filter' => 'authGuard']);
 $routes->post('/lhus/perbaikan/(:num)', 'LhusController::perbaikanLhus/$1', ['filter' => 'authGuard']);
+$routes->post('/lhus/verifikasi/(:num)', 'LhusController::verifikasiLhus/$1', ['filter' => 'authGuard']);
 
 $routes->get('/uploads/(:segment)', 'ImageController::show/$1');
 
-$routes->get('/print-lhu', 'LhuController::print', ['filter' => 'authGuard']);
+$routes->get('/lhu', 'LhuController::index', ['filter' => 'authGuard']);
+
+$routes->get('/print-lhu/(:num)', 'LhuController::print/$1', ['filter' => 'authGuard']);
 $routes->get('/print-lhus/(:num)/(:num)', 'LhusController::print/$1/$2', ['filter' => 'authGuard']);
 
 

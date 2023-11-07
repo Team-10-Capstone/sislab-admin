@@ -9,7 +9,7 @@ class LhuController extends BaseController
         $this->pager = \Config\Services::pager();
     }
 
-    public function print()
+    public function print($id)
     {
         return view('pages/lhu-print', [
             'title' => 'Print LHU',
@@ -44,7 +44,7 @@ class LhuController extends BaseController
             ->orderBy($order_by[0], $order_by[1])
             ->limit($perPage, $offset);
 
-        $query->like('fppc.status', "selesai-pengujian");
+        $query->like('fppc.status', "terbit-lhu");
 
         if (!empty($keyword)) {
             $query->like('no_fppc', $keyword);
@@ -60,7 +60,8 @@ class LhuController extends BaseController
         }
 
         if (!empty($tipe_permohonan)) {
-            $query->where('tipe_permohonan', $tipe_permohonan);
+            $query->like('fppc.tipe_permohonan', $tipe_permohonan);
+
         }
 
         // Execute the query to retrieve the results
@@ -73,7 +74,7 @@ class LhuController extends BaseController
         // Create a pager instance
         $pager = $this->pager;
 
-        return view('pages/lhus', [
+        return view('pages/lhu', [
             'keyword' => $keyword,
             'data' => $results,
             'pager' => $pager,
@@ -81,7 +82,7 @@ class LhuController extends BaseController
             'start_date' => $start_date,
             'end_date' => $end_date,
             'tipe_permohonan' => $tipe_permohonan,
-            'title' => 'Daftar LHUS',
+            'title' => 'Daftar LHU',
         ]);
     }
 

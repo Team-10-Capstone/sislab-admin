@@ -42,7 +42,8 @@
             <div>
                 <h3
                     class="text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-white text-2xl font-medium">
-                    Disposisi Penyelia</h3>
+                    Daftar LHU
+                </h3>
             </div>
             <ol class="flex items-center whitespace-nowrap min-w-0">
                 <li class="text-sm">
@@ -54,7 +55,7 @@
                     </a>
                 </li>
                 <li class="text-sm text-gray-500 hover:text-primary dark:text-white/70 " aria-current="page">
-                    Disposisi Penyelia
+                    Laporan Hasil Uji Sementara
                 </li>
             </ol>
         </div>
@@ -66,8 +67,8 @@
                 <div class="box">
 
                     <div class="box-body">
-                        <form method="get" action="<?= site_url('disposisi-penyelia') ?>" onsubmit="return false;"
-                            id="search-form" class="xl:flex xl:justify-between space-y-3 xl:space-y-0">
+                        <form method="get" action="<?= site_url('lhus') ?>" onsubmit="return false;" id="search-form"
+                            class="xl:flex xl:justify-between space-y-3 xl:space-y-0">
                             <div class="sm:flex sm:space-x-3 space-y-3 sm:space-y-0 rtl:space-x-reverse">
                                 <div class="relative max-w-xs">
                                     <label for="hs-table-search" class="sr-only">Pencarian</label>
@@ -220,13 +221,11 @@
                                             </td>
 
                                             <td class="font-medium space-x-2 rtl:space-x-reverse">
-
-                                                <a href="<?= site_url('disposisi-penyelia/create/' . $row['id']) ?>"
-                                                    class="invoice-edit m-0 relative ti-btn rounded-full p-2 transition-none focus:outline-none ti-btn-soft-secondary">
-                                                    <i class="ti ti-pencil"></i>
-                                                    <p>
-                                                        Buat Disposisi
-                                                    </p>
+                                                <!-- print button -->
+                                                <a href="<?php echo base_url('print-lhu/' . $row['id']); ?>"
+                                                    class="w-full ti-btn bg-gray-500 text-white hover:bg-gray-600 focus:ring-gray-500 dark:bg-black/20 dark:hover:bg-black/30 dark:focus:ring-offset-white/10">
+                                                    <i class="ti ti-printer"></i>
+                                                    Cetak PDF
                                                 </a>
                                             </td>
                                         </tr>

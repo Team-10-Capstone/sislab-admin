@@ -65,13 +65,10 @@
         <div class="grid grid-cols-12 gap-6">
             <div class="col-span-12">
                 <div class="box">
-                    <div class="box-header lg:flex lg:justify-between">
-                        <h5 class="box-title my-auto">Daftar FPPC</h5>
 
-                    </div>
                     <div class="box-body">
-                        <form method="get" action="<?= site_url('FppcController/index') ?>" onsubmit="return false;"
-                            id="search-form" class="xl:flex xl:justify-between space-y-3 xl:space-y-0">
+                        <form method="get" action="<?= site_url('lhus') ?>" onsubmit="return false;" id="search-form"
+                            class="xl:flex xl:justify-between space-y-3 xl:space-y-0">
                             <div class="sm:flex sm:space-x-3 space-y-3 sm:space-y-0 rtl:space-x-reverse">
                                 <div class="relative max-w-xs">
                                     <label for="hs-table-search" class="sr-only">Pencarian</label>
@@ -132,7 +129,7 @@
                                         </svg>
                                     </button>
 
-                                    <input type="hidden" name="kd_kegiatan" value="">
+                                    <input type="hidden" name="tipe_permohonan" value="">
 
                                     <div id="dropdown-tipe" aria-labelledby="hs-dropdown-transform-style"
                                         data-hs-transition
@@ -140,17 +137,14 @@
                                         <a id="" class="ti-dropdown-item" href="javascript:void(0);">
                                             Semua jenis
                                         </a>
-                                        <a id="I" class="ti-dropdown-item" href="javascript:void(0);">
-                                            Import
+                                        <a id="lalulintas" class="ti-dropdown-item" href="javascript:void(0);">
+                                            Lalulintas
                                         </a>
-                                        <a id="N" class="ti-dropdown-item" href="javascript:void(0);">
-                                            Surveilance & Mandiri
+                                        <a id="mandiri" class="ti-dropdown-item" href="javascript:void(0);">
+                                            Mandiri
                                         </a>
-                                        <a id="K" class="ti-dropdown-item" href="javascript:void(0);">
-                                            Domestik keluar
-                                        </a>
-                                        <a id="M" class="ti-dropdown-item" href="javascript:void(0);">
-                                            Domestik masuk
+                                        <a id="monsur" class="ti-dropdown-item" href="javascript:void(0);">
+                                            Monsur
                                         </a>
                                     </div>
                                 </div>
@@ -268,6 +262,6 @@
 <script src="<?php echo base_url('assets/libs/choices.js/public/assets/scripts/choices.min.js'); ?>"></script>
 
 <!-- Invoice JS -->
-<script src="<?php echo base_url('assets/js/permohonan-ppk.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/fppc.js'); ?>"></script>
 
 <?= $this->endSection('scripts'); ?>

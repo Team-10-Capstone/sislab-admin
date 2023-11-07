@@ -64,10 +64,7 @@
         <div class="grid grid-cols-12 gap-6">
             <div class="col-span-12">
                 <div class="box">
-                    <div class="box-header lg:flex lg:justify-between">
-                        <h5 class="box-title my-auto">Daftar FPPC</h5>
 
-                    </div>
                     <div class="box-body">
                         <form method="get" action="<?= site_url('fppc/index') ?>" onsubmit="return false;"
                             id="search-form" class="xl:flex xl:justify-between space-y-3 xl:space-y-0">

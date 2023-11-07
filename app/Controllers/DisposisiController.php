@@ -54,7 +54,7 @@ class DisposisiController extends BaseController
         }
 
         if (!empty($tipe_permohonan)) {
-            $query->where('tipe_permohonan', $tipe_permohonan);
+            $query->like('fppc.tipe_permohonan', $tipe_permohonan);
         }
 
         // Execute the query to retrieve the results

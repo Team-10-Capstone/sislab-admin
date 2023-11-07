@@ -52,7 +52,8 @@ class LhusController extends BaseController
         }
 
         if (!empty($tipe_permohonan)) {
-            $query->where('tipe_permohonan', $tipe_permohonan);
+            $query->like('fppc.tipe_permohonan', $tipe_permohonan);
+
         }
 
         // Execute the query to retrieve the results
@@ -381,7 +382,7 @@ class LhusController extends BaseController
 
         return view('pages/lhus-verifikasi-details', [
             'fppc' => $fppcData,
-            'title' => 'Input Hasil Uji',
+            'title' => 'Verifikasi LHUS',
             'disposisis' => $uniqueDisposisiWithPenyelia,
             'managerData' => $managerData,
             'permohonans' => $groupedPermohonanUjiWithArrOfDtlFppc,
@@ -433,7 +434,7 @@ class LhusController extends BaseController
         }
 
         if (!empty($tipe_permohonan)) {
-            $query->where('tipe_permohonan', $tipe_permohonan);
+            $query->like('fppc.tipe_permohonan', $tipe_permohonan);
         }
 
         // Execute the query to retrieve the results
@@ -464,7 +465,7 @@ class LhusController extends BaseController
         $lhuModel = new \App\Models\LhuModel();
 
         $fppcModel->update($id, [
-            'status' => 'lhus',
+            'status' => 'terbit-lhu',
         ]);
 
         session()->setFlashdata('success', 'Berhasil memverifikasi LHUS');
