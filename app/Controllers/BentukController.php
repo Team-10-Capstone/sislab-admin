@@ -44,18 +44,18 @@ class BentukController extends BaseController
         $BentukModel = new BentukModel();
 
         if ($this->request->getMethod() === 'post') {
-            $rules = [
-                'nama' => 'required',
+            $rulesBentuk = [
+                'nama_bentuk' => 'required',
             ];
-
-            if (!$this->validate($rules)) {
-                session()->setFlashdata('error', $this->validator->getErrors());
-                return redirect()->to('/bentuk');
-            }
 
             $data = [
                 'nama_bentuk' => $this->request->getPost('nama'),
             ];
+
+            if (!$this->validateData($data, $rulesBentuk)) {
+                session()->setFlashdata('error', $this->validator->getErrors());
+                return redirect()->to('/bentuk');
+            }
 
             $BentukModel->insert($data);
 

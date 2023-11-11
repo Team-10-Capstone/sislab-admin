@@ -82,19 +82,12 @@ class AdminController extends BaseController
         $adminModel = new AdminModel();
 
         if ($this->request->getMethod() === 'post') {
-            $rules = [
+            $rulesAdmin = [
                 'name' => 'required',
                 'email' => 'required',
                 'roleId' => 'required',
                 'password' => 'required',
             ];
-
-            if (!$this->validate($rules)) {
-                $errors = $this->validator->getErrors();
-                $errorString = implode("\n", $errors);
-                session()->setFlashdata('errors', $errorString);
-                return redirect()->to('/admin');
-            }
 
             $data = [
                 'name' => $this->request->getPost('name'),
@@ -102,6 +95,13 @@ class AdminController extends BaseController
                 'roleId' => $this->request->getPost('roleId'),
                 'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
             ];
+
+            if (!$this->validateData($data, $rulesAdmin)) {
+                $errors = $this->validator->getErrors();
+                $errorString = implode("\n", $errors);
+                session()->setFlashdata('errors', $errorString);
+                return redirect()->to('/admin');
+            }
 
             $adminModel->update($id, $data);
 

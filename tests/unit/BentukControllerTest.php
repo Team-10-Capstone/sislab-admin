@@ -32,17 +32,31 @@ class BentukControllerTest extends CIUnitTestCase
         $result = $this->withRequest($request)->controller(BentukController::class)
             ->execute('create');
 
+        $requestError = $this->request
+            ->withMethod('post')
+            ->setGlobal('post', [
+                'nama' => null,
+            ]);
+
+        $resultError = $this->withRequest($requestError)->controller(BentukController::class)
+            ->execute('create');
+
         $result->assertOK();
+        $resultError->assertTrue(session()->has('error'));
+
+        $result->assertOK();
+        $result->assertTrue(session()->has('success'));
         $result->assertRedirectTo('/bentuk');
     }
 
-    public function testEdit() {
+    public function testEdit()
+    {
         $request = $this->request
             ->withMethod('post')
             ->setGlobal('post', [
                 'nama' => 'Bentuk 1',
             ]);
-        
+
         $result = $this->withRequest($request)->controller(BentukController::class)
             ->execute('edit', 1);
 
@@ -51,7 +65,8 @@ class BentukControllerTest extends CIUnitTestCase
         $result->assertRedirectTo('/bentuk');
     }
 
-    public function testDelete() {
+    public function testDelete()
+    {
         $result = $this->controller(BentukController::class)
             ->execute('delete', 1);
 
