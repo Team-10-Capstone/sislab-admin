@@ -14,8 +14,8 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
     require SYSTEMPATH . 'Config/Routes.php';
 }
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Pages');
-$routes->setDefaultMethod('index');
+// $routes->setDefaultController('Pages');
+// $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(true);
 $routes->set404Override(function () {
     return view('/pages/error404', ['title' => 'Page Not Found']);
@@ -39,7 +39,7 @@ $routes->setAutoRoute(true);
 
 // $routes->get('/', 'Home::index');
 
-$routes->get('/', 'Pages::index', ['filter' => 'authGuard']);
+$routes->get('/', 'IndexController::index', ['filter' => 'authGuard']);
 $routes->get('/register', 'RegisterController::index', ['filter' => 'noauth']);
 $routes->match(['get', 'post'], 'RegisterController/store', 'RegisterController::store');
 $routes->match(['get', 'post'], 'LoginController/loginAuth', 'LoginController::loginAuth');

@@ -37,4 +37,20 @@ class FppcModel extends Model
     protected $updatedField = 'updated_at'; // Change the updated field to 'updated_at'
 
     protected $deletedField = 'deleted_at'; // Change the deleted field to 'deleted_at's
+
+    public function getTipeCountsByMonth()
+    {
+        $this->select('CAST(tipe_permohonan AS VARCHAR) as tipe_permohonan, MONTH(created_at) as month, COUNT(CAST(tipe_permohonan AS VARCHAR)) as tipe_permohonan_count')
+            ->groupBy(['CAST(tipe_permohonan AS VARCHAR)', 'MONTH(created_at)']); // Use the same expression in GROUP BY
+
+        return $this->findAll();
+    }
+
+    public function getStatusCountsByMonth()
+    {
+        $this->select('CAST(status AS VARCHAR) as status, MONTH(created_at) as month, COUNT(CAST(status AS VARCHAR)) as status_count')
+            ->groupBy(['CAST(status AS VARCHAR)', 'MONTH(created_at)']); // Use the same expression in GROUP BY
+
+        return $this->findAll();
+    }
 }

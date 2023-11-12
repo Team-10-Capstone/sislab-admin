@@ -225,7 +225,7 @@
                                                     class="invoice-edit m-0 relative ti-btn rounded-full p-2 transition-none focus:outline-none ti-btn-soft-secondary">
                                                     <i class="ti ti-pencil"></i>
                                                     <p>
-                                                        Lihat detail
+                                                        Lihat Detail
                                                     </p>
                                                 </a>
                                             </td>
