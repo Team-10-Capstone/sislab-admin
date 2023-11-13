@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreatePermohonanUjiTable extends Migration
+class CreatePermohonanUjiTable2 extends Migration
 {
     public function up()
     {

@@ -33,13 +33,31 @@ class WadahControllerTest extends CIUnitTestCase
         $result = $this->withRequest($request)->controller(WadahController::class)
             ->execute('create');
 
-        // $result->assertTrue(session()->has('success'));
+        $result->assertTrue(session()->has('success'));
         $result->assertOK();
         $result->assertRedirectTo('/wadah');
 
     }
 
-    public function testEdit()
+    public function testCreatePostError()
+    {
+        $request = $this->request
+            ->withMethod('post')
+            ->setGlobal('post', [
+                'nama' => null,
+                'image' => null
+            ]);
+
+        $result = $this->withRequest($request)->controller(WadahController::class)
+            ->execute('create');
+
+        $result->assertTrue(session()->has('errors'));
+        $result->assertOK();
+        $result->assertRedirectTo('/wadah');
+
+    }
+
+    public function testEditWadah()
     {
         $request = $this->request
             ->withMethod('post')

@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateFppcTable extends Migration
+class CreateFppcTable2 extends Migration
 {
     public function up()
     {

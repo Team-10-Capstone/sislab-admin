@@ -38,28 +38,72 @@ class ParameterUjiControllerTest extends CIUnitTestCase
 
         $result->assertOK();
         $result->assertRedirectTo('/parameter');
+        $result->assertTrue(session()->has('success'));
+    }
+    public function testCreatePostError()
+    {
+        $request = $this->request
+            ->withMethod('post')
+            ->setGlobal('post', [
+                'kode_uji' => null,
+                'jenis_parameter' => null,
+                'keterangan_uji' => null,
+                'standar_uji' => null,
+                'no_ikm' => null,
+            ]);
+
+        $result = $this->withRequest($request)->controller(ParameterUjiController::class)
+            ->execute('create');
+
+        $result->assertOK();
+        $result->assertRedirectTo('/parameter');
+        $result->assertTrue(session()->has('errors'));
     }
 
-    public function testEditPost() {
-            $request = $this->request
-                ->withMethod('post')
-                ->setGlobal('post', [
-                    'kode_uji' => '100',
+    public function testEditPost()
+    {
+        $request = $this->request
+            ->withMethod('post')
+            ->setGlobal('post', [
+                'kode_uji' => '100',
                 'jenis_parameter' => 'PARASIT',
                 'keterangan_uji' => 'Uji Parasit',
                 'standar_uji' => 'negatif',
                 'no_ikm' => 'IKM-001',
-                ]);
-    
-            $result = $this->withRequest($request)->controller(ParameterUjiController::class)
-                ->execute('edit', '1');
-    
-            $result->assertOK();
-            $result->assertRedirectTo('/parameter');
-    
+            ]);
+
+        $result = $this->withRequest($request)->controller(ParameterUjiController::class)
+            ->execute('edit', '1');
+
+        $result->assertOK();
+        $result->assertRedirectTo('/parameter');
+        $result->assertTrue(session()->has('success'));
+
     }
 
-    public function testDelete() {
+    public function testEditPostError()
+    {
+        $request = $this->request
+            ->withMethod('post')
+            ->setGlobal('post', [
+                'kode_uji' => null,
+                'jenis_parameter' => null,
+                'keterangan_uji' => null,
+                'standar_uji' => null,
+                'no_ikm' => null,
+            ]);
+
+        $result = $this->withRequest($request)->controller(ParameterUjiController::class)
+            ->execute('edit', '1');
+
+        $result->assertOK();
+        $result->assertRedirectTo('/parameter');
+        $result->assertTrue(session()->has('errors'));
+
+    }
+
+    public function testDelete()
+    {
         $result = $this->controller(ParameterUjiController::class)
             ->execute('delete', 1);
 

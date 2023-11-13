@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class UpdateConstraint extends Migration
+class UpdateConstraint2 extends Migration
 {
     public function up()
     {

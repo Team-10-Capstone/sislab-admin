@@ -8,6 +8,7 @@ use App\Models\AdminModel;
 class AdminController extends BaseController
 {
     protected $pager;
+
     public function __construct()
     {
         $this->pager = \Config\Services::pager();
@@ -44,20 +45,12 @@ class AdminController extends BaseController
         $adminModel = new AdminModel();
 
         if ($this->request->getMethod() === 'post') {
-            $rules = [
+            $rulesAdmin = [
                 'name' => 'required',
                 'email' => 'required',
                 'roleId' => 'required',
                 'password' => 'required',
             ];
-
-            // if (!$this->validate($rules)) {
-            //     dd($this->validator->getErrors());
-            //     $errors = $this->validator->getErrors();
-            //     $errorString = implode("\n", $errors);
-            //     session()->setFlashdata('errors', $errorString);
-            //     return redirect()->to('/admin');
-            // }
 
             $data = [
                 'name' => $this->request->getPost('name'),
@@ -65,6 +58,14 @@ class AdminController extends BaseController
                 'roleId' => $this->request->getPost('roleId'),
                 'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
             ];
+
+            if (!$this->validateData($data, $rulesAdmin)) {
+                $errors = $this->validator->getErrors();
+                $errorString = implode("\n", $errors);
+                session()->setFlashdata('errors', $errorString);
+                $this->validator->reset();
+                return redirect()->to('/admin');
+            }
 
             $adminModel->insert($data);
 
@@ -100,6 +101,7 @@ class AdminController extends BaseController
                 $errors = $this->validator->getErrors();
                 $errorString = implode("\n", $errors);
                 session()->setFlashdata('errors', $errorString);
+                $this->validator->reset();
                 return redirect()->to('/admin');
             }
 

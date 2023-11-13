@@ -9,7 +9,6 @@ class HasilUjiController extends Controller
     {
         $HasilUjiModel = new \App\Models\HasilUjiModel();
         $PermohonanUjiModel = new \App\Models\PermohonanUjiModel();
-        $FppcModel = new \App\Models\FppcModel();
 
         helper(['form', 'url']);
 

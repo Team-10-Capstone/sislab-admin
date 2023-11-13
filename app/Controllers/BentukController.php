@@ -53,7 +53,10 @@ class BentukController extends BaseController
             ];
 
             if (!$this->validateData($data, $rulesBentuk)) {
-                session()->setFlashdata('error', $this->validator->getErrors());
+                $errors = $this->validator->getErrors();
+                $errorString = implode("\n", $errors);
+                session()->setFlashdata('errors', $errorString);
+                $this->validator->reset();
                 return redirect()->to('/bentuk');
             }
 
@@ -62,8 +65,6 @@ class BentukController extends BaseController
             session()->setFlashdata('success', 'bentuk berhasil ditambahkan.');
             return redirect()->to('/bentuk');
         }
-
-        return redirect()->to('/404');
     }
 
     public function edit($id)

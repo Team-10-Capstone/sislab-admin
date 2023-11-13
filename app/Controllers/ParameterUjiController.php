@@ -51,6 +51,22 @@ class ParameterUjiController extends BaseController
             'no_ikm' => $this->request->getPost('no_ikm'),
         ];
 
+        $rulesParam = [
+            'kode_uji' => 'required',
+            'jenis_parameter' => 'required',
+            'keterangan_uji' => 'required',
+            'standar_uji' => 'required',
+            'no_ikm' => 'required',
+        ];
+
+        if (!$this->validateData($data, $rulesParam)) {
+            $errors = $this->validator->getErrors();
+            $errorString = implode("\n", $errors);
+            session()->setFlashdata('errors', $errorString);
+            $this->validator->reset();
+            return redirect()->to('/parameter');
+        }
+
         $ParameterModel->insert($data);
 
         session()->setFlashdata('success', 'Parameter berhasil ditambahkan.');
@@ -70,6 +86,22 @@ class ParameterUjiController extends BaseController
             'standar_uji' => $this->request->getPost('standar_uji'),
             'no_ikm' => $this->request->getPost('no_ikm'),
         ];
+
+        $rulesParam = [
+            'kode_uji' => 'required',
+            'jenis_parameter' => 'required',
+            'keterangan_uji' => 'required',
+            'standar_uji' => 'required',
+            'no_ikm' => 'required',
+        ];
+
+        if (!$this->validateData($data, $rulesParam)) {
+            $errors = $this->validator->getErrors();
+            $errorString = implode("\n", $errors);
+            session()->setFlashdata('errors', $errorString);
+            $this->validator->reset();
+            return redirect()->to('/parameter');
+        }
 
         $ParameterModel->update($id, $data);
 

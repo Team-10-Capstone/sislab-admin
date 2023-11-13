@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class WadahTable extends Migration
+class WadahTable2 extends Migration
 {
     public function up()
     {

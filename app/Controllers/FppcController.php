@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use PHPUnit\Framework\Constraint\IsEmpty;
-
 class FppcController extends BaseController
 {
     public function __construct()
@@ -75,7 +73,7 @@ class FppcController extends BaseController
             'start_date' => $start_date,
             'end_date' => $end_date,
             'tipe_permohonan' => $tipe_permohonan,
-            'title' => 'Permohonan PPK'
+            'title' => 'Daftar FPPC'
         ]);
     }
 
@@ -85,7 +83,7 @@ class FppcController extends BaseController
         $ppkId = $this->request->getVar('ppk_id');
 
         if (empty($ppkId)) {
-            return redirect()->to('/permohonan-ppk');
+            return redirect()->to('/ppk');
         }
         // Load the FppcModel
         $fppcModel = new \App\Models\FppcModel();
@@ -97,7 +95,7 @@ class FppcController extends BaseController
         $fppcData = $fppcModel->where('id_ppk', $ppkId)->first();
 
         if (!empty($fppcData)) {
-            return redirect()->to('/permohonan-ppk');
+            return redirect()->to('/ppk');
         }
 
         $karimutu = db_connect('karimutu');
@@ -142,16 +140,6 @@ class FppcController extends BaseController
             $is_perulangan = $this->request->getPost('is_perulangan');
 
             $karimutu = db_connect('karimutu');
-
-            // if its perulangan
-            if ($is_perulangan == 'true') {
-                $fppcData = $fppcModel->where('id', $id)->first();
-
-                $fppcData['is_perulangan'] = true;
-                $fppcData['no_fppc_sebelumnya'] = $fppcData['no_fppc'];
-
-                $dtlFppcs = $fppcDetailsModel->where('id_fppc', $id)->findAll();
-            }
 
             // get ppk details data from tr_master_pelaporan single data
             $ppk = $karimutu->query("SELECT * FROM tr_mst_pelaporan WHERE id_ppk = ?", [$id])->getRowArray();
@@ -264,6 +252,7 @@ class FppcController extends BaseController
             ->first();
 
         $fppcDetailsData = $fppcDetailsModel->where('id_fppc', $id)->findAll();
+
         if (empty($fppcDetailsData)) {
             return redirect()->to('/fppc');
         }
@@ -302,7 +291,6 @@ class FppcController extends BaseController
         ];
 
         return view('pages/fppc-verifikasi', $returnData);
-
     }
 
     public function updateStatus($id, $status)
@@ -311,15 +299,22 @@ class FppcController extends BaseController
             '1' => 'menunggu-disposisi',
             '0' => 'ditolak',
         ];
+
+        if (!array_key_exists($status, $statusData)) {
+            session()->setFlashdata('errors', 'Status Permohonan Uji Lab Tidak Valid');
+            return redirect()->to('/fppc');
+        }
+
         $fppcModel = new \App\Models\FppcModel();
 
         $fppcModel->update($id, ['status' => $statusData[$status]]);
 
-        if ($status == 1) {
-            session()->setFlashdata('success', 'Permohonan Uji Lab Berhasil Diterima');
-        } else {
-            session()->setFlashdata('success', 'Permohonan Uji Lab Berhasil Ditolak');
-        }
+        $message = [
+            '1' => 'Permohonan Uji Lab Berhasil Diterima',
+            '0' => 'Permohonan Uji Lab Berhasil Ditolak',
+        ];
+
+        session()->setFlashdata('success', $message[$status]);
 
         return redirect()->to('/fppc');
     }
@@ -339,4 +334,6 @@ class FppcController extends BaseController
         session()->setFlashdata('success', 'Permohonan Uji Lab Berhasil Dihapus');
         return redirect()->to('/fppc');
     }
+
+
 }

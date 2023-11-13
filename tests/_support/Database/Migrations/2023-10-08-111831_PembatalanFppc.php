@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class PembatalanFppc extends Migration
+class PembatalanFppc2 extends Migration
 {
     public function up()
     {

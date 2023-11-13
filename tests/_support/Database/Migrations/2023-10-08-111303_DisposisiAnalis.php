@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class DisposisiAnalis extends Migration
+class DisposisiAnalis2 extends Migration
 {
     public function up()
     {

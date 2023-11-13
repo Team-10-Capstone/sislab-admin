@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddTanggalToDisposisi extends Migration
+class AddTanggalToDisposisi2 extends Migration
 {
     public function up()
     {

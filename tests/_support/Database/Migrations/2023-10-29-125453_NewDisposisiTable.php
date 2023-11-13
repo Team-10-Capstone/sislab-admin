@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class NewDisposisiTable extends Migration
+class NewDisposisiTable2 extends Migration
 {
     public function up()
     {

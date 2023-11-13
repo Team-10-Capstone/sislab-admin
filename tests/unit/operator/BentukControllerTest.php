@@ -42,7 +42,7 @@ class BentukControllerTest extends CIUnitTestCase
             ->execute('create');
 
         $result->assertOK();
-        $resultError->assertTrue(session()->has('error'));
+        $resultError->assertTrue(session()->has('errors'));
 
         $result->assertOK();
         $result->assertTrue(session()->has('success'));

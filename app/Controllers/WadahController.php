@@ -7,7 +7,11 @@ use App\Models\WadahModel;
 
 class WadahController extends BaseController
 {
+    /**
+     * @codeCoverageIgnore
+     */
     protected $pager;
+
     public function __construct()
     {
         $this->pager = \Config\Services::pager();
@@ -64,6 +68,7 @@ class WadahController extends BaseController
                 $errorString = implode("\n", $errors);
 
                 session()->setFlashdata('errors', $errorString);
+
                 return redirect()->to('/wadah');
             }
 
@@ -102,7 +107,6 @@ class WadahController extends BaseController
             return redirect()->to('/wadah');
 
         } else {
-
             return view('pages/wadah', [
                 'title' => 'Tambah Wadah',
             ]);
@@ -138,7 +142,6 @@ class WadahController extends BaseController
                         return redirect()->to('/wadah');
                     }
 
-
                     $data = [
                         'nama_wadah' => $this->request->getPost('nama'),
                         'image' => base_url('uploads/' . $fileNama),
@@ -169,14 +172,6 @@ class WadahController extends BaseController
                 session()->setFlashdata('success', 'Wadah berhasil diubah.');
                 return redirect()->to('/wadah');
             }
-        } else {
-
-            $wadah = $WadahModel->find($id);
-
-            return view('pages/wadah', [
-                'title' => 'Ubah Wadah',
-                'wadah' => $wadah,
-            ]);
         }
     }
 

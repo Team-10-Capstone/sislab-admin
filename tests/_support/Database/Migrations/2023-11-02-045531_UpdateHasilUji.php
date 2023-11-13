@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class UpdateHasilUji extends Migration
+class UpdateHasilUji2 extends Migration
 {
     public function up()
     {

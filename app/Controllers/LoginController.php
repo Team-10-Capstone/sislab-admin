@@ -10,7 +10,7 @@ class LoginController extends Controller
     {
         helper(['form']);
         $data['title'] = "Login";
-        echo view('pages/login', $data);
+        return view('pages/login', $data);
     }
 
     public function loginAuth()

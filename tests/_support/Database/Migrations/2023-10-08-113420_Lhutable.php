@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Lhutable extends Migration
+class Lhutable2 extends Migration
 {
     public function up()
     {
