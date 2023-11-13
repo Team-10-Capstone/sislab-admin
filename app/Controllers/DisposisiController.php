@@ -175,10 +175,6 @@ class DisposisiController extends BaseController
             ->where('id_fppc', $id)
             ->findAll();
 
-        if (empty($fppcDetailsData)) {
-            return redirect()->to('/fppc');
-        }
-
         $analis = $AdminModel->where('roleId', 3)->findAll();
 
         $groupedPermohonanUjiWithArrOfDtlFppc = [];
@@ -227,24 +223,11 @@ class DisposisiController extends BaseController
                 'nama_bentuk' => $value['nama_bentuk'],
                 'image_wadah' => $value['image_wadah'],
             ];
-
-            if (!empty($value['hasil_uji_id'])) {
-                $analis_id = $value['analis_id'];
-
-                $analisData = $AdminModel->where('adminId', $analis_id)->first();
-
-                $dtlFppcData['keterangan_hasil'] = $value['keterangan_hasil'];
-                $dtlFppcData['nilai_hasil'] = $value['nilai_hasil'];
-                $dtlFppcData['hasil_uji'] = $value['hasil_uji'];
-                $dtlFppcData['hasil_uji_id'] = $value['hasil_uji_id'];
-                $dtlFppcData['analis'] = $analisData['name'];
-            } else {
-                $dtlFppcData['keterangan_hasil'] = '';
-                $dtlFppcData['nilai_hasil'] = '';
-                $dtlFppcData['hasil_uji'] = '';
-                $dtlFppcData['hasil_uji_id'] = '';
-                $dtlFppcData['analis'] = '';
-            }
+            $dtlFppcData['keterangan_hasil'] = '';
+            $dtlFppcData['nilai_hasil'] = '';
+            $dtlFppcData['hasil_uji'] = '';
+            $dtlFppcData['hasil_uji_id'] = '';
+            $dtlFppcData['analis'] = '';
 
             $groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey]['dtl_fppc'][] = $dtlFppcData;
             $groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey]['permohonan_uji_id'][] = $value['id'];
@@ -261,58 +244,4 @@ class DisposisiController extends BaseController
         ]);
     }
 
-    public function create()
-    {
-        $fppcModel = new \App\Models\FppcModel();
-        $fppcDetailsModel = new \App\Models\DtlFppcModel();
-        $permohonanUjiModel = new \App\Models\PermohonanUjiModel();
-        $adminModel = new \App\Models\AdminModel();
-
-        $id = $this->request->getVar('fppc_id');
-
-        $fppcData = $fppcModel->select('*')
-            ->where('fppc.id', $id)
-            ->first();
-
-        $fppcDetailsData = $fppcDetailsModel->where('id_fppc', $id)->findAll();
-        if (empty($fppcDetailsData)) {
-            return redirect()->to('/fppc');
-        }
-
-        $permohonanUjiData = $permohonanUjiModel->where('dtl_fppc_id', $fppcDetailsData[0]['id'])->findAll();
-
-        $mergedFppcDetailsAndPermohonanUji = [];
-
-        foreach ($fppcDetailsData as $fppcDetails) {
-            $permohonanUji = array_filter($permohonanUjiData, function ($permohonanUji) use ($fppcDetails) {
-                return $permohonanUji['dtl_fppc_id'] == $fppcDetails['id'];
-            });
-
-            $permohonanUji = array_values($permohonanUji);
-
-            $permohonanUjiQuery = $permohonanUjiModel->select('permohonan_uji.*, parameter_uji.keterangan_uji, parameter_uji.jenis_parameter, parameter_uji.no_ikm')
-                ->join('parameter_uji', 'parameter_uji.id = permohonan_uji.parameter_uji_id')
-                ->where('dtl_fppc_id', $fppcDetails['id'])
-                ->findAll();
-
-            $mergedFppcDetailsAndPermohonanUji[] = [
-                'fppc_details' => $fppcDetails,
-                'permohonan_uji' => $permohonanUjiQuery,
-            ];
-        }
-
-        $adminData = $adminModel->where('roleId', 2)->findAll();
-
-        $returnData = [
-            'fppc' => $fppcData,
-            'fppc_details' => $mergedFppcDetailsAndPermohonanUji,
-            'title' => 'Disposisi Penyelia',
-            'admin' => $adminData,
-        ];
-
-        // dd($returnData);
-
-        return view('pages/disposisi-penyelia-create', $returnData);
-
-    }
 }
