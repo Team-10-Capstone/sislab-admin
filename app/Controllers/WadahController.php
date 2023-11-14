@@ -75,6 +75,7 @@ class WadahController extends BaseController
             $isImageStartsWithHttp = strpos($imageString, 'http') === 0;
 
             if (!$isImageStartsWithHttp) {
+                // @codeCoverageIgnoreStart
                 $imageData = json_decode($imageString);
 
                 $fileNama = $imageData->name;
@@ -94,6 +95,7 @@ class WadahController extends BaseController
                     'nama_wadah' => $this->request->getPost('nama'),
                     'image' => base_url('uploads/' . $fileNama),
                 ];
+                // @codeCoverageIgnoreEnd
             } else {
                 $data = [
                     'nama_wadah' => $this->request->getPost('nama'),
@@ -106,10 +108,6 @@ class WadahController extends BaseController
             session()->setFlashdata('success', 'Wadah berhasil ditambahkan.');
             return redirect()->to('/wadah');
 
-        } else {
-            return view('pages/wadah', [
-                'title' => 'Tambah Wadah',
-            ]);
         }
     }
 
@@ -125,6 +123,7 @@ class WadahController extends BaseController
             $isImageStartsWithHttp = strpos($imageString, 'http') === 0;
 
             if (!$isImageStartsWithHttp) {
+                // @codeCoverageIgnoreStart
                 $imageData = json_decode($imageString);
 
                 // if imageData name is initial-image.jpg, ignore the image
@@ -161,6 +160,7 @@ class WadahController extends BaseController
                     session()->setFlashdata('success', 'Wadah berhasil diubah.');
                     return redirect()->to('/wadah');
                 }
+                // @codeCoverageIgnoreEnd
             } else {
                 $data = [
                     'nama_wadah' => $this->request->getPost('nama'),

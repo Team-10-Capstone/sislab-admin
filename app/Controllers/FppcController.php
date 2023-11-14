@@ -132,6 +132,7 @@ class FppcController extends BaseController
         $fppcDetailsModel = new \App\Models\DtlFppcModel();
         $permohonanUjiModel = new \App\Models\PermohonanUjiModel();
         $parameterUjiModel = new \App\Models\ParameterUjiModel();
+        $AktivitasModel = new \App\Models\AktivitasModel();
 
         $adminId = session()->get('adminId');
 
@@ -228,6 +229,15 @@ class FppcController extends BaseController
                         $permohonanUjiModel->insert($data);
                     }
                 }
+
+                $activityData = [
+                    'id_fppc' => $fppcId,
+                    'description' => 'Permohonan Uji Lab Berhasil Dibuat, menunggu verifikasi',
+                    'type' => 'fppc',
+                    'user_id' => $adminId,
+                ];
+
+                $AktivitasModel->insert($activityData);
             }
 
             session()->setFlashdata('success', 'Permohonan Uji Lab Berhasil Dibuat');
@@ -295,6 +305,8 @@ class FppcController extends BaseController
 
     public function updateStatus($id, $status)
     {
+        $AktivitasModel = new \App\Models\AktivitasModel();
+
         $statusData = [
             '1' => 'menunggu-disposisi',
             '0' => 'ditolak',
@@ -313,6 +325,20 @@ class FppcController extends BaseController
             '1' => 'Permohonan Uji Lab Berhasil Diterima',
             '0' => 'Permohonan Uji Lab Berhasil Ditolak',
         ];
+
+        $activityData = [
+            '1' => 'Permohonan Uji Lab diverifikasi, menunggu penjadwalan pengujian',
+            '0' => 'Permohonan Uji Lab ditolak'
+        ];
+
+        $activityData = [
+            'id_fppc' => $id,
+            'description' => $activityData[$status],
+            'type' => 'verifikasi',
+            'user_id' => session()->get('adminId'),
+        ];
+
+        $AktivitasModel->insert($activityData);
 
         session()->setFlashdata('success', $message[$status]);
 

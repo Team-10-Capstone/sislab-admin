@@ -105,8 +105,6 @@ class LhusController extends BaseController
                 $groupedPenyeliaAccess[$parameter_uji_id] = [];
             }
 
-
-
             $groupedPenyeliaAccess[$parameter_uji_id]['penyelia'][] = [
                 'id' => $disposisi['penyelia_id'],
                 'name' => $disposisi['nama_admin'],
@@ -463,10 +461,24 @@ class LhusController extends BaseController
     {
         $fppcModel = new \App\Models\FppcModel();
         $lhuModel = new \App\Models\LhuModel();
+        $AktivitasModel = new \App\Models\AktivitasModel();
 
         $fppcModel->update($id, [
             'status' => 'terbit-lhu',
         ]);
+
+        $fppcData = $fppcModel->where('id', $id)->first();
+
+        $activityDescription = 'LHU dengan nomor ' . $fppcData['no_fppc'] . ' telah diverifikasi oleh ' . session()->get('name') . ' pada ' . date('Y-m-d H:i:s') . '.';
+
+        $activityData = [
+            'id_fppc' => $id,
+            'description' => $activityDescription,
+            'type' => 'lhu',
+            'user_id' => session()->get('adminId'),
+        ];
+
+        $AktivitasModel->insert($activityData);
 
         session()->setFlashdata('success', 'Berhasil memverifikasi LHUS');
 
@@ -477,6 +489,7 @@ class LhusController extends BaseController
     {
         $fppcModel = new \App\Models\FppcModel();
         $perbaikanModel = new \App\Models\PerbaikanModel();
+        $AktivitasModel = new \App\Models\AktivitasModel();
 
         $alasan = $this->request->getPost('alasan_perbaikan');
 
@@ -493,6 +506,17 @@ class LhusController extends BaseController
         $fppcModel->update($id, [
             'status' => 'perbaikan',
         ]);
+
+        $activityDescription = 'Terdapat kesalahan pada hasil uji, menunggu perbaikan dari laboratorium';
+
+        $activityData = [
+            'id_fppc' => $id,
+            'description' => $activityDescription,
+            'type' => 'lhu',
+            'user_id' => session()->get('adminId'),
+        ];
+
+        $AktivitasModel->insert($activityData);
 
         session()->setFlashdata('success', 'Berhasil mengajukan perbaikan');
 

@@ -85,6 +85,7 @@ class DisposisiController extends BaseController
 
         $DisposisiPenyelia = new \App\Models\DisposisiPenyeliaModel();
         $FppcModel = new \App\Models\FppcModel();
+        $AktivitasModel = new \App\Models\AktivitasModel();
 
         $disposisi = $this->request->getPost('disposisi');
 
@@ -154,6 +155,17 @@ class DisposisiController extends BaseController
             }
 
             $FppcModel->update($fppc_id, ['status' => 'menunggu-pengujian']);
+
+            $activityDescription = 'Penjadwalan pengujian telah dibuat, pengujian akan dilakukan pada tanggal ' . $formattedDateTime;
+
+            $activityData = [
+                'id_fppc' => $fppc_id,
+                'description' => $activityDescription,
+                'type' => 'penjadwalan',
+                'user_id' => session()->get('adminId'),
+            ];
+
+            $AktivitasModel->insert($activityData);
 
             session()->setFlashdata('success', 'Berhasil membuat disposisi');
 
