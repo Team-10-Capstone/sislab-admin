@@ -45,7 +45,7 @@
 
 				$userRole = session()->get('role');
 
-				if (canDisplayLink($userRole, [1, 2, 3])) {
+				if (canDisplayLink($userRole, [0, 1, 4])) {
 					// Display links for users with allowed roles
 					echo '<li class="slide">
 					<a href="/ppk" class="side-menu__item">
@@ -63,7 +63,7 @@
 
 				$userRole = session()->get('role');
 
-				if (canDisplayLink($userRole, [1])) {
+				if (canDisplayLink($userRole, [0, 1])) {
 					// Display links for users with allowed roles
 					echo "<li class='slide  has-sub'>
 					<a href='javascript:void(0);' class='side-menu__item'>
@@ -87,7 +87,7 @@
 
 				$userRole = session()->get('role');
 
-				if (canDisplayLink($userRole, [1])) {
+				if (canDisplayLink($userRole, [0, 1])) {
 					// Display links for users with allowed roles
 					echo "<li class='slide'>
 					<a href='/disposisi-penyelia' class='side-menu__item'>
@@ -104,7 +104,7 @@
 
 				$userRole = session()->get('role');
 
-				if (canDisplayLink($userRole, [1, 2, 3, 4])) {
+				if (canDisplayLink($userRole, [3])) {
 					// Display links for users with allowed roles
 					echo "<li class='slide  has-sub'>
 					<a href='javascript:void(0);' class='side-menu__item'>
@@ -168,8 +168,8 @@
 					// Display links for users with allowed roles
 					echo "<li class='slide'>
 					<a href=" . base_url('lhu') . " class='side-menu__item'>
-						<i class='ti ti-file-description side-menu__icon'></i>
-						<span class='side-menu__label'>Daftar Admin</span>
+						<i class='ti ti-checkup-list side-menu__icon'></i>
+						<span class='side-menu__label'>Daftar LHU</span>
 					</a>
 				</li>";
 				}
@@ -180,7 +180,7 @@
 
 				$userRole = session()->get('role');
 
-				if (canDisplayLink($userRole, [1])) {
+				if (canDisplayLink($userRole, [0, 1])) {
 					// Display links for users with allowed roles
 					echo "<li class='slide'>
 					<a href=" . base_url('admin') . " class='side-menu__item'>

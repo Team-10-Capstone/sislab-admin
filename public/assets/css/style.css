@@ -2648,6 +2648,10 @@ select option:active,
 .m-1{
   margin: 0.25rem;
 }
+.\!my-auto{
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
 .mx-3{
   margin-left: 0.75rem;
   margin-right: 0.75rem;
@@ -2837,6 +2841,9 @@ select option:active,
 }
 .h-max{
   height: max-content;
+}
+.h-20{
+  height: 5rem;
 }
 .\!w-full{
   width: 100% !important;
@@ -3320,6 +3327,9 @@ select option:active,
 .gap-x-3{
   column-gap: 0.75rem;
 }
+.gap-x-5{
+  column-gap: 1.25rem;
+}
 .gap-x-6{
   column-gap: 1.5rem;
 }
@@ -3599,9 +3609,6 @@ select option:active,
 .rounded-sm{
   border-radius: 0.25rem;
 }
-.\!border{
-  border-width: 1px !important;
-}
 .border{
   border-width: 1px;
 }
@@ -3864,6 +3871,12 @@ select option:active,
 }
 .bg-origin-content{
   background-origin: content-box;
+}
+.fill-primary{
+  fill: rgb(var(--color-primary));
+}
+.fill-secondary{
+  fill: rgb(var(--color-secondary));
 }
 .object-contain{
   object-fit: contain;
@@ -14579,11 +14592,6 @@ select.tabulator-page-size option{
   border-color: rgb(var(--color-danger));
 }
 
-.hover\:border-gray-200:hover{
-  --tw-border-opacity: 1;
-  border-color: rgb(226 232 240 / var(--tw-border-opacity));
-}
-
 .hover\:border-gray-500:hover{
   --tw-border-opacity: 1;
   border-color: rgb(100 116 139 / var(--tw-border-opacity));
@@ -14631,11 +14639,6 @@ select.tabulator-page-size option{
 
 .hover\:text-danger:hover{
   color: rgb(var(--color-danger));
-}
-
-.hover\:text-gray-500:hover{
-  --tw-text-opacity: 1;
-  color: rgb(100 116 139 / var(--tw-text-opacity));
 }
 
 .hover\:text-gray-700:hover{
@@ -15211,6 +15214,9 @@ select.tabulator-page-size option{
 }
 
 @media (min-width: 768px){
+  .md\:col-span-6{
+    grid-column: span 6 / span 6;
+  }
   .md\:grid{
     display: grid;
   }
@@ -15293,6 +15299,9 @@ select.tabulator-page-size option{
 @media (min-width: 1400px){
   .xxl\:col-span-3{
     grid-column: span 3 / span 3;
+  }
+  .xxl\:col-span-4{
+    grid-column: span 4 / span 4;
   }
 }
 

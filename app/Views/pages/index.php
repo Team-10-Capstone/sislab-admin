@@ -42,103 +42,125 @@
         </div>
         <!-- Page Header Close -->
 
+        <div class="grid grid-cols-12 gap-6">
+            <div class="col-span-12 md:col-span-6 xxl:col-span-3">
+                <div class="box overflow-hidden">
+                    <div class="box-body">
+                        <div class="flex">
+                            <div class="flex space-x-3 rtl:space-x-reverse">
+                                <div class="w-10 h-10 flex justify-center items-center rounded-sm bg-primary/10">
+                                    <i class="ti ti-flask text-xl text-primary"></i>
+                                </div>
+                                <h6 class="text-lg font-medium text-gray-800 mb-2 dark:text-white my-auto flex-1">
+                                    Total Permohonan
+                                </h6>
+                            </div>
+                            <span class="badge bg-primary/10 text-primary py-1 ltr:ml-auto rtl:mr-auto !my-auto">
+                                <i
+                                    class="<?php echo $currentMonthTipeCountsTotal['isPositive'] ? 'ti ti-trending-up' : 'ti ti-trending-down'; ?> ltr:mr-1 rtl:ml-1 align-middle"></i>
+                                <?php echo $currentMonthTipeCountsTotal['percentage']; ?>%
+                            </span>
+                        </div>
+                        <div class="mt-2">
+                            <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">
+                                <?php echo $currentMonthTipeCountsTotal['count']; ?>
+                            </h2>
+                            <p class="text-xs text-gray-400 ">in a month</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-12 md:col-span-6 xxl:col-span-3">
+                <div class="box overflow-hidden">
+                    <div class="box-body">
+                        <div class="flex">
+                            <div class="flex space-x-3 rtl:space-x-reverse">
+                                <div class="w-10 h-10 flex justify-center items-center rounded-sm bg-danger/10">
+                                    <i class="ti ti-arrows-double-ne-sw text-xl text-danger"></i>
+                                </div>
+                                <h6 class="text-lg font-medium text-gray-800 mb-2 dark:text-white my-auto flex-1">
+                                    Permohonan Lalulintas
+                                </h6>
+                            </div>
+                            <span class="badge bg-primary/10 text-primary py-1 ltr:ml-auto rtl:mr-auto !my-auto">
+                                <i
+                                    class="<?php echo $currentMonthTipeCounts['lalulintas']['isPositive'] ? 'ti ti-trending-up' : 'ti ti-trending-down'; ?> ltr:mr-1 rtl:ml-1 align-middle"></i>
+                                <?php echo $currentMonthTipeCounts['lalulintas']['percentage']; ?>%
+                            </span>
+                        </div>
+                        <div class="mt-2">
+                            <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">
+                                <?php echo $currentMonthTipeCounts['lalulintas']['count']; ?>
+                            </h2>
+                            <p class="text-xs text-gray-400 ">in a month</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-12 md:col-span-6 xxl:col-span-3">
+                <div class="box overflow-hidden">
+                    <div class="box-body">
+                        <div class="flex">
+                            <div class="flex space-x-3 rtl:space-x-reverse">
+                                <div class="w-10 h-10 flex justify-center items-center rounded-sm bg-warning/10">
+                                    <i class="ti ti-search text-xl text-warning"></i>
+                                </div>
+                                <h6 class="text-lg flex-1 font-medium text-gray-800 mb-2 dark:text-white my-auto">
+                                    Permohonan
+                                    Monsur
+                                </h6>
+                            </div>
+                            <span class="badge bg-primary/10 text-primary py-1 ltr:ml-auto rtl:mr-auto !my-auto">
+                                <i
+                                    class="<?php echo $currentMonthTipeCounts['monsur']['isPositive'] ? 'ti ti-trending-up' : 'ti ti-trending-down'; ?> ltr:mr-1 rtl:ml-1 align-middle"></i>
+                                <?php echo $currentMonthTipeCounts['monsur']['percentage']; ?>%
+                            </span>
+                        </div>
+                        <div class="mt-2">
+                            <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">
+                                <?php echo $currentMonthTipeCounts['monsur']['count']; ?>
+                            </h2>
+                            <p class="text-xs text-gray-400 ">in a month</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-span-12 md:col-span-6 xxl:col-span-3">
+                <div class="box overflow-hidden">
+                    <div class="box-body">
+                        <div class="flex">
+                            <div class="flex space-x-3 rtl:space-x-reverse">
+                                <div class="w-10 h-10 flex justify-center items-center rounded-sm bg-secondary/10">
+                                    <i class="ti ti-user text-xl text-secondary"></i>
+                                </div>
+                                <h6 class="text-lg flex-1 font-medium text-gray-800 mb-2 dark:text-white my-auto">
+                                    Permohonan
+                                    Mandiri
+                                </h6>
+                            </div>
+                            <span class="badge bg-primary/10 text-primary py-1 ltr:ml-auto rtl:mr-auto !my-auto">
+                                <i
+                                    class="<?php echo $currentMonthTipeCounts['mandiri']['isPositive'] ? 'ti ti-trending-up' : 'ti ti-trending-down'; ?> ltr:mr-1 rtl:ml-1 align-middle"></i>
+                                <?php echo $currentMonthTipeCounts['mandiri']['percentage']; ?>%
+                            </span>
+                        </div>
+                        <div class="mt-2">
+                            <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">
+                                <?php echo $currentMonthTipeCounts['mandiri']['count']; ?>
+                            </h2>
+                            <p class="text-xs text-gray-400 ">in a month</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Start::row-1 -->
         <div class="grid grid-cols-12 gap-x-6">
             <div class="col-span-12 xxxl:col-span-9">
                 <div class="grid grid-cols-12 gap-x-6">
 
-                    <div class="col-span-12 sm:col-span-6 xxl:col-span-3">
-                        <div class="box">
-                            <div class="box-body">
-                                <div class="flex items-start space-x-3 rtl:space-x-reverse">
-                                    <span class="">
-                                        <i
-                                            class="ri-group-line text-xl avatar w-10 h-10 rounded-full p-2.5 bg-primary/10 text-primary leading-none"></i>
-                                    </span>
-                                    <div class="w-full">
-                                        <div class="flex mb-2 items-start justify-between">
-                                            <h5 class="text-xl font-semibold mb-0 leading-none">
-                                                <?php echo $total; ?>
-                                            </h5>
-                                        </div>
-                                        <p
-                                            class="mb-0 text-xs leading-none opacity-70 text-gray-500 dark:text-white/70">
-                                            Total Permohonan
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-span-12 sm:col-span-6 xxl:col-span-3">
-                        <div class="box">
-                            <div class="box-body">
-                                <div class="flex items-start space-x-3 rtl:space-x-reverse">
-                                    <span class="">
-                                        <i
-                                            class="ti ti-ship text-xl avatar w-10 h-10 rounded-full p-2.5 bg-secondary/10 text-secondary leading-none"></i>
-                                    </span>
-                                    <div class="w-full">
-                                        <div class="flex mb-2 items-start justify-between">
-                                            <h5 class="text-xl font-semibold mb-0 leading-none">
-                                                <?php echo $byTipeTotal['lalulintas']; ?>
-                                            </h5>
-                                        </div>
-                                        <p
-                                            class="mb-0 text-xs leading-none opacity-70 text-gray-500 dark:text-white/70">
-                                            Permohonan Lalulintas
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-span-12 sm:col-span-6 xxl:col-span-3">
-                        <div class="box">
-                            <div class="box-body">
-                                <div class="flex items-start space-x-3 rtl:space-x-reverse">
-                                    <span class="">
-                                        <i
-                                            class="ri-user-follow-line text-xl avatar w-10 h-10 rounded-full p-2.5 bg-success/10 text-success leading-none"></i>
-                                    </span>
-                                    <div class="w-full">
-                                        <div class="flex mb-2 items-start justify-between">
-                                            <h5 class="text-xl font-semibold mb-0 leading-none">
-                                                <?php echo $byTipeTotal['monsur']; ?>
-                                            </h5>
-                                        </div>
-                                        <p
-                                            class="mb-0 text-xs leading-none opacity-70 text-gray-500 dark:text-white/70">
-                                            Permohonan Monsur
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-span-12 sm:col-span-6 xxl:col-span-3">
-                        <div class="box">
-                            <div class="box-body">
-                                <div class="flex items-start space-x-3 rtl:space-x-reverse">
-                                    <span class="">
-                                        <i
-                                            class="ti ti-man text-xl avatar w-10 h-10 rounded-full p-2.5 bg-warning/10 text-warning leading-none"></i>
-                                    </span>
-                                    <div class="w-full">
-                                        <div class="flex mb-2 items-start justify-between">
-                                            <h5 class="text-xl font-semibold mb-0 leading-none">
-                                                <?php echo $byTipeTotal['mandiri']; ?>
-                                            </h5>
-                                        </div>
-                                        <p
-                                            class="mb-0 text-xs leading-none opacity-70 text-gray-500 dark:text-white/70">
-                                            Permohonan Mandiri
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="col-span-12 xl:col-span-9">
                         <div class="box overflow-hidden">
                             <div class="box-header">
@@ -204,14 +226,16 @@
                                     class="h-40 w-40 mx-auto">
                                 <div>
                                     <h5 class="font-semibold text-gray-800 dark:text-white text-xl mb-1"> Welcome Back,
-                                        Oddy
-                                        ...!</h5>
+
+                                        <?php echo session()->get('name'); ?>
+                                    </h5>
                                     <p class="text-xs text-gray-500 dark:text-white/70 mb-4">
-                                        Anda memiliki 3 permohonan baru yang belum diproses.
+                                        Selamat datang di Sistem Informasi Laboratorium
                                     </p>
-                                    <button type="button" class="ti-btn ti-btn-primary">
+                                    <a href="<?php echo base_url('fppc'); ?>" type="button"
+                                        class="ti-btn ti-btn-primary">
                                         Lihat Permohonan
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                             <span class="shape-1 text-primary"><i class="ti ti-circle text-base font-bold"></i></span>

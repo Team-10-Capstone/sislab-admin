@@ -106,6 +106,8 @@ class FppcControllerTest extends CIUnitTestCase
 
         $parameter_uji = $fabricatorParameterUji->create();
 
+        session()->set('adminId', '1');
+
         $request = $this->request
             ->withMethod('post')
             ->setGlobal('post', [

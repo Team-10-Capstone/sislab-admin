@@ -68,6 +68,11 @@ class IndexController extends BaseController
                         'percentage' => 0,
                         'isPositive' => true,
                     ],
+                    'total' => [
+                        'count' => 0,
+                        'percentage' => 0,
+                        'isPositive' => true,
+                    ]
                 ];
 
                 foreach ($relatedTipeCounts as $relatedTipeCount) {
@@ -164,6 +169,22 @@ class IndexController extends BaseController
             return is_array($tipeCount);
         });
 
+        $previousMonthTipeCounts = array_filter($finalTipeCountsInDateRange[date('Y-m', strtotime('-1 months', strtotime($currentMonth)))], function ($tipeCount) {
+            return is_array($tipeCount);
+        });
+
+        $totalNow = array_sum(array_column($currentMonthTipeCounts, 'count'));
+
+        $totalBefore = array_sum(array_column($previousMonthTipeCounts, 'count'));
+
+        $percentage = $totalBefore ? $totalNow / $totalBefore * 100 : 100;
+
+        $currentMonthTipeCountsTotal = [
+            'count' => array_sum(array_column($currentMonthTipeCounts, 'count')),
+            'percentage' => $percentage,
+            'isPositive' => $percentage > 0,
+        ];
+
         $data = [
             'title' => 'Dashboard',
             'tipeCounts' => $tipeCounts,
@@ -175,6 +196,7 @@ class IndexController extends BaseController
             'total' => $total,
             'tipeCountsWithMonth' => $finalTipeCountsInDateRange,
             'currentMonthTipeCounts' => $currentMonthTipeCounts,
+            'currentMonthTipeCountsTotal' => $currentMonthTipeCountsTotal,
         ];
 
         return view('pages/index', $data);

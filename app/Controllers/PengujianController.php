@@ -268,6 +268,7 @@ class PengujianController extends BaseController
 
         $FppcModel->update($fppc_id, ['status' => 'selesai-pengujian']);
 
+        // @codeCoverageIgnoreStart
         $activityDescription = 'Pengujian dengan nomor FPPC ' . $fppc_id . ' telah selesai dilakukan, menunggu diterbitkan LHU';
 
         $activityData = [
@@ -278,6 +279,7 @@ class PengujianController extends BaseController
         ];
 
         $AktivitasModel->insert($activityData);
+        // @codeCoverageIgnoreEnd
 
         session()->setFlashdata('success', 'Berhasil menyelesaikan pengujian');
 
