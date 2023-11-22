@@ -11,7 +11,7 @@ function getPpkTipePermohonan($kd_kegiatan, $kd_mks)
         echo 'Domestik keluar';
     } elseif ($kd_kegiatan == 'M') {
         echo 'Domestik masuk';
-    } elseif ($kd_kegiatan == 'N' && $kd_mks == 16) {
+    } elseif ($kd_kegiatan == 'N' && $kd_mks == 16 && $kd_mks == 17 && $kd_mks == 18) {
         echo 'Mandiri';
     } elseif ($kd_kegiatan == 'N' && $kd_mks == 21) {
         echo 'Surveilance';

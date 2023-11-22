@@ -7,15 +7,15 @@ use CodeIgniter\Model;
 class DisposisiAnalisModel extends Model
 {
     protected $useSoftDeletes = true;
-    protected $table = 'disposisi_analis';
+    protected $table = 'disposisi_analis_baru';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $allowedFields = [
         'id_fppc',
         'id_dtl_fppc',
+        'id_permohonan_uji',
         'analis_id',
         'penyelia_id',
-        'status',
     ];
 
     protected $useTimestamps = true;

@@ -163,7 +163,6 @@
                         <tbody>
                             <?php foreach ($wadahs as $wadah): ?>
                                 <tr class="product-list">
-
                                     <td>
                                         <div class="flex space-x-3 rtl:space-x-reverse">
                                             <img class="avatar avatar-sm rounded-sm bg-gray-100 dark:bg-black/20 p-1"

@@ -2833,17 +2833,11 @@ select option:active,
 .h-\[200px\]{
   height: 200px;
 }
-.h-\[400px\]{
-  height: 400px;
-}
 .h-full{
   height: 100%;
 }
 .h-max{
   height: max-content;
-}
-.h-20{
-  height: 5rem;
 }
 .\!w-full{
   width: 100% !important;
@@ -3090,6 +3084,24 @@ select option:active,
 .appearance-none{
   appearance: none;
 }
+.columns-3{
+  columns: 3;
+}
+.columns-2{
+  columns: 2;
+}
+.columns-3xs{
+  columns: 16rem;
+}
+.columns-4xl{
+  columns: 56rem;
+}
+.columns-md{
+  columns: 28rem;
+}
+.columns-sm{
+  columns: 24rem;
+}
 .break-before-auto{
   break-before: auto;
 }
@@ -3324,11 +3336,11 @@ select option:active,
 .gap-6{
   gap: 1.5rem;
 }
+.gap-4{
+  gap: 1rem;
+}
 .gap-x-3{
   column-gap: 0.75rem;
-}
-.gap-x-5{
-  column-gap: 1.25rem;
 }
 .gap-x-6{
   column-gap: 1.5rem;
@@ -3795,11 +3807,6 @@ select option:active,
 .bg-gradient-to-t{
   background-image: linear-gradient(to top, var(--tw-gradient-stops));
 }
-.from-black\/50{
-  --tw-gradient-from: rgb(0 0 0 / 0.5) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(0 0 0 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
 .from-white{
   --tw-gradient-from: #fff var(--tw-gradient-from-position);
   --tw-gradient-to: rgb(255 255 255 / 0) var(--tw-gradient-to-position);
@@ -3808,9 +3815,6 @@ select option:active,
 .via-transparent{
   --tw-gradient-to: rgb(0 0 0 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), transparent var(--tw-gradient-via-position), var(--tw-gradient-to);
-}
-.to-transparent{
-  --tw-gradient-to: transparent var(--tw-gradient-to-position);
 }
 .decoration-slice{
   box-decoration-break: slice;
@@ -3871,12 +3875,6 @@ select option:active,
 }
 .bg-origin-content{
   background-origin: content-box;
-}
-.fill-primary{
-  fill: rgb(var(--color-primary));
-}
-.fill-secondary{
-  fill: rgb(var(--color-secondary));
 }
 .object-contain{
   object-fit: contain;
@@ -4264,9 +4262,6 @@ select option:active,
 }
 .opacity-0{
   opacity: 0;
-}
-.opacity-70{
-  opacity: 0.7;
 }
 .bg-blend-normal{
   background-blend-mode: normal;
@@ -15156,9 +15151,6 @@ select.tabulator-page-size option{
   .sm\:col-span-3{
     grid-column: span 3 / span 3;
   }
-  .sm\:col-span-6{
-    grid-column: span 6 / span 6;
-  }
   .sm\:m-0{
     margin: 0px;
   }
@@ -15277,6 +15269,9 @@ select.tabulator-page-size option{
   .xl\:flex{
     display: flex;
   }
+  .xl\:grid-cols-2{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .xl\:justify-between{
     justify-content: space-between;
   }
@@ -15299,9 +15294,6 @@ select.tabulator-page-size option{
 @media (min-width: 1400px){
   .xxl\:col-span-3{
     grid-column: span 3 / span 3;
-  }
-  .xxl\:col-span-4{
-    grid-column: span 4 / span 4;
   }
 }
 

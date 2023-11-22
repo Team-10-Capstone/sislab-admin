@@ -66,6 +66,10 @@ $routes->get('/disposisi-penyelia/create/(:num)', 'DisposisiController::createDi
 $routes->get('/disposisi-penyelia', 'DisposisiController::verify', ['filter' => 'authGuard']);
 $routes->post('/disposisi-penyelia/store', 'DisposisiController::store', ['filter' => 'authGuard']);
 
+$routes->get('/disposisi-analis', 'AnalisController::index', ['filter' => 'authGuard']);
+$routes->get('/disposisi-analis/create/(:num)', 'AnalisController::createDisposisiViews/$1', ['filter' => 'authGuard']);
+$routes->post('/disposisi-analis/store', 'AnalisController::store', ['filter' => 'authGuard']);
+
 $routes->get('/wadah', 'WadahController::index', ['filter' => 'authGuard']);
 $routes->post('/wadah/create', 'WadahController::create', ['filter' => 'authGuard']);
 $routes->post('/wadah/edit/(:num)', 'WadahController::edit/$1', ['filter' => 'authGuard']);

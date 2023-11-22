@@ -36,7 +36,7 @@ class PengujianController extends BaseController
             ->orderBy($order_by[0], $order_by[1])
             ->limit($perPage, $offset);
 
-        $query->like('fppc.status', "menunggu-pengujian");
+        $query->like('fppc.status', "proses-pengujian");
         $query->orLike('fppc.status', "perbaikan");
 
         if (!empty($keyword)) {
