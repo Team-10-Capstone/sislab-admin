@@ -11,14 +11,14 @@ class ParameterUjiSeeder extends Seeder
         $data = [
             [
                 'kode_uji' => 1,
-                'jenis_parameter' => 'Sample Type 1',
+                'jenis_parameter' => 'PARASIT',
                 'no_ikm' => 'IKM-001',
                 'keterangan_uji' => 'Description for Sample 1',
                 'standar_uji' => 'Standard 1',
             ],
             [
                 'kode_uji' => 2,
-                'jenis_parameter' => 'Sample Type 2',
+                'jenis_parameter' => 'FISIOLOGI',
                 'no_ikm' => 'IKM-002',
                 'keterangan_uji' => 'Description for Sample 2',
                 'standar_uji' => 'Standard 2',
