@@ -55,12 +55,15 @@
         </div>
         <!-- Page Header Close -->
 
-        <div class="w-full justify-center pb-20">
-            <button onclick="printLHU()" class="btn ti-btn ti-btn-primary"><i class="ti ti-printer"></i>Print
+        <div class="w-full flex flex-col h-full justify-center pb-20">
+        <div class="w-full flex-1 flex items-center justify-center md:block md:h-full md:w-auto">
+        <button onclick="printLHU()" class="btn ti-btn ti-btn-primary"><i class="ti ti-printer"></i>Print
                 Sekarang</button>
+                </div>
+            
 
             <div class="container w-full !text-black flex justify-center">
-                <div class="p-10 bg-white">
+                <div class="p-10 bg-white hidden md:block mt-6">
                     <div class="table-wrapper" id="myElementId"
                         style="background-color: white; display: inline-block; padding: 0px;">
                         <!-- kop surat -->

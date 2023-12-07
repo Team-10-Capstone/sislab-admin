@@ -26,6 +26,7 @@ class FppcModel extends Model
         'alamat_trader',
         'nama_penerima',
         'alamat_penerima',
+        'no_npwp'
     ];
 
     protected $useTimestamps = true; // Set to true if you want to use timestamps

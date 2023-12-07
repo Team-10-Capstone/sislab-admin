@@ -152,6 +152,13 @@ class FppcController extends BaseController
 
             $tipe = convertPpkTipeToFppcTipe($ppk['kd_kegiatan'], $ppk['kd_mks_kirim']);
 
+            $npwp = $ppk['npwp_trader'];
+
+            if (empty($npwp) || $npwp == '-') {
+                session()->setFlashdata('errors', 'NPWP Trader Tidak Ditemukan, Harap Hubungi Admin');
+                return redirect()->to('/ppk');
+            }
+
             $data_fppc = [
                 'no_fppc' => $ppk['id_ppk'] . '-' . $ppk['id_trader'],
                 'no_ppk' => $ppk['no_ppk'],
@@ -167,6 +174,7 @@ class FppcController extends BaseController
                 'nama_penerima' => $ppk['nm_penerima'],
                 'alamat_penerima' => $ppk['al_penerima'],
                 'tipe_permohonan' => $tipe,
+                'no_npwp' => $ppk['npwp_trader'],
             ];
 
             $fppcId = $fppcModel->insert($data_fppc);

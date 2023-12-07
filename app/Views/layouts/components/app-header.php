@@ -39,8 +39,8 @@
 						<div class="header-profile hs-dropdown ti-dropdown" data-hs-dropdown-placement="bottom-right">
 							<button id="dropdown-profile" type="button"
 								class="hs-dropdown-toggle ti-dropdown-toggle gap-2 p-0 flex-shrink-0 h-8 w-8 rounded-full shadow-none focus:ring-gray-400 text-xs dark:focus:ring-white/10">
-								<img class="inline-block rounded-full ring-2 ring-white dark:ring-white/10"
-									src="<?php echo base_url('assets/img/users/1.jpg'); ?>" alt="Image Description">
+								<img class="inline-block border border-primary rounded-full ring-2 ring-white dark:ring-white/10"
+									src="https://cdn2.iconfinder.com/data/icons/web-kit-2/64/web_user-512.png" alt="Image Description">
 							</button>
 
 							<div class="hs-dropdown-menu ti-dropdown-menu border-0 w-[20rem]"
@@ -48,7 +48,7 @@
 								<div class="ti-dropdown-header !bg-primary flex">
 									<div class="ltr:mr-3 rtl:ml-3">
 										<img class="avatar shadow-none rounded-full !ring-transparent"
-											src="<?php echo base_url('assets/img/users/1.jpg'); ?>" alt="profile-img">
+										src="https://cdn2.iconfinder.com/data/icons/web-kit-2/64/web_user-512.png" alt="profile-img">
 									</div>
 									<div>
 										<p class="ti-dropdown-header-title !text-white">
@@ -60,10 +60,6 @@
 									</div>
 								</div>
 								<div class="mt-2 ti-dropdown-divider">
-									<a href="javascript:void(0);" class="ti-dropdown-item">
-										<i class="ti ti-user-circle text-lg"></i>
-										Profile
-									</a>
 									<a href="<?php echo base_url(); ?>/LoginController/logout" class="ti-dropdown-item">
 										<i class="ti ti-logout  text-lg"></i>
 										Log Out

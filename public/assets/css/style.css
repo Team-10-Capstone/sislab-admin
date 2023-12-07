@@ -2854,6 +2854,9 @@ select option:active,
 .h-max{
   height: max-content;
 }
+.h-screen{
+  height: 100vh;
+}
 .\!w-full{
   width: 100% !important;
 }
@@ -2956,6 +2959,16 @@ select option:active,
 .scale-95{
   --tw-scale-x: .95;
   --tw-scale-y: .95;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.scale-50{
+  --tw-scale-x: .5;
+  --tw-scale-y: .5;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.scale-0{
+  --tw-scale-x: 0;
+  --tw-scale-y: 0;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .\!transform{
@@ -3704,6 +3717,9 @@ select option:active,
 .border-yellow-200{
   --tw-border-opacity: 1;
   border-color: rgb(254 240 138 / var(--tw-border-opacity));
+}
+.border-primary{
+  border-color: rgb(var(--color-primary));
 }
 .border-t-transparent{
   border-top-color: transparent;
@@ -15223,6 +15239,15 @@ select.tabulator-page-size option{
   }
   .md\:grid{
     display: grid;
+  }
+  .md\:h-auto{
+    height: auto;
+  }
+  .md\:h-full{
+    height: 100%;
+  }
+  .md\:w-auto{
+    width: auto;
   }
   .md\:grid-cols-2{
     grid-template-columns: repeat(2, minmax(0, 1fr));
