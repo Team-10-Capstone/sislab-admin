@@ -98,13 +98,29 @@
 				}
 				?>
 
+				<?php
+				helper('role_helper');
+
+				$userRole = session()->get('role');
+
+				if (canDisplayLink($userRole, [0, 1])) {
+					// Display links for users with allowed roles
+					echo "<li class='slide'>
+					<a href='/disposisi-analis' class='side-menu__item'>
+						<i class='ti ti-mail-exclamation side-menu__icon'></i>
+						<span class='side-menu__label'>Disposisi Ke Analis</span>
+					</a>
+				</li>";
+				}
+				?>
+
 
 				<?php
 				helper('role_helper');
 
 				$userRole = session()->get('role');
 
-				if (canDisplayLink($userRole, [3])) {
+				if (canDisplayLink($userRole, [1])) {
 					// Display links for users with allowed roles
 					echo "<li class='slide  has-sub'>
 					<a href='javascript:void(0);' class='side-menu__item'>

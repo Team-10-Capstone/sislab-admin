@@ -234,19 +234,14 @@
                                 </tbody>
                             </table>
                         </div>
-
-
                         <?= $pager_links ?>
-
                     </div>
                 </div>
             </div>
         </div>
         <!-- End::row-1 -->
-
     </div>
     <!-- End::main-content -->
-
 </div>
 
 <!-- Start::Invoice Modal-->

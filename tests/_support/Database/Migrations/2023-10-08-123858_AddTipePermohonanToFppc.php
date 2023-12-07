@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddTipePermohonanToFppc2 extends Migration
+class AddTipePermohonanToFppc extends Migration
 {
     public function up()
     {

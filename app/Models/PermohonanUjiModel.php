@@ -13,7 +13,6 @@ class PermohonanUjiModel extends Model
         'kode_sampel',
         'dtl_fppc_id',
         'parameter_uji_id',
-        'hasil_uji_id',
         'status',
     ];
 

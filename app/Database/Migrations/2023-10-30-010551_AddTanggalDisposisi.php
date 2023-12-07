@@ -9,7 +9,7 @@ class AddTanggalToDisposisi extends Migration
     public function up()
     {
         //
-        $this->forge->addColumn('disposisi_penyelia_baru', [
+        $this->forge->addColumn('disposisi_analis', [
             'tanggal_pengujian' => [
                 'type' => 'DATE',
                 'null' => true,
@@ -24,7 +24,7 @@ class AddTanggalToDisposisi extends Migration
     public function down()
     {
         //
-        $this->forge->dropColumn('disposisi_penyelia_baru', 'tanggal_pengujian');
-        $this->forge->dropColumn('disposisi_penyelia_baru', 'waktu_pengujian');
+        $this->forge->dropColumn('disposisi_analis', 'tanggal_pengujian');
+        $this->forge->dropColumn('disposisi_analis', 'waktu_pengujian');
     }
 }

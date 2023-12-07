@@ -16,7 +16,7 @@ use App\Models\PermohonanUjiModel;
 use App\Models\DtlFppcModel;
 use CodeIgniter\Test\Fabricator;
 
-class DisposisiControllerTest extends CIUnitTestCase
+class DisposisiPenyeliaControllerTest extends CIUnitTestCase
 {
     use ControllerTester;
     use DatabaseTestTrait;
@@ -27,7 +27,7 @@ class DisposisiControllerTest extends CIUnitTestCase
             ->execute('index');
 
         $this->assertTrue($result->isOK());
-        $this->assertStringContainsString('Disposisi Penyelia', $result->getBody());
+        $this->assertStringContainsString('Disposisi Analis', $result->getBody());
     }
 
     public function testIndexWithFilters()
@@ -45,7 +45,7 @@ class DisposisiControllerTest extends CIUnitTestCase
             ->execute('index');
 
         $this->assertTrue($result->isOK());
-        $this->assertStringContainsString('Disposisi Penyelia', $result->getBody());
+        $this->assertStringContainsString('Disposisi Analis', $result->getBody());
     }
 
     public function testCreatePost()
@@ -139,7 +139,7 @@ class DisposisiControllerTest extends CIUnitTestCase
                     [
                         'fppc_id' => $fppc['id'],
                         'permohonan_uji_id' => $permohonanIds,
-                        'petugas_penyelia' => [1],
+                        'petugas_analis' => [1],
                         'tanggal_pengujian' => '2021-08-01',
                         'waktu_pengujian' => '08:00',
                     ],
@@ -149,7 +149,7 @@ class DisposisiControllerTest extends CIUnitTestCase
         $result = $this->withRequest($request)->controller(DisposisiController::class)
             ->execute('store');
 
-        $result->assertRedirectTo('/disposisi-penyelia');
+        $result->assertRedirectTo('/disposisi-analis');
     }
 
     public function testCreatePage()
@@ -230,7 +230,6 @@ class DisposisiControllerTest extends CIUnitTestCase
             'kode_sampel' => '123456789',
             'dtl_fppc_id' => $dtlFppcData,
             'parameter_uji_id' => $parameter_uji['id'],
-            'hasil_uji_id' => null,
             'status' => 'pending',
         ];
 
@@ -240,7 +239,7 @@ class DisposisiControllerTest extends CIUnitTestCase
             ->execute('createDisposisiViews', $fppcData);
 
         $result->assertTrue($result->isOK());
-        $result->assertStringContainsString('Disposisi Penyelia', $result->getBody());
+        $result->assertStringContainsString('Disposisi Analis', $result->getBody());
     }
 }
 

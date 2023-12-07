@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddWarna2 extends Migration
+class AddWarna extends Migration
 {
     public function up()
     {

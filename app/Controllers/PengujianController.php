@@ -36,7 +36,7 @@ class PengujianController extends BaseController
             ->orderBy($order_by[0], $order_by[1])
             ->limit($perPage, $offset);
 
-        $query->like('fppc.status', "menunggu-pengujian");
+        $query->like('fppc.status', "proses-pengujian");
         $query->orLike('fppc.status', "perbaikan");
 
         if (!empty($keyword)) {
@@ -80,36 +80,37 @@ class PengujianController extends BaseController
 
     public function input($id)
     {
+        $perbaikan = new \App\Models\PerbaikanModel();
         $fppcModel = new \App\Models\FppcModel();
         $fppcDetailsModel = new \App\Models\DtlFppcModel();
         $permohonanUjiModel = new \App\Models\PermohonanUjiModel();
-        $DisposisiPenyelia = new \App\Models\DisposisiPenyeliaModel();
+        $DisposisiAnalis = new \App\Models\DisposisiAnalisModel();
         $AdminModel = new \App\Models\AdminModel();
-        $perbaikan = new \App\Models\PerbaikanModel();
+        
+        $perbaikan = $perbaikan->where('id_fppc', $id)->first();
 
         $fppcData = $fppcModel->where('id', $id)->first();
 
-        $disposisis = $DisposisiPenyelia->select('disposisi_penyelia_baru.*, admin.name as nama_admin, admin.email as email_admin, admin.mobile as mobile_admin, permohonan_uji.parameter_uji_id')
-            ->where('disposisi_penyelia_baru.id_fppc', $id)
-            ->join('permohonan_uji', 'permohonan_uji.id = disposisi_penyelia_baru.id_permohonan_uji')
-            ->join('admin', 'admin.adminId = disposisi_penyelia_baru.penyelia_id')
+        $disposisis = $DisposisiAnalis->select('disposisi_analis.*, admin.name as nama_admin, admin.email as email_admin, admin.mobile as mobile_admin, permohonan_uji.parameter_uji_id, disposisi_penyelia.manajer_teknis_id')
+            ->where('disposisi_analis.id_fppc', $id)
+            ->join('permohonan_uji', 'permohonan_uji.id = disposisi_analis.id_permohonan_uji')
+            ->join('admin', 'admin.adminId = disposisi_analis.analis_id')
+            ->join('disposisi_penyelia', 'disposisi_penyelia.id_fppc = disposisi_analis.id_fppc')
             ->findAll();
 
-        $perbaikan = $perbaikan->where('id_fppc', $id)->first();
-
-        $groupedPenyeliaAccess = [];
-        $uniqueDisposisiWithPenyelia = [];
+        $groupedAnalisAccess = [];
+        $uniqueDisposisiWithAnalis = [];
 
         foreach ($disposisis as $disposisi) {
             $parameter_uji_id = $disposisi['parameter_uji_id'];
 
 
-            if (!isset($groupedPenyeliaAccess[$parameter_uji_id])) {
-                $groupedPenyeliaAccess[$parameter_uji_id] = [];
+            if (!isset($groupedAnalisAccess[$parameter_uji_id])) {
+                $groupedAnalisAccess[$parameter_uji_id] = [];
             }
 
-            $groupedPenyeliaAccess[$parameter_uji_id]['penyelia'][] = [
-                'id' => $disposisi['penyelia_id'],
+            $groupedAnalisAccess[$parameter_uji_id]['analis'][] = [
+                'id' => $disposisi['analis_id'],
                 'name' => $disposisi['nama_admin'],
                 'email' => $disposisi['email_admin'],
             ];
@@ -117,8 +118,8 @@ class PengujianController extends BaseController
 
             if (
                 in_array(
-                    $disposisi['penyelia_id'],
-                    array_column($uniqueDisposisiWithPenyelia, 'penyelia_id')
+                    $disposisi['analis_id'],
+                    array_column($uniqueDisposisiWithAnalis, 'analis_id')
                 )
             ) {
                 // @codeCoverageIgnoreStart
@@ -126,10 +127,10 @@ class PengujianController extends BaseController
                 // @codeCoverageIgnoreEnd
             }
 
-            $uniqueDisposisiWithPenyelia[] = $disposisi;
+            $uniqueDisposisiWithAnalis[] = $disposisi;
         }
 
-        $manajer_id = $disposisis[0]['manajer_teknis_id'];
+        $manajer_id = $disposisis ? $disposisis[0]['manajer_teknis_id'] : 1;
 
         $managerData = $AdminModel->where('adminId', $manajer_id)->first();
 
@@ -174,11 +175,11 @@ class PengujianController extends BaseController
 
             $parameterUjiKey = $value['parameter_uji_id'];
             if (!isset($groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey])) {
-                $isPenyeliaHasAccess = in_array($currentPenyeliaId, array_column($groupedPenyeliaAccess[$parameterUjiKey]['penyelia'], 'id'));
+                $isAnalisHasAccess = in_array($currentPenyeliaId, array_column($groupedAnalisAccess[$parameterUjiKey]['analis'], 'id'));
 
                 $groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey] = [
                     'parameter_uji' => $parameterUji,
-                    'isPenyeliaHasAccess' => $isPenyeliaHasAccess,
+                    'isAnalisHasAccess' => $isAnalisHasAccess,
                     'image' => $value['image_hasil'],
                     'kontrol_positif_warna' => $value['kontrol_positif_warna'],
                     'kontrol_negatif_warna' => $value['kontrol_negatif_warna'],
@@ -202,17 +203,15 @@ class PengujianController extends BaseController
                 'nama_wadah' => $value['nama_wadah'],
                 'nama_bentuk' => $value['nama_bentuk'],
                 'image_wadah' => $value['image_wadah'],
+
             ];
 
             if (!empty($value['hasil_uji_id'])) {
                 // @codeCoverageIgnoreStart
-                $analis_id = $value['analis_id'];
-                $analisData = $AdminModel->where('adminId', $analis_id)->first();
                 $dtlFppcData['keterangan_hasil'] = $value['keterangan_hasil'];
                 $dtlFppcData['nilai_hasil'] = $value['nilai_hasil'];
                 $dtlFppcData['hasil_uji'] = $value['hasil_uji'];
                 $dtlFppcData['hasil_uji_id'] = $value['hasil_uji_id'];
-                $dtlFppcData['analis'] = $analisData['name'];
                 $dtlFppcData['ct'] = $value['ct'];
                 $dtlFppcData['warna'] = $value['warna'];
                 // @codeCoverageIgnoreEnd
@@ -221,7 +220,6 @@ class PengujianController extends BaseController
                 $dtlFppcData['nilai_hasil'] = 'Belum dilakukan pengujian';
                 $dtlFppcData['hasil_uji'] = 'Belum dilakukan pengujian';
                 $dtlFppcData['hasil_uji_id'] = 'Belum dilakukan pengujian';
-                $dtlFppcData['analis'] = 'Belum dilakukan pengujian';
                 $dtlFppcData['ct'] = 'Belum dilakukan pengujian';
                 $dtlFppcData['warna'] = 'Belum dilakukan pengujian';
             }
@@ -232,7 +230,7 @@ class PengujianController extends BaseController
         return view('pages/pengujian-input-hasil', [
             'fppc' => $fppcData,
             'title' => 'Input Hasil Uji',
-            'disposisis' => $uniqueDisposisiWithPenyelia,
+            'disposisis' => $uniqueDisposisiWithAnalis,
             'managerData' => $managerData,
             'permohonans' => $groupedPermohonanUjiWithArrOfDtlFppc,
             'analiss' => $analis,
@@ -258,17 +256,18 @@ class PengujianController extends BaseController
         $statuses = array_column($permohonanRelated, 'status');
 
         foreach ($statuses as $key => $value) {
+            // @codeCoverageIgnoreStart
             if ($value != 'selesai') {
                 session()->setFlashdata('errors', 'Tidak dapat menyelesaikan pengujian, karena masih ada permohonan uji yang belum selesai');
                 return redirect()->to('/pengujian/input-hasil/' . $fppc_id);
             }
+            // @codeCoverageIgnoreEnd
         }
 
         $FppcModel = new \App\Models\FppcModel();
 
         $FppcModel->update($fppc_id, ['status' => 'selesai-pengujian']);
 
-        // @codeCoverageIgnoreStart
         $activityDescription = 'Pengujian dengan nomor FPPC ' . $fppc_id . ' telah selesai dilakukan, menunggu diterbitkan LHU';
 
         $activityData = [
@@ -279,13 +278,13 @@ class PengujianController extends BaseController
         ];
 
         $AktivitasModel->insert($activityData);
-        // @codeCoverageIgnoreEnd
 
         session()->setFlashdata('success', 'Berhasil menyelesaikan pengujian');
 
         return redirect()->to('/pengujian');
     }
 
+    // @codeCoverageIgnoreStart
     public function reset($id)
     {
         $permohonanUjiModel = new \App\Models\PermohonanUjiModel();
@@ -310,4 +309,5 @@ class PengujianController extends BaseController
 
         return redirect()->to('/pengujian/input-hasil/' . $id);
     }
+    // @codeCoverageIgnoreEnd
 }

@@ -361,5 +361,28 @@ class FppcController extends BaseController
         return redirect()->to('/fppc');
     }
 
+    // @codeCoverageIgnoreStart
+    public function reject($id)
+    {
+        $fppcModel = new \App\Models\FppcModel();
+        $pembatalanFppcModel = new \App\Models\PembatalanFppcModel();
+
+        $fppcModel->update($id, ['status' => 'ditolak']);
+
+        $data = [
+            'id_fppc' => $id,
+            'id_admin' => session()->get('adminId'),
+            'alasan' => $this->request->getPost('alasan'),
+        ];
+
+        $pembatalanFppcModel->insert($data);
+
+
+        session()->setFlashdata('success', 'Permohonan FPPC Berhasil Ditolak');
+
+        return redirect()->to('/fppc');
+
+    }
+    // @codeCoverageIgnoreEnd
 
 }

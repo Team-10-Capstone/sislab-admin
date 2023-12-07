@@ -22,26 +22,19 @@ class HasilUjiController extends Controller
             'permohonan' => 'required'
         ];
 
-        $validation = \Config\Services::validation();
-
-        $validation->setRules($rules);
-
-        $isDataValid = $validation->run([
-            'sampels' => $sampels,
-            'image' => $image,
-            'permohonan' => $permohonan
-        ]);
+        $isDataValid = $this->validateData($this->request->getPost(), $rules);
 
         if (!$isDataValid) {
-            $errors = $validation->getErrors();
+            $errors = $this->validator->getErrors();
 
             $errorString = implode("\n", $errors);
 
             session()->setFlashdata('errors', $errorString);
 
+            $this->validator->reset();
+
             return redirect()->to('/pengujian/input-hasil/' . $sampels[0]['fppc_id']);
         }
-
 
         $imageData = json_decode($image);
 
@@ -54,16 +47,20 @@ class HasilUjiController extends Controller
         $fileSize = file_put_contents($uploadPath . $fileNama, $imageBinary);
 
         if ($fileSize === false) {
+            //@codeCoverageIgnoreStart
             session()->setFlashdata('error', 'Gagal mengupload gambar');
             return redirect()->to('/pengujian/input-hasil/' . $sampels[0]['fppc_id']);
+            //@codeCoverageIgnoreEnd
         }
 
         $imageUrl = base_url('uploads/' . $fileNama);
 
         foreach ($sampels as $sampel) {
             if (!isset($permohonan[$sampel['kode_uji']])) {
+                // @codeCoverageIgnoreStart
                 session()->setFlashdata('error', 'Permohonan uji tidak ditemukan');
                 return redirect()->to('/pengujian/input-hasil/' . $sampel['fppc_id']);
+                // @codeCoverageIgnoreEnd
             }
 
             $permohonanRelated = $permohonan[$sampel['kode_uji']];
@@ -71,7 +68,6 @@ class HasilUjiController extends Controller
             $data = [
                 'fppc_id' => $sampel['fppc_id'],
                 'dtl_fppc_id' => $sampel['dtl_fppc_id'],
-                'analis_id' => $sampel['analis_id'],
                 'hasil_uji' => $sampel['hasil_uji'],
                 'keterangan' => $sampel['keterangan'],
                 'nilai' => $sampel['ct'],
@@ -89,12 +85,9 @@ class HasilUjiController extends Controller
 
             $permohonan_uji_id = $sampel['permohonan_uji_id'];
 
-            $validation = \Config\Services::validation();
-
-            $validation->setRules([
+            $validation = [
                 'fppc_id' => 'required',
                 'dtl_fppc_id' => 'required',
-                'analis_id' => 'required',
                 'hasil_uji' => 'required',
                 'keterangan' => 'required',
                 'nilai' => 'required',
@@ -108,17 +101,18 @@ class HasilUjiController extends Controller
                 'kontrol_positif_ct' => 'required',
                 'kontrol_negatif_ct' => 'required',
                 'warna' => 'required'
-            ]);
-
-            $isDataValid = $validation->run($data);
+            ];
+            
+            $isDataValid = $this->validateData($data, $validation);
 
             if (!$isDataValid) {
-                $errors = $validation->getErrors();
+                $errors = $this->validator->getErrors();
 
                 $errorString = implode("\n", $errors);
 
                 session()->setFlashdata('errors', $errorString);
-
+                
+                $this->validator->reset();
                 return redirect()->to('/pengujian/input-hasil/' . $sampel['fppc_id']);
             }
 

@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreatePermohonanUji2 extends Migration
+class CreatePermohonanUji extends Migration
 {
     public function up()
     {
@@ -18,10 +18,6 @@ class CreatePermohonanUji2 extends Migration
                 'null' => true,
             ],
             'parameter_uji_id' => [
-                'type' => 'INT',
-                'null' => true,
-            ],
-            'hasil_uji_id' => [
                 'type' => 'INT',
                 'null' => true,
             ],
@@ -43,7 +39,6 @@ class CreatePermohonanUji2 extends Migration
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('dtl_fppc_id', 'dtl_fppc', 'id');
         $this->forge->addForeignKey('parameter_uji_id', 'parameter_uji', 'id');
-        $this->forge->addForeignKey('hasil_uji_id', 'hasil_uji', 'id');
         $this->forge->createTable('permohonan_uji');
     }
 

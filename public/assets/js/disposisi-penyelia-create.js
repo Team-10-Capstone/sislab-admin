@@ -9,7 +9,7 @@
       new Choices(element, {
         allowHTML: true,
         removeItemButton: true,
-        placeholderValue: "Pilih petugas analis",
+        placeholderValue: "Pilih petugas penyelia",
       });
     }
   });

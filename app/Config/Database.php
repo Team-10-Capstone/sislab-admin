@@ -26,9 +26,9 @@ class Database extends Config
      */
     public array $default = [
         'DSN' => '',
-        'hostname' => 'localhost',
-        'username' => 'sa',
-        'password' => '123',
+        'hostname' => 'sislab.database.windows.net',
+        'username' => 'fahri',
+        'password' => 'Wates123',
         'database' => 'sislab',
         'DBDriver' => 'SQLSRV',
         'DBPrefix' => '',
@@ -51,10 +51,10 @@ class Database extends Config
      */
     public array $karimutu = [
         'DSN' => '',
-        'hostname' => 'localhost',
-        'username' => 'sa',
-        'password' => '123',
-        'database' => 'karimutu_2',
+        'hostname' => 'sislab.database.windows.net',
+        'username' => 'fahri',
+        'password' => 'Wates123',
+        'database' => 'karimutu',
         'DBDriver' => 'SQLSRV',
         'DBPrefix' => '',
         'pConnect' => false,

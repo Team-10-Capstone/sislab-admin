@@ -58,13 +58,18 @@ $routes->get('/fppc/create', 'FppcController::create', ['filter' => 'authGuard']
 $routes->get('/fppc/verify', 'FppcController::verify', ['filter' => 'authGuard']);
 $routes->get('/fppc/verify-status/(:num)/(:num)', 'FppcController::updateStatus/$1/$2', ['filter' => 'authGuard']);
 $routes->post('/fppc/store', 'FppcController::store', ['filter' => 'authGuard']);
-$routes->get('/fppc/delete/(:segment)', 'FppcController::delete/$1', ['filter' => 'authGuard']);
+$routes->post('/fppc/reject/(:num)', 'FppcController::reject/$1', ['filter' => 'authGuard']);
 $routes->get('/fppc/index', 'FppcController::index', ['filter' => 'authGuard']);
 
-$routes->get('/disposisi-penyelia', 'DisposisiController::index', ['filter' => 'authGuard']);
-$routes->get('/disposisi-penyelia/create/(:num)', 'DisposisiController::createDisposisiViews/$1', ['filter' => 'authGuard']);
-$routes->get('/disposisi-penyelia', 'DisposisiController::verify', ['filter' => 'authGuard']);
-$routes->post('/disposisi-penyelia/store', 'DisposisiController::store', ['filter' => 'authGuard']);
+$routes->get('/disposisi-analis', 'DisposisiController::index', ['filter' => 'authGuard']);
+$routes->get('/disposisi-analis/create/(:num)', 'DisposisiController::createDisposisiViews/$1', ['filter' => 'authGuard']);
+$routes->get('/disposisi-analis', 'DisposisiController::verify', ['filter' => 'authGuard']);
+$routes->post('/disposisi-analis/store', 'DisposisiController::store', ['filter' => 'authGuard']);
+
+$routes->get('/disposisi-penyelia', 'DisposisiPenyeliaController::index', ['filter' => 'authGuard']);
+$routes->get('/disposisi-penyelia/create/(:num)', 'DisposisiPenyeliaController::createDisposisiViews/$1', ['filter' => 'authGuard']);
+$routes->get('/disposisi-penyelia', 'DisposisiPenyeliaController::verify', ['filter' => 'authGuard']);
+$routes->post('/disposisi-penyelia/store', 'DisposisiPenyeliaController::store', ['filter' => 'authGuard']);
 
 $routes->get('/wadah', 'WadahController::index', ['filter' => 'authGuard']);
 $routes->post('/wadah/create', 'WadahController::create', ['filter' => 'authGuard']);

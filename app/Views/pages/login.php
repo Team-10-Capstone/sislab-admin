@@ -43,7 +43,7 @@
         <div class="p-4 sm:p-7">
             <div class="text-center">
                 <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">
-                    Sign in
+                    Login
                 </h1>
             </div>
 
@@ -66,8 +66,7 @@
                         <div>
                             <div class="flex justify-between items-center">
                                 <label for="password" class="block text-sm mb-2 dark:text-white">Password</label>
-                                <a class="text-sm text-primary decoration-2 hover:underline font-medium"
-                                    href="<?php echo base_url('forgot'); ?>">Forgot password?</a>
+                                
                             </div>
                             <div class="relative">
                                 <input type="password" id="password" name="password"

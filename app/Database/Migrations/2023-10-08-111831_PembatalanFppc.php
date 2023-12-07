@@ -21,10 +21,6 @@ class PembatalanFppc extends Migration
                 'type' => 'INT',
                 'null' => true,
             ],
-            'dibatalkan_oleh' => [
-                'type' => 'INT',
-                'default' => 'admin',
-            ],
             'alasan' => [
                 'type' => 'VARCHAR',
                 'constraint' => 255,

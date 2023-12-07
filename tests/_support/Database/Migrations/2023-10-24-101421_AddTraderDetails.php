@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddTraderDetails2 extends Migration
+class AddTraderDetails extends Migration
 {
     public function up()
     {

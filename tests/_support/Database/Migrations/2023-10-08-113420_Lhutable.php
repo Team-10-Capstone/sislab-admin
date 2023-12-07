@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Lhutable2 extends Migration
+class Lhutable extends Migration
 {
     public function up()
     {
@@ -35,13 +35,8 @@ class Lhutable2 extends Migration
             ],
             'no_lhu' => [
                 'type' => 'VARCHAR',
-                'constraint' => 50,
+                'constraint' => 255,
                 'null' => true,
-            ],
-            'status' => [
-                'type' => 'ENUM',
-                'constraint' => ['sementara', 'disetujui', 'ditolak'],
-                'default' => 'sementara'
             ],
             'created_at' => [
                 'type' => 'DATETIME',

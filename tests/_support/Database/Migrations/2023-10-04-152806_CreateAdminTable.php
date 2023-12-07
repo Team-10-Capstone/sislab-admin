@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateAdminTable2 extends Migration
+class CreateAdminTable extends Migration
 {
     public function up()
     {

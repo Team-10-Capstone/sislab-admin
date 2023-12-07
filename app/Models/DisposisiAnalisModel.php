@@ -6,7 +6,6 @@ use CodeIgniter\Model;
 
 class DisposisiAnalisModel extends Model
 {
-    protected $useSoftDeletes = true;
     protected $table = 'disposisi_analis';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
@@ -16,13 +15,13 @@ class DisposisiAnalisModel extends Model
         'analis_id',
         'penyelia_id',
         'status',
+        'id_permohonan_uji',
+        'tanggal_pengujian',
+        'waktu_pengujian',
     ];
 
     protected $useTimestamps = true;
     protected $dateFormat = 'datetime';
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
-    protected $deletedField = 'deleted_at';
-
-
 }

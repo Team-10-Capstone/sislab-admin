@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateFppcTable2 extends Migration
+class CreateFppcTable extends Migration
 {
     public function up()
     {
@@ -60,7 +60,7 @@ class CreateFppcTable2 extends Migration
             ],
             'status' => [
                 'type' => 'ENUM',
-                'constraint' => ['pending', 'ditolak', 'menunggu-disposisi', 'menunggu-pengujian', 'proses-pengujian', 'selesai-pengujian', 'lhus', 'terbit-lhu', 'selesai'],
+                'constraint' => ['pending', 'ditolak', 'menunggu-disposisi', 'menunggu-pengujian', 'proses-pengujian', 'selesai-pengujian', 'lhus', 'perbaikan', 'terbit-lhu', 'selesai'],
                 'default' => 'pending'
             ],
             'created_at' => [

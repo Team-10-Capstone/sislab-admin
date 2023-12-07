@@ -66,7 +66,7 @@
             <div>
                 <h3
                     class="text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-white text-2xl font-medium">
-                    Pilih Petugas Penyelia
+                    Buat Disposisi Analis
                 </h3>
             </div>
             <ol class="flex items-center whitespace-nowrap min-w-0">
@@ -79,7 +79,7 @@
                     </a>
                 </li>
                 <li class="text-sm text-gray-500 hover:text-primary dark:text-white/70 " aria-current="page">
-                    Pilih Petugas Penyelia
+                    Buat Disposisi Analis
                 </li>
             </ol>
         </div>
@@ -177,7 +177,7 @@
                                 </div>
 
                             </div>
-                            <form method="POST" action="<?= base_url('disposisi-penyelia/store') ?>"
+                            <form method="POST" action="<?= base_url('disposisi-analis/store') ?>"
                                 class="col-span-12 xl:col-span-8">
                                 <div class="w-full grid grid-cols-2 gap-x-6">
                                     <?php foreach ($permohonans as $keypermohonan => $permohonan): ?>
@@ -215,11 +215,11 @@
                                                     <button type="button"
                                                         class="hs-dropdown-toggle flex-1 m-0 py-1 ti-btn ti-btn-soft-primary"
                                                         data-hs-overlay="#hs-focus-management-modal<?php
-                                                        echo $permohonan['parameter_uji']['jenis_parameter'] . '2';
+                                                        echo $permohonan['parameter_uji']['kode_uji'] . '2';
                                                         ?>">
                                                         Lihat Detail Sampel
                                                     </button>
-                                                    <div id="hs-focus-management-modal<?php echo $permohonan['parameter_uji']['jenis_parameter']; ?>2"
+                                                    <div id="hs-focus-management-modal<?php echo $permohonan['parameter_uji']['kode_uji']; ?>2"
                                                         class="hs-overlay hidden ti-modal text-left">
                                                         <div class="hs-overlay-open:mt-7 ti-modal-box mt-0 ease-out">
                                                             <div class="ti-modal-content">
@@ -229,7 +229,7 @@
                                                                     </h3>
                                                                     <button type="button"
                                                                         class="hs-dropdown-toggle ti-modal-close-btn"
-                                                                        data-hs-overlay="#hs-focus-management-modal<?php echo $permohonan['parameter_uji']['jenis_parameter']; ?>2">
+                                                                        data-hs-overlay="#hs-focus-management-modal<?php echo $permohonan['parameter_uji']['kode_uji']; ?>2">
                                                                         <span class="sr-only">Close</span>
                                                                         <svg class="w-3.5 h-3.5" width="8" height="8"
                                                                             viewBox="0 0 8 8" fill="none"
@@ -411,10 +411,10 @@
                                                 </div>
 
                                                 <div>
-                                                    <label class="ti-form-select-label">Pilih Petugas Penyelia</label>
+                                                    <label class="ti-form-select-label">Buat Disposisi Analis</label>
                                                     <select class="ti-form-select blog-tag2" multiple
                                                         id="choices-multiple-default"
-                                                        name="disposisi[<?= $keypermohonan + 1; ?>][petugas_penyelia][]">
+                                                        name="disposisi[<?= $keypermohonan + 1; ?>][petugas_analis][]">
                                                         <?php foreach ($admin as $adminItem): ?>
                                                             <option value="<?= $adminItem['adminId']; ?>">
                                                                 <?= $adminItem['name']; ?>
@@ -436,7 +436,7 @@
                                             role="status" aria-label="loading"></span>
                                         Loading
                                     </button>
-                                    <a href="/disposisi-penyelia" class="text-white">
+                                    <a href="/disposisi-Analis" class="text-white">
                                         <button class="ti-btn btn ti-btn-danger cursor-pointer cancel-button">
                                             <i class="ti ti-circle-x"></i>
                                             Batal

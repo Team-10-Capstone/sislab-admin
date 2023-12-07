@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class PembatalanFppc2 extends Migration
+class PembatalanFppc extends Migration
 {
     public function up()
     {
@@ -20,10 +20,6 @@ class PembatalanFppc2 extends Migration
             'id_admin' => [
                 'type' => 'INT',
                 'null' => true,
-            ],
-            'dibatalkan_oleh' => [
-                'type' => 'INT',
-                'default' => 'admin',
             ],
             'alasan' => [
                 'type' => 'VARCHAR',

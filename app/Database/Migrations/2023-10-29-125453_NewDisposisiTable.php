@@ -49,11 +49,11 @@ class NewDisposisiTable extends Migration
         $this->forge->addForeignKey('id_permohonan_uji', 'permohonan_uji', 'id');
         $this->forge->addForeignKey('manajer_teknis_id', 'admin', 'adminId');
         $this->forge->addForeignKey('penyelia_id', 'admin', 'adminId');
-        $this->forge->createTable('disposisi_penyelia_baru');
+        $this->forge->createTable('disposisi_analis');
     }
 
     public function down()
     {
-        $this->forge->dropTable('disposisi_penyelia_baru');
+        $this->forge->dropTable('disposisi_analis');
     }
 }

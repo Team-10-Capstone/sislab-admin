@@ -611,15 +611,7 @@
                                                                                             </td>
                                                                                         </tr>
 
-                                                                                        <tr
-                                                                                            class="divide-x divide-gray-200 dark:divide-white/10">
-                                                                                            <td class="font-medium">
-                                                                                                Analis
-                                                                                            </td>
-                                                                                            <td>
-                                                                                                <?= $sampel['analis']; ?>
-                                                                                            </td>
-                                                                                        </tr>
+                                                                                        
                                                                                     </tbody>
                                                                                 </table>
                                                                             </div>
@@ -651,7 +643,7 @@
                                     <a href="/pengujian" class="text-white">
                                         <button class="ti-btn btn ti-btn-danger cursor-pointer cancel-button">
                                             <i class="ti ti-circle-x"></i>
-                                            Batal
+                                            Perbaikan
                                         </button>
                                     </a>
                                     <a href="<?php echo base_url("lhus/ajukan-lhus/" . $fppc['id']); ?>"

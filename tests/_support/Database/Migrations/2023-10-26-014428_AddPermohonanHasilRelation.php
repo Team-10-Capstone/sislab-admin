@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class AddPermohonanHasilRelation2 extends Migration
+class AddPermohonanHasilRelation extends Migration
 {
     public function up()
     {

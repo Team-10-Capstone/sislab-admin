@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class CreateParameterUji2 extends Migration
+class CreateParameterUji extends Migration
 {
     public function up()
     {

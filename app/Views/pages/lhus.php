@@ -42,7 +42,7 @@
             <div>
                 <h3
                     class="text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-white text-2xl font-medium">
-                    Laporan Hasil Uji Sementara
+                    Daftar Hasil Uji
                 </h3>
             </div>
             <ol class="flex items-center whitespace-nowrap min-w-0">
@@ -55,7 +55,7 @@
                     </a>
                 </li>
                 <li class="text-sm text-gray-500 hover:text-primary dark:text-white/70 " aria-current="page">
-                    Laporan Hasil Uji Sementara
+                    Daftar Hasil Uji
                 </li>
             </ol>
         </div>

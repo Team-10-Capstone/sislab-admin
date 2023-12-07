@@ -6,14 +6,12 @@ use CodeIgniter\Model;
 
 class PembatalanFppcModel extends Model
 {
-    protected $useSoftDeletes = true;
     protected $table = 'pembatalan_fppc';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
     protected $allowedFields = [
         'id_fppc',
         'id_admin',
-        'dibatalkan_oleh',
         'alasan',
     ];
 
@@ -22,7 +20,4 @@ class PembatalanFppcModel extends Model
 
     protected $createdField = 'created_at';
     protected $updatedField = 'updated_at';
-    protected $deletedField = 'deleted_at';
-
-
 }

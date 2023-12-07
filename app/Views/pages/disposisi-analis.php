@@ -42,7 +42,7 @@
             <div>
                 <h3
                     class="text-gray-700 hover:text-gray-900 dark:text-white dark:hover:text-white text-2xl font-medium">
-                    Form FPPC</h3>
+                    Disposisi Analis</h3>
             </div>
             <ol class="flex items-center whitespace-nowrap min-w-0">
                 <li class="text-sm">
@@ -54,7 +54,7 @@
                     </a>
                 </li>
                 <li class="text-sm text-gray-500 hover:text-primary dark:text-white/70 " aria-current="page">
-                    Form FPPC
+                    Disposisi Analis
                 </li>
             </ol>
         </div>
@@ -66,7 +66,7 @@
                 <div class="box">
 
                     <div class="box-body">
-                        <form method="get" action="<?= site_url('fppc/index') ?>" onsubmit="return false;"
+                        <form method="get" action="<?= site_url('disposisi-analis') ?>" onsubmit="return false;"
                             id="search-form" class="xl:flex xl:justify-between space-y-3 xl:space-y-0">
                             <div class="sm:flex sm:space-x-3 space-y-3 sm:space-y-0 rtl:space-x-reverse">
                                 <div class="relative max-w-xs">
@@ -82,7 +82,6 @@
                                         <i class="ri-search-line text-gray-500 dark:text-white/70"></i>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="sm:space-x-3 sm:flex space-y-3 sm:space-y-0 rtl:space-x-reverse">
                                 <div class="inline-flex">
@@ -155,6 +154,7 @@
                                 class="ti-custom-table ti-custom-table-head edit-table whitespace-nowrap text-center">
                                 <thead class="bg-gray-50 dark:bg-black/20">
                                     <tr class="cart-box">
+
                                         <th scope="col" class="dark:text-white/70">No FPPC</th>
                                         <th scope="col" class="dark:text-white/70">Trader</th>
                                         <th scope="col" class="dark:text-white/70">Tipe Permohonan</th>
@@ -221,11 +221,11 @@
 
                                             <td class="font-medium space-x-2 rtl:space-x-reverse">
 
-                                                <a href="<?= site_url('fppc/verify?fppc_id=' . $row['id']) ?>"
+                                                <a href="<?= site_url('disposisi-analis/create/' . $row['id']) ?>"
                                                     class="invoice-edit m-0 relative ti-btn rounded-full p-2 transition-none focus:outline-none ti-btn-soft-secondary">
                                                     <i class="ti ti-pencil"></i>
                                                     <p>
-                                                        Lihat Detail
+                                                        Buat Disposisi
                                                     </p>
                                                 </a>
                                             </td>
@@ -234,19 +234,14 @@
                                 </tbody>
                             </table>
                         </div>
-
-
                         <?= $pager_links ?>
-
                     </div>
                 </div>
             </div>
         </div>
         <!-- End::row-1 -->
-
     </div>
     <!-- End::main-content -->
-
 </div>
 
 <!-- Start::Invoice Modal-->

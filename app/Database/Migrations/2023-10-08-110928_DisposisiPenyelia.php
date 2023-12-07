@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class DisposisiPenyelia extends Migration
+class DisposisiPenyelia2 extends Migration
 {
     public function up()
     {

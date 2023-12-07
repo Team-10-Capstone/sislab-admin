@@ -12,8 +12,8 @@ class PpkController extends BaseController
     }
     public function index()
     {
-
         $karimutu = db_connect('karimutu');
+        $fppcModel = new \App\Models\FppcModel();
 
         // Get the page number from the URL, default to 1 if not provided
         $page = $this->request->getVar('page') ?? 1;
@@ -34,11 +34,21 @@ class PpkController extends BaseController
         // Calculate the offset based on the current page and items per page
         $offset = ($page - 1) * $perPage;
 
-        $query = "SELECT * FROM comps
+        $fppc = $fppcModel->findAll();
+
+        $ids = array_map(function ($item) {
+            return $item['id_ppk'];
+        }, $fppc);
+
+        // not in query
+        $query = "SELECT * FROM tr_mst_pelaporan
           WHERE (nm_penerima LIKE ? OR nm_trader LIKE ?)";
 
-        $bindings = ['%' . $keyword . '%', '%' . $keyword . '%'];
+        if (!empty($ids)) {
+            $query .= " AND id_ppk NOT IN (" . implode(',', $ids) . ")";
+        }
 
+        $bindings = ['%' . $keyword . '%', '%' . $keyword . '%'];
 
         if (!empty($kd_kegiatan)) {
             $query .= " AND kd_kegiatan = ?";

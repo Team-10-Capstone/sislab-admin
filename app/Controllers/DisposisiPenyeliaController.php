@@ -2,9 +2,7 @@
 
 namespace App\Controllers;
 
-use PHPUnit\Framework\Constraint\IsEmpty;
-
-class DisposisiController extends BaseController
+class DisposisiPenyeliaController extends BaseController
 {
     public function __construct()
     {
@@ -38,7 +36,7 @@ class DisposisiController extends BaseController
             ->orderBy($order_by[0], $order_by[1])
             ->limit($perPage, $offset);
 
-        $query->like('fppc.status', "menunggu-pengujian");
+        $query->like('fppc.status', "menunggu-disposisi");
 
         if (!empty($keyword)) {
             $query->like('no_fppc', $keyword);
@@ -67,7 +65,7 @@ class DisposisiController extends BaseController
         // Create a pager instance
         $pager = $this->pager;
 
-        return view('pages/disposisi-analis', [
+        return view('pages/disposisi-penyelia', [
             'keyword' => $keyword,
             'data' => $results,
             'pager' => $pager,
@@ -75,7 +73,7 @@ class DisposisiController extends BaseController
             'start_date' => $start_date,
             'end_date' => $end_date,
             'tipe_permohonan' => $tipe_permohonan,
-            'title' => 'Disposisi Analis',
+            'title' => 'Disposisi Penyelia',
         ]);
     }
 
@@ -83,59 +81,32 @@ class DisposisiController extends BaseController
     {
         $data = [];
 
-        $DisposisiAnalis = new \App\Models\DisposisiAnalisModel();
+        $DisposisiPenyelia = new \App\Models\DisposisiPenyeliaModel();
         $FppcModel = new \App\Models\FppcModel();
         $AktivitasModel = new \App\Models\AktivitasModel();
 
-        $disposisi = $this->request->getPost('disposisi');
+        $penyelia = $this->request->getPost('penyelia');
+        $fppc_id = $this->request->getPost('fppc_id');
 
         if ($this->request->getMethod() === 'post') {
             // get admin id from session
             $adminId = session()->get('adminId');
 
-            $disposisi = $this->request->getPost('disposisi');
+            $data = [];
 
-            //    get fppc_id from first array
-            $fppc_id = $disposisi[array_key_first($disposisi)]['fppc_id'];
-
-            foreach ($disposisi as $eachDisposisi) {
-
-                foreach ($eachDisposisi['permohonan_uji_id'] as $permohonan_uji_id) {
-                    // parse int id_analis
-                    $permohonan_uji_id = (int) $permohonan_uji_id;
-
-                    $tanggal_pengujian = $eachDisposisi['tanggal_pengujian'];
-                    $waktu_pengujian = $eachDisposisi['waktu_pengujian'];
-
-                    $mergedDateTime = $tanggal_pengujian . ' ' . $waktu_pengujian;
-
-                    // Create a DateTime object from the merged date and time string
-                    $datetime = new \DateTime($mergedDateTime);
-
-                    // Format the DateTime object in the desired format (datetime2)
-                    $formattedDateTime = $datetime->format('Y-m-d H:i:s');
-
-                    foreach ($eachDisposisi['petugas_analis'] as $petugas_analis) {
-                        // parse int id_analis
-                        $petugas_analis = (int) $petugas_analis;
-
-                        $data = [
-                            'id_fppc' => $eachDisposisi['fppc_id'],
-                            'id_permohonan_uji' => $permohonan_uji_id,
-                            'analis_id' => $petugas_analis,
-                            'penyelia_id' => $adminId,
-                            'tanggal_pengujian' => $formattedDateTime,
-                            'waktu_pengujian' => $waktu_pengujian,
-                        ];
-
-                        $DisposisiAnalis->insert($data);
-                    }
-                }
+            foreach ($penyelia as $value) {
+                $data[] = [
+                    'id_fppc' => $fppc_id,
+                    'penyelia_id' => $value,
+                    'manajer_teknis_id' => $adminId,
+                ];
             }
 
-            $FppcModel->update($fppc_id, ['status' => 'proses-pengujian']);
+            $DisposisiPenyelia->insertBatch($data);
 
-            $activityDescription = 'Penjadwalan pengujian telah dibuat, pengujian akan dilakukan pada tanggal ' . $formattedDateTime;
+            $FppcModel->update($fppc_id, ['status' => 'menunggu-pengujian']);
+
+            $activityDescription = 'Penjadwalan pengujian telah dibuat';
 
             $activityData = [
                 'id_fppc' => $fppc_id,
@@ -150,7 +121,7 @@ class DisposisiController extends BaseController
 
         }
 
-        return redirect()->to('/disposisi-analis');
+        return redirect()->to('/disposisi-penyelia');
     }
 
     public function createDisposisiViews($id)
@@ -165,8 +136,6 @@ class DisposisiController extends BaseController
         $fppcDetailsData = $fppcDetailsModel
             ->where('id_fppc', $id)
             ->findAll();
-
-        $analis = $AdminModel->where('roleId', 3)->findAll();
 
         $groupedPermohonanUjiWithArrOfDtlFppc = [];
 
@@ -225,14 +194,13 @@ class DisposisiController extends BaseController
             $groupedPermohonanUjiWithArrOfDtlFppc[$parameterUjiKey]['permohonan_uji_id'][] = $value['id'];
         }
 
-        $adminData = $AdminModel->where('roleId', 3)->findAll();
+        $adminData = $AdminModel->where('roleId', 2)->findAll();
 
-        return view('pages/disposisi', [
+        return view('pages/disposisi-penyelia-create', [
             'fppc' => $fppcData,
-            'title' => 'Disposisi Analis',
+            'title' => 'Disposisi Penyelia',
             'admin' => $adminData,
-            'permohonans' => $groupedPermohonanUjiWithArrOfDtlFppc,
-            'analiss' => $analis,
+            'permohonans' => $groupedPermohonanUjiWithArrOfDtlFppc
         ]);
     }
 

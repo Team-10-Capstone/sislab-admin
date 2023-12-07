@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class BentukTable2 extends Migration
+class BentukTable extends Migration
 {
     public function up()
     {
