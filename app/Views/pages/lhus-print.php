@@ -2,6 +2,10 @@
 
 <?= $this->section('styles'); ?>
 
+<link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
+
+<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+
 <style type="text/css">
     .header-print {
         /* ubah angka sesuai kebutuhan */
@@ -54,12 +58,14 @@
         <!-- Page Header Close -->
 
         <div class="w-full justify-center pb-20">
-            <button onclick="printLHU()" class="btn ti-btn ti-btn-primary"><i class="ti ti-printer"></i>Print
+            <button 
+            onclick="printLHU()"
+            class="btn ti-btn ti-btn-primary"><i class="ti ti-printer"></i>Print
                 Sekarang</button>
 
-            <div class="container w-full !text-black flex justify-center">
+            <div class="container w-full !text-black flex justify-center mt-5">
                 <div class="p-10 bg-white">
-                    <div class="table-wrapper" id="lhu-doc"
+                    <div class="table-wrapper" id="myElementId"
                         style="background-color: white; display: inline-block; padding: 0px;">
                         <!-- kop surat -->
                         <table class="header-print" style="
@@ -105,8 +111,8 @@
                                 </tr>
                                 <tr>
 
-                                    <td style="font-size: 14px; font-weight: bold; border: none;">
-                                        LHUS/01/2023-06-04
+                                <td style="font-weight: bold; font-size: 14px; border: none;">Nomor/<i>Number</i>:
+                                        LHUS/<?php echo $fppc['no_fppc']; ?>/<?php echo date('Y'); ?></td>
                                     </td>
 
                                 </tr>
@@ -139,7 +145,12 @@
                                         :
                                     </td>
                                     <td>
-                                        2023-03-24
+                                    <?php 
+                  // format to dd mmmm yyyy
+                  $date = date_create($fppc['created_at']);
+
+                  echo date_format($date, "d F Y");
+                ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -150,7 +161,12 @@
                                         :
                                     </td>
                                     <td>
-                                        2023-03-24
+                                    <?php 
+                  // format to dd mmmm yyyy
+                  $date = date_create($tanggal_pengujian);
+
+                  echo date_format($date, "d F Y");
+                ?>
                                     </td>
                                 </tr>
                             </table>
@@ -251,7 +267,8 @@
                                                 <?php echo $hasil_uji['hasil_uji']; ?>
                                             </td>
                                             <td style="padding: 4px">
-                                                <?php echo $hasil_uji['analis']; ?>
+                                                <?php foreach ($hasil_uji['analis_array'] as $analis): ?>
+                                                    <?php echo $analis['analis']; ?><br /> <?php endforeach; ?>
                                             </td>
                                             <td></td>
                                         </tr>
@@ -332,7 +349,12 @@
                                     <td style="width: 48%; border: none;"></td>
                                     <td style="font-size: 14px; width: 8%; border: none;">Jakarta, </td>
                                     <td style="font-size: 14px; border: none;">
-                                        12 Desember 2020
+                                    <?php
+                    // format to dd mmmm yyyy
+                    $date = date_create($fppc['updated_at']);
+
+                    echo date_format($date, "d F Y");
+                    ?>
                                     </td>
                                 </tr>
 
@@ -355,13 +377,14 @@
 
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
 
     </div>
+
+    <!-- <p id="myElementId">Hello {{name}}!</p> -->
     <!-- Start::main-content -->
 
 </div>
@@ -372,9 +395,7 @@
 
 <script>
     function printLHU() {
-        const doc = document.getElementById('lhu-doc');
-
-        const newWin = window.open('', 'Print-Window');
+        const printJS = window.printJS;
 
         var htmlToPrintCss = '' +
             '<style type="text/css">' +
@@ -387,15 +408,13 @@
             '}' +
             '</style>';
 
-        const html = '' +
-            '<html>' +
-            '<head>' + htmlToPrintCss + '</head>' +
-            '<body onload="window.print()">' + doc.innerHTML + '</body>' +
-            '</html>';
-
-        newWin.document.open();
-        newWin.document.write(html);
-        newWin.print();
+        printJS({
+            printable: 'myElementId',
+            type: 'html',
+            honorColor: true,
+            targetStyles: ['*'],
+            style: 'table th, table td { border: 1px solid #000; padding: 0.5em;}; @page { margin: 1cm; };'
+        })
     }
 
 </script>

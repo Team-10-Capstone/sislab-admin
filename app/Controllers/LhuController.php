@@ -11,7 +11,45 @@ class LhuController extends BaseController
 
     public function print($id)
     {
+        $fppcModel = new \App\Models\FppcModel();
+        $dtlFppcModel = new \App\Models\DtlFppcModel();
+        $permohonanUjiModel = new \App\Models\PermohonanUjiModel();
+        $hasilUjiModel = new \App\Models\HasilUjiModel();
+        $disposisiAnalisModel = new \App\Models\DisposisiAnalisModel();
+
+        $fppcData = $fppcModel->find($id);
+
+        $dtlFppc = $dtlFppcModel->where('id_fppc', $id)->findAll();
+
+        $dtlFppcIds = array_map(function ($item) {
+            return $item['id'];
+        }, $dtlFppc);
+
+        $relatedPermohonanUji = $permohonanUjiModel->select('permohonan_uji.dtl_fppc_id, permohonan_uji.kode_sampel, permohonan_uji.parameter_uji_id, hasil_uji.hasil_uji, parameter_uji.keterangan_uji, parameter_uji.standar_uji, parameter_uji.no_ikm')
+            ->whereIn('permohonan_uji.dtl_fppc_id', $dtlFppcIds)
+            ->join('hasil_uji', 'hasil_uji.permohonan_uji_id = permohonan_uji.id')
+            ->join('parameter_uji', 'parameter_uji.id = permohonan_uji.parameter_uji_id')
+            ->findAll();
+
+        $disposisi = $disposisiAnalisModel->where('id_fppc', $id)->first();
+
+        $groupedDtlFppcWithArrOfPermohonan = [];
+
+        foreach ($dtlFppc as $dtl) {
+            $related = array_filter($relatedPermohonanUji, function ($item) use ($dtl) {
+                return $item['dtl_fppc_id'] == $dtl['id'];
+            });
+
+            $groupedDtlFppcWithArrOfPermohonan[] = [
+                'dtl_fppc' => $dtl,
+                'permohonan_uji' => $related,
+            ];
+        }
+
         return view('pages/lhu-print', [
+            'sampels' => $groupedDtlFppcWithArrOfPermohonan,
+            'fppc' => $fppcData,
+            'tanggal_pengujian' => $disposisi['tanggal_pengujian'],
             'title' => 'Print LHU',
         ]);
     }
@@ -85,7 +123,4 @@ class LhuController extends BaseController
             'title' => 'Daftar LHU',
         ]);
     }
-
-
-
 }

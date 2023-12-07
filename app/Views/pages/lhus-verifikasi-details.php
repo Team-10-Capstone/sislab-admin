@@ -292,7 +292,7 @@
                                 </div>
                             </div>
                             <div class="col-span-12 xl:col-span-8">
-                                <div class="grid grid-cols-2 gap-6 h-max">
+                                <div class="grid md:grid-cols-2 gap-6 h-max">
                                     <?php foreach ($permohonans as $permohonan): ?>
                                         <div class="box h-max">
                                             <div class="box-body">
@@ -596,7 +596,7 @@
                                                                                                     Analis
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <?= $sampel['analis']; ?>
+                                                                                                    
                                                                                                 </td>
                                                                                             </tr>
                                                                                         </tbody>
@@ -631,12 +631,11 @@
                                         </div>
                                         <div class="box-body">
                                             <div class="grid grid-cols-2">
-
                                                 <form method="post"
                                                     action="<?php echo base_url('lhus/perbaikan/' . $permohonan['dtl_fppc'][0]['fppc_id']); ?>"
                                                     class="pr-4 space-y-4">
                                                     <p>
-                                                        Klik tombol ini untuk meminta perbaikan data dari penyelia
+                                                        Klik tombol ini untuk meminta perbaikan input hasil uji
                                                     </p>
                                                     <input type="text"
                                                         class="ti-form-input ti-form-input-danger ti-input-perbaikan"

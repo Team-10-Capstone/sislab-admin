@@ -110,7 +110,7 @@
               <td style="font-size: 14px; width: 2%; border: none;">:</td>
 
               <td style="font-size: 14px; width: 50%; border: none; ">
-                Oddy Pratama
+                <?php echo $fppcData['nm_trader']; ?>
               </td>
             </tr>
             <tr>
@@ -127,7 +127,12 @@
               <td style="font-size: 14px; border: none;">Tanggal Penerimaan/ <br> <i>Receipt date</i></td>
               <td style="font-size: 14px; border: none;">:</td>
               <td style="font-size: 14px; border: none;">
-                12/12/2020
+                <?php 
+                  // format to dd mmmm yyyy
+                  $date = date_create($fppcData['created_at']);
+
+                  echo date_format($date, "d F Y");
+                ?>
               </td>
             </tr>
             <tr>

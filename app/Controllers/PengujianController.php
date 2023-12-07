@@ -87,7 +87,7 @@ class PengujianController extends BaseController
         $DisposisiAnalis = new \App\Models\DisposisiAnalisModel();
         $AdminModel = new \App\Models\AdminModel();
         
-        $perbaikan = $perbaikan->where('id_fppc', $id)->first();
+        $perbaikans = $perbaikan->where('id_fppc', $id)->findAll();
 
         $fppcData = $fppcModel->where('id', $id)->first();
 
@@ -234,7 +234,7 @@ class PengujianController extends BaseController
             'managerData' => $managerData,
             'permohonans' => $groupedPermohonanUjiWithArrOfDtlFppc,
             'analiss' => $analis,
-            'perbaikan' => $perbaikan,
+            'perbaikans' => $perbaikans,
         ]);
     }
 

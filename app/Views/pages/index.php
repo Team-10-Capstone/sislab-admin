@@ -42,7 +42,8 @@
         </div>
         <!-- Page Header Close -->
 
-        <div class="grid grid-cols-12 gap-6">
+        <div class="flex flex-col-reverse md:block">
+        <div class="md:grid grid-cols-12 gap-1 md:gap-6">
             <div class="col-span-12 md:col-span-6 xxl:col-span-3">
                 <div class="box overflow-hidden">
                     <div class="box-body">
@@ -158,7 +159,7 @@
         <!-- Start::row-1 -->
         <div class="grid grid-cols-12 gap-x-6">
             <div class="col-span-12 xxxl:col-span-9">
-                <div class="grid grid-cols-12 gap-x-6">
+                <div class="flex flex-col-reverse md:grid grid-cols-12 gap-x-6">
 
 
                     <div class="col-span-12 xl:col-span-9">
@@ -232,10 +233,6 @@
                                     <p class="text-xs text-gray-500 dark:text-white/70 mb-4">
                                         Selamat datang di Sistem Informasi Laboratorium
                                     </p>
-                                    <a href="<?php echo base_url('fppc'); ?>" type="button"
-                                        class="ti-btn ti-btn-primary">
-                                        Lihat Permohonan
-                                    </a>
                                 </div>
                             </div>
                             <span class="shape-1 text-primary"><i class="ti ti-circle text-base font-bold"></i></span>
@@ -265,7 +262,7 @@
         </div>
         <!-- End::row-1 -->
 
-
+        </div>
 
     </div>
     <!-- Start::main-content -->
@@ -293,7 +290,9 @@
                 name: "Monsur",
                 type: "line",
                 data: Object.keys(tipeCounts).map((key) => ({
-                    x: key,
+                    x: new Intl.DateTimeFormat("en-US", {
+                        month: "short",
+                    }).format(new Date(key)),
                     y: tipeCounts[key].monsur.count,
                 })),
             },
@@ -301,7 +300,9 @@
                 name: "Lalu lintas",
                 type: "line",
                 data: Object.keys(tipeCounts).map((key) => ({
-                    x: key,
+                    x: new Intl.DateTimeFormat("en-US", {
+                        month: "short",
+                    }).format(new Date(key)),
                     y: tipeCounts[key].lalulintas.count,
                 })),
             },
@@ -309,7 +310,9 @@
                 name: "Mandiri",
                 type: "line",
                 data: Object.keys(tipeCounts).map((key) => ({
-                    x: key,
+                    x: new Intl.DateTimeFormat("en-US", {
+                        month: "short",
+                    }).format(new Date(key)),
                     y: tipeCounts[key].mandiri.count,
                 })),
             },

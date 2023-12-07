@@ -2603,6 +2603,9 @@ select option:active,
 .top-\[4\.5rem\]{
   top: 4.5rem;
 }
+.start-0{
+  inset-inline-start: 0px;
+}
 .isolate{
   isolation: isolate;
 }
@@ -2623,6 +2626,12 @@ select option:active,
 }
 .col-span-8{
   grid-column: span 8 / span 8;
+}
+.col-span-4{
+  grid-column: span 4 / span 4;
+}
+.col-start-1{
+  grid-column-start: 1;
 }
 .float-right{
   float: right;
@@ -2650,9 +2659,6 @@ select option:active,
 }
 .m-1{
   margin: 0.25rem;
-}
-.m-4{
-  margin: 1rem;
 }
 .m-2{
   margin: 0.5rem;
@@ -2886,9 +2892,6 @@ select option:active,
 }
 .w-full{
   width: 100%;
-}
-.w-1\/2{
-  width: 50%;
 }
 .min-w-0{
   min-width: 0px;
@@ -3330,6 +3333,15 @@ select option:active,
 .gap-6{
   gap: 1.5rem;
 }
+.gap-4{
+  gap: 1rem;
+}
+.gap-3{
+  gap: 0.75rem;
+}
+.gap-1{
+  gap: 0.25rem;
+}
 .gap-x-3{
   column-gap: 0.75rem;
 }
@@ -3338,9 +3350,6 @@ select option:active,
 }
 .gap-y-4{
   row-gap: 1rem;
-}
-.gap-y-6{
-  row-gap: 1.5rem;
 }
 .space-x-2 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
@@ -3908,9 +3917,6 @@ select option:active,
 }
 .p-6{
   padding: 1.5rem;
-}
-.p-5{
-  padding: 1.25rem;
 }
 .px-0{
   padding-left: 0px;
@@ -15203,11 +15209,26 @@ select.tabulator-page-size option{
 }
 
 @media (min-width: 768px){
+  .md\:start-auto{
+    inset-inline-start: auto;
+  }
   .md\:col-span-6{
     grid-column: span 6 / span 6;
   }
+  .md\:mt-0{
+    margin-top: 0px;
+  }
+  .md\:block{
+    display: block;
+  }
   .md\:grid{
     display: grid;
+  }
+  .md\:grid-cols-2{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .md\:gap-6{
+    gap: 1.5rem;
   }
 }
 
@@ -15220,9 +15241,6 @@ select.tabulator-page-size option{
   }
   .lg\:max-w-\[100px\]{
     max-width: 100px;
-  }
-  .lg\:grid-cols-1{
-    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
   .lg\:grid-cols-2{
     grid-template-columns: repeat(2, minmax(0, 1fr));

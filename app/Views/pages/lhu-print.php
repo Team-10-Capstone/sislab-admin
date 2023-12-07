@@ -2,6 +2,10 @@
 
 <?= $this->section('styles'); ?>
 
+<link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
+
+<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+
 <style type="text/css">
     .header-print {
         /* ubah angka sesuai kebutuhan */
@@ -57,7 +61,7 @@
 
             <div class="container w-full !text-black flex justify-center">
                 <div class="p-10 bg-white">
-                    <div class="table-wrapper" id="lhu-doc"
+                    <div class="table-wrapper" id="myElementId"
                         style="background-color: white; display: inline-block; padding: 0px;">
                         <!-- kop surat -->
                         <table class="header-print" style="
@@ -98,13 +102,6 @@
                             <table
                                 style="border-collapse: collapse; background-color:white; width: 600px; text-align: center;">
                                 <tr>
-
-                                    <td style="text-align: right; border: none;">
-                                        TEST/08232732323
-                                    </td>
-
-                                </tr>
-                                <tr>
                                     <td style="font-weight: bold; text-decoration: underline; border: none;">HASIL UJI
                                     </td>
                                 </tr>
@@ -116,7 +113,7 @@
                                 </tr>
                                 <tr>
                                     <td style="font-weight: bold; font-size: 14px; border: none;">Nomor/<i>Number</i>:
-                                        121212121
+                                        LHU/<?php echo $fppc['no_fppc']; ?>/<?php echo date('Y'); ?></td>
                                     </td>
                                 </tr>
                             </table>
@@ -139,7 +136,7 @@
                                     <td style="font-size: 14px; width: 2%; border: none;">:</td>
 
                                     <td style="font-size: 14px; width: 50%; border: none; ">
-                                        Oddy Pratama
+                                        <?php echo $fppc['nama_trader']; ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -147,7 +144,7 @@
                                     <td style="font-size: 14px; border: none;">Alamat/<i>Address</i></td>
                                     <td style="font-size: 14px; border: none;">:</td>
                                     <td style="font-size: 14px; border: none;">
-                                        RIAU, PEKANBARU
+                                        <?php echo $fppc['alamat_trader']; ?>
                                     </td>
                                 </tr>
 
@@ -158,7 +155,12 @@
                                     </td>
                                     <td style="font-size: 14px; border: none;">:</td>
                                     <td style="font-size: 14px; border: none;">
-                                        12/12/2020
+                                    <?php 
+                  // format to dd mmmm yyyy
+                  $date = date_create($fppc['created_at']);
+
+                  echo date_format($date, "d F Y");
+                ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -169,7 +171,12 @@
                                     <td style="font-size: 14px; border: none;">:</td>
 
                                     <td style="font-size: 14px; border: none;">
-                                        12/12/2020
+                                    <?php 
+                  // format to dd mmmm yyyy
+                  $date = date_create($tanggal_pengujian);
+
+                  echo date_format($date, "d F Y");
+                ?>
                                     </td>
                                 </tr>
                             </table>
@@ -190,27 +197,30 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            19212
-                                        </td>
-                                        <td>
-                                            Test jenis
-                                        </td>
-                                        <td>
-                                            Keterangan Uji
-                                        </td>
-                                        <td>
-                                            Standareee
-                                        </td>
-                                        <td>
-                                            awdwad
-                                        </td>
-                                        <td>
-                                            121awda
-                                        </td>
-                                    </tr>
-
+                                    <?php foreach ($sampels as $sampel) : ?>
+                                        <?php foreach ($sampel['permohonan_uji'] as $key => $permohonan_uji) : ?>
+                                            <tr>
+                                                <td style="font-size: 14px;">
+                                                    <?php echo $permohonan_uji['kode_sampel']; ?>
+                                                </td>
+                                                <td style="font-size: 14px;">
+                                                    <?php echo $sampel['dtl_fppc']['nama_lokal']; ?>
+                                                </td>
+                                                <td style="font-size: 14px;">
+                                                    <?php echo $permohonan_uji['keterangan_uji']; ?>
+                                                </td>
+                                                <td style="font-size: 14px;">
+                                                    <?php echo $permohonan_uji['hasil_uji']; ?>
+                                                </td>
+                                                <td style="font-size: 14px;">
+                                                    <?php echo $permohonan_uji['standar_uji']; ?>
+                                                </td>
+                                                <td style="font-size: 14px;">
+                                                    <?php echo $permohonan_uji['no_ikm']; ?>
+                                                </td>
+                                            </tr>
+                                    <?php endforeach; ?>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -286,7 +296,12 @@
                                     <td style="width: 48%; border: none;"></td>
                                     <td style="font-size: 14px; width: 8%; border: none;">Jakarta, </td>
                                     <td style="font-size: 14px; border: none;">
-                                        12 Desember 2020
+                                    <?php
+                    // format to dd mmmm yyyy
+                    $date = date_create($fppc['updated_at']);
+
+                    echo date_format($date, "d F Y");
+                    ?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -347,30 +362,15 @@
 
 <script>
     function printLHU() {
-        const doc = document.getElementById('lhu-doc');
+        const printJS = window.printJS;
 
-        const newWin = window.open('', 'Print-Window');
-
-        var htmlToPrintCss = '' +
-            '<style type="text/css">' +
-            'table th, table td {' +
-            'border: 1px solid #000;' +
-            '}' +
-            '@page {' +
-            'size: A4; /* Set the page size to A4 */' +
-            'margin: 1cm;' +
-            '}' +
-            '</style>';
-
-        const html = '' +
-            '<html>' +
-            '<head>' + htmlToPrintCss + '</head>' +
-            '<body onload="window.print()">' + doc.innerHTML + '</body>' +
-            '</html>';
-
-        newWin.document.open();
-        newWin.document.write(html);
-        newWin.print();
+        printJS({
+            printable: 'myElementId',
+            type: 'html',
+            honorColor: true,
+            targetStyles: ['*'],
+            style: 'table th, table td { border: 1px solid #000; padding: 0;}; @page { margin: 1cm; };'
+        })
     }
 </script>
 

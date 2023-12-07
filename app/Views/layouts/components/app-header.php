@@ -13,12 +13,8 @@
 			</div>
 
 			<div class="responsive-logo">
-				<a class="responsive-logo-dark" href="javascript:void(0);" aria-label="Brand"><img
-						src="<?php echo base_url('assets/img/brand-logos/desktop-logo.png'); ?>" alt="logo"
-						class="mx-auto"></a>
-				<a class="responsive-logo-light" href="javascript:void(0);" aria-label="Brand"><img
-						src="<?php echo base_url('assets/img/brand-logos/desktop-dark.png'); ?>" alt="logo"
-						class="mx-auto"></a>
+			<img src="<?php echo base_url('assets/img/brand-logos/mpoksiti.png'); ?>" alt="logo"
+				class="w-8 h-8 object-contain main-logo desktop-logo">
 			</div>
 
 			<div class="header-right">

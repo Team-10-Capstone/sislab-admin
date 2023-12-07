@@ -45,7 +45,7 @@
 
 				$userRole = session()->get('role');
 
-				if (canDisplayLink($userRole, [0, 1, 4])) {
+				if (canDisplayLink($userRole, [0, 4])) {
 					// Display links for users with allowed roles
 					echo '<li class="slide">
 					<a href="/ppk" class="side-menu__item">
@@ -103,7 +103,7 @@
 
 				$userRole = session()->get('role');
 
-				if (canDisplayLink($userRole, [0, 1])) {
+				if (canDisplayLink($userRole, [0, 2])) {
 					// Display links for users with allowed roles
 					echo "<li class='slide'>
 					<a href='/disposisi-analis' class='side-menu__item'>
@@ -146,7 +146,7 @@
 
 				$userRole = session()->get('role');
 
-				if (canDisplayLink($userRole, [1, 2, 3, 4])) {
+				if (canDisplayLink($userRole, [0, 2, 3])) {
 					// Display links for users with allowed roles
 					echo "<li class='slide'>
 					<a href='/pengujian' class='side-menu__item'>
@@ -164,7 +164,7 @@
 
 				$userRole = session()->get('role');
 
-				if (canDisplayLink($userRole, [1, 2, 3, 4])) {
+				if (canDisplayLink($userRole, [0, 2])) {
 					// Display links for users with allowed roles
 					echo "<li class='slide'>
 					<a href='/lhus' class='side-menu__item'>
@@ -180,7 +180,7 @@
 
 				$userRole = session()->get('role');
 
-				if (canDisplayLink($userRole, [1, 2, 3, 4])) {
+				if (canDisplayLink($userRole, [0,1,4])) {
 					// Display links for users with allowed roles
 					echo "<li class='slide'>
 					<a href=" . base_url('lhu') . " class='side-menu__item'>

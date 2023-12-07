@@ -366,6 +366,9 @@ class FppcController extends BaseController
     {
         $fppcModel = new \App\Models\FppcModel();
         $pembatalanFppcModel = new \App\Models\PembatalanFppcModel();
+        $AktivitasModel = new \App\Models\AktivitasModel();
+
+        $adminId = session()->get('adminId');
 
         $fppcModel->update($id, ['status' => 'ditolak']);
 
@@ -374,9 +377,18 @@ class FppcController extends BaseController
             'id_admin' => session()->get('adminId'),
             'alasan' => $this->request->getPost('alasan'),
         ];
+        
 
         $pembatalanFppcModel->insert($data);
 
+        $activityData = [
+            'id_fppc' => $id,
+            'description' => 'Permohonan FPPC ditolak, harap perbaiki permohonan',
+            'type' => 'penolakan',
+            'user_id' => $adminId,
+        ];
+
+        $AktivitasModel->insert($activityData);
 
         session()->setFlashdata('success', 'Permohonan FPPC Berhasil Ditolak');
 

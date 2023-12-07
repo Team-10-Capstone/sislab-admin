@@ -312,7 +312,7 @@
                             </div>
                             <div class="col-span-12 xl:col-span-8">
                                 <div class="<?php
-                                if (!$perbaikan) {
+                                if (!$perbaikans) {
                                     echo 'hidden';
                                 } else {
                                     echo 'mb-6';
@@ -322,7 +322,13 @@
                                     <p>
                                     <span class="font-bold">Penting!</span> ada perbaikan yang diperlukan pada pengujian ini.</p>
                                     <p>
-                                    <span class="font-bold">Perbaikan:</span> <?= $perbaikan ? $perbaikan['alasan'] : ""; ?>
+                                    <span class="font-bold">Perbaikan:</span> 
+                                    <ul class="list-disc list-inside">
+                                    <?php foreach ($perbaikans as $perbaikan): ?>
+                                        <li><?= $perbaikan['alasan']; ?> (<?= date("d-m-Y H:i", strtotime($perbaikan['created_at'])); ?>)
+                                    </li>
+                                    <?php endforeach; ?>
+                                    </ul>
                             </p>
                                 </div>
                                 </div>

@@ -55,7 +55,7 @@
                     </a>
                 </li>
                 <li class="text-sm text-gray-500 hover:text-primary dark:text-white/70 " aria-current="page">
-                    Laporan Hasil Uji Sementara
+                    Laporan Hasil Uji
                 </li>
             </ol>
         </div>
@@ -67,7 +67,7 @@
                 <div class="box">
 
                     <div class="box-body">
-                        <form method="get" action="<?= site_url('lhus') ?>" onsubmit="return false;" id="search-form"
+                        <form method="get" action="<?= site_url('lhu') ?>" onsubmit="return false;" id="search-form"
                             class="xl:flex xl:justify-between space-y-3 xl:space-y-0">
                             <div class="sm:flex sm:space-x-3 space-y-3 sm:space-y-0 rtl:space-x-reverse">
                                 <div class="relative max-w-xs">
