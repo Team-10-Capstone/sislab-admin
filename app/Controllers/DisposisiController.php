@@ -34,31 +34,40 @@ class DisposisiController extends BaseController
         // Calculate the offset based on the current page and items per page
         $offset = ($page - 1) * $perPage;
 
-        $query = $fppcModel->select('*')
+        $query = $fppcModel->select('fppc.*, disposisi_penyelia.penyelia_id')
             ->orderBy($order_by[0], $order_by[1])
             ->limit($perPage, $offset);
 
         $query->like('fppc.status', "menunggu-pengujian");
 
         if (!empty($keyword)) {
-            $query->like('no_fppc', $keyword);
-            $query->orLike('no_ppk', $keyword);
+            $query->like('fppc.no_fppc', $keyword);
+            $query->orLike('fppc.no_ppk', $keyword);
         }
 
         if (!empty($start_date)) {
-            $query->where('created_at >=', $start_date);
+            $query->where('fppc.created_at >=', $start_date);
         }
 
         if (!empty($end_date)) {
-            $query->where('created_at <=', $end_date);
+            $query->where('fppc.created_at <=', $end_date);
         }
 
         if (!empty($tipe_permohonan)) {
             $query->like('fppc.tipe_permohonan', $tipe_permohonan);
         }
 
+        $penyeliaId = session()->get('adminId');
+        $role = session()->get('role');
+
+        if ($role === 2) {
+            $query->where('disposisi_penyelia.penyelia_id', $penyeliaId);
+        }
+
         // Execute the query to retrieve the results
-        $results = $query->findAll();
+        $results = $query
+            ->join('disposisi_penyelia', 'disposisi_penyelia.id_fppc = fppc.id', 'left')
+        ->findAll();
 
 
         $totalRecords = count($results);

@@ -194,7 +194,7 @@
                                         } elseif ($admin['roleId'] === 2) {
                                             echo 'Penyelia';
                                         } elseif ($admin['roleId'] === 3) {
-                                            echo 'Operator';
+                                            echo 'Analis';
                                         } elseif ($admin['roleId'] === 4) {
                                             echo 'Petugas Lab';
                                         } elseif ($admin['roleId'] === 0) {

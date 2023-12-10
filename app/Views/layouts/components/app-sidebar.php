@@ -47,14 +47,14 @@
 
 				if (canDisplayLink($userRole, [0, 4])) {
 					// Display links for users with allowed roles
-					echo '<li class="slide">
-					<a href="/ppk" class="side-menu__item">
-						<i class="ti ti-login side-menu__icon"></i>
-						<span class="side-menu__label">
+					echo "<li class='slide'>
+					<a href=" . base_url('ppk') . " class='side-menu__item'>
+						<i class='ti ti-login side-menu__icon'></i>
+						<span class='side-menu__label'>
 							Permohonan masuk
 						</span>
 					</a>
-				</li>';
+				</li>";
 				}
 				?>
 
@@ -90,7 +90,7 @@
 				if (canDisplayLink($userRole, [0, 1])) {
 					// Display links for users with allowed roles
 					echo "<li class='slide'>
-					<a href='/disposisi-penyelia' class='side-menu__item'>
+					<a href=" . base_url('disposisi-penyelia') . " class='side-menu__item'>
 						<i class='ti ti-mail-exclamation side-menu__icon'></i>
 						<span class='side-menu__label'>Disposisi Ke Penyelia</span>
 					</a>
@@ -106,7 +106,7 @@
 				if (canDisplayLink($userRole, [0, 2])) {
 					// Display links for users with allowed roles
 					echo "<li class='slide'>
-					<a href='/disposisi-analis' class='side-menu__item'>
+					<a href=" . base_url('disposisi-analis') . " class='side-menu__item'>
 						<i class='ti ti-mail-exclamation side-menu__icon'></i>
 						<span class='side-menu__label'>Disposisi Ke Analis</span>
 					</a>
@@ -149,7 +149,7 @@
 				if (canDisplayLink($userRole, [0, 2, 3])) {
 					// Display links for users with allowed roles
 					echo "<li class='slide'>
-					<a href='/pengujian' class='side-menu__item'>
+					<a href=" . base_url('pengujian') . " class='side-menu__item'>
 						<i class='ti ti-report-search side-menu__icon'></i>
 						<span class='side-menu__label'>
 							Pengujian Laboratorium
@@ -167,7 +167,7 @@
 				if (canDisplayLink($userRole, [0, 2])) {
 					// Display links for users with allowed roles
 					echo "<li class='slide'>
-					<a href='/lhus' class='side-menu__item'>
+					<a href=" . base_url('lhus') . " class='side-menu__item'>
 						<i class='ti ti-file-description side-menu__icon'></i>
 						<span class='side-menu__label'>Daftar Hasil Uji</span>
 					</a>

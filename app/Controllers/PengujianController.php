@@ -32,7 +32,7 @@ class PengujianController extends BaseController
         // Calculate the offset based on the current page and items per page
         $offset = ($page - 1) * $perPage;
 
-        $query = $fppcModel->select('*')
+        $query = $fppcModel->select('fppc.*, disposisi_analis.analis_id, disposisi_penyelia.penyelia_id')
             ->orderBy($order_by[0], $order_by[1])
             ->limit($perPage, $offset);
 
@@ -40,25 +40,45 @@ class PengujianController extends BaseController
         $query->orLike('fppc.status', "perbaikan");
 
         if (!empty($keyword)) {
-            $query->like('no_fppc', $keyword);
-            $query->orLike('no_ppk', $keyword);
+            $query->like('fppc.no_fppc', $keyword);
+            $query->orLike('fppc.no_ppk', $keyword);
         }
 
         if (!empty($start_date)) {
-            $query->where('created_at >=', $start_date);
+            $query->where('fppc.created_at >=', $start_date);
         }
 
         if (!empty($end_date)) {
-            $query->where('created_at <=', $end_date);
+            $query->where('fppc.created_at <=', $end_date);
         }
 
         if (!empty($tipe_permohonan)) {
             $query->like('fppc.tipe_permohonan', $tipe_permohonan);
         }
 
-        // Execute the query to retrieve the results
-        $results = $query->findAll();
 
+        $results = $query->
+         join('disposisi_analis', 'disposisi_analis.id_fppc = fppc.id')
+         ->join('disposisi_penyelia', 'disposisi_penyelia.id_fppc = fppc.id')
+            ->findAll();
+            
+        $analisId = session()->get('adminId');
+        $role = session()->get('role');
+        
+
+        if ($role === 3) {
+            $results = array_filter($results, function ($item) use ($analisId) {
+                return $item['analis_id'] == $analisId;
+            });
+        }
+
+        if ($role === 2) {
+            $results = array_filter($results, function ($item) use ($analisId) {
+                return $item['penyelia_id'] == $analisId;
+            });
+        }
+
+        $results = array_map("unserialize", array_unique(array_map("serialize", $results)));
 
         $totalRecords = count($results);
         $pager_links = $this->pager->makeLinks($page, $perPage, $totalRecords, 'default');
