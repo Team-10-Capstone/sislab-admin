@@ -51,7 +51,7 @@ $routes->post('/admin/add', 'AdminController::create', ['filter' => 'authGuard']
 $routes->post('/admin/edit/(:num)', 'AdminController::edit/$1', ['filter' => 'authGuard']);
 $routes->get('/admin/delete/(:num)', 'AdminController::delete/$1', ['filter' => 'authGuard']);
 
-$routes->get('/ppk', 'PpkController::index', ['filter' => 'authGuard']);
+$routes->get('/ppk', 'PpkController::index', ['filter' => 'authGuard:4,0']);
 
 $routes->get('/fppc', 'FppcController::index', ['filter' => 'authGuard']);
 $routes->get('/fppc/create', 'FppcController::create', ['filter' => 'authGuard']);

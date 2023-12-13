@@ -16,7 +16,7 @@
 
     <!-- Start::main-content -->
     <div class="main-content">
-        <?php if (session()->getFlashdata('success')): ?>
+    <?php if (session()->getFlashdata('success')): ?>
             <div class="toast-container">
                 <div class="ti-toast bg-white dark:bg-bgdark dark:border-white/10" role="alert">
                     <div class="flex p-4">
@@ -30,6 +30,26 @@
                         <div class="ltr:ml-3 rtl:mr-3">
                             <p class="text-sm text-gray-700 dark:text-white/70">
                                 <?= session()->getFlashdata('success') ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php if (session()->getFlashdata('errors')): ?>
+            <div class="toast-container">
+                <div class="ti-toast bg-white dark:bg-bgdark dark:border-white/10" role="alert">
+                    <div class="flex p-4">
+                        <div class="flex-shrink-0">
+                            <svg class="h-4 w-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16"
+                                height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 0a8 8 0 1 0 8 8A8 8 0 0 0 8 0zm3.97 12.97a.75.75 0 0 1-1.06 1.06L8 9.06l-3.91 3.91a.75.75 0 0 1-1.06-1.06L6.94 8 2.03 4.09a.75.75 0 1 1 1.06-1.06L8 6.94l3.91-3.91a.75.75 0 1 1 1.06 1.06L9.06 8l3.91 3.91z" />
+                            </svg>
+                        </div>
+                        <div class="ltr:ml-3 rtl:mr-3">
+                            <p class="text-sm text-gray-700 dark:text-white/70">
+                                <?= session()->getFlashdata('errors') ?>
                             </p>
                         </div>
                     </div>

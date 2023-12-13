@@ -32,7 +32,7 @@ class PengujianController extends BaseController
         // Calculate the offset based on the current page and items per page
         $offset = ($page - 1) * $perPage;
 
-        $query = $fppcModel->select('fppc.*, disposisi_analis.analis_id, disposisi_penyelia.penyelia_id')
+        $query = $fppcModel->select('fppc.*')
             ->orderBy($order_by[0], $order_by[1])
             ->limit($perPage, $offset);
 
@@ -57,28 +57,46 @@ class PengujianController extends BaseController
         }
 
 
-        $results = $query->
-         join('disposisi_analis', 'disposisi_analis.id_fppc = fppc.id')
-         ->join('disposisi_penyelia', 'disposisi_penyelia.id_fppc = fppc.id')
-            ->findAll();
+        $results = $query->findAll();
             
         $analisId = session()->get('adminId');
         $role = session()->get('role');
         
 
-        if ($role === 3) {
-            $results = array_filter($results, function ($item) use ($analisId) {
-                return $item['analis_id'] == $analisId;
-            });
-        }
-
         if ($role === 2) {
-            $results = array_filter($results, function ($item) use ($analisId) {
-                return $item['penyelia_id'] == $analisId;
-            });
+            $results = array_map(function ($result) use ($analisId) {
+                $DisposisiAnalisModel = new \App\Models\DisposisiAnalisModel();
+
+                $disposisiAnalis = $DisposisiAnalisModel->where('id_fppc', $result['id'])->findAll();
+
+                $penyeliaIds = array_column($disposisiAnalis, 'penyelia_id');
+
+                if (in_array($analisId, $penyeliaIds)) {
+                    return $result;
+                }
+
+                return null;
+
+            }, $results);
+        } else if ($role === 3) {
+            $results = array_map(function ($result) use ($analisId) {
+                $DisposisiAnalisModel = new \App\Models\DisposisiAnalisModel();
+
+                $disposisiAnalis = $DisposisiAnalisModel->where('id_fppc', $result['id'])->findAll();
+
+                $analisIds = array_column($disposisiAnalis, 'analis_id');
+
+                if (in_array($analisId, $analisIds)) {
+                    return $result;
+                }
+
+                return null;
+               
+            }, $results);
         }
 
-        $results = array_map("unserialize", array_unique(array_map("serialize", $results)));
+        // filter null
+        $results = array_filter($results);
 
         $totalRecords = count($results);
         $pager_links = $this->pager->makeLinks($page, $perPage, $totalRecords, 'default');

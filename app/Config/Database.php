@@ -21,14 +21,60 @@ class Database extends Config
      */
     public string $defaultGroup = 'default';
 
-    /**
-     * The default database connection.
-     */
+    // /**
+    //  * The default database connection.
+    //  */
+    // public array $default = [
+    //     'DSN' => '',
+    //     'hostname' => 'sislab.database.windows.net',
+    //     'username' => 'fahri',
+    //     'password' => 'Wates123',
+    //     'database' => 'sislab',
+    //     'DBDriver' => 'SQLSRV',
+    //     'DBPrefix' => '',
+    //     'pConnect' => false,
+    //     'DBDebug' => true,
+    //     'charset' => 'utf16',
+    //     'DBCollat' => 'utf8_general_ci',
+    //     'swapPre' => '',
+    //     'encrypt' => false,
+    //     'compress' => false,
+    //     'strictOn' => false,
+    //     'failover' => [],
+    //     'port' => 1433,
+    // ];
+
+
+    // /**
+    //  * Database karimutu
+    //  * used to query data from karimutu system
+    //  */
+    // public array $karimutu = [
+    //     'DSN' => '',
+    //     'hostname' => 'sislab.database.windows.net',
+    //     'username' => 'fahri',
+    //     'password' => 'Wates123',
+    //     'database' => 'karimutu',
+    //     'DBDriver' => 'SQLSRV',
+    //     'DBPrefix' => '',
+    //     'pConnect' => false,
+    //     'DBDebug' => true,
+    //     'charset' => 'utf16',
+    //     'DBCollat' => 'utf8_general_ci',
+    //     'swapPre' => '',
+    //     'encrypt' => false,
+    //     'compress' => false,
+    //     'strictOn' => false,
+    //     'failover' => [],
+    //     'port' => 1433,
+    //     // Change this to the appropriate port
+    // ];
+
     public array $default = [
         'DSN' => '',
-        'hostname' => 'sislab.database.windows.net',
-        'username' => 'fahri',
-        'password' => 'Wates123',
+        'hostname' => 'localhost',
+        'username' => 'sa',
+        'password' => '123',
         'database' => 'sislab',
         'DBDriver' => 'SQLSRV',
         'DBPrefix' => '',
@@ -51,10 +97,10 @@ class Database extends Config
      */
     public array $karimutu = [
         'DSN' => '',
-        'hostname' => 'sislab.database.windows.net',
-        'username' => 'fahri',
-        'password' => 'Wates123',
-        'database' => 'karimutu',
+        'hostname' => 'localhost',
+        'username' => 'sa',
+        'password' => '123',
+        'database' => 'karimutu_2',
         'DBDriver' => 'SQLSRV',
         'DBPrefix' => '',
         'pConnect' => false,

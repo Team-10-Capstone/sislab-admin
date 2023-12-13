@@ -201,4 +201,13 @@ class IndexController extends BaseController
 
         return view('pages/index', $data);
     }
+
+    public function accessDenied()
+    {
+        $data = [
+            'title' => 'Access Denied',
+        ];
+
+        return view('pages/denied', $data);
+    }
 }
