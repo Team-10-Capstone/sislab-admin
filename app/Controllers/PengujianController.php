@@ -136,6 +136,11 @@ class PengujianController extends BaseController
             ->join('disposisi_penyelia', 'disposisi_penyelia.id_fppc = disposisi_analis.id_fppc')
             ->findAll();
 
+        $disposisipenyelias = $DisposisiAnalis->select('disposisi_penyelia.*, admin.name as nama_admin, admin.email as email_admin, admin.mobile as mobile_admin')
+            ->where('disposisi_penyelia.id_fppc', $id)
+            ->join('admin', 'admin.adminId = disposisi_penyelia.penyelia_id')
+            ->findAll();
+
         $groupedAnalisAccess = [];
         $uniqueDisposisiWithAnalis = [];
 
@@ -273,6 +278,7 @@ class PengujianController extends BaseController
             'permohonans' => $groupedPermohonanUjiWithArrOfDtlFppc,
             'analiss' => $analis,
             'perbaikans' => $perbaikans,
+            'disposisipenyelias' => $disposisipenyelias,
         ]);
     }
 

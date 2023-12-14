@@ -25,6 +25,10 @@ class AdminController extends BaseController
         $offset = ($page - 1) * $perPage;
 
         $admin = $adminModel->findAll($perPage, $offset);
+        
+        foreach ($admin as $key => $value) {
+            $admin[$key]['password'] = password_verify($value['password'], PASSWORD_DEFAULT);
+        }
 
         $totalRecords = count($adminModel->findAll());
 
